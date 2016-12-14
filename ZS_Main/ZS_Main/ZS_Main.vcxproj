@@ -74,7 +74,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>include;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -90,10 +95,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>include;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreHlmsPbs.lib;OgreHlmsUnlit.lib;OgreMain.lib;OgreOverlay.lib;OIS.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -110,6 +118,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Common\BaseSystem.h" />
+    <ClInclude Include="include\Common\CameraController.h" />
+    <ClInclude Include="include\Common\GameEntity.h" />
+    <ClInclude Include="include\Common\GameEntityManager.h" />
+    <ClInclude Include="include\Common\GameState.h" />
+    <ClInclude Include="include\Common\GraphicsSystem.h" />
+    <ClInclude Include="include\Common\InputListeners.h" />
+    <ClInclude Include="include\Common\LogicSystem.h" />
+    <ClInclude Include="include\Common\MainEntryPointHelper.h" />
+    <ClInclude Include="include\Common\SdlInputHandler.h" />
+    <ClInclude Include="include\Common\Threading\MessageQueueSystem.h" />
+    <ClInclude Include="include\Common\Threading\MqMessages.h" />
+    <ClInclude Include="include\Common\Threading\YieldTimer.h" />
+    <ClInclude Include="include\Common\TutorialGameState.h" />
+    <ClInclude Include="include\Common\Utils\HdrUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Common\BaseSystem.cpp" />
+    <ClCompile Include="src\Common\CameraController.cpp" />
+    <ClCompile Include="src\Common\GameEntityManager.cpp" />
+    <ClCompile Include="src\Common\GraphicsSystem.cpp" />
+    <ClCompile Include="src\Common\LogicSystem.cpp" />
+    <ClCompile Include="src\Common\SdlInputHandler.cpp" />
+    <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
+    <ClCompile Include="src\Common\TutorialGameState.cpp" />
+    <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
