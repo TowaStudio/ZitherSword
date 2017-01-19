@@ -1,7 +1,7 @@
 
 #include "Threading/MessageQueueSystem.h"
 
-namespace Demo
+namespace ZS
 {
 namespace Mq
 {

@@ -4,7 +4,7 @@
 
 #include "Threading/MessageQueueSystem.h"
 
-namespace Demo
+namespace ZS
 {
     class GameState;
 

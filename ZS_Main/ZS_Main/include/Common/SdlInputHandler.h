@@ -10,7 +10,7 @@
 
 #include <SDL.h>
 
-namespace Demo
+namespace ZS
 {
     class MouseListener;
     class KeyboardListener;

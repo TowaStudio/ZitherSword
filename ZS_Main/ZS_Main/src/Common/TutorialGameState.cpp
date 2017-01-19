@@ -17,9 +17,9 @@
 #include "OgreHlms.h"
 #include "OgreGpuProgramManager.h"
 
-using namespace Demo;
+using namespace ZS;
 
-namespace Demo
+namespace ZS
 {
     TutorialGameState::TutorialGameState( const Ogre::String &helpDescription ) :
         mGraphicsSystem( 0 ),

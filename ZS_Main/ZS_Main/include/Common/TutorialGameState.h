@@ -13,7 +13,7 @@ namespace Ogre
     }
 }
 
-namespace Demo
+namespace ZS
 {
     class GraphicsSystem;
     class CameraController;

@@ -25,7 +25,7 @@
 
 #include <SDL_syswm.h>
 
-namespace Demo
+namespace ZS
 {
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <CoreFoundation/CoreFoundation.h>

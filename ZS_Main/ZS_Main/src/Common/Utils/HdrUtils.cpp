@@ -16,7 +16,7 @@
 #include "OgreTechnique.h"
 #include "OgrePass.h"
 
-namespace Demo
+namespace ZS
 {
     void HdrUtils::setSkyColour( const Ogre::ColourValue &colour,
                                  float multiplier )

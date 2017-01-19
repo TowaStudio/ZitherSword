@@ -22,7 +22,7 @@
 
 #include <SDL_syswm.h>
 
-namespace Demo
+namespace ZS
 {
     LogicSystem::LogicSystem( GameState *gameState ) :
         BaseSystem( gameState ),

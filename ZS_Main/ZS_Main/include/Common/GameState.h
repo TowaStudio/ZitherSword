@@ -4,7 +4,7 @@
 
 #include "InputListeners.h"
 
-namespace Demo
+namespace ZS
 {
     class GameState : public MouseListener, public KeyboardListener, public JoystickListener
     {

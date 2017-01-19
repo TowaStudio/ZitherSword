@@ -4,7 +4,7 @@
 
 #include "LogicSystem.h"
 
-namespace Demo
+namespace ZS
 {
     const size_t cNumTransforms = 250;
 

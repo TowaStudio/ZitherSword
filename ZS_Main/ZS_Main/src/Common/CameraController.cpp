@@ -6,9 +6,9 @@
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
 
-using namespace Demo;
+using namespace ZS;
 
-namespace Demo
+namespace ZS
 {
     CameraController::CameraController( GraphicsSystem *graphicsSystem, bool useSceneNode ) :
         mUseSceneNode( useSceneNode ),

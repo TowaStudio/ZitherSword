@@ -133,6 +133,8 @@
     <ClInclude Include="include\Common\Threading\YieldTimer.h" />
     <ClInclude Include="include\Common\TutorialGameState.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
+    <ClInclude Include="include\Hdr.h" />
+    <ClInclude Include="include\HdrGameState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Common\BaseSystem.cpp" />
@@ -144,6 +146,9 @@
     <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
     <ClCompile Include="src\Common\TutorialGameState.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
+    <ClCompile Include="src\Hdr.cpp" />
+    <ClCompile Include="src\HdrGameState.cpp" />
+    <ClCompile Include="src\ZS_Core\GameObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

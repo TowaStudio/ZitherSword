@@ -12,7 +12,7 @@ struct SDL_JoyButtonEvent;
 struct SDL_JoyAxisEvent;
 struct SDL_JoyHatEvent;
 
-namespace Demo
+namespace ZS
 {
     class MouseListener
     {

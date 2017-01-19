@@ -6,7 +6,7 @@
 #include "OgreQuaternion.h"
 #include "OgreStringVector.h"
 
-namespace Demo
+namespace ZS
 {
     #define NUM_GAME_ENTITY_BUFFERS 4
 

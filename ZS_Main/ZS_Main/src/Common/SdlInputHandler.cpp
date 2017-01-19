@@ -7,7 +7,7 @@
 
 #include <SDL_syswm.h>
 
-namespace Demo
+namespace ZS
 {
     SdlInputHandler::SdlInputHandler( SDL_Window *sdlWindow,
                                       MouseListener *mouseListener,
