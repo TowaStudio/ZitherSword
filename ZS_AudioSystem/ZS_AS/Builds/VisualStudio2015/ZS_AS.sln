@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2015
+Project("{2AD587B8-0C22-DE57-F4DE-E985D5DE92D8}") = "ZS_AS", "ZS_AS.vcxproj", "{B67BE303-FE2B-462E-47B8-6C4B0C1C880B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B67BE303-FE2B-462E-47B8-6C4B0C1C880B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B67BE303-FE2B-462E-47B8-6C4B0C1C880B}.Debug|Win32.Build.0 = Debug|Win32
+		{B67BE303-FE2B-462E-47B8-6C4B0C1C880B}.Release|Win32.ActiveCfg = Release|Win32
+		{B67BE303-FE2B-462E-47B8-6C4B0C1C880B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
