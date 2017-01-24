@@ -1,9 +1,8 @@
+#include "GameObject.h"
+
 using namespace ZS;
 
 namespace ZS
 {
-	class GameObject
-	{
-		
-	};
+	
 }

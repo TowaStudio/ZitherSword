@@ -18,6 +18,52 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Common\BaseSystem.h" />
+    <ClInclude Include="include\Common\CameraController.h" />
+    <ClInclude Include="include\Common\GameEntity.h" />
+    <ClInclude Include="include\Common\GameEntityManager.h" />
+    <ClInclude Include="include\Common\GameState.h" />
+    <ClInclude Include="include\Common\GraphicsSystem.h" />
+    <ClInclude Include="include\Common\InputListeners.h" />
+    <ClInclude Include="include\Common\LogicSystem.h" />
+    <ClInclude Include="include\Common\MainEntryPointHelper.h" />
+    <ClInclude Include="include\Common\SdlEmulationLayer.h" />
+    <ClInclude Include="include\Common\SdlInputHandler.h" />
+    <ClInclude Include="include\Common\System\iOS\AppDelegate.h" />
+    <ClInclude Include="include\Common\System\iOS\GameViewController.h" />
+    <ClInclude Include="include\Common\System\iOS\iOSUtils.h" />
+    <ClInclude Include="include\Common\System\MainEntryPoints.h" />
+    <ClInclude Include="include\Common\System\StaticPluginLoader.h" />
+    <ClInclude Include="include\Common\Threading\MessageQueueSystem.h" />
+    <ClInclude Include="include\Common\Threading\MqMessages.h" />
+    <ClInclude Include="include\Common\Threading\YieldTimer.h" />
+    <ClInclude Include="include\Common\TutorialGameState.h" />
+    <ClInclude Include="include\Common\Utils\HdrUtils.h" />
+    <ClInclude Include="include\Common\Utils\MeshUtils.h" />
+    <ClInclude Include="include\Hdr.h" />
+    <ClInclude Include="include\HdrGameState.h" />
+    <ClInclude Include="include\ZS_Core\GameObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Common\BaseSystem.cpp" />
+    <ClCompile Include="src\Common\CameraController.cpp" />
+    <ClCompile Include="src\Common\GameEntityManager.cpp" />
+    <ClCompile Include="src\Common\GraphicsSystem.cpp" />
+    <ClCompile Include="src\Common\LogicSystem.cpp" />
+    <ClCompile Include="src\Common\SdlInputHandler.cpp" />
+    <ClCompile Include="src\Common\System\Desktop\MainLoopMultiThreaded.cpp" />
+    <ClCompile Include="src\Common\System\Desktop\MainLoopSingleThreaded.cpp" />
+    <ClCompile Include="src\Common\System\MainEntryPoints.cpp" />
+    <ClCompile Include="src\Common\System\StaticPluginLoader.cpp" />
+    <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
+    <ClCompile Include="src\Common\TutorialGameState.cpp" />
+    <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
+    <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
+    <ClCompile Include="src\Hdr.cpp" />
+    <ClCompile Include="src\HdrGameState.cpp" />
+    <ClCompile Include="src\ZS_Core\GameObject.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>
     <RootNamespace>ZS_Main</RootNamespace>
@@ -74,7 +120,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -95,7 +141,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -117,39 +163,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Common\BaseSystem.h" />
-    <ClInclude Include="include\Common\CameraController.h" />
-    <ClInclude Include="include\Common\GameEntity.h" />
-    <ClInclude Include="include\Common\GameEntityManager.h" />
-    <ClInclude Include="include\Common\GameState.h" />
-    <ClInclude Include="include\Common\GraphicsSystem.h" />
-    <ClInclude Include="include\Common\InputListeners.h" />
-    <ClInclude Include="include\Common\LogicSystem.h" />
-    <ClInclude Include="include\Common\MainEntryPointHelper.h" />
-    <ClInclude Include="include\Common\SdlInputHandler.h" />
-    <ClInclude Include="include\Common\Threading\MessageQueueSystem.h" />
-    <ClInclude Include="include\Common\Threading\MqMessages.h" />
-    <ClInclude Include="include\Common\Threading\YieldTimer.h" />
-    <ClInclude Include="include\Common\TutorialGameState.h" />
-    <ClInclude Include="include\Common\Utils\HdrUtils.h" />
-    <ClInclude Include="include\Hdr.h" />
-    <ClInclude Include="include\HdrGameState.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Common\BaseSystem.cpp" />
-    <ClCompile Include="src\Common\CameraController.cpp" />
-    <ClCompile Include="src\Common\GameEntityManager.cpp" />
-    <ClCompile Include="src\Common\GraphicsSystem.cpp" />
-    <ClCompile Include="src\Common\LogicSystem.cpp" />
-    <ClCompile Include="src\Common\SdlInputHandler.cpp" />
-    <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
-    <ClCompile Include="src\Common\TutorialGameState.cpp" />
-    <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
-    <ClCompile Include="src\Hdr.cpp" />
-    <ClCompile Include="src\HdrGameState.cpp" />
-    <ClCompile Include="src\ZS_Core\GameObject.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
