@@ -43,7 +43,26 @@
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
     <ClInclude Include="include\Hdr.h" />
     <ClInclude Include="include\HdrGameState.h" />
+    <ClInclude Include="include\ZS_Core\AudioSystem.h" />
+    <ClInclude Include="include\ZS_Core\BossEnemy.h" />
+    <ClInclude Include="include\ZS_Core\BuffItem.h" />
+    <ClInclude Include="include\ZS_Core\EliteEnemy.h" />
+    <ClInclude Include="include\ZS_Core\Enemy.h" />
+    <ClInclude Include="include\ZS_Core\FlyingProps.h" />
+    <ClInclude Include="include\ZS_Core\GameMaster.h" />
     <ClInclude Include="include\ZS_Core\GameObject.h" />
+    <ClInclude Include="include\ZS_Core\HitInfo.h" />
+    <ClInclude Include="include\ZS_Core\InputManager.h" />
+    <ClInclude Include="include\ZS_Core\Item.h" />
+    <ClInclude Include="include\ZS_Core\Joint.h" />
+    <ClInclude Include="include\ZS_Core\LevelManager.h" />
+    <ClInclude Include="include\ZS_Core\PlayerStats.h" />
+    <ClInclude Include="include\ZS_Core\SaveData.h" />
+    <ClInclude Include="include\ZS_Core\Skill.h" />
+    <ClInclude Include="include\ZS_Core\Swordsman.h" />
+    <ClInclude Include="include\ZS_Core\Timer.h" />
+    <ClInclude Include="include\ZS_Core\Unit.h" />
+    <ClInclude Include="include\ZS_Core\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Common\BaseSystem.cpp" />
@@ -62,7 +81,25 @@
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
     <ClCompile Include="src\Hdr.cpp" />
     <ClCompile Include="src\HdrGameState.cpp" />
+    <ClCompile Include="src\ZS_Core\AudioSystem.cpp" />
+    <ClCompile Include="src\ZS_Core\BossEnemy.cpp" />
+    <ClCompile Include="src\ZS_Core\BuffItem.cpp" />
+    <ClCompile Include="src\ZS_Core\EliteEnemy.cpp" />
+    <ClCompile Include="src\ZS_Core\Enemy.cpp" />
+    <ClCompile Include="src\ZS_Core\FlyingProps.cpp" />
+    <ClCompile Include="src\ZS_Core\GameMaster.cpp" />
     <ClCompile Include="src\ZS_Core\GameObject.cpp" />
+    <ClCompile Include="src\ZS_Core\HitInfo.cpp" />
+    <ClCompile Include="src\ZS_Core\InputManager.cpp" />
+    <ClCompile Include="src\ZS_Core\Item.cpp" />
+    <ClCompile Include="src\ZS_Core\Joint.cpp" />
+    <ClCompile Include="src\ZS_Core\LevelManager.cpp" />
+    <ClCompile Include="src\ZS_Core\SaveData.cpp" />
+    <ClCompile Include="src\ZS_Core\Skill.cpp" />
+    <ClCompile Include="src\ZS_Core\Swordsman.cpp" />
+    <ClCompile Include="src\ZS_Core\Timer.cpp" />
+    <ClCompile Include="src\ZS_Core\Unit.cpp" />
+    <ClCompile Include="src\ZS_Core\Weapon.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>

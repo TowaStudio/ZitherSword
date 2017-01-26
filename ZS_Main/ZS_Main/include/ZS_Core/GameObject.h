@@ -1,12 +1,33 @@
-#ifndef _GAMEOBJECT_H_
-#define _GAMEOBJECT_H_
+/**
+ * Project ZS
+ */
+
+
+#ifndef _GAMEOBJECT_H
+#define _GAMEOBJECT_H
+
+#include "Ogre.h"
+using namespace std;
 
 namespace ZS
 {
-	class GameObject
-	{
-
+	enum Tag {
+		Player = 0,
+		Enemy = 1 << 0,
+		Joint = 1 << 1,
+		Item = 1 << 2
 	};
+
+	class GameObject {
+	public:
+		GameObject(string name, Ogre::Transform transform, Tag tag);
+		~GameObject();
+
+		string name;
+		Ogre::Transform transform;
+		Tag tag;
+	};
+
 }
 
-#endif
+#endif //_GAMEOBJECT_H
