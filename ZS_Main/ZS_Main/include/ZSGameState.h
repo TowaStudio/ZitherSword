@@ -7,7 +7,7 @@
 
 namespace ZS
 {
-    class HdrGameState : public TutorialGameState
+    class ZSGameState : public TutorialGameState
     {
         Ogre::SceneNode     *mSceneNode[16];
 
@@ -27,7 +27,7 @@ namespace ZS
         void switchPreset( int direction=1 );
 
     public:
-        HdrGameState( const Ogre::String &helpDescription );
+        ZSGameState( const Ogre::String &helpDescription );
 
         virtual void createScene01(void);
 

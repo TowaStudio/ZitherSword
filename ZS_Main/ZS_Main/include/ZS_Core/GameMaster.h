@@ -7,6 +7,7 @@
 #define _GAMEMASTER_H
 
 #include "SaveData.h";
+#include "Logger.h";
 #include "Stats.h";
 
 namespace ZS

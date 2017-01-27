@@ -41,8 +41,9 @@
     <ClInclude Include="include\Common\TutorialGameState.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
-    <ClInclude Include="include\Hdr.h" />
-    <ClInclude Include="include\HdrGameState.h" />
+    <ClInclude Include="include\Common\Utils\tinyxml2.h" />
+    <ClInclude Include="include\ZSMain.h" />
+    <ClInclude Include="include\ZSGameState.h" />
     <ClInclude Include="include\ZS_Core\AudioSystem.h" />
     <ClInclude Include="include\ZS_Core\BossEnemy.h" />
     <ClInclude Include="include\ZS_Core\BuffItem.h" />
@@ -56,9 +57,11 @@
     <ClInclude Include="include\ZS_Core\Item.h" />
     <ClInclude Include="include\ZS_Core\Joint.h" />
     <ClInclude Include="include\ZS_Core\LevelManager.h" />
+    <ClInclude Include="include\ZS_Core\Logger.h" />
     <ClInclude Include="include\ZS_Core\PlayerStats.h" />
     <ClInclude Include="include\ZS_Core\SaveData.h" />
     <ClInclude Include="include\ZS_Core\Skill.h" />
+    <ClInclude Include="include\ZS_Core\Stats.h" />
     <ClInclude Include="include\ZS_Core\Swordsman.h" />
     <ClInclude Include="include\ZS_Core\Timer.h" />
     <ClInclude Include="include\ZS_Core\Unit.h" />
@@ -79,8 +82,9 @@
     <ClCompile Include="src\Common\TutorialGameState.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
-    <ClCompile Include="src\Hdr.cpp" />
-    <ClCompile Include="src\HdrGameState.cpp" />
+    <ClCompile Include="src\Common\Utils\tinyxml2.cpp" />
+    <ClCompile Include="src\ZSMain.cpp" />
+    <ClCompile Include="src\ZSGameState.cpp" />
     <ClCompile Include="src\ZS_Core\AudioSystem.cpp" />
     <ClCompile Include="src\ZS_Core\BossEnemy.cpp" />
     <ClCompile Include="src\ZS_Core\BuffItem.cpp" />
@@ -94,8 +98,11 @@
     <ClCompile Include="src\ZS_Core\Item.cpp" />
     <ClCompile Include="src\ZS_Core\Joint.cpp" />
     <ClCompile Include="src\ZS_Core\LevelManager.cpp" />
+    <ClCompile Include="src\ZS_Core\Logger.cpp" />
+    <ClCompile Include="src\ZS_Core\PlayerStats.cpp" />
     <ClCompile Include="src\ZS_Core\SaveData.cpp" />
     <ClCompile Include="src\ZS_Core\Skill.cpp" />
+    <ClCompile Include="src\ZS_Core\Stats.cpp" />
     <ClCompile Include="src\ZS_Core\Swordsman.cpp" />
     <ClCompile Include="src\ZS_Core\Timer.cpp" />
     <ClCompile Include="src\ZS_Core\Unit.cpp" />
@@ -157,7 +164,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -178,7 +187,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

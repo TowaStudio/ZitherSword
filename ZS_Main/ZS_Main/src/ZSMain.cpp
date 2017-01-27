@@ -1,6 +1,6 @@
 
 #include "GraphicsSystem.h"
-#include "HdrGameState.h"
+#include "ZSGameState.h"
 
 #include "OgreSceneManager.h"
 #include "OgreCamera.h"
@@ -25,13 +25,13 @@ int mainApp( int argc, const char *argv[] )
 
 namespace ZS
 {
-    class HdrGraphicsSystem : public GraphicsSystem
+    class ZSGraphicsSystem : public GraphicsSystem
     {
         virtual Ogre::CompositorWorkspace* setupCompositor()
         {
             Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
             return compositorManager->addWorkspace( mSceneManager, mRenderWindow, mCamera,
-                                                    "HdrWorkspace", true );
+                                                    "ZSWorkspace", true );
         }
 
         virtual void setupResources(void)
@@ -69,7 +69,7 @@ namespace ZS
         }
 
     public:
-        HdrGraphicsSystem( GameState *gameState ) :
+        ZSGraphicsSystem( GameState *gameState ) :
             GraphicsSystem( gameState )
         {
         }
@@ -80,7 +80,7 @@ namespace ZS
                                          GameState **outLogicGameState,
                                          LogicSystem **outLogicSystem )
     {
-        HdrGameState *gfxGameState = new HdrGameState(
+        ZSGameState *gfxGameState = new ZSGameState(
         "This samples shows the HDR (High Dynamic Range) pipeline in action\n"
         "HDR combined with PBR let us use real world values as input for our lighting and\n"
         "a real world scale such as lumen, lux and EV Stops (photography, in log2 space)\n"
@@ -102,7 +102,7 @@ namespace ZS
         "LEGAL: Uses Saint Peter's Basilica (C) by Emil Persson under CC Attrib 3.0 Unported\n"
         "See Samples/Media/materials/textures/Cubemaps/License.txt for more information.");
 
-        GraphicsSystem *graphicsSystem = new HdrGraphicsSystem( gfxGameState );
+        GraphicsSystem *graphicsSystem = new ZSGraphicsSystem( gfxGameState );
 
         gfxGameState->_notifyGraphicsSystem( graphicsSystem );
 

@@ -5,6 +5,13 @@
 
 #include "AudioSystem.h"
 
-/**
- * AudioSystem implementation
- */
+namespace ZS {
+	/**
+	* AudioSystem implementation
+	*/
+	AudioSystem* AudioSystem::instance = new AudioSystem();
+
+	AudioSystem::AudioSystem() {
+		
+	}
+}

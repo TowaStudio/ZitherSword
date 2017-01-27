@@ -1,5 +1,5 @@
 
-#include "HdrGameState.h"
+#include "ZSGameState.h"
 #include "Common\CameraController.h"
 #include "Common\GraphicsSystem.h"
 
@@ -25,7 +25,7 @@
 
 namespace ZS
 {
-    HdrGameState::HdrGameState( const Ogre::String &helpDescription ) :
+    ZSGameState::ZSGameState( const Ogre::String &helpDescription ) :
         TutorialGameState( helpDescription ),
         mAnimateObjects( true ),
         mCurrentPreset( -1 ),
@@ -39,7 +39,7 @@ namespace ZS
         memset( mSceneNode, 0, sizeof(mSceneNode) );
     }
     //-----------------------------------------------------------------------------------
-    void HdrGameState::createScene01(void)
+    void ZSGameState::createScene01(void)
     {
         Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
 
@@ -89,12 +89,12 @@ namespace ZS
         TutorialGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
-    void HdrGameState::update( float timeSinceLast )
+    void ZSGameState::update( float timeSinceLast )
     {
         TutorialGameState::update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------
-    void HdrGameState::switchPreset( int direction )
+    void ZSGameState::switchPreset( int direction )
     {
         struct Preset
         {
@@ -258,7 +258,7 @@ namespace ZS
                                        preset.envmapScale );
     }
     //-----------------------------------------------------------------------------------
-    void HdrGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
+    void ZSGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
     {
         TutorialGameState::generateDebugText( timeSinceLast, outText );
 
@@ -288,7 +288,7 @@ namespace ZS
         }
     }
     //-----------------------------------------------------------------------------------
-    void HdrGameState::keyReleased( const SDL_KeyboardEvent &arg )
+    void ZSGameState::keyReleased( const SDL_KeyboardEvent &arg )
     {
         if( (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS|KMOD_LSHIFT|KMOD_RSHIFT)) != 0 )
         {

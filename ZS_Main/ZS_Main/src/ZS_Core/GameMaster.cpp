@@ -29,4 +29,7 @@ namespace ZS {
 	SaveData GameMaster::load() {
 		return SaveData();
 	}
+
+	void GameMaster::loadStatsConfiguration() {
+	}
 };
