@@ -24,8 +24,7 @@ namespace ZS {
 			return instance;
 		}
 
-		void Log(string str);
-		
+		virtual void Log(string str) = 0;
 
 	};
 }

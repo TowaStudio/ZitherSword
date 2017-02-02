@@ -7,6 +7,7 @@
 #define _GAMEOBJECT_H
 
 #include "Ogre.h"
+#include "tinyxml2.h"
 using namespace std;
 
 namespace ZS
