@@ -67,10 +67,10 @@ INT WINAPI ZS::MainEntryPoints::mainAppMultiThreaded( HINSTANCE hInst, HINSTANCE
 int ZS::MainEntryPoints::mainAppMultiThreaded( int argc, const char *argv[] )
 #endif
 {
-    GameState *graphicsGameState = 0;
-    GraphicsSystem *graphicsSystem = 0;
-    GameState *logicGameState = 0;
-    LogicSystem *logicSystem = 0;
+    GameState *graphicsGameState = nullptr;
+    GraphicsSystem *graphicsSystem = nullptr;
+    GameState *logicGameState = nullptr;
+    LogicSystem *logicSystem = nullptr;
 
     Ogre::Barrier barrier( 2 );
 
