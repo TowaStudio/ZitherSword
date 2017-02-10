@@ -32,4 +32,5 @@ namespace ZS {
 
 	void GameMaster::loadStatsConfiguration() {
 	}
+
 };

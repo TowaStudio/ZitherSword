@@ -1,5 +1,5 @@
 
-#include "TutorialGameState.h"
+#include "BaseGameState.h"
 #include "CameraController.h"
 #include "GraphicsSystem.h"
 
@@ -22,33 +22,31 @@ using namespace ZS;
 
 namespace ZS
 {
-    TutorialGameState::TutorialGameState( const Ogre::String &helpDescription ) :
+    BaseGameState::BaseGameState( const Ogre::String &helpDescription ) :
         mGraphicsSystem( 0 ),
         mCameraController( 0 ),
         mHelpDescription( helpDescription ),
-        mDisplayHelpMode( 1 ),
-        mNumDisplayHelpModes( 2 ),
         mDebugText( 0 )
     {
     }
     //-----------------------------------------------------------------------------------
-    TutorialGameState::~TutorialGameState()
+    BaseGameState::~BaseGameState()
     {
         delete mCameraController;
         mCameraController = 0;
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::_notifyGraphicsSystem( GraphicsSystem *graphicsSystem )
+    void BaseGameState::_notifyGraphicsSystem( GraphicsSystem *graphicsSystem )
     {
         mGraphicsSystem = graphicsSystem;
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::createScene01(void)
+    void BaseGameState::createScene01(void)
     {
         createDebugTextOverlay();
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::createDebugTextOverlay(void)
+    void BaseGameState::createDebugTextOverlay(void)
     {
         Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
         Ogre::v1::Overlay *overlay = overlayManager.create( "DebugText" );
@@ -57,15 +55,15 @@ namespace ZS
             overlayManager.createOverlayElement("Panel", "DebugPanel"));
         mDebugText = static_cast<Ogre::v1::TextAreaOverlayElement*>(
                     overlayManager.createOverlayElement( "TextArea", "DebugText" ) );
-        mDebugText->setFontName( "DebugFont" );
-        mDebugText->setCharHeight( 0.025f );
+        mDebugText->setFontName( "Helvetica" );
+        mDebugText->setCharHeight( 0.03f );
 
         mDebugTextShadow= static_cast<Ogre::v1::TextAreaOverlayElement*>(
                     overlayManager.createOverlayElement( "TextArea", "0DebugTextShadow" ) );
-        mDebugTextShadow->setFontName( "DebugFont" );
-        mDebugTextShadow->setCharHeight( 0.025f );
+        mDebugTextShadow->setFontName( "Helvetica" );
+        mDebugTextShadow->setCharHeight( 0.03f );
         mDebugTextShadow->setColour( Ogre::ColourValue::Black );
-        mDebugTextShadow->setPosition( 0.002f, 0.002f );
+        mDebugTextShadow->setPosition( 0.001f, 0.001f );
 
         panel->addChild( mDebugTextShadow );
         panel->addChild( mDebugText );
@@ -73,20 +71,8 @@ namespace ZS
         overlay->show();
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
+    void BaseGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
     {
-        if( mDisplayHelpMode == 0 )
-        {
-            outText = mHelpDescription;
-            outText += "\n\nPress F1 to toggle help";
-            outText += "\n\nProtip: Ctrl+F1 will reload PBS shaders (for real time template editing).\n"
-                       "Ctrl+F2 reloads Unlit shaders.\n"
-                       "Ctrl+F3 reloads Compute shaders.\n"
-                       "Note: If the modified templates produce invalid shader code, "
-                       "crashes or exceptions can happen.\n";
-            return;
-        }
-
         const Ogre::FrameStats *frameStats = mGraphicsSystem->getRoot()->getFrameStats();
 
         Ogre::String finalText;
@@ -101,7 +87,7 @@ namespace ZS
         finalText += " ms\n";
         finalText += "Avg FPS:\t";
         finalText += Ogre::StringConverter::toString( 1000.0f / frameStats->getAvgTime() );
-        finalText += "\n\nPress F1 to toggle help";
+        finalText += "\n";
 
         outText.swap( finalText );
 
@@ -109,22 +95,19 @@ namespace ZS
         mDebugTextShadow->setCaption( finalText );
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::update( float timeSinceLast )
+    void BaseGameState::update( float timeSinceLast )
     {
-        if( mDisplayHelpMode != 0 )
-        {
-            //Show FPS
-            Ogre::String finalText;
-            generateDebugText( timeSinceLast, finalText );
-            mDebugText->setCaption( finalText );
-            mDebugTextShadow->setCaption( finalText );
-        }
+        //Show FPS
+        Ogre::String finalText;
+        generateDebugText( timeSinceLast, finalText );
+        mDebugText->setCaption( finalText );
+        mDebugTextShadow->setCaption( finalText );
 
         if( mCameraController )
             mCameraController->update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::keyPressed( const SDL_KeyboardEvent &arg )
+    void BaseGameState::keyPressed( const SDL_KeyboardEvent &arg )
     {
         bool handledEvent = false;
 
@@ -135,12 +118,10 @@ namespace ZS
             GameState::keyPressed( arg );
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::keyReleased( const SDL_KeyboardEvent &arg )
+    void BaseGameState::keyReleased( const SDL_KeyboardEvent &arg )
     {
         if( arg.keysym.sym == SDLK_F1 && (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS)) == 0 )
         {
-            mDisplayHelpMode = (mDisplayHelpMode + 1) % mNumDisplayHelpModes;
-
             Ogre::String finalText;
             generateDebugText( 0, finalText );
             mDebugText->setCaption( finalText );
@@ -189,7 +170,7 @@ namespace ZS
         }
     }
     //-----------------------------------------------------------------------------------
-    void TutorialGameState::mouseMoved( const SDL_Event &arg )
+    void BaseGameState::mouseMoved( const SDL_Event &arg )
     {
         if( mCameraController )
             mCameraController->mouseMoved( arg );

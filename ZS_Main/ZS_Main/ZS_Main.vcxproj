@@ -38,12 +38,15 @@
     <ClInclude Include="include\Common\Threading\MessageQueueSystem.h" />
     <ClInclude Include="include\Common\Threading\MqMessages.h" />
     <ClInclude Include="include\Common\Threading\YieldTimer.h" />
-    <ClInclude Include="include\Common\TutorialGameState.h" />
+    <ClInclude Include="include\Common\BaseGameState.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
     <ClInclude Include="include\Common\Utils\tinyxml2.h" />
+    <ClInclude Include="include\ZSGraphicsSystem.h" />
+    <ClInclude Include="include\ZSLogicGameState.h" />
+    <ClInclude Include="include\ZSLogicSystem.h" />
     <ClInclude Include="include\ZSMain.h" />
-    <ClInclude Include="include\ZSGameState.h" />
+    <ClInclude Include="include\ZSGraphicsGameState.h" />
     <ClInclude Include="include\ZS_Core\AudioSystem.h" />
     <ClInclude Include="include\ZS_Core\BossEnemy.h" />
     <ClInclude Include="include\ZS_Core\BuffItem.h" />
@@ -81,12 +84,14 @@
     <ClCompile Include="src\Common\System\MainEntryPoints.cpp" />
     <ClCompile Include="src\Common\System\StaticPluginLoader.cpp" />
     <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
-    <ClCompile Include="src\Common\TutorialGameState.cpp" />
+    <ClCompile Include="src\Common\BaseGameState.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
     <ClCompile Include="src\Common\Utils\tinyxml2.cpp" />
+    <ClCompile Include="src\ZSGraphicsSystem.cpp" />
+    <ClCompile Include="src\ZSLogicSystem.cpp" />
     <ClCompile Include="src\ZSMain.cpp" />
-    <ClCompile Include="src\ZSGameState.cpp" />
+    <ClCompile Include="src\ZSGraphicsGameState.cpp" />
     <ClCompile Include="src\ZS_Core\AudioSystem.cpp" />
     <ClCompile Include="src\ZS_Core\BossEnemy.cpp" />
     <ClCompile Include="src\ZS_Core\BuffItem.cpp" />
@@ -111,6 +116,7 @@
     <ClCompile Include="src\ZS_Core\Timer.cpp" />
     <ClCompile Include="src\ZS_Core\Unit.cpp" />
     <ClCompile Include="src\ZS_Core\Weapon.cpp" />
+    <ClCompile Include="ZSLogicGameState.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>

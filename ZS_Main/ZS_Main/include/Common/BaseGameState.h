@@ -19,7 +19,7 @@ namespace ZS
     class CameraController;
 
     /// Base game state for the tutorials. All it does is show a little text on screen :)
-    class TutorialGameState : public GameState
+    class BaseGameState : public GameState
     {
     protected:
         GraphicsSystem      *mGraphicsSystem;
@@ -28,8 +28,6 @@ namespace ZS
         CameraController    *mCameraController;
 
         Ogre::String        mHelpDescription;
-        Ogre::uint16        mDisplayHelpMode;
-        Ogre::uint16        mNumDisplayHelpModes;
 
         Ogre::v1::TextAreaOverlayElement *mDebugText;
         Ogre::v1::TextAreaOverlayElement *mDebugTextShadow;
@@ -38,8 +36,8 @@ namespace ZS
         virtual void generateDebugText( float timeSinceLast, Ogre::String &outText );
 
     public:
-        TutorialGameState( const Ogre::String &helpDescription );
-        virtual ~TutorialGameState();
+        BaseGameState( const Ogre::String &helpDescription );
+        virtual ~BaseGameState();
 
         void _notifyGraphicsSystem( GraphicsSystem *graphicsSystem );
 

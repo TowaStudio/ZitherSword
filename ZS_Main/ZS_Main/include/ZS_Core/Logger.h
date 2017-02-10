@@ -15,8 +15,8 @@ namespace ZS {
 	private:
 		static Logger* instance;
 		Logger();
-		Logger(Logger const&) {};
-		Logger& operator= (Logger const&) {};
+		Logger(Logger const&) {}
+		Logger& operator= (Logger const&) {}
 
 
 	public:

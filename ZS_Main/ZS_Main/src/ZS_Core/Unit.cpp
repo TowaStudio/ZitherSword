@@ -5,7 +5,7 @@
 #include "Unit.h"
 
 namespace ZS {
-	Unit::Unit(string _name, Ogre::Transform _transform, Tag _tag,
+	Unit::Unit(std::string _name, Ogre::Transform _transform, Tag _tag,
 			int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd) :
 		GameObject(_name, _transform, _tag), id(_id),
 		hp(_hp), maxhp(_maxhp),

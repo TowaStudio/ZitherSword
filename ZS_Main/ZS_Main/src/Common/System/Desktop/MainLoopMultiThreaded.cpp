@@ -103,7 +103,7 @@ unsigned long renderThreadApp( Ogre::ThreadHandle *threadHandle )
     GraphicsSystem *graphicsSystem  = threadData->graphicsSystem;
     Ogre::Barrier *barrier          = threadData->barrier;
 
-    graphicsSystem->initialize( "Tutorial 06: Multithreading" );
+    graphicsSystem->initialize( "ZitherSword" );
     barrier->sync();
 
     if( graphicsSystem->getQuit() )

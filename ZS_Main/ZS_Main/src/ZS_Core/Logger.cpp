@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 namespace ZS {
-	Logger* Logger::instance = new Logger();
+	//Logger* Logger::instance = new Logger();
 
 	/**
 	* GameMaster implementation

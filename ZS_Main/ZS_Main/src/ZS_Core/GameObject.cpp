@@ -13,7 +13,7 @@ namespace ZS {
 	 * @param _transform 
 	 * @param _tag 
 	 */
-	GameObject::GameObject(string _name, Ogre::Transform _transform, Tag _tag) :
+	GameObject::GameObject(std::string _name, Ogre::Transform _transform, Tag _tag) :
 		name(_name),
 		transform(_transform),
 		tag(_tag) {

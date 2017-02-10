@@ -1,5 +1,5 @@
 
-#include "ZSGameState.h"
+#include "ZSGraphicsGameState.h"
 #include "Common\CameraController.h"
 #include "Common\GraphicsSystem.h"
 
@@ -25,8 +25,8 @@
 
 namespace ZS
 {
-    ZSGameState::ZSGameState( const Ogre::String &helpDescription ) :
-        TutorialGameState( helpDescription ),
+    ZSGraphicsGameState::ZSGraphicsGameState( const Ogre::String &debugDescription ) :
+        BaseGameState( debugDescription ),
         mAnimateObjects( true ),
         mCurrentPreset( -1 ),
         mExposure( 0.0f ),
@@ -34,16 +34,16 @@ namespace ZS
         mMaxAutoExposure( 2.5f ),
         mBloomFullThreshold( 5.0f )
     {
-        mDisplayHelpMode = 2;
-        mNumDisplayHelpModes = 3;
         memset( mSceneNode, 0, sizeof(mSceneNode) );
     }
     //-----------------------------------------------------------------------------------
-    void ZSGameState::createScene01(void)
+    void ZSGraphicsGameState::createScene01(void)
     {
         Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
 
         Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
+
+
 
         Ogre::Light *light = sceneManager->createLight();
         Ogre::SceneNode *lightNode = rootNode->createChildSceneNode();
@@ -86,15 +86,15 @@ namespace ZS
 
         switchPreset();
 
-        TutorialGameState::createScene01();
+        BaseGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
-    void ZSGameState::update( float timeSinceLast )
+    void ZSGraphicsGameState::update( float timeSinceLast )
     {
-        TutorialGameState::update( timeSinceLast );
+        BaseGameState::update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------
-    void ZSGameState::switchPreset( int direction )
+    void ZSGraphicsGameState::switchPreset( int direction )
     {
         struct Preset
         {
@@ -258,41 +258,16 @@ namespace ZS
                                        preset.envmapScale );
     }
     //-----------------------------------------------------------------------------------
-    void ZSGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
+    void ZSGraphicsGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
     {
-        TutorialGameState::generateDebugText( timeSinceLast, outText );
-
-        if( mDisplayHelpMode == 2 )
-        {
-            outText += "\nHold SHIFT to decrease values\n[SPACE] Preset: ";
-            outText += mPresetName;
-            outText += "\nF5 Exposure = ";
-            outText += Ogre::StringConverter::toString( mExposure );
-            outText += "\nF6 Min Auto Exposure = ";
-            outText += Ogre::StringConverter::toString( mMinAutoExposure );
-            outText += "\nF7 Max Auto Exposure = ";
-            outText += Ogre::StringConverter::toString( mMaxAutoExposure );
-            outText += "\nF8 Bloom Threshold = ";
-            outText += Ogre::StringConverter::toString( mBloomFullThreshold );
-        }
-        else if( mDisplayHelpMode == 1 )
-        {
-            Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
-
-            outText += "\nPress F2 to toggle animation. ";
-            outText += mAnimateObjects ? "[On]" : "[Off]";
-            outText += "\nPress F3 to show/hide animated objects. ";
-            outText += (visibilityMask & 0x000000001) ? "[On]" : "[Off]";
-            outText += "\nPress F4 to show/hide palette of spheres. ";
-            outText += (visibilityMask & 0x000000002) ? "[On]" : "[Off]";
-        }
+        BaseGameState::generateDebugText( timeSinceLast, outText );
     }
     //-----------------------------------------------------------------------------------
-    void ZSGameState::keyReleased( const SDL_KeyboardEvent &arg )
+    void ZSGraphicsGameState::keyReleased( const SDL_KeyboardEvent &arg )
     {
         if( (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS|KMOD_LSHIFT|KMOD_RSHIFT)) != 0 )
         {
-            TutorialGameState::keyReleased( arg );
+            BaseGameState::keyReleased( arg );
             return;
         }
 
@@ -377,7 +352,7 @@ namespace ZS
         }
         else
         {
-            TutorialGameState::keyReleased( arg );
+            BaseGameState::keyReleased( arg );
         }
     }
 }

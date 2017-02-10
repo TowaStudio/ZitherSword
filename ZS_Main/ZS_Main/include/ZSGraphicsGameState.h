@@ -1,13 +1,13 @@
 
-#ifndef _Demo_HdrGameState_H_
-#define _Demo_HdrGameState_H_
+#ifndef _ZSGRAPHICSGAMESTATE_H
+#define _ZSGRAPHICSGAMESTATE_H
 
 #include "OgrePrerequisites.h"
-#include "TutorialGameState.h"
+#include "BaseGameState.h"
 
 namespace ZS
 {
-    class ZSGameState : public TutorialGameState
+    class ZSGraphicsGameState : public BaseGameState
     {
         Ogre::SceneNode     *mSceneNode[16];
 
@@ -27,7 +27,7 @@ namespace ZS
         void switchPreset( int direction=1 );
 
     public:
-        ZSGameState( const Ogre::String &helpDescription );
+        ZSGraphicsGameState( const Ogre::String &debugDescription );
 
         virtual void createScene01(void);
 

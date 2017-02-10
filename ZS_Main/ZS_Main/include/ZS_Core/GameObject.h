@@ -8,7 +8,6 @@
 
 #include "Ogre.h"
 #include "tinyxml2.h"
-using namespace std;
 
 namespace ZS
 {
@@ -21,10 +20,10 @@ namespace ZS
 
 	class GameObject {
 	public:
-		GameObject(string name, Ogre::Transform transform, Tag tag);
+		GameObject(std::string name, Ogre::Transform transform, Tag tag);
 		~GameObject();
 
-		string name;
+		std::string name;
 		Ogre::Transform transform;
 		Tag tag;
 	};

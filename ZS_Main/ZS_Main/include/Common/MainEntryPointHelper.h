@@ -12,7 +12,7 @@
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-    #define DEMO_MAIN_ENTRY_PARAMS hInst, hPrevInstance, strCmdLine, nCmdShow
+    #define MAIN_ENTRY_PARAMS hInst, hPrevInstance, strCmdLine, nCmdShow
     INT WINAPI WinMainApp( HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR strCmdLine, INT nCmdShow );
 #else
     #define DEMO_MAIN_ENTRY_PARAMS argc, argv

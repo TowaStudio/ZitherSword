@@ -10,8 +10,7 @@
 #include "Logger.h";
 #include "Stats.h";
 
-namespace ZS
-{
+namespace ZS {
 	class GameMaster {
 
 	private:
