@@ -71,8 +71,24 @@
     <ClInclude Include="include\ZS_Core\Timer.h" />
     <ClInclude Include="include\ZS_Core\Unit.h" />
     <ClInclude Include="include\ZS_Core\Weapon.h" />
+    <ClInclude Include="JuceLibraryCode\AppConfig.h" />
+    <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_audio_devices.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_audio_formats.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_audio_processors.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_audio_utils.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_core.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_cryptography.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_data_structures.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_events.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_graphics.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_gui_basics.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_gui_extra.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_opengl.cpp" />
+    <ClCompile Include="JuceLibraryCode\juce_video.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
     <ClCompile Include="src\Common\GameEntityManager.cpp" />
@@ -174,7 +190,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;..\..\JuceLibraryCode;E:\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
@@ -197,7 +213,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;..\..\JuceLibraryCode;E:\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>

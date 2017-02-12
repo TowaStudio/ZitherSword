@@ -12,6 +12,10 @@ namespace ZS {
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 
 	AudioSystem::AudioSystem() {
-		
+		time = 0;
+	}
+	
+	void AudioSystem::timerCallback() {
+		time++;
 	}
 }
