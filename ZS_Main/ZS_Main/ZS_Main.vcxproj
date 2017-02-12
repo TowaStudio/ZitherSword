@@ -89,6 +89,7 @@
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
     <ClCompile Include="src\Common\Utils\tinyxml2.cpp" />
     <ClCompile Include="src\ZSGraphicsSystem.cpp" />
+    <ClCompile Include="src\ZSLogicGameState.cpp" />
     <ClCompile Include="src\ZSLogicSystem.cpp" />
     <ClCompile Include="src\ZSMain.cpp" />
     <ClCompile Include="src\ZSGraphicsGameState.cpp" />
@@ -116,7 +117,6 @@
     <ClCompile Include="src\ZS_Core\Timer.cpp" />
     <ClCompile Include="src\ZS_Core\Unit.cpp" />
     <ClCompile Include="src\ZS_Core\Weapon.cpp" />
-    <ClCompile Include="ZSLogicGameState.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>
