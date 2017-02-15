@@ -4,14 +4,17 @@
 namespace ZS {
 
 	ZSLogicGameState::ZSLogicGameState() :
-		mLogicSystem(0)	
+		mLogicSystem(nullptr),
+		gm(GameMaster::GetInstance())
 	{
+
 	}
 
 	ZSLogicGameState::~ZSLogicGameState() {
 	}
 
 	void ZSLogicGameState::createScene01() {
+		gm->log("Start in createScrene01");
 	}
 
 	void ZSLogicGameState::update(float timeSinceLast) {

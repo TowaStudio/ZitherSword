@@ -11,20 +11,18 @@ using namespace std;
 
 namespace ZS {
 	class Logger {
-
-	private:
+	protected:
 		static Logger* instance;
-		Logger();
+		Logger() {}
 		Logger(Logger const&) {}
 		Logger& operator= (Logger const&) {}
-
 
 	public:
 		static Logger* GetInstance() {
 			return instance;
 		}
 
-		virtual void Log(string str) = 0;
+		virtual void log(string str) = 0;
 
 	};
 }

@@ -14,7 +14,7 @@ namespace ZS {
 	* Swordsman implementation
 	*/
 	Swordsman::Swordsman(PlayerStats stats) :
-		Unit("Swordsman", Ogre::Transform(), Tag::Player, LevelManager::GetInstance()->getUnitID()
+		Unit("Swordsman", Tag::Player, Vec3(0.0f, 0.0f, 0.0f), GameMaster::GetLevelManager()->getUnitID()
 			, 0.0f, 0.0f
 			, 0.0f, 0.0f
 			, 0.0f, 0.0f, 0.0f) {

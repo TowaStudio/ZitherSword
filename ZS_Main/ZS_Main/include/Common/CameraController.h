@@ -3,7 +3,7 @@
 #define _Demo_CameraController_H_
 
 #include "OgrePrerequisites.h"
-#include "BaseGameState.h"
+#include "DebugGameState.h"
 
 namespace ZS
 {

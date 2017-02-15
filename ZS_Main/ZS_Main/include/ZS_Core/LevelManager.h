@@ -9,23 +9,16 @@
 namespace ZS {
 	class LevelManager {
 	private:
-		static LevelManager* instance;
-		LevelManager();
-		LevelManager(LevelManager const&) {};
-		LevelManager& operator= (LevelManager const&) {};
-
+		int level;
 		int unitsCount;
 		int jointCount;
 
 	public:
-		static LevelManager* GetInstance() {
-			return instance;
-		}
+		LevelManager(int level);
+		~LevelManager();
 
 		int getUnitID();
 		int getJointID();
-
-		int level;
 
 		bool loadLevel();
 

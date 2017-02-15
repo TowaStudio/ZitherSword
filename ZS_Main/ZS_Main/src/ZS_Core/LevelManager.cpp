@@ -2,15 +2,20 @@
  * Project ZS
  */
 
-#include "LevelManager.h"
+#include "LevelManager.h";
 
 namespace ZS {
-	LevelManager* LevelManager::instance = new LevelManager();
-	/**
-	* LevelManager implementation
-	*/
 
-	LevelManager::LevelManager() {
+	LevelManager::LevelManager(int _level) :
+		level(_level),
+		unitsCount(0),
+		jointCount(0)
+	{
+		
+	}
+
+	LevelManager::~LevelManager() {
+
 	}
 
 	int LevelManager::getUnitID() {
