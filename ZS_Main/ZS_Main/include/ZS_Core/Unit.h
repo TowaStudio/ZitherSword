@@ -8,11 +8,15 @@
 
 #include "GameObject.h"
 #include "HitInfo.h"
+#include "Stats.h"
+#include "FlyingProps.h"
 
 namespace ZS {
+
 	class Unit : public GameObject {
 	public:
-		Unit(std::string name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd);
+		Unit(const std::string& name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status);
+		Unit(const std::string& name, Tag tag, Vec3 pos, int id, Stats stats);
 		~Unit();
 
 		int id;
@@ -23,12 +27,15 @@ namespace ZS {
 		float str;
 		float def;
 		float spd;
+		Status status;
 
-		HitInfo* attack();
-
+		virtual HitInfo attack();
+		virtual void heal(float amount);
 		bool damage(float dmg);
+		
 
-		void heal();
+		static float DamageCalculate(Unit* source, Unit* target);
+		static float DamageCalculate(FlyingProps* source, Unit* target);
 	};
 }
 

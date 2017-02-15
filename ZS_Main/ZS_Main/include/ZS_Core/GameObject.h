@@ -15,16 +15,16 @@ namespace ZS
 	typedef Ogre::Vector3 Vec3;
 
 	enum Tag {
-		Player = 1 << 0,
-		Enemy = 1 << 1,
-		Item = 1 << 2,
-		Joint = 1 << 3
+		PLAYER = 1 << 0,
+		ENEMY = 1 << 1,
+		ITEM = 1 << 2,
+		JOINT = 1 << 3
 	};
 
 	class GameObject {
 	public:
-		GameObject(std::string name, Tag tag, Vec3 pos);
-		~GameObject();
+		GameObject(const std::string& name, Tag tag, Vec3 pos);
+		virtual ~GameObject();
 
 		std::string name;
 		Tag tag;

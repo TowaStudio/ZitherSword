@@ -13,13 +13,15 @@ namespace ZS {
 
 	class Swordsman : public Unit {
 	public:
-		Swordsman(PlayerStats stats);
+		Swordsman(PlayerStats stats, Vec3 startPos);
 		~Swordsman();
 
 		int level;
 		int exp;
-
+				
 		HitInfo* skill();
+		HitInfo attack() override;
+		void heal(float amount) override;
 	};
 }
 

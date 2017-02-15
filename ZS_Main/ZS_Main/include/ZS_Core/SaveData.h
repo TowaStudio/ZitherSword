@@ -10,8 +10,16 @@
 
 namespace ZS {
 
-	class SaveData {
+	struct SaveData {
 	public:
+		SaveData() : 
+			levelProgress(0),
+			stats(PlayerStats()) {}
+
+		SaveData(int _levelProgress, PlayerStats _stats) : 
+			levelProgress(_levelProgress),
+			stats(_stats) {}
+
 		int levelProgress;
 		PlayerStats stats;
 	};

@@ -21,16 +21,19 @@ namespace ZS {
 		GameMaster(GameMaster const&) {};
 		GameMaster& operator= (GameMaster const&) {};
 
-		static InputManager* inputManager;
-		static LevelManager* levelManager;
+		InputManager* inputManager;
+		LevelManager* levelManager;
 		Logger* logger;
+
+		int currentLevel; // menu = 0, level
+		SaveData tempSave;
 
 	public:
 		static GameMaster* GetInstance() {
 			return instance;
 		}
 
-		static LevelManager* GetLevelManager() {
+		LevelManager* getLevelManager() {
 			if(!levelManager) {
 				levelManager = new LevelManager(-1);
 			}
@@ -38,7 +41,7 @@ namespace ZS {
 			return levelManager;			
 		}
 
-		static InputManager* GetInputManager() {
+		InputManager* getInputManager() {
 			if(!inputManager) {
 				inputManager = new InputManager();
 			}
@@ -49,10 +52,14 @@ namespace ZS {
 		void setLogger(Logger* logger);
 		void log(std::string str);
 
+		// Save
 		bool save();
 		SaveData load();
+		PlayerStats getPlayerStats();
 
-		void loadStatsConfiguration();
+		// Scenes
+		void mainMenu();
+		void loadLevel(int level);
 		
 
 	};

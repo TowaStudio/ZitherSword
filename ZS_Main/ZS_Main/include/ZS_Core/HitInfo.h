@@ -10,19 +10,20 @@
 
 namespace ZS {
 	class Unit;
-	class HitInfo {
+	struct HitInfo {
 	public:
 
 		HitInfo();
-		HitInfo(Unit* _source, Unit* _target, float _dmg);
+		HitInfo(Unit* _source, Unit* _target, float _dmg, Time _time);
 		~HitInfo();
 
+		bool valid;
 		Unit* source;
 		Unit* target;
 		float dmg;
 		bool isCritical;
 		bool isFatal;
-		Time* time;
+		Time time;
 	};
 }
 

@@ -5,6 +5,7 @@
 
 #ifndef _LEVELMANAGER_H
 #define _LEVELMANAGER_H
+#include "Swordsman.h"
 
 namespace ZS {
 	class LevelManager {
@@ -12,6 +13,7 @@ namespace ZS {
 		int level;
 		int unitsCount;
 		int jointCount;
+		Swordsman* swordsman;
 
 	public:
 		LevelManager(int level);
@@ -20,11 +22,11 @@ namespace ZS {
 		int getUnitID();
 		int getJointID();
 
-		bool loadLevel();
+		Swordsman* GetSwordsman() const;
 
-		bool initLevel();
-
-		bool startLevel();
+		void loadLevel();
+		void initLevel();
+		void startLevel();
 	};
 
 }
