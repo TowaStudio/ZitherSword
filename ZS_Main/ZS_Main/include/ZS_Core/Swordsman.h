@@ -7,7 +7,7 @@
 #define _SWORDSMAN_H
 
 #include "Unit.h"
-#include "SaveData.h";
+#include "SaveData.h"
 
 namespace ZS {
 

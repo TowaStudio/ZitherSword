@@ -7,13 +7,26 @@
 
 namespace ZS {
 	GameMaster* GameMaster::instance = new GameMaster();
+	InputManager* GameMaster::inputManager = nullptr;
+	LevelManager* GameMaster::levelManager = nullptr;
 
 	/**
 	* GameMaster implementation
 	*/
 
 
-	GameMaster::GameMaster() {
+	GameMaster::GameMaster() :
+		logger(nullptr)
+	{
+		
+	}
+
+	void GameMaster::setLogger(Logger* _logger) {
+		logger = _logger;
+	}
+
+	void GameMaster::log(std::string str) {
+		logger->log(str);
 	}
 
 	/**

@@ -10,13 +10,13 @@ namespace ZS {
 	/**
 	 * @brief The base class for all game object
 	 * @param _name 
-	 * @param _transform 
 	 * @param _tag 
 	 */
-	GameObject::GameObject(std::string _name, Ogre::Transform _transform, Tag _tag) :
+	GameObject::GameObject(std::string _name, Tag _tag, Vec3 _pos) :
 		name(_name),
-		transform(_transform),
-		tag(_tag) {
+		tag(_tag),
+		pos(_pos)
+	{
 		
 	}
 

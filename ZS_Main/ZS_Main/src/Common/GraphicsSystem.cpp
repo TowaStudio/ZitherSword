@@ -501,7 +501,7 @@ namespace ZS
     {
         Ogre::InstancingThreadedCullingMethod threadedCullingMethod =
                 Ogre::INSTANCING_CULLING_SINGLETHREAD;
-#if OGRE_DEBUG_MODE
+#if !OGRE_DEBUG_MODE
         //Debugging multithreaded code is a PITA, disable it.
         const size_t numThreads = 1;
 #else

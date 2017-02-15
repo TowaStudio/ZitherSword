@@ -1,3 +1,4 @@
+// GameStates and systems
 #include "ZSGraphicsSystem.h"
 #include "ZSGraphicsGameState.h"
 #include "ZSLogicSystem.h"
@@ -5,10 +6,13 @@
 
 #include "OgreSceneManager.h"
 
-//Declares WinMain / main
+// ZS_Core
+#include "GameMaster.h"
+#include "ScreenLogger.h"
+
+// Declares WinMain / main
 #include "MainEntryPointHelper.h"
 #include "System/MainEntryPoints.h"
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 INT WINAPI WinMainApp( HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR strCmdLine, INT nCmdShow )
 #else
@@ -26,18 +30,27 @@ namespace ZS
                                          GameState **outLogicGameState,
                                          LogicSystem **outLogicSystem )
     {
-        ZSGraphicsGameState *zsGrahicsGameState = new ZSGraphicsGameState("Debug Information:\n");
+		ZSGraphicsGameState *zsGrahicsGameState = new ZSGraphicsGameState();
 		ZSGraphicsSystem *zsGraphicsSystem = new ZSGraphicsSystem(zsGrahicsGameState);
     	ZSLogicGameState *zsLogicGameState = new ZSLogicGameState();
-		LogicSystem *logicSystem = new LogicSystem(zsLogicGameState);
+		ZSLogicSystem *zsLogicSystem = new ZSLogicSystem(zsLogicGameState);
 
-		zsLogicGameState->_notifyLogicSystem(logicSystem);
+		GameMaster* gm = GameMaster::GetInstance();
+
+		ScreenLogger* screenLogger = ScreenLogger::GetInstance();
+		screenLogger->bindGraphicsGameState(zsGrahicsGameState);
+		gm->setLogger(screenLogger);
+
+		zsLogicGameState->_notifyLogicSystem(zsLogicSystem);
 		zsGrahicsGameState->_notifyGraphicsSystem(zsGraphicsSystem);
+
+		zsLogicSystem->_notifyGraphicsSystem(zsGraphicsSystem);
+		zsGraphicsSystem->_notifyLogicSystem(zsLogicSystem);
 
         *outGraphicsGameState = zsGrahicsGameState;
         *outGraphicsSystem = zsGraphicsSystem;
 		*outLogicGameState = zsLogicGameState;
-		*outLogicSystem = logicSystem;
+		*outLogicSystem = zsLogicSystem;
     }
 
     void MainEntryPoints::destroySystems( GameState *graphicsGameState,

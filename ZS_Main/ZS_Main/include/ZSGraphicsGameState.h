@@ -3,14 +3,16 @@
 #define _ZSGRAPHICSGAMESTATE_H
 
 #include "OgrePrerequisites.h"
-#include "BaseGameState.h"
+#include "DebugGameState.h"
+#include "GameMaster.h"
 
 namespace ZS
 {
-    class ZSGraphicsGameState : public BaseGameState
+	class GameMaster;
+
+	class ZSGraphicsGameState : public DebugGameState
     {
         Ogre::SceneNode     *mSceneNode[16];
-
         Ogre::SceneNode     *mLightNodes[3];
 
         bool                mAnimateObjects;
@@ -22,14 +24,16 @@ namespace ZS
         float mMaxAutoExposure;
         float mBloomFullThreshold;
 
-        virtual void generateDebugText( float timeSinceLast, Ogre::String &outText );
+		GameMaster* gm;
+
+        virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 
         void switchPreset( int direction=1 );
 
     public:
-        ZSGraphicsGameState( const Ogre::String &debugDescription );
+		ZSGraphicsGameState();
 
-        virtual void createScene01(void);
+	    virtual void createScene01(void);
 
         virtual void update( float timeSinceLast );
 

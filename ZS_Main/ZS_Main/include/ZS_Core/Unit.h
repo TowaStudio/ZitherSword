@@ -12,7 +12,7 @@
 namespace ZS {
 	class Unit : public GameObject {
 	public:
-		Unit(std::string name, Ogre::Transform transform, Tag tag, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd);
+		Unit(std::string name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd);
 		~Unit();
 
 		int id;

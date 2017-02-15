@@ -2,7 +2,8 @@
 #define _ZSLOGICGAMESTATE_H
 
 #include "OgrePrerequisites.h"
-#include "Common/BaseGameState.h"
+#include "Common/DebugGameState.h"
+#include "GameMaster.h"
 
 namespace ZS {
 	class LogicSystem;
@@ -10,7 +11,9 @@ namespace ZS {
 	struct MovableObjectDefinition;
 
 	class ZSLogicGameState : public GameState {
-		LogicSystem         *mLogicSystem;
+	private:
+		LogicSystem *mLogicSystem;
+		GameMaster* gm;
 
 	public:
 		ZSLogicGameState();

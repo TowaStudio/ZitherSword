@@ -3,31 +3,35 @@
  */
 
 
-#ifndef _GAMEOBJECT_H
-#define _GAMEOBJECT_H
+#ifndef _ZS_GAMEOBJECT_H
+#define _ZS_GAMEOBJECT_H
 
-#include "Ogre.h"
+#include "OgreVector3.h"
 #include "tinyxml2.h"
+#include <string>
 
 namespace ZS
 {
+	typedef Ogre::Vector3 Vec3;
+
 	enum Tag {
-		Player = 0,
-		Enemy = 1 << 0,
-		Joint = 1 << 1,
-		Item = 1 << 2
+		Player = 1 << 0,
+		Enemy = 1 << 1,
+		Item = 1 << 2,
+		Joint = 1 << 3
 	};
 
 	class GameObject {
 	public:
-		GameObject(std::string name, Ogre::Transform transform, Tag tag);
+		GameObject(std::string name, Tag tag, Vec3 pos);
 		~GameObject();
 
 		std::string name;
-		Ogre::Transform transform;
 		Tag tag;
+		Vec3 pos;
 	};
 
+	typedef std::vector<GameObject> GameObjectVec;
 }
 
 #endif //_GAMEOBJECT_H
