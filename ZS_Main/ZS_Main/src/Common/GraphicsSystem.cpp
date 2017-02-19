@@ -24,6 +24,7 @@
 #include "OgreOverlaySystem.h"
 
 #include "OgreWindowEventUtilities.h"
+#include "GameMaster.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -41,20 +42,20 @@ namespace ZS
     GraphicsSystem::GraphicsSystem( GameState *gameState,
                                     Ogre::ColourValue backgroundColour ) :
         BaseSystem( gameState ),
-        mLogicSystem( 0 ),
+        mLogicSystem( nullptr ),
     #if OGRE_USE_SDL2
-        mSdlWindow( 0 ),
-        mInputHandler( 0 ),
+        mSdlWindow( nullptr ),
+        mInputHandler( nullptr ),
     #endif
-        mRoot( 0 ),
-        mRenderWindow( 0 ),
-        mSceneManager( 0 ),
-        mCamera( 0 ),
-        mWorkspace( 0 ),
-        mOverlaySystem( 0 ),
+        mRoot( nullptr ),
+        mRenderWindow( nullptr ),
+        mSceneManager( nullptr ),
+        mCamera( nullptr ),
+        mWorkspace( nullptr ),
+        mOverlaySystem( nullptr ),
         mAccumTimeSinceLastLogicFrame( 0 ),
         mCurrentTransformIdx( 0 ),
-        mThreadGameEntityToUpdate( 0 ),
+        mThreadGameEntityToUpdate( nullptr ),
         mThreadWeight( 0 ),
         mQuit( false ),
         mAlwaysAskForConfig( true ),
@@ -66,7 +67,12 @@ namespace ZS
     {
         assert( !mRoot && "deinitialize() not called!!!" );
     }
-    //-----------------------------------------------------------------------------------
+
+	void GraphicsSystem::_notifyLogicSystem(BaseSystem* logicSystem) {
+	    mLogicSystem = logicSystem;
+    }	
+	
+	//-----------------------------------------------------------------------------------
     void GraphicsSystem::initialize( const Ogre::String &windowTitle )
     {
     #if OGRE_USE_SDL2
@@ -232,6 +238,7 @@ namespace ZS
     #if OGRE_USE_SDL2
         mInputHandler = new SdlInputHandler( mSdlWindow, mCurrentGameState,
                                              mCurrentGameState, mCurrentGameState );
+		mInputHandler->bindSystems(mLogicSystem, this);
     #endif
 
         BaseSystem::initialize();
@@ -245,15 +252,15 @@ namespace ZS
             mSceneManager->removeRenderQueueListener( mOverlaySystem );
 
         OGRE_DELETE mOverlaySystem;
-        mOverlaySystem = 0;
+        mOverlaySystem = nullptr;
 
     #if OGRE_USE_SDL2
         delete mInputHandler;
-        mInputHandler = 0;
+        mInputHandler = nullptr;
     #endif
 
         OGRE_DELETE mRoot;
-        mRoot = 0;
+        mRoot = nullptr;
 
     #if OGRE_USE_SDL2
         if( mSdlWindow )
@@ -261,7 +268,7 @@ namespace ZS
             // Restore desktop resolution on exit
             SDL_SetWindowFullscreen( mSdlWindow, 0 );
             SDL_DestroyWindow( mSdlWindow );
-            mSdlWindow = 0;
+            mSdlWindow = nullptr;
         }
 
         SDL_Quit();
@@ -345,7 +352,7 @@ namespace ZS
     }
     #endif
     //-----------------------------------------------------------------------------------
-    void GraphicsSystem::processIncomingMessage( Mq::MessageId messageId, const void *data )
+    void GraphicsSystem::processIncomingMessage( Mq::MessageType messageId, const void *data )
     {
         switch( messageId )
         {
@@ -632,12 +639,12 @@ namespace ZS
         mGameEntities[toRemove->mType].erase( itGameEntity );
 
         toRemove->mSceneNode->getParentSceneNode()->removeAndDestroyChild( toRemove->mSceneNode );
-        toRemove->mSceneNode = 0;
+        toRemove->mSceneNode = nullptr;
 
         assert( dynamic_cast<Ogre::Item*>( toRemove->mMovableObject ) );
 
         mSceneManager->destroyItem( static_cast<Ogre::Item*>( toRemove->mMovableObject ) );
-        toRemove->mMovableObject = 0;
+        toRemove->mMovableObject = nullptr;
     }
     //-----------------------------------------------------------------------------------
     void GraphicsSystem::updateGameEntities( const GameEntityVec &gameEntities, float weight )

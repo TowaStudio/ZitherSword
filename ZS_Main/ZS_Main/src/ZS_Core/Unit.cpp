@@ -8,20 +8,21 @@
 namespace ZS {
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos,
 			int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status) :
-		GameObject(_name, _tag, _pos), id(_id),
-		hp(_hp), maxhp(_maxhp),
-		sp(_sp), maxsp(_maxsp),
-		str(_str), def(_def), spd(_spd),
-		status(_status)
+		GameObject(_name, _tag, _pos), id(_id)
+		, hp(_hp), maxhp(_maxhp)
+		, sp(_sp), maxsp(_maxsp)
+		, str(_str), def(_def), spd(_spd)
+		, status(_status)
 	{
 	}
 
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats) :
-		GameObject(_name, _tag, _pos), id(_id),
-		hp(_stats.hp), maxhp(_stats.maxhp),
-		sp(_stats.sp), maxsp(_stats.maxsp),
-		str(_stats.str), def(_stats.def), spd(_stats.spd),
-		status(_stats.status) {
+		GameObject(_name, _tag, _pos), id(_id)
+		, hp(_stats.hp), maxhp(_stats.maxhp)
+		, sp(_stats.sp), maxsp(_stats.maxsp)
+		, str(_stats.str), def(_stats.def), spd(_stats.spd)
+		, status(_stats.status)
+	{
 	}
 
 	Unit::~Unit() {

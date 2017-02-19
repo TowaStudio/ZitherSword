@@ -2,8 +2,8 @@
  * Project ZS
  */
 
-#ifndef _AUDIOSYSTEM_H
-#define _AUDIOSYSTEM_H
+#ifndef _ZS_AUDIOSYSTEM_H
+#define _ZS_AUDIOSYSTEM_H
 
 namespace ZS {
 	class AudioSystem {

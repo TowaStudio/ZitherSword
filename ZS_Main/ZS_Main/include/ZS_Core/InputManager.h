@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _INPUTMANAGER_H
-#define _INPUTMANAGER_H
+#ifndef _ZS_INPUTMANAGER_H
+#define _ZS_INPUTMANAGER_H
 
 class InputManager {
 };

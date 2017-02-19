@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _BUFFITEM_H
-#define _BUFFITEM_H
+#ifndef _ZS_BUFFITEM_H
+#define _ZS_BUFFITEM_H
 
 #include "Item.h"
 

@@ -31,8 +31,6 @@
     <ClInclude Include="include\Common\SdlEmulationLayer.h" />
     <ClInclude Include="include\Common\SdlInputHandler.h" />
     <ClInclude Include="include\Common\System\iOS\AppDelegate.h" />
-    <ClInclude Include="include\Common\System\iOS\GameViewController.h" />
-    <ClInclude Include="include\Common\System\iOS\iOSUtils.h" />
     <ClInclude Include="include\Common\System\MainEntryPoints.h" />
     <ClInclude Include="include\Common\System\StaticPluginLoader.h" />
     <ClInclude Include="include\Common\Threading\MessageQueueSystem.h" />
@@ -72,6 +70,7 @@
     <ClInclude Include="include\ZS_Core\Timer.h" />
     <ClInclude Include="include\ZS_Core\Unit.h" />
     <ClInclude Include="include\ZS_Core\Weapon.h" />
+    <ClInclude Include="StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cheatsheet.cpp" />
@@ -119,6 +118,7 @@
     <ClCompile Include="src\ZS_Core\Timer.cpp" />
     <ClCompile Include="src\ZS_Core\Unit.cpp" />
     <ClCompile Include="src\ZS_Core\Weapon.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>
@@ -182,7 +182,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreHlmsInk_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -207,7 +207,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreHlmsPbs.lib;OgreHlmsUnlit.lib;OgreMain.lib;OgreOverlay.lib;OIS.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreHlmsPbs.lib;OgreHlmsUnlit.lib;OgreHlmsInk.lib;OgreMain.lib;OgreOverlay.lib;OIS.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

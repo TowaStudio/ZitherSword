@@ -1,6 +1,6 @@
 
-#ifndef _Demo_CameraController_H_
-#define _Demo_CameraController_H_
+#ifndef _ZS_CameraController_H_
+#define _ZS_CameraController_H_
 
 #include "OgrePrerequisites.h"
 #include "DebugGameState.h"

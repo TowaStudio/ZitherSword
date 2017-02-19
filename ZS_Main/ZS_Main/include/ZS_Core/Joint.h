@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _JOINT_H
-#define _JOINT_H
+#ifndef _ZS_JOINT_H
+#define _ZS_JOINT_H
 
 #include "GameObject.h"
 

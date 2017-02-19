@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _HITINFO_H
-#define _HITINFO_H
+#ifndef _ZS_HITINFO_H
+#define _ZS_HITINFO_H
 
 #include "Timer.h"
 

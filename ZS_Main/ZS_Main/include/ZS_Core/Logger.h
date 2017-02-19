@@ -3,8 +3,8 @@
 */
 
 
-#ifndef _LOGGER_H
-#define _LOGGER_H
+#ifndef _ZS_LOGGER_H
+#define _ZS_LOGGER_H
 
 #include "Ogre.h"
 using namespace std;

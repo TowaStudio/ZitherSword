@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _ENEMY_H
-#define _ENEMY_H
+#ifndef _ZS_ENEMY_H
+#define _ZS_ENEMY_H
 
 #include "Unit.h"
 #include "Stats.h"

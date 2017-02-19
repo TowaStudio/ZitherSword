@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _LEVELMANAGER_H
-#define _LEVELMANAGER_H
+#ifndef _ZS_LEVELMANAGER_H
+#define _ZS_LEVELMANAGER_H
 #include "Swordsman.h"
 
 namespace ZS {

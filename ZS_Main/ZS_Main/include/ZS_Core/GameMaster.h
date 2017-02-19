@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _GAMEMASTER_H
-#define _GAMEMASTER_H
+#ifndef _ZS_GAMEMASTER_H
+#define _ZS_GAMEMASTER_H
 
 #include "InputManager.h"
 #include "LevelManager.h"

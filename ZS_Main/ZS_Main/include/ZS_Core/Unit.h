@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _UNIT_H
-#define _UNIT_H
+#ifndef _ZS_UNIT_H
+#define _ZS_UNIT_H
 
 #include "GameObject.h"
 #include "HitInfo.h"

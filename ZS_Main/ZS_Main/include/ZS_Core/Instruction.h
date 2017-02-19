@@ -3,8 +3,8 @@
 */
 
 
-#ifndef _INSTRUCTION_H
-#define _INSTRUCTION_H
+#ifndef _ZS_INSTRUCTION_H
+#define _ZS_INSTRUCTION_H
 
 namespace ZS {
 	class Instruction {

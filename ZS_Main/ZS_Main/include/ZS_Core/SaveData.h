@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _SAVEDATA_H
-#define _SAVEDATA_H
+#ifndef _ZS_SAVEDATA_H
+#define _ZS_SAVEDATA_H
 
 #include "PlayerStats.h"
 
