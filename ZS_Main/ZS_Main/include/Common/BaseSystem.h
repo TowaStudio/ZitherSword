@@ -1,6 +1,6 @@
 
-#ifndef _Demo_BaseSystem_H_
-#define _Demo_BaseSystem_H_
+#ifndef _ZS_BaseSystem_H_
+#define _ZS_BaseSystem_H_
 
 #include "Threading/MessageQueueSystem.h"
 

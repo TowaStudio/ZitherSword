@@ -1,5 +1,6 @@
 #include "ZSLogicGameState.h"
 #include "Threading/MqMessages.h"
+#include <SDL.h>
 
 namespace ZS {
 
@@ -12,7 +13,7 @@ namespace ZS {
 
 	ZSLogicGameState::~ZSLogicGameState() {
 	}
-
+	  
 	void ZSLogicGameState::createScene01() {
 		gm->log("Start in createScrene01");
 	}
@@ -20,5 +21,15 @@ namespace ZS {
 	void ZSLogicGameState::update(float timeSinceLast) {
 
 		GameState::update(timeSinceLast);
+	}
+
+	void ZSLogicGameState::keyReleased(const SDL_KeyboardEvent& arg) {
+		gm->log(Ogre::StringConverter::toString(arg.keysym.sym));
+		if(arg.keysym.sym == SDLK_l) {
+			gm->load();
+			gm->loadLevel(0);
+		} else {
+			GameState::keyPressed(arg);
+		}
 	}
 }

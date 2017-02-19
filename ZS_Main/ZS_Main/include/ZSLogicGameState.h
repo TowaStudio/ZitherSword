@@ -1,5 +1,5 @@
-#ifndef _ZSLOGICGAMESTATE_H
-#define _ZSLOGICGAMESTATE_H
+#ifndef _ZS_LOGICGAMESTATE_H
+#define _ZS_LOGICGAMESTATE_H
 
 #include "OgrePrerequisites.h"
 #include "Common/DebugGameState.h"
@@ -23,6 +23,7 @@ namespace ZS {
 
 		virtual void createScene01(void);
 		virtual void update(float timeSinceLast);
+		virtual void keyReleased(const SDL_KeyboardEvent& arg);
 	};
 }
 

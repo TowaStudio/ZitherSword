@@ -1,5 +1,5 @@
-#ifndef _ZSLOGICSYSTEM_H
-#define _ZSLOGICSYSTEM_H
+#ifndef _ZS_LOGICSYSTEM_H
+#define _ZS_LOGICSYSTEM_H
 #include "LogicSystem.h"
 
 namespace ZS {

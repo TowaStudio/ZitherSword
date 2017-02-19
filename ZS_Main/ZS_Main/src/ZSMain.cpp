@@ -44,8 +44,8 @@ namespace ZS
 		zsLogicGameState->_notifyLogicSystem(zsLogicSystem);
 		zsGrahicsGameState->_notifyGraphicsSystem(zsGraphicsSystem);
 
-		zsLogicSystem->_notifyGraphicsSystem(zsGraphicsSystem);
 		zsGraphicsSystem->_notifyLogicSystem(zsLogicSystem);
+		zsLogicSystem->_notifyGraphicsSystem(zsGraphicsSystem);
 
         *outGraphicsGameState = zsGrahicsGameState;
         *outGraphicsSystem = zsGraphicsSystem;

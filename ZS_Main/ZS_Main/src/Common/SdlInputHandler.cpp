@@ -16,7 +16,7 @@ namespace ZS
                                       KeyboardListener *keyboardListener,
                                       JoystickListener *joystickListener ) :
         mSdlWindow( sdlWindow ),
-        mLogicSystem( 0 ),
+        mLogicSystem( nullptr ),
         mMouseListener( mouseListener ),
         mKeyboardListener( keyboardListener ),
         mJoystickListener( joystickListener ),
@@ -37,7 +37,13 @@ namespace ZS
     SdlInputHandler::~SdlInputHandler()
     {
     }
-    //-----------------------------------------------------------------------------------
+
+	void SdlInputHandler::bindSystems(BaseSystem* logicSystem, BaseSystem* graphicsSystem) {
+		mLogicSystem = logicSystem;
+		mGraphicsSystem = graphicsSystem;
+	}
+
+	//-----------------------------------------------------------------------------------
     void SdlInputHandler::handleWindowEvent( const SDL_Event& evt )
     {
         switch( evt.window.event )

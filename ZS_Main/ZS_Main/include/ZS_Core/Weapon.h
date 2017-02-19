@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _WEAPON_H
-#define _WEAPON_H
+#ifndef _ZS_WEAPON_H
+#define _ZS_WEAPON_H
 
 #include "Item.h"
 

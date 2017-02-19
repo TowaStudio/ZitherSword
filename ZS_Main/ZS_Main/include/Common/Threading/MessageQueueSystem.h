@@ -26,7 +26,7 @@ namespace Mq
         MessageArray        mIncomingMessages[2];
 
         template <typename T> static void storeMessageToQueue( MessageArray &queue,
-                                                               Mq::MessageId messageId, const T &msg )
+                                                               Mq::MessageType messageId, const T &msg )
         {
             //Save the current offset.
             const size_t startOffset = queue.size();
@@ -36,7 +36,7 @@ namespace Mq
                                                                 sizeof(size_t) );
             queue.resize( queue.size() + totalSize );
 
-            //Write the header: the Size and the MessageId
+            //Write the header: the Size and the MessageType
             *reinterpret_cast<Ogre::uint32*>( queue.begin() + startOffset ) = totalSize;
             *reinterpret_cast<Ogre::uint32*>( queue.begin() + startOffset +
                                               sizeof(Ogre::uint32) )        = messageId;
@@ -63,7 +63,7 @@ namespace Mq
             The message itself. Structure must be POD.
         */
         template <typename T>
-        void queueSendMessage( MessageQueueSystem *dstSystem, Mq::MessageId messageId, const T &msg )
+        void queueSendMessage( MessageQueueSystem *dstSystem, Mq::MessageType messageId, const T &msg )
         {
             storeMessageToQueue( mPendingOutgoingMessages[dstSystem], messageId, msg );
         }
@@ -101,7 +101,7 @@ namespace Mq
         /// Abusing this function can degrade performance as it would perform
         /// frequent locking. See queueSendMessage
         template <typename T>
-        void receiveMessageImmediately( Mq::MessageId messageId, const T &msg )
+        void receiveMessageImmediately( Mq::MessageType messageId, const T &msg )
         {
             mMessageQueueMutex.lock();
             storeMessageToQueue( mIncomingMessages[0], messageId, msg );
@@ -131,7 +131,7 @@ namespace Mq
                         "MessageQueue corrupted or invalid message!" );
 
                 const void *data = itor + cSizeOfHeader;
-                processIncomingMessage( static_cast<Mq::MessageId>( messageId ), data );
+                processIncomingMessage( static_cast<Mq::MessageType>( messageId ), data );
                 itor += totalSize;
             }
 
@@ -139,7 +139,7 @@ namespace Mq
         }
 
         /// Derived classes must implement this function to process the incoming message
-        virtual void processIncomingMessage( Mq::MessageId messageId, const void *data ) = 0;
+        virtual void processIncomingMessage( Mq::MessageType messageId, const void *data ) = 0;
     };
 }
 }

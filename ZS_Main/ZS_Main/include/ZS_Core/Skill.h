@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _SKILL_H
-#define _SKILL_H
+#ifndef _ZS_SKILL_H
+#define _ZS_SKILL_H
 
 class Skill {
 };

@@ -2,8 +2,8 @@
 * Project ZS
 */
 
-#ifndef _PLAYERSTATS_H
-#define _PLAYERSTATS_H
+#ifndef _ZS_PLAYERSTATS_H
+#define _ZS_PLAYERSTATS_H
 
 #include "Stats.h"
 

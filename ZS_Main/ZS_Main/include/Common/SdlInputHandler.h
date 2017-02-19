@@ -2,8 +2,8 @@
 //Thanks to Jordan Milne and Scrawl for allowing to use their
 //sdlinputwrapper files as base under the MIT license
 
-#ifndef _Demo_SdlInputHandler_H_
-#define _Demo_SdlInputHandler_H_
+#ifndef _ZS_SdlInputHandler_H_
+#define _ZS_SdlInputHandler_H_
 
 #include "BaseSystem.h"
 #include "OgrePrerequisites.h"
@@ -72,6 +72,7 @@ namespace ZS
                          KeyboardListener *keyboardListener,
                          JoystickListener *joystickListener );
         virtual ~SdlInputHandler();
+	    void bindSystems(BaseSystem* logicSystem, BaseSystem* graphicsSystem);
 
         void _handleSdlEvents( const SDL_Event& evt );
 

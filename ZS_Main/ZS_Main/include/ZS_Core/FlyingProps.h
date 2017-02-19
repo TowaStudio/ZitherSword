@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _FLYINGPROPS_H
-#define _FLYINGPROPS_H
+#ifndef _ZS_FLYINGPROPS_H
+#define _ZS_FLYINGPROPS_H
 
 #include "Item.h"
 

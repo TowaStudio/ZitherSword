@@ -1,6 +1,6 @@
 
-#ifndef _Demo_SdlEmulationLayer_H_
-#define _Demo_SdlEmulationLayer_H_
+#ifndef _ZS_SdlEmulationLayer_H_
+#define _ZS_SdlEmulationLayer_H_
 
 #include "OgrePrerequisites.h"
 

@@ -10,9 +10,10 @@
 
 namespace ZS {
 	class ZSGraphicsSystem : public GraphicsSystem {
-		virtual Ogre::CompositorWorkspace* setupCompositor();
-
+	protected:
 		virtual void setupResources(void);
+		virtual void registerHlms(void);
+
 
 	public:
 		ZSGraphicsSystem(GameState* gameState);

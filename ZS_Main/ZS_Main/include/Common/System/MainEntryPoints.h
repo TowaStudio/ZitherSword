@@ -1,6 +1,6 @@
 
-#ifndef _Demo_MainEntryPoints_H_
-#define _Demo_MainEntryPoints_H_
+#ifndef _ZS_MainEntryPoints_H_
+#define _ZS_MainEntryPoints_H_
 
 #include "OgrePrerequisites.h"
 

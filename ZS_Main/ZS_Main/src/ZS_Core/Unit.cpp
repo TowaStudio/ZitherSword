@@ -3,24 +3,40 @@
  */
 
 #include "Unit.h"
+#include "Stats.h"
 
 namespace ZS {
-	Unit::Unit(std::string _name, Tag _tag, Vec3 _pos,
-			int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd) :
-		GameObject(_name, _tag, _pos), id(_id),
-		hp(_hp), maxhp(_maxhp),
-		sp(_sp), maxsp(_maxsp),
-		str(_str), def(_def), spd(_spd) {
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos,
+			int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status) :
+		GameObject(_name, _tag, _pos), id(_id)
+		, hp(_hp), maxhp(_maxhp)
+		, sp(_sp), maxsp(_maxsp)
+		, str(_str), def(_def), spd(_spd)
+		, status(_status)
+	{
+	}
+
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats) :
+		GameObject(_name, _tag, _pos), id(_id)
+		, hp(_stats.hp), maxhp(_stats.maxhp)
+		, sp(_stats.sp), maxsp(_stats.maxsp)
+		, str(_stats.str), def(_stats.def), spd(_stats.spd)
+		, status(_stats.status)
+	{
 	}
 
 	Unit::~Unit() {
 	}
 
-	/**
-	  * @return HitInfo
-	  */
-	HitInfo* Unit::attack() {
-		return nullptr;
+	HitInfo Unit::attack() {
+		return HitInfo();
+	}
+
+	void Unit::heal(float amount) {
+		hp += amount;
+		if(hp > maxhp) {
+			hp = maxhp;
+		}
 	}
 
 	/**
@@ -34,12 +50,17 @@ namespace ZS {
 		return false;
 	}
 
-	/**
-	 * @return void
-	 */
-	void Unit::heal() {
-		return;
+	float Unit::DamageCalculate(Unit* source, Unit* target) {
+		float dmg;
+		dmg = std::max(1.0f, source->str - target->def);
+		//TODO: Full damage calculation;
+		return dmg;
 	}
 
-	
+	float Unit::DamageCalculate(FlyingProps* source, Unit* target) {
+		float dmg;
+		dmg = std::max(1.0f, source->atk - target->def);
+		//TODO: Full damage calculation (Flying props);
+		return dmg;
+	}
 }

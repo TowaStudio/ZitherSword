@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _TIMER_H
-#define _TIMER_H
+#ifndef _ZS_TIMER_H
+#define _ZS_TIMER_H
 
 namespace ZS {
 	struct Time {

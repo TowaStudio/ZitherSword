@@ -1,6 +1,6 @@
 
-#ifndef _Demo_GameState_H_
-#define _Demo_GameState_H_
+#ifndef _ZS_GameState_H_
+#define _ZS_GameState_H_
 
 #include "InputListeners.h"
 

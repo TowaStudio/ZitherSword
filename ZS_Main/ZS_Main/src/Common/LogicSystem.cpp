@@ -19,6 +19,7 @@
 #include "Compositor/OgreCompositorManager2.h"
 
 #include "OgreOverlaySystem.h"
+#include "GameMaster.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -28,8 +29,8 @@ namespace ZS
 {
     LogicSystem::LogicSystem( GameState *gameState ) :
         BaseSystem( gameState ),
-        mGraphicsSystem( 0 ),
-        mGameEntityManager( 0 ),
+        mGraphicsSystem( nullptr ),
+        mGameEntityManager( nullptr ),
         mCurrentTransformIdx( 1 )
     {
         //mCurrentTransformIdx is 1, 0 and NUM_GAME_ENTITY_BUFFERS - 1 are taken by GraphicsSytem at startup
@@ -73,7 +74,7 @@ namespace ZS
         BaseSystem::finishFrameParallel();
     }
     //-----------------------------------------------------------------------------------
-    void LogicSystem::processIncomingMessage( Mq::MessageId messageId, const void *data )
+    void LogicSystem::processIncomingMessage( Mq::MessageType messageId, const void *data )
     {
         switch( messageId )
         {
@@ -92,7 +93,9 @@ namespace ZS
                                                                 data ) );
             break;
         case Mq::SDL_EVENT:
-            //TODO
+			//TODO: Handle SDL_INPUT message;
+			GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
+			
             break;
         default:
             break;

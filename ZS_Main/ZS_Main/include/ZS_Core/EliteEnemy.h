@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _ELITEENEMY_H
-#define _ELITEENEMY_H
+#ifndef _ZS_ELITEENEMY_H
+#define _ZS_ELITEENEMY_H
 
 #include "Enemy.h"
 

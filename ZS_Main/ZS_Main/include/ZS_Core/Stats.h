@@ -2,8 +2,8 @@
 * Project ZS
 */
 
-#ifndef _STATS_H
-#define _STATS_H
+#ifndef _ZS_STATS_H
+#define _ZS_STATS_H
 
 namespace ZS {
 	enum Status {

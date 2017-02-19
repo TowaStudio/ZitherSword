@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _ITEM_H
-#define _ITEM_H
+#ifndef _ZS_ITEM_H
+#define _ZS_ITEM_H
 
 #include "GameObject.h"
 

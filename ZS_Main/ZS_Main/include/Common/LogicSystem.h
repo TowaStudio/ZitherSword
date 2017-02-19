@@ -1,9 +1,10 @@
 
-#ifndef _Demo_LogicSystem_H_
-#define _Demo_LogicSystem_H_
+#ifndef _ZS_LogicSystem_H_
+#define _ZS_LogicSystem_H_
 
 #include "BaseSystem.h"
 #include "OgrePrerequisites.h"
+#include "SdlInputHandler.h"
 
 namespace ZS
 {
@@ -19,13 +20,12 @@ namespace ZS
         std::deque<Ogre::uint32>    mAvailableTransformIdx;
 
         /// @see MessageQueueSystem::processIncomingMessage
-        virtual void processIncomingMessage( Mq::MessageId messageId, const void *data );
+        virtual void processIncomingMessage( Mq::MessageType messageId, const void *data );
 
     public:
         LogicSystem( GameState *gameState );
         virtual ~LogicSystem();
-
-        void _notifyGraphicsSystem( BaseSystem *graphicsSystem )    { mGraphicsSystem = graphicsSystem; }
+	    void _notifyGraphicsSystem( BaseSystem *graphicsSystem )    { mGraphicsSystem = graphicsSystem; }
         void _notifyGameEntityManager( GameEntityManager *mgr )     { mGameEntityManager = mgr; }
 
         void finishFrameParallel(void);

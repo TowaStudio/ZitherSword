@@ -26,8 +26,8 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 
-#ifndef _Demo_StaticPluginLoader_H_
-#define _Demo_StaticPluginLoader_H_
+#ifndef _ZS_StaticPluginLoader_H_
+#define _ZS_StaticPluginLoader_H_
 
 #include "OgreBuildSettings.h"
 

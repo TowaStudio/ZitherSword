@@ -3,8 +3,8 @@
 */
 
 
-#ifndef _SCREENLOGGER_H
-#define _SCREENLOGGER_H
+#ifndef _ZS_SCREENLOGGER_H
+#define _ZS_SCREENLOGGER_H
 
 #include "ZSGraphicsGameState.h"
 #include "Logger.h"

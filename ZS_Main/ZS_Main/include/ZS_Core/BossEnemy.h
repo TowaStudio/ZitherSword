@@ -3,8 +3,8 @@
  */
 
 
-#ifndef _BOSSENEMY_H
-#define _BOSSENEMY_H
+#ifndef _ZS_BOSSENEMY_H
+#define _ZS_BOSSENEMY_H
 
 #include "Enemy.h"
 
