@@ -11,7 +11,7 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 
-	void AudioSystem::musicSetup(int _bpm = 92, int _bpb = 4) {
+	void AudioSystem::musicSetup(NoteName *sequences[] = nullptr, int _bpm = 92, int _bpb = 4) {
 		// setting properties
 		bpm = _bpm;
 		bpb = _bpb;
@@ -23,6 +23,7 @@ namespace ZS {
 		// calculating properties
 		interval = (60 * 1000) / (tpb * bpm);
 		thresTime = tolerance * interval;
+
 	}
 
 	void AudioSystem::startMusic() {
@@ -49,7 +50,8 @@ namespace ZS {
 			inputJudge(currentTime, inputNote);
 		}
 
-		// play sound : TODO
+		// play sound
+		playSound(Note());
 
 	}
 
@@ -70,8 +72,44 @@ namespace ZS {
 		// TODO
 	}
 
+	void AudioSystem::playSound(Note note) {
+
+		if (reader != nullptr) {
+			
+			transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
+			mixer.addInputSource(&transportSource, true);
+			transportSource.start();
+		}
+	}
+
+	void AudioSystem::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
+		mixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
+	}
+
+	void AudioSystem::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) {
+		mixer.getNextAudioBlock(bufferToFill);
+	}
+
+	void AudioSystem::releaseResources() {
+		mixer.releaseResources();
+	}
+
 	AudioSystem::AudioSystem() {
+		// load music file
+		formatManager.registerBasicFormats();
+		readFile("testcello.wav", "F:/ZitherSword/ZS_Main/Assets/Audio/");
+
+		//test pointer
+		//NoteName* a[4];
+		//int b[] = { 1, 2, 3, 4 };
+		//a[1] = (NoteName*)b;
+		//musicSetup(a);
 		musicSetup();
+	}
+
+	void AudioSystem::readFile(String fileName = "testcello.wav", String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/") {
+		File file = File::getCurrentWorkingDirectory().getChildFile(directory + fileName);
+		reader = formatManager.createReaderFor(file);
 	}
 	
 	void AudioSystem::timerCallback() {

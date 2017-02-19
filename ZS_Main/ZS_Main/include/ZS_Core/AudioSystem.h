@@ -25,14 +25,13 @@ namespace ZS {
 		int barNum = 1;
 	};
 
-
-	class AudioSystem : public Timer{
+	class AudioSystem : public AudioAppComponent, public Timer{
 	public:
 		static AudioSystem* GetInstance() {
 			return instance;
 		}
 
-		void musicSetup(int timePerBeat, int beatsPerBar);
+		void musicSetup(NoteName *sequences[], int timePerBeat, int beatsPerBar);
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);
@@ -62,14 +61,27 @@ namespace ZS {
 		int64 currentTickTime; 
 		//int64 nextTickTime;
 
+		MixerAudioSource mixer;
+		AudioFormatManager formatManager;
+		AudioFormatReader* reader;
+		AudioTransportSource transportSource;
+
+		void readFile(String fileName, String directory);
 		void inputJudge(int64 currentTime, NoteName noteName);
 		void recordNote(int tickNum, NoteName noteName);
+		void playSound(Note note);
 
 		static AudioSystem* instance;
 		AudioSystem();
 		AudioSystem(AudioSystem const&) {};
 		AudioSystem& operator= (AudioSystem const&) {};
 
+		// override AudioAppComponent
+		void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
+		void getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) override;
+		void releaseResources() override;
+
+		// override Timer
 		void timerCallback() override;
 
 	};
