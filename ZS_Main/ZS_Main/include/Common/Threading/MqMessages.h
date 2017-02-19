@@ -1,6 +1,6 @@
 
-#ifndef _Mq_MqMessages_H_
-#define _Mq_MqMessages_H_
+#ifndef _ZS_MqMessages_H_
+#define _ZS_MqMessages_H_
 
 #include <vector>
 #include <assert.h>
@@ -9,7 +9,7 @@ namespace ZS
 {
 namespace Mq
 {
-    enum MessageId
+    enum MessageType
     {
         //Graphics <-  Logic
         LOGICFRAME_FINISHED,
@@ -19,8 +19,9 @@ namespace Mq
         GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT,
         //Graphics  -> Logic
         SDL_EVENT,
+		SDL_KEYEVENT,
 
-        NUM_MESSAGE_IDS
+        NUM_MESSAGE_TYPES
     };
 }
 }

@@ -1,6 +1,6 @@
 
-#ifndef _ZSGRAPHICSGAMESTATE_H
-#define _ZSGRAPHICSGAMESTATE_H
+#ifndef _ZS_GRAPHICSGAMESTATE_H
+#define _ZS_GRAPHICSGAMESTATE_H
 
 #include "OgrePrerequisites.h"
 #include "DebugGameState.h"
@@ -16,19 +16,10 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         bool                mAnimateObjects;
-        Ogre::uint32        mCurrentPreset;
-
-        Ogre::String mPresetName;
-        float mExposure;
-        float mMinAutoExposure;
-        float mMaxAutoExposure;
-        float mBloomFullThreshold;
-
-		GameMaster* gm;
+        
+        GameMaster* gm;
 
         virtual void showFPS( float timeSinceLast, Ogre::String &outText );
-
-        void switchPreset( int direction=1 );
 
     public:
 		ZSGraphicsGameState();

@@ -1,5 +1,5 @@
-#ifndef _ZSGAMEOBJECTMANAGER_H
-#define _ZSGAMEOBJECTMANAGER_H
+#ifndef _ZS_GAMEOBJECTMANAGER_H
+#define _ZS_GAMEOBJECTMANAGER_H
 
 #include "OgreVector3.h"
 #include "OgreQuaternion.h"

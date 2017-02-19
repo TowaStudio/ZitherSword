@@ -1,6 +1,6 @@
 
-#ifndef _Demo_GraphicsSystem_H_
-#define _Demo_GraphicsSystem_H_
+#ifndef _ZS_GraphicsSystem_H_
+#define _ZS_GraphicsSystem_H_
 
 #include "BaseSystem.h"
 #include "GameEntityManager.h"
@@ -59,7 +59,7 @@ namespace ZS
     #endif
 
         /// @see MessageQueueSystem::processIncomingMessage
-        virtual void processIncomingMessage( Mq::MessageId messageId, const void *data );
+        virtual void processIncomingMessage( Mq::MessageType messageId, const void *data );
 
         static void addResourceLocation( const Ogre::String &archName, const Ogre::String &typeName,
                                          const Ogre::String &secName );
@@ -85,7 +85,7 @@ namespace ZS
                         Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.2f, 0.4f, 0.6f ) );
         virtual ~GraphicsSystem();
 
-        void _notifyLogicSystem( BaseSystem *logicSystem )      { mLogicSystem = logicSystem; }
+	    void _notifyLogicSystem(BaseSystem* logicSystem);
 
         void initialize( const Ogre::String &windowTitle );
         void deinitialize(void);
