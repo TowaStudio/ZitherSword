@@ -198,7 +198,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreHlmsInk_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

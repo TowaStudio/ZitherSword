@@ -28,6 +28,7 @@ namespace ZS {
 
 	void AudioSystem::startMusic() {
 		// init
+		setAudioChannels(0, 2);
 		currentBarNum = 0;
 		currentTickNum = -1;
 		currentTickTime = -1;
@@ -76,14 +77,15 @@ namespace ZS {
 
 		if (reader != nullptr) {
 			
-			transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
-			mixer.addInputSource(&transportSource, true);
+			//transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
+			//mixer.addInputSource(&transportSource, true);
+			transportSource.setPosition(0.0);
 			transportSource.start();
 		}
 	}
 
 	void AudioSystem::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
-		mixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
+		transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
 	}
 
 	void AudioSystem::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) {
@@ -108,11 +110,13 @@ namespace ZS {
 	}
 
 	void AudioSystem::readFile(String fileName = "testcello.wav", String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/") {
-		File file = File::getCurrentWorkingDirectory().getChildFile(directory + fileName);
+		File file = File("F:/Temp/cello.wav");// File::getCurrentWorkingDirectory().getChildFile(directory + fileName);
 		reader = formatManager.createReaderFor(file);
+		transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
+		mixer.addInputSource(&transportSource, true);
 	}
 	
-	void AudioSystem::timerCallback() {
+	void AudioSystem::hiResTimerCallback() {
 		if (currentTickNum + 1 - tpb * bpb >= 0) {
 			currentBarNum += 1; 
 			currentTickNum = 0;
@@ -125,5 +129,6 @@ namespace ZS {
 		//nextTickTime = currentTickTime + interval;
 
 		// TODO: play solid music
+		
 	}
 }

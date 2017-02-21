@@ -25,7 +25,7 @@ namespace ZS {
 		int barNum = 1;
 	};
 
-	class AudioSystem : public AudioAppComponent, public Timer{
+	class AudioSystem : public juce::AudioAppComponent, public juce::HighResolutionTimer{
 	public:
 		static AudioSystem* GetInstance() {
 			return instance;
@@ -82,7 +82,7 @@ namespace ZS {
 		void releaseResources() override;
 
 		// override Timer
-		void timerCallback() override;
+		void hiResTimerCallback() override;
 
 	};
 }
