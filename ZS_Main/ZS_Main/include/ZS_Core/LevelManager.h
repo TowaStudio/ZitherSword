@@ -5,6 +5,8 @@
 
 #ifndef _ZS_LEVELMANAGER_H
 #define _ZS_LEVELMANAGER_H
+
+#include "tinyxml2.h"
 #include "Swordsman.h"
 
 namespace ZS {
@@ -27,6 +29,8 @@ namespace ZS {
 		void loadLevel();
 		void initLevel();
 		void startLevel();
+
+		void trigger();
 	};
 
 }

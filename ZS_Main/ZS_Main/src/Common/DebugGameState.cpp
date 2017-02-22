@@ -17,6 +17,7 @@
 #include "OgreHlms.h"
 #include "OgreHlmsCompute.h"
 #include "OgreGpuProgramManager.h"
+#include "GameMaster.h"
 
 using namespace ZS;
 
@@ -127,21 +128,14 @@ namespace ZS
     {
         if( arg.keysym.sym == SDLK_F1 && (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS)) == 0 )
         {
-            Ogre::String finalText;
-            showFPS( 0, finalText );
-            mDebugText->setCaption( finalText );
-            mDebugTextShadow->setCaption( finalText );
-        }
-        else if( arg.keysym.sym == SDLK_F1 && (arg.keysym.mod & (KMOD_LCTRL|KMOD_RCTRL)) )
-        {
-            //Hot reload of PBS shaders. We need to clear the microcode cache
-            //to prevent using old compiled versions.
+            //Hot reload of Ink shaders.
             Ogre::Root *root = mGraphicsSystem->getRoot();
             Ogre::HlmsManager *hlmsManager = root->getHlmsManager();
 
-            Ogre::Hlms *hlms = hlmsManager->getHlms( Ogre::HLMS_PBS );
+            Ogre::Hlms *hlms = hlmsManager->getHlms( Ogre::HLMS_USER0 );
             Ogre::GpuProgramManager::getSingleton().clearMicrocodeCache();
             hlms->reloadFrom( hlms->getDataFolder() );
+			GameMaster::GetInstance()->log(hlms->getDataFolder()->getName());
         }
         else if( arg.keysym.sym == SDLK_F2 && (arg.keysym.mod & (KMOD_LCTRL|KMOD_RCTRL)) )
         {
@@ -153,9 +147,19 @@ namespace ZS
             Ogre::GpuProgramManager::getSingleton().clearMicrocodeCache();
             hlms->reloadFrom( hlms->getDataFolder() );
         }
-        else if( arg.keysym.sym == SDLK_F3 && (arg.keysym.mod & (KMOD_LCTRL|KMOD_RCTRL)) )
+		else if(arg.keysym.sym == SDLK_F3 && (arg.keysym.mod & (KMOD_LCTRL | KMOD_RCTRL))) {
+			//Hot reload of PBS shaders. We need to clear the microcode cache
+			//to prevent using old compiled versions.
+			Ogre::Root *root = mGraphicsSystem->getRoot();
+			Ogre::HlmsManager *hlmsManager = root->getHlmsManager();
+
+			Ogre::Hlms *hlms = hlmsManager->getHlms(Ogre::HLMS_PBS);
+			Ogre::GpuProgramManager::getSingleton().clearMicrocodeCache();
+			hlms->reloadFrom(hlms->getDataFolder());
+		}
+        else if( arg.keysym.sym == SDLK_F4 && (arg.keysym.mod & (KMOD_LCTRL|KMOD_RCTRL)) )
         {
-            //Hot reload of Unlit shaders.
+            //Hot reload of compute shaders.
             Ogre::Root *root = mGraphicsSystem->getRoot();
             Ogre::HlmsManager *hlmsManager = root->getHlmsManager();
 

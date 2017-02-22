@@ -76,29 +76,28 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     void LogicSystem::processIncomingMessage( Mq::MessageType messageId, const void *data )
     {
-        switch( messageId )
-        {
-        case Mq::LOGICFRAME_FINISHED:
-            {
-                Ogre::uint32 newIdx = *reinterpret_cast<const Ogre::uint32*>( data );
-                assert( (mAvailableTransformIdx.empty() ||
-                        newIdx == (mAvailableTransformIdx.back() + 1) % NUM_GAME_ENTITY_BUFFERS) &&
-                        "Indices are arriving out of order!!!" );
+        switch( messageId ) {			
+			case Mq::LOGICFRAME_FINISHED:
+				{
+					Ogre::uint32 newIdx = *reinterpret_cast<const Ogre::uint32*>( data );
+					assert( (mAvailableTransformIdx.empty() ||
+							newIdx == (mAvailableTransformIdx.back() + 1) % NUM_GAME_ENTITY_BUFFERS) &&
+							"Indices are arriving out of order!!!" );
 
-                mAvailableTransformIdx.push_back( newIdx );
-            }
-            break;
-        case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
-            mGameEntityManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
-                                                                data ) );
-            break;
-        case Mq::SDL_EVENT:
-			//TODO: Handle SDL_INPUT message;
-			GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
-			
-            break;
-        default:
-            break;
+					mAvailableTransformIdx.push_back( newIdx );
+				}
+				break;
+			case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
+				mGameEntityManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
+																	data ) );
+				break;
+			case Mq::SDL_EVENT:
+				//TODO: Handle SDL_INPUT message;
+				//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
+
+				break;
+			default:
+				break;
         }
     }
 }

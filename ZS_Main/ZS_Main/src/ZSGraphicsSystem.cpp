@@ -28,11 +28,10 @@ namespace ZS {
 
 		Ogre::RenderSystem *renderSystem = mRoot->getRenderSystem();
 
-		Ogre::String shaderSyntax = "GLSL";
-		if(renderSystem->getName() == "Direct3D11 Rendering Subsystem")
-			shaderSyntax = "HLSL";
-		else if(renderSystem->getName() == "Metal Rendering Subsystem")
-			shaderSyntax = "Metal";
+		Ogre::String shaderSyntax = "HLSL";
+		if(renderSystem->getName() != "Direct3D11 Rendering Subsystem") {
+			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED, "This game is only available in Direct3D11", renderSystem->getName());
+		}
 
 		Ogre::Archive *archiveLibrary = Ogre::ArchiveManager::getSingletonPtr()->load(
 			dataFolder + "Hlms/Common/" + shaderSyntax,
@@ -92,20 +91,18 @@ namespace ZS {
 		if (originalDataFolder.empty()) originalDataFolder = "./";
 		else if (*(originalDataFolder.end() - 1) != '/') originalDataFolder += "/";
 
-		const char* c_locations[9] =
+		const int RecourcesFolderCount = 6;
+		const char* c_locations[RecourcesFolderCount] =
 		{
 			"2.0/scripts/materials/Common",
 			"2.0/scripts/materials/Common/GLSL",
 			"2.0/scripts/materials/Common/HLSL",
 			"2.0/scripts/materials/Common/Metal",
-			"2.0/scripts/materials/HDR",
-			"2.0/scripts/materials/HDR/GLSL",
-			"2.0/scripts/materials/HDR/HLSL",
-			"2.0/scripts/materials/HDR/Metal",
-			"2.0/scripts/materials/PbsMaterials"
+			"2.0/scripts/materials/PbsMaterials",
+			"2.0/scripts/materials/InkPaint"
 		};
 
-		for (size_t i = 0; i < 9; ++i) {
+		for (size_t i = 0; i < RecourcesFolderCount; ++i) {
 			Ogre::String dataFolder = originalDataFolder + c_locations[i];
 			addResourceLocation(dataFolder, "FileSystem", "General");
 		}

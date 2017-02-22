@@ -37,9 +37,9 @@
     <ClInclude Include="include\Common\Threading\MqMessages.h" />
     <ClInclude Include="include\Common\Threading\YieldTimer.h" />
     <ClInclude Include="include\Common\DebugGameState.h" />
+    <ClInclude Include="include\Common\tinyxml\tinyxml2.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
-    <ClInclude Include="include\Common\Utils\tinyxml2.h" />
     <ClInclude Include="include\ZSGameObjectManager.h" />
     <ClInclude Include="include\ZSGraphicsSystem.h" />
     <ClInclude Include="include\ZSLogicGameState.h" />
@@ -51,9 +51,11 @@
     <ClInclude Include="include\ZS_Core\BuffItem.h" />
     <ClInclude Include="include\ZS_Core\EliteEnemy.h" />
     <ClInclude Include="include\ZS_Core\Enemy.h" />
+    <ClInclude Include="include\ZS_Core\Event.h" />
     <ClInclude Include="include\ZS_Core\FlyingProps.h" />
     <ClInclude Include="include\ZS_Core\GameMaster.h" />
     <ClInclude Include="include\ZS_Core\GameObject.h" />
+    <ClInclude Include="include\ZS_Core\GenerateEnemyEvent.h" />
     <ClInclude Include="include\ZS_Core\HitInfo.h" />
     <ClInclude Include="include\ZS_Core\InputManager.h" />
     <ClInclude Include="include\ZS_Core\Instruction.h" />
@@ -68,12 +70,12 @@
     <ClInclude Include="include\ZS_Core\Stats.h" />
     <ClInclude Include="include\ZS_Core\Swordsman.h" />
     <ClInclude Include="include\ZS_Core\Timer.h" />
+    <ClInclude Include="include\ZS_Core\Trigger.h" />
     <ClInclude Include="include\ZS_Core\Unit.h" />
     <ClInclude Include="include\ZS_Core\Weapon.h" />
-    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\cheatsheet.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
     <ClCompile Include="src\Common\GameEntityManager.cpp" />
@@ -86,9 +88,9 @@
     <ClCompile Include="src\Common\System\StaticPluginLoader.cpp" />
     <ClCompile Include="src\Common\Threading\MessageQueueSystem.cpp" />
     <ClCompile Include="src\Common\DebugGameState.cpp" />
+    <ClCompile Include="src\Common\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
-    <ClCompile Include="src\Common\Utils\tinyxml2.cpp" />
     <ClCompile Include="src\ZSGameObjectManager.cpp" />
     <ClCompile Include="src\ZSGraphicsSystem.cpp" />
     <ClCompile Include="src\ZSLogicGameState.cpp" />
@@ -109,6 +111,7 @@
     <ClCompile Include="src\ZS_Core\Item.cpp" />
     <ClCompile Include="src\ZS_Core\Joint.cpp" />
     <ClCompile Include="src\ZS_Core\LevelManager.cpp" />
+    <ClCompile Include="src\ZS_Core\Logger.cpp" />
     <ClCompile Include="src\ZS_Core\PlayerStats.cpp" />
     <ClCompile Include="src\ZS_Core\SaveData.cpp" />
     <ClCompile Include="src\ZS_Core\ScreenLogger.cpp" />
@@ -116,9 +119,10 @@
     <ClCompile Include="src\ZS_Core\Stats.cpp" />
     <ClCompile Include="src\ZS_Core\Swordsman.cpp" />
     <ClCompile Include="src\ZS_Core\Timer.cpp" />
+    <ClCompile Include="src\ZS_Core\Trigger.cpp" />
     <ClCompile Include="src\ZS_Core\Unit.cpp" />
     <ClCompile Include="src\ZS_Core\Weapon.cpp" />
-    <ClCompile Include="StaticObject.cpp" />
+    <ClCompile Include="src\ZS_Core\StaticObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35C15D9E-1DFF-4E50-A7D9-AB860503FBD0}</ProjectGuid>
@@ -176,9 +180,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\tinyxml;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -199,9 +204,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\tinyxml;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

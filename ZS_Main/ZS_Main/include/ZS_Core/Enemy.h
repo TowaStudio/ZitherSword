@@ -20,6 +20,7 @@ namespace ZS {
 		HitInfo attack() override;
 	};
 
+	typedef std::vector<Enemy> EnemyVec;
 }
 
 #endif //_ENEMY_H

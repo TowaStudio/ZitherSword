@@ -127,7 +127,7 @@ namespace Mq
                                                                                  sizeof(Ogre::uint32) );
 
                 assert( itor + totalSize <= end && "MessageQueue corrupted!" );
-                assert( messageId <= Mq::NUM_MESSAGE_IDS &&
+                assert( messageId <= Mq::NUM_MESSAGE_TYPES &&
                         "MessageQueue corrupted or invalid message!" );
 
                 const void *data = itor + cSizeOfHeader;
