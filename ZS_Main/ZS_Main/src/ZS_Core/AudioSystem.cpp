@@ -15,6 +15,7 @@ namespace ZS {
 		// setting properties
 		bpm = _bpm;
 		bpb = _bpb;
+		//part = _part;
 
 		// hardcoding properties
 		tolerance = 0.25;
@@ -52,7 +53,7 @@ namespace ZS {
 		}
 
 		// play sound
-		playSound(Note());
+		playSound(inputNote);
 
 	}
 
@@ -73,19 +74,18 @@ namespace ZS {
 		// TODO
 	}
 
-	void AudioSystem::playSound(Note note) {
-
-		if (reader != nullptr) {
-			
-			//transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
-			//mixer.addInputSource(&transportSource, true);
+	void AudioSystem::playSound(NoteName note) {
+		if (readers[note] != nullptr) {
+			//AudioTransportSource transportSource;
+			transportSource.setSource(new AudioFormatReaderSource(readers[note], true), 0, nullptr, readers[note]->sampleRate);
+			mixer.addInputSource(&transportSource, true);
 			transportSource.setPosition(0.0);
 			transportSource.start();
 		}
 	}
 
 	void AudioSystem::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
-		transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+		mixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
 	}
 
 	void AudioSystem::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) {
@@ -99,7 +99,8 @@ namespace ZS {
 	AudioSystem::AudioSystem() {
 		// load music file
 		formatManager.registerBasicFormats();
-		readFile("testcello.wav", "F:/ZitherSword/ZS_Main/Assets/Audio/");
+		part = "Med_";
+		readFiles();
 
 		//test pointer
 		//NoteName* a[4];
@@ -109,11 +110,17 @@ namespace ZS {
 		musicSetup();
 	}
 
-	void AudioSystem::readFile(String fileName = "testcello.wav", String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/") {
-		File file = File("F:/Temp/cello.wav");// File::getCurrentWorkingDirectory().getChildFile(directory + fileName);
-		reader = formatManager.createReaderFor(file);
-		transportSource.setSource(new AudioFormatReaderSource(reader, true), 0, nullptr, reader->sampleRate);
-		mixer.addInputSource(&transportSource, true);
+	void AudioSystem::readFiles() {
+		String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
+		for (int i = 0; i < 5; i++) {
+			String path = directory + part;
+			path += noteGroup[i];
+			path += ".wav";
+			File file = File(path);
+			readers[noteGroup[i]] = formatManager.createReaderFor(file);
+		}
+		//File file = File("F:/ZitherSword/ZS_Main/Assets/Audio/Med_1.wav");
+		//reader = formatManager.createReaderFor(file); // test
 	}
 	
 	void AudioSystem::hiResTimerCallback() {
@@ -128,7 +135,9 @@ namespace ZS {
 		currentTickTime = Time::currentTimeMillis();
 		//nextTickTime = currentTickTime + interval;
 
-		// TODO: play solid music
-		
+		// TODO: play solid music // test
+		if (currentTickNum % 4 == 0) {
+			playSound((NoteName)(currentTickNum / 4));
+		}
 	}
 }
