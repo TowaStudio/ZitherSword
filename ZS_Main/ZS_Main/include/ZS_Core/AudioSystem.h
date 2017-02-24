@@ -16,7 +16,7 @@ namespace ZS {
 		FA = 4,
 		SO = 5,
 		LA = 6,
-		SI = 7
+		SI = 7,
 	};
 	/*struct Note {
 		NoteName name = REST;
@@ -31,7 +31,7 @@ namespace ZS {
 			return instance;
 		}
 
-		void musicSetup(NoteName *sequences[], int timePerBeat, int beatsPerBar);
+		void musicSetup(NoteName *patterns[], int timePerBeat, int beatsPerBar);
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);
@@ -46,21 +46,26 @@ namespace ZS {
 
 
 	private:
+		// setting variables
+		NoteName **patterns;
 		int bpm; // beats per minute
 		int bpb; // beats per bar
-		String part; // Hi_, Low, Med_
+		String part; // Hi_, Low_, Med_
 
+		// computing variables
 		float tolerance; // 0: no tolerance - 0.5: full tolerance 
 		int tpb; // ticks per beat
 		int interval;
 		int thresTime;
 		const int noteGroup[5] = { 1, 2, 3, 5, 6 }; // INTERNAL USE
 
+		// run time variables
 		//int64 startTime;
 		int currentBarNum; // the current number of bar
 		int currentTickNum; // the current number of tick within a bar
 		int64 currentTickTime; 
 		//int64 nextTickTime;
+		NoteName* inputSequence;
 
 		MixerAudioSource mixer;
 		AudioFormatManager formatManager;
@@ -71,6 +76,7 @@ namespace ZS {
 		void inputJudge(int64 currentTime, NoteName noteName);
 		void recordNote(int tickNum, NoteName noteName);
 		void playSound(NoteName note);
+		int identifySequence();
 
 		static AudioSystem* instance;
 		AudioSystem();

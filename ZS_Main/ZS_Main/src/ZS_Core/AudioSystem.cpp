@@ -11,11 +11,12 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 
-	void AudioSystem::musicSetup(NoteName *sequences[] = nullptr, int _bpm = 92, int _bpb = 4) {
+	void AudioSystem::musicSetup(NoteName *_patterns[] = nullptr, int _bpm = 92, int _bpb = 4) {
 		// setting properties
+		patterns = _patterns;
 		bpm = _bpm;
 		bpb = _bpb;
-		//part = _part;
+		//part = _part; // TODO 3 sound levels
 
 		// hardcoding properties
 		tolerance = 0.25;
@@ -24,13 +25,14 @@ namespace ZS {
 		// calculating properties
 		interval = (60 * 1000) / (tpb * bpm);
 		thresTime = tolerance * interval;
+		inputSequence = new NoteName[tpb * bpb];
 
 	}
 
 	void AudioSystem::startMusic() {
 		// init
 		setAudioChannels(0, 2);
-		currentBarNum = 0;
+		currentBarNum = 0; // TODO prelude bars
 		currentTickNum = -1;
 		currentTickTime = -1;
 		//nextTickTime = -1;
@@ -71,12 +73,17 @@ namespace ZS {
 	}
 
 	void AudioSystem::recordNote(int tickNum, NoteName noteName) {
-		// TODO
+		if (tickNum == - tpb * bpb) {
+			// TODO next[0] = noteName;
+			inputSequence[0] = noteName;
+		}
+		else {
+			inputSequence[tickNum] = noteName;
+		}
 	}
 
 	void AudioSystem::playSound(NoteName note) {
 		if (readers[note] != nullptr) {
-			//AudioTransportSource transportSource;
 			transportSource.setSource(new AudioFormatReaderSource(readers[note], true), 0, nullptr, readers[note]->sampleRate);
 			mixer.addInputSource(&transportSource, true);
 			transportSource.setPosition(0.0);
@@ -84,30 +91,39 @@ namespace ZS {
 		}
 	}
 
-	void AudioSystem::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
-		mixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
+	int AudioSystem::identifySequence() {
+		for (int pat = 0; pat < sizeof(patterns); pat++) {
+			bool match = true;
+			for (int i = 0; i < sizeof(inputSequence); i++) {
+				if (inputSequence[i] != patterns[i][pat]) {
+					match = false;
+					break;
+				}
+			}
+			if (match) {
+				return pat; // return the index of pattern
+			}
+		}
+		return -1; // No match
 	}
 
-	void AudioSystem::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) {
-		mixer.getNextAudioBlock(bufferToFill);
-	}
-
-	void AudioSystem::releaseResources() {
-		mixer.releaseResources();
-	}
-
+	// constructor
 	AudioSystem::AudioSystem() {
-		// load music file
+		// init settings
 		formatManager.registerBasicFormats();
 		part = "Med_";
+
+		// load files
 		readFiles();
 
-		//test pointer
-		//NoteName* a[4];
-		//int b[] = { 1, 2, 3, 4 };
-		//a[1] = (NoteName*)b;
-		//musicSetup(a);
-		musicSetup();
+		//test sequense
+		NoteName** a = new NoteName*[2];
+		int b[] = { 1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0 };
+		int c[] = { 5,0,0,0,6,0,0,0,5,0,0,0,6,0,0,0 };
+		a[0] = (NoteName*)b;
+		a[1] = (NoteName*)c;
+		musicSetup(a);
+		//musicSetup();
 	}
 
 	void AudioSystem::readFiles() {
@@ -119,15 +135,30 @@ namespace ZS {
 			File file = File(path);
 			readers[noteGroup[i]] = formatManager.createReaderFor(file);
 		}
-		//File file = File("F:/ZitherSword/ZS_Main/Assets/Audio/Med_1.wav");
-		//reader = formatManager.createReaderFor(file); // test
+	}
+
+	// override 
+	void AudioSystem::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
+		mixer.prepareToPlay(samplesPerBlockExpected, sampleRate);
+	}
+
+	void AudioSystem::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill) {
+		mixer.getNextAudioBlock(bufferToFill);
+	}
+
+	void AudioSystem::releaseResources() {
+		mixer.releaseResources();
 	}
 	
 	void AudioSystem::hiResTimerCallback() {
 		if (currentTickNum + 1 - tpb * bpb >= 0) {
 			currentBarNum += 1; 
 			currentTickNum = 0;
-			// TODO: sequence identify
+			
+			// 
+			inputSequence = new NoteName[tpb * bpb];
+			int res = identifySequence();
+			// TODO return the action to core
 		}
 		else {
 			currentTickNum++;
