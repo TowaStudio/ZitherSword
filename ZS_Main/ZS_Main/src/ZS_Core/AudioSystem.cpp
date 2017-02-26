@@ -2,7 +2,6 @@
  * Project ZS
  */
 
-
 #include "AudioSystem.h"
 
 namespace ZS {
@@ -10,8 +9,8 @@ namespace ZS {
 	* AudioSystem implementation
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
-
-	void AudioSystem::musicSetup(NoteName *_patterns[] = nullptr, int _bpm = 92, int _bpb = 4) {
+	
+	void AudioSystem::musicSetup(Patterns _patterns = nullptr, int _bpm = 92, int _bpb = 4) {
 		// setting properties
 		patterns = _patterns;
 		bpm = _bpm;
@@ -25,7 +24,7 @@ namespace ZS {
 		// calculating properties
 		interval = (60 * 1000) / (tpb * bpm);
 		thresTime = tolerance * interval;
-		inputSequence = new NoteName[tpb * bpb];
+		inputSequence = &(std::vector<NoteName> { REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST });
 
 	}
 
@@ -50,8 +49,8 @@ namespace ZS {
 
 		// judge input
 		if (isTimerRunning()) {
-			int64 currentTime = Time::currentTimeMillis();
-			inputJudge(currentTime, inputNote);
+			int64 currentTime = juce::Time::currentTimeMillis();
+			//inputJudge(currentTime, inputNote);
 		}
 
 		// play sound
@@ -75,10 +74,10 @@ namespace ZS {
 	void AudioSystem::recordNote(int tickNum, NoteName noteName) {
 		if (tickNum == - tpb * bpb) {
 			// TODO next[0] = noteName;
-			inputSequence[0] = noteName;
+			inputSequence->at(0) = noteName;
 		}
 		else {
-			inputSequence[tickNum] = noteName;
+			inputSequence->at(tickNum) = noteName;
 		}
 	}
 
@@ -92,16 +91,37 @@ namespace ZS {
 	}
 
 	int AudioSystem::identifySequence() {
-		for (int pat = 0; pat < sizeof(patterns); pat++) {
+		/*for (std::vector<std::vector<NoteName>>::iterator p = patterns->begin(); p != patterns->end(); ++p)
+		{
 			bool match = true;
-			for (int i = 0; i < sizeof(inputSequence); i++) {
-				if (inputSequence[i] != patterns[i][pat]) {
+			if (p->size() != tpb * bpb) {
+				match = false;
+				break;
+			}
+			for (std::vector<NoteName>::iterator i = p->begin(); i != p->end(); ++i) {
+				
+			}
+			if (match) {
+				return p->; // return the index of pattern
+			}
+		}*/
+		if (!patterns) {
+			return -1;
+		}
+		for (int p = 0; p < patterns->size(); p++) {
+			bool match = true;
+			if (patterns->at(p).size() != tpb * bpb) {
+				match = false;
+				break;
+			}
+			for (int i = 0; i < inputSequence->size(); i++) {
+				if (inputSequence->at(i) != patterns->at(p).at(i)) {
 					match = false;
 					break;
 				}
 			}
 			if (match) {
-				return pat; // return the index of pattern
+				return p; // return the index of pattern
 			}
 		}
 		return -1; // No match
@@ -117,12 +137,16 @@ namespace ZS {
 		readFiles();
 
 		//test sequense
-		NoteName** a = new NoteName*[2];
-		int b[] = { 1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0 };
-		int c[] = { 5,0,0,0,6,0,0,0,5,0,0,0,6,0,0,0 };
-		a[0] = (NoteName*)b;
-		a[1] = (NoteName*)c;
-		musicSetup(a);
+		//NoteName** a = new NoteName*[2];
+		//int b[] = { 1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0 };
+		//int c[] = { 5,0,0,0,6,0,0,0,5,0,0,0,6,0,0,0 };
+		//a[0] = (NoteName*)b;
+		//a[1] = (NoteName*)c;
+		//std::vector<NoteName>  b { (NoteName)2, (NoteName)1, (NoteName)2 };
+		//Patterns a;
+		//a->push_back((std::vector<NoteName>)b);
+
+		//musicSetup(a);
 		//musicSetup();
 	}
 
@@ -156,19 +180,19 @@ namespace ZS {
 			currentTickNum = 0;
 			
 			// 
-			inputSequence = new NoteName[tpb * bpb];
-			int res = identifySequence();
+			inputSequence = &(std::vector<NoteName> { REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST });
+			//int res = identifySequence();
 			// TODO return the action to core
 		}
 		else {
 			currentTickNum++;
 		}
-		currentTickTime = Time::currentTimeMillis();
+		currentTickTime = juce::Time::currentTimeMillis();
 		//nextTickTime = currentTickTime + interval;
 
 		// TODO: play solid music // test
 		if (currentTickNum % 4 == 0) {
-			playSound((NoteName)(currentTickNum / 4));
+			//playSound((NoteName)(currentTickNum / 4));
 		}
 	}
 }

@@ -120,7 +120,7 @@ namespace ZS
                         mKeyboardListener->keyPressed( evt.key );
 
                     if( mLogicSystem )
-                        mGraphicsSystem->queueSendMessage( mLogicSystem, Mq::SDL_EVENT, evt );
+                        mGraphicsSystem->queueSendMessage( mLogicSystem, Mq::SDL_KEYEVENT, evt );
                 }
                 break;
             case SDL_KEYUP:
@@ -129,7 +129,7 @@ namespace ZS
                         mKeyboardListener->keyReleased( evt.key );
 
                     if( mLogicSystem )
-                        mGraphicsSystem->queueSendMessage( mLogicSystem, Mq::SDL_EVENT, evt );
+                        mGraphicsSystem->queueSendMessage( mLogicSystem, Mq::SDL_KEYEVENT, evt );
                 }
                 break;
             case SDL_TEXTINPUT:

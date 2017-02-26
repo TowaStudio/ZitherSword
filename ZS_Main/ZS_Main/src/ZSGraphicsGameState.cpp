@@ -219,8 +219,6 @@ namespace ZS
         DebugGameState::createScene01();
 		// for test
 		AudioSystem::GetInstance()->startMusic();
-		//ATest *aTest = new ATest();
-		//aTest->input();
     }
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
