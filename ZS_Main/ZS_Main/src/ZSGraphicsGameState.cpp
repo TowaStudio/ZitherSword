@@ -237,6 +237,8 @@ namespace ZS
 		//createShadowMapDebugOverlays();
 
         DebugGameState::createScene01();
+		// for test
+		AudioSystem::GetInstance()->startMusic();
     }
 	void ZSGraphicsGameState::createShadowMapDebugOverlays(void) {
 		Ogre::Root *root = mGraphicsSystem->getRoot();
