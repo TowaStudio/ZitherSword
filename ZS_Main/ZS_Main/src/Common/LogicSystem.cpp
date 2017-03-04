@@ -78,14 +78,13 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     void LogicSystem::processIncomingMessage( Mq::MessageType messageId, const void *data )
     {
-        switch( messageId )
-        {
-        case Mq::LOGICFRAME_FINISHED:
-            {
-                Ogre::uint32 newIdx = *reinterpret_cast<const Ogre::uint32*>( data );
-                assert( (mAvailableTransformIdx.empty() ||
-                        newIdx == (mAvailableTransformIdx.back() + 1) % NUM_GAME_ENTITY_BUFFERS) &&
-                        "Indices are arriving out of order!!!" );
+        switch( messageId ) {			
+			case Mq::LOGICFRAME_FINISHED:
+				{
+					Ogre::uint32 newIdx = *reinterpret_cast<const Ogre::uint32*>( data );
+					assert( (mAvailableTransformIdx.empty() ||
+							newIdx == (mAvailableTransformIdx.back() + 1) % NUM_GAME_ENTITY_BUFFERS) &&
+							"Indices are arriving out of order!!!" );
 
                 mAvailableTransformIdx.push_back( newIdx );
             }

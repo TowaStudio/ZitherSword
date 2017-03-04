@@ -15,8 +15,8 @@ namespace ZS {
 
 	class Unit : public GameObject {
 	public:
-		Unit(const std::string& name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status);
-		Unit(const std::string& name, Tag tag, Vec3 pos, int id, Stats stats);
+		Unit(const std::string& name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, Vec3 moveVec = Vec3::ZERO);
+		Unit(const std::string& name, Tag tag, Vec3 pos, int id, Stats stats, Vec3 moveVec = Vec3::ZERO);
 		~Unit();
 
 		int id;
@@ -28,7 +28,13 @@ namespace ZS {
 		float def;
 		float spd;
 		Status status;
+		Vec3 moveVec;
 
+		// MOVEMENT
+		Vec3 move();
+		Vec3 move(Vec3 _movement);
+		
+		// BATTLE
 		virtual HitInfo attack();
 		virtual void heal(float amount);
 		bool damage(float dmg);

@@ -20,7 +20,7 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     GameEntityManager::~GameEntityManager()
     {
-        mLogicSystem->_notifyGameEntityManager( 0 );
+        mLogicSystem->_notifyGameEntityManager( nullptr );
 
         {
             GameEntityVecVec::iterator itor = mScheduledForRemoval.begin();

@@ -65,7 +65,7 @@ namespace ZS
 			sceneNode->setPosition(0, -1, 0);
 			sceneNode->attachObject(item);
 
-			/*
+			
 			//Change the addressing mode of the roughness map to wrap via code.
 			//Detail maps default to wrap, but the rest to clamp.
 			assert(dynamic_cast<Ogre::HlmsPbsDatablock*>(item->getSubItem(0)->getDatablock()));
@@ -79,8 +79,20 @@ namespace ZS
 			//Set the new samplerblock. The Hlms system will
 			//automatically create the API block if necessary
 			datablock->setSamplerblock(Ogre::PBSM_ROUGHNESS, samplerblock);
-			*/
+			
 		}
+
+        {
+			Ogre::Item* item = sceneManager->createItem("ogrehead_v2.mesh",
+														Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
+														Ogre::SCENE_DYNAMIC);
+			item->setDatablock("InkShader");
+			Ogre::SceneNode* sceneNode = sceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->createChildSceneNode(Ogre::SCENE_DYNAMIC);
+			sceneNode->attachObject(item);
+			sceneNode->setPosition(0.0f, 2.0f, 2.0f);
+			sceneNode->scale(0.1f, 0.1f, 0.1f);
+        }
+		
 
 		/*
 
@@ -120,7 +132,7 @@ namespace ZS
 			}
 		}*/
 
-		{
+		/*{
 			int mNumSpheres = 0;
 			Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
 			Ogre::HlmsTextureManager *hlmsTextureManager = hlmsManager->getTextureManager();
@@ -171,7 +183,7 @@ namespace ZS
 					sceneNode->attachObject(item);
 				}
 			}
-		}
+		}*/
 
         Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
 		
@@ -214,7 +226,7 @@ namespace ZS
 
         mLightNodes[2] = lightNode;
 
-        mCameraController = new CameraController( mGraphicsSystem, false );
+        //mCameraController = new CameraController( mGraphicsSystem, false );
 
         DebugGameState::createScene01();
 		// for test
@@ -244,7 +256,7 @@ namespace ZS
         {
             mAnimateObjects = !mAnimateObjects;
         }
-        else if( arg.keysym.sym == SDLK_F3 )
+        /*else if( arg.keysym.sym == SDLK_F3 )
         {
             Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
             bool showMovingObjects = (visibilityMask & 0x00000001);
@@ -261,7 +273,7 @@ namespace ZS
             visibilityMask &= ~0x00000002;
             visibilityMask |= (Ogre::uint32)(showPalette) << 1;
             mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
-        }
+        }*/
         else
         {
             DebugGameState::keyReleased( arg );

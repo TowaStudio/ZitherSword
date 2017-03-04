@@ -51,12 +51,14 @@ namespace ZS {
 		GameMaster* gm = GameMaster::GetInstance();
 		
 		swordsman = new Swordsman(gm->getPlayerStats(), pos);
-		Enemy* enemyA = new Enemy("E1", enemyPos, 100.0f, 100.0f, 20.0f, 20.0f, 100.0f, 20.0f, 12.0f, Status::Normal, 200.0f);
+		Enemy* enemyA = new Enemy("E1", enemyPos, 100.0f, 100.0f, 20.0f, 20.0f, 100.0f, 20.0f, 12.0f, Status::Normal, 200);
 		enemyA->attack();
 
 		gm->log(Ogre::StringConverter::toString(swordsman->hp) + "/" + Ogre::StringConverter::toString(swordsman->maxhp));
 		startLevel();
 	}
+
+	
 
 	void LevelManager::startLevel() {
 		//TODO: Start audio system and input manager;
