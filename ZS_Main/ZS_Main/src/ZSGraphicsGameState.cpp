@@ -13,20 +13,27 @@
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
 
+#include "Hlms/Unlit/OgreHlmsUnlitDatablock.h"
 #include "Hlms/Ink/OgreHlmsInk.h"
 #include "Hlms/Ink/OgreHlmsInkDatablock.h"
 
-#include "Hlms\Pbs\OgreHlmsPbsDatablock.h"
+#include "Hlms/Pbs/OgreHlmsPbsDatablock.h"
 #include "OgreHlmsSamplerblock.h"
 
 #include "OgreRoot.h"
 #include "OgreHlmsManager.h"
 #include "OgreHlmsTextureManager.h"
-#include "Hlms\Pbs\OgreHlmsPbs.h"
+#include "Hlms/Pbs/OgreHlmsPbs.h"
 
-#include "Common\Utils\HdrUtils.h"
+#include "Compositor/OgreCompositorWorkspace.h"
+#include "Compositor/OgreCompositorShadowNode.h"
+
+#include "Common/Utils/HdrUtils.h"
 #include <iostream>
 #include <OgreTimer.h>
+#include <OgreOverlayManager.h>
+#include <OgreOverlayContainer.h>
+#include <OgreOverlay.h>
 
 namespace ZS
 {
@@ -226,10 +233,63 @@ namespace ZS
 
         mLightNodes[2] = lightNode;
 
-        //mCameraController = new CameraController( mGraphicsSystem, false );
+        mCameraController = new CameraController( mGraphicsSystem, false );
+		//createShadowMapDebugOverlays();
 
         DebugGameState::createScene01();
     }
+	void ZSGraphicsGameState::createShadowMapDebugOverlays(void) {
+		Ogre::Root *root = mGraphicsSystem->getRoot();
+		Ogre::CompositorWorkspace *workspace = mGraphicsSystem->getCompositorWorkspace();
+		Ogre::Hlms *hlmsUnlit = root->getHlmsManager()->getHlms(Ogre::HLMS_UNLIT);
+
+		Ogre::HlmsMacroblock macroblock;
+		macroblock.mDepthCheck = false;
+		Ogre::HlmsBlendblock blendblock;
+
+		Ogre::CompositorShadowNode *shadowNode = workspace->findShadowNode("ZSShadowNode");
+		for(int i = 0; i<5; ++i) {
+			const Ogre::String datablockName("depthShadow" + Ogre::StringConverter::toString(i));
+			Ogre::HlmsUnlitDatablock *depthShadow = (Ogre::HlmsUnlitDatablock*)hlmsUnlit->createDatablock(
+				datablockName, datablockName,
+				macroblock, blendblock,
+				Ogre::HlmsParamVec());
+			Ogre::TexturePtr tex = shadowNode->getLocalTextures()[i].textures[0];
+			depthShadow->setTexture(0, 0, tex, 0);
+		}
+
+		Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
+		// Create an overlay
+		mDebugOverlayPSSM = overlayManager.create("PSSM Overlays");
+		mDebugOverlaySpotlights = overlayManager.create("Spotlight overlays");
+
+		for(int i = 0; i<3; ++i) {
+			// Create a panel
+			Ogre::v1::OverlayContainer* panel = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "PanelName" +
+													Ogre::StringConverter::toString(i)));
+			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			panel->setPosition(100 + i * 1600, 10000 - 1600);
+			panel->setDimensions(1500, 1500);
+			panel->setMaterialName("depthShadow" + Ogre::StringConverter::toString(i));
+			mDebugOverlayPSSM->add2D(panel);
+		}
+
+		for(int i = 3; i<5; ++i) {
+			// Create a panel
+			Ogre::v1::OverlayContainer* panel = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "PanelName" +
+													Ogre::StringConverter::toString(i)));
+			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			panel->setPosition(100 + i * 1600, 10000 - 1600);
+			panel->setDimensions(1500, 1500);
+			panel->setMaterialName("depthShadow" + Ogre::StringConverter::toString(i));
+			mDebugOverlaySpotlights->add2D(panel);
+		}
+
+		mDebugOverlayPSSM->show();
+		mDebugOverlaySpotlights->show();
+	}
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
     {
@@ -244,6 +304,10 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::keyReleased( const SDL_KeyboardEvent &arg )
     {
+		if(arg.keysym.sym == SDLK_ESCAPE) {
+			mGraphicsSystem->setQuit();
+		}
+
         if( (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS|KMOD_LSHIFT|KMOD_RSHIFT)) != 0 )
         {
             DebugGameState::keyReleased( arg );

@@ -5,6 +5,7 @@
 #include "OgrePrerequisites.h"
 #include "DebugGameState.h"
 #include "GameMaster.h"
+#include "OgreOverlayPrerequisites.h"
 
 namespace ZS
 {
@@ -16,7 +17,10 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         bool                mAnimateObjects;
-        
+
+		Ogre::v1::Overlay *mDebugOverlayPSSM;
+		Ogre::v1::Overlay *mDebugOverlaySpotlights;
+
         GameMaster* gm;
 
         virtual void showFPS( float timeSinceLast, Ogre::String &outText );
@@ -25,8 +29,8 @@ namespace ZS
 		ZSGraphicsGameState();
 
 	    virtual void createScene01(void);
-
-        virtual void update( float timeSinceLast );
+		void createShadowMapDebugOverlays();
+		virtual void update( float timeSinceLast );
 
         virtual void keyReleased( const SDL_KeyboardEvent &arg );
     };

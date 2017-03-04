@@ -12,6 +12,7 @@ namespace ZS {
 	class ZSGraphicsSystem : public GraphicsSystem {
 	protected:
 		virtual void setupResources(void);
+		Ogre::CompositorWorkspace* setupCompositor();
 		virtual void registerHlms(void);
 
 

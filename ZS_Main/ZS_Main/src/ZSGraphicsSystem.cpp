@@ -8,11 +8,11 @@
 
 namespace ZS {
 
-	/*Ogre::CompositorWorkspace* ZSGraphicsSystem::setupCompositor() {
+	Ogre::CompositorWorkspace* ZSGraphicsSystem::setupCompositor() {
 		Ogre::CompositorManager2* compositorManager = mRoot->getCompositorManager2();
 		return compositorManager->addWorkspace(mSceneManager, mRenderWindow, mCamera,
 		                                       "ZSWorkspace", true);
-	}*/
+	}
 
 	//-----------------------------------------------------------------------------------
 	void ZSGraphicsSystem::registerHlms(void) {
