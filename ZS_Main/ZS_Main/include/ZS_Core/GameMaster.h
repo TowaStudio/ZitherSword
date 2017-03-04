@@ -11,6 +11,7 @@
 #include "SaveData.h"
 #include "Logger.h"
 #include "Stats.h"
+#include "AudioSystem.h"
 
 namespace ZS {
 	class GameMaster {

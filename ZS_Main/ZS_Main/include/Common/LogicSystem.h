@@ -19,6 +19,8 @@ namespace ZS
         Ogre::uint32                mCurrentTransformIdx;
         std::deque<Ogre::uint32>    mAvailableTransformIdx;
 
+		//GameMaster* gm;
+
         /// @see MessageQueueSystem::processIncomingMessage
         virtual void processIncomingMessage( Mq::MessageType messageId, const void *data );
 

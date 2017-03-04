@@ -1,6 +1,6 @@
 #include "ZSGraphicsSystem.h"
 
-#include "Hlms/Ink/OgreHlmsInk.h"
+//#include "Hlms/Ink/OgreHlmsInk.h"
 #include "Hlms/Unlit/OgreHlmsUnlit.h"
 #include "Hlms/Pbs/OgreHlmsPbs.h"
 #include "OgreHlmsManager.h"
@@ -48,8 +48,8 @@ namespace ZS {
 			dataFolder + "Hlms/Ink/" + shaderSyntax,
 			"FileSystem", true);
 
-		Ogre::HlmsInk *hlmsInk = OGRE_NEW Ogre::HlmsInk(archiveInk, &library);
-		Ogre::Root::getSingleton().getHlmsManager()->registerHlms(hlmsInk);
+		//Ogre::HlmsInk *hlmsInk = OGRE_NEW Ogre::HlmsInk(archiveInk, &library);
+		//Ogre::Root::getSingleton().getHlmsManager()->registerHlms(hlmsInk);
 
 		Ogre::Archive *archiveUnlit = Ogre::ArchiveManager::getSingletonPtr()->load(
 			dataFolder + "Hlms/Unlit/" + shaderSyntax,
@@ -75,7 +75,7 @@ namespace ZS {
 			if(!supportsNoOverwriteOnTextureBuffers) {
 				hlmsPbs->setTextureBufferDefaultSize(512 * 1024);
 				hlmsUnlit->setTextureBufferDefaultSize(512 * 1024);
-				hlmsInk->setTextureBufferDefaultSize(512 * 1024);
+				//hlmsInk->setTextureBufferDefaultSize(512 * 1024);
 			}
 		}
 	}

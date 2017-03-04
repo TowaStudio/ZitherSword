@@ -24,7 +24,7 @@ namespace ZS {
 	}
 
 	void ZSLogicGameState::keyReleased(const SDL_KeyboardEvent& arg) {
-		gm->log(Ogre::StringConverter::toString(arg.keysym.sym));
+		//gm->log(Ogre::StringConverter::toString(arg.keysym.sym));
 		if(arg.keysym.sym == SDLK_l) {
 			gm->load();
 			gm->loadLevel(0);
