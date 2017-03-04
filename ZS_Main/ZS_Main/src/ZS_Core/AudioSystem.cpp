@@ -176,6 +176,13 @@ namespace ZS {
 		mixer.releaseResources();
 	}
 	
+	void AudioSystem::changeListenerCallback(ChangeBroadcaster* source) {
+		AudioTransportSource* transportSource = (AudioTransportSource*)source;
+		if (!transportSource->isPlaying()) {
+			transportSource->releaseResources();
+		}
+	}
+
 	void AudioSystem::hiResTimerCallback() {
 		if (currentTickNum + 1 - tpb * bpb >= 0) {
 			currentBarNum += 1; 
@@ -195,7 +202,7 @@ namespace ZS {
 
 		// TODO: play solid music // test
 		if (currentTickNum % 4 == 0) {
-			inputSequence[currentTickNum] = DO; 
+			//inputSequence[currentTickNum] = DO; 
 			//playSound((NoteName)(currentTickNum / 4)); 
 		}
 	}

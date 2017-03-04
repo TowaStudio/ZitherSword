@@ -29,7 +29,7 @@ namespace ZS {
 		int barNum = 1;
 	};*/
 
-	class AudioSystem : public AudioAppComponent, public HighResolutionTimer{
+	class AudioSystem : private AudioAppComponent, private HighResolutionTimer, private ChangeListener{
 	public:
 		static AudioSystem* GetInstance() {
 			return instance;
@@ -94,6 +94,9 @@ namespace ZS {
 
 		// override Timer
 		void hiResTimerCallback() override;
+
+		// override ChangeListener
+		void changeListenerCallback(ChangeBroadcaster* source) override;
 
 	};
 }
