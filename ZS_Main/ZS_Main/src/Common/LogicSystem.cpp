@@ -2,7 +2,7 @@
 #include "LogicSystem.h"
 #include "GameState.h"
 #include "SdlInputHandler.h"
-#include "GameEntityManager.h"
+#include "LevelManager.h"
 
 #include "OgreRoot.h"
 #include "OgreException.h"
@@ -30,7 +30,7 @@ namespace ZS
     LogicSystem::LogicSystem( GameState *gameState ) :
         BaseSystem( gameState ),
         mGraphicsSystem( nullptr ),
-        mGameEntityManager( nullptr ),
+        mLevelManager( nullptr ),
         mCurrentTransformIdx( 1 )
     {
         //mCurrentTransformIdx is 1, 0 and NUM_GAME_ENTITY_BUFFERS - 1 are taken by GraphicsSytem at startup
@@ -45,8 +45,8 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     void LogicSystem::finishFrameParallel(void)
     {
-        if( mGameEntityManager )
-            mGameEntityManager->finishFrameParallel();
+        if( mLevelManager )
+            mLevelManager->finishFrameParallel();
 
         //Notify the GraphicsSystem we're done rendering this frame.
         if( mGraphicsSystem )
@@ -88,7 +88,7 @@ namespace ZS
 				}
 				break;
 			case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
-				mGameEntityManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
+				mLevelManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
 																	data ) );
 				break;
 			case Mq::SDL_EVENT:

@@ -3,7 +3,7 @@
 #define _ZS_GraphicsSystem_H_
 
 #include "BaseSystem.h"
-#include "GameEntityManager.h"
+#include "LevelManager.h"
 #include "System/StaticPluginLoader.h"
 #include "OgrePrerequisites.h"
 #include "OgreColourValue.h"
@@ -78,7 +78,7 @@ namespace ZS
         /// Optional override method where you can create resource listeners (e.g. for loading screens)
         virtual void createResourceListener(void) {}
 
-        void gameEntityAdded( const GameEntityManager::CreatedGameEntity *createdGameEntity );
+        void gameEntityAdded( const LevelManager::CreatedGameEntity *createdGameEntity );
         void gameEntityRemoved( GameEntity *toRemove );
     public:
         GraphicsSystem( GameState *gameState,

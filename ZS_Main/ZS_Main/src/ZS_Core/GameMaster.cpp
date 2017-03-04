@@ -23,6 +23,10 @@ namespace ZS {
 		
 	}
 
+	void GameMaster::bindLevelManager(LevelManager * _levelManager) {
+		levelManager = _levelManager;
+	}
+
 	void GameMaster::setLogger(Logger* _logger) {
 		logger = _logger;
 	}
@@ -65,9 +69,7 @@ namespace ZS {
 	}
 
 	void GameMaster::loadLevel(int level) {
-		delete levelManager;
-		levelManager = new LevelManager(level);
-		levelManager->loadLevel(); //TODO
+		levelManager->loadLevel(0); //TODO
 		currentLevel = level;
 	}
 

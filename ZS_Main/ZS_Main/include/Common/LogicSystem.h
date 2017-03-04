@@ -8,13 +8,13 @@
 
 namespace ZS
 {
-    class GameEntityManager;
+    class LevelManager;
 
     class LogicSystem : public BaseSystem
     {
     protected:
         BaseSystem          *mGraphicsSystem;
-        GameEntityManager   *mGameEntityManager;
+        LevelManager* mLevelManager;
 
         Ogre::uint32                mCurrentTransformIdx;
         std::deque<Ogre::uint32>    mAvailableTransformIdx;
@@ -26,11 +26,11 @@ namespace ZS
         LogicSystem( GameState *gameState );
         virtual ~LogicSystem();
 	    void _notifyGraphicsSystem( BaseSystem *graphicsSystem )    { mGraphicsSystem = graphicsSystem; }
-        void _notifyGameEntityManager( GameEntityManager *mgr )     { mGameEntityManager = mgr; }
+        void _notifyLevelManager( LevelManager* mgr )     { mLevelManager = mgr; }
 
         void finishFrameParallel(void);
 
-        GameEntityManager* getGameEntityManager(void)               { return mGameEntityManager; }
+        LevelManager* getGameEntityManager(void)               { return mLevelManager; }
         Ogre::uint32 getCurrentTransformIdx(void) const             { return mCurrentTransformIdx; }
     };
 }

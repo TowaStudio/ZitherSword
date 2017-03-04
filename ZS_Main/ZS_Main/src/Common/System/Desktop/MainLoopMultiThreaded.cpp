@@ -45,6 +45,7 @@ THE SOFTWARE.
 #include "Threading/OgreBarrier.h"
 
 #include "Threading/OgreThreads.h"
+#include "LevelManager.h"
 
 using namespace ZS;
 
@@ -76,8 +77,6 @@ int ZS::MainEntryPoints::mainAppMultiThreaded( int argc, const char *argv[] )
 
     MainEntryPoints::createSystems( &graphicsGameState, &graphicsSystem,
                                     &logicGameState, &logicSystem );
-
-    GameEntityManager gameEntityManager( graphicsSystem, logicSystem );
 
     ThreadData threadData;
     threadData.graphicsSystem   = graphicsSystem;

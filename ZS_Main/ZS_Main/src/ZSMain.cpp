@@ -36,6 +36,8 @@ namespace ZS
 		ZSLogicSystem *zsLogicSystem = new ZSLogicSystem(zsLogicGameState);
 
 		GameMaster* gm = GameMaster::GetInstance();
+		LevelManager* levelManager = new LevelManager(zsGraphicsSystem, zsLogicSystem);
+
 
 		ScreenLogger* screenLogger = ScreenLogger::GetInstance();
 		screenLogger->bindGraphicsGameState(zsGrahicsGameState);

@@ -35,11 +35,13 @@ namespace ZS {
 
 		LevelManager* getLevelManager() {
 			if(!levelManager) {
-				levelManager = new LevelManager(-1);
+				//TODO: handle exceptions.
+				return nullptr;
 			}
-
-			return levelManager;			
+			return levelManager;
 		}
+
+		void bindLevelManager(LevelManager* _levelManager);
 
 		InputManager* getInputManager() {
 			if(!inputManager) {

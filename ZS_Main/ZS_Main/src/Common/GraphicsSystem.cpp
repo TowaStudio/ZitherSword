@@ -377,7 +377,7 @@ namespace ZS
             }
             break;
         case Mq::GAME_ENTITY_ADDED:
-            gameEntityAdded( reinterpret_cast<const GameEntityManager::CreatedGameEntity*>( data ) );
+            gameEntityAdded( reinterpret_cast<const LevelManager::CreatedGameEntity*>( data ) );
             break;
         case Mq::GAME_ENTITY_REMOVED:
             gameEntityRemoved( *reinterpret_cast<GameEntity * const *>( data ) );
@@ -583,7 +583,7 @@ namespace ZS
         }
     };
     //-----------------------------------------------------------------------------------
-    void GraphicsSystem::gameEntityAdded( const GameEntityManager::CreatedGameEntity *cge )
+    void GraphicsSystem::gameEntityAdded( const LevelManager::CreatedGameEntity *cge )
     {
         Ogre::SceneNode *sceneNode = mSceneManager->getRootSceneNode( cge->gameEntity->mType )->
                 createChildSceneNode( cge->gameEntity->mType,

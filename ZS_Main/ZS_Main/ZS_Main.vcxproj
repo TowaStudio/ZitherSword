@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ZS_Core\Behaviour.h" />
     <ClInclude Include="include\Common\BaseSystem.h" />
     <ClInclude Include="include\Common\CameraController.h" />
     <ClInclude Include="include\Common\GameEntity.h" />
-    <ClInclude Include="include\Common\GameEntityManager.h" />
     <ClInclude Include="include\Common\GameState.h" />
     <ClInclude Include="include\Common\GraphicsSystem.h" />
     <ClInclude Include="include\Common\InputListeners.h" />
@@ -76,9 +76,9 @@
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ZS_Core\Behaviour.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
-    <ClCompile Include="src\Common\GameEntityManager.cpp" />
     <ClCompile Include="src\Common\GraphicsSystem.cpp" />
     <ClCompile Include="src\Common\LogicSystem.cpp" />
     <ClCompile Include="src\Common\SdlInputHandler.cpp" />
