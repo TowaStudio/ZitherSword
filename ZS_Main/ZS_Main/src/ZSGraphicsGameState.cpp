@@ -13,8 +13,8 @@
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
 
-#include "Hlms/Ink/OgreHlmsInk.h"
-#include "Hlms/Ink/OgreHlmsInkDatablock.h"
+//#include "Hlms/Ink/OgreHlmsInk.h"
+//#include "Hlms/Ink/OgreHlmsInkDatablock.h"
 
 #include "Hlms\Pbs\OgreHlmsPbsDatablock.h"
 #include "OgreHlmsSamplerblock.h"
@@ -229,6 +229,8 @@ namespace ZS
         //mCameraController = new CameraController( mGraphicsSystem, false );
 
         DebugGameState::createScene01();
+		// for test
+		AudioSystem::GetInstance()->startMusic();
     }
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
