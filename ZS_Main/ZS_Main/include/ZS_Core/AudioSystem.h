@@ -69,7 +69,7 @@ namespace ZS {
 		int currentTickNum; // the current number of tick within a bar
 		int64 currentTickTime; 
 		//int64 nextTickTime;
-		std::vector<NoteName>* inputSequence;
+		std::vector<NoteName> inputSequence;
 
 		MixerAudioSource mixer;
 		AudioFormatManager formatManager;

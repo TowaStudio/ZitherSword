@@ -1,8 +1,8 @@
 /**
  * Project ZS
  */
-
 #include "AudioSystem.h"
+#include "GameMaster.h"
 
 namespace ZS {
 	/**
@@ -24,7 +24,7 @@ namespace ZS {
 		// calculating properties
 		interval = (60 * 1000) / (tpb * bpm);
 		thresTime = tolerance * interval;
-		inputSequence = &(std::vector<NoteName> { REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST });
+		inputSequence = std::vector<NoteName> (tpb * bpb, REST);
 
 	}
 
@@ -50,7 +50,7 @@ namespace ZS {
 		// judge input
 		if (isTimerRunning()) {
 			int64 currentTime = juce::Time::currentTimeMillis();
-			//inputJudge(currentTime, inputNote);
+			inputJudge(currentTime, inputNote);
 		}
 
 		// play sound
@@ -72,12 +72,12 @@ namespace ZS {
 	}
 
 	void AudioSystem::recordNote(int tickNum, NoteName noteName) {
-		if (tickNum == - tpb * bpb) {
+		if (tickNum == tpb * bpb) {
 			// TODO next[0] = noteName;
-			inputSequence->at(0) = noteName;
+			inputSequence[0] = noteName;
 		}
 		else {
-			inputSequence->at(tickNum) = noteName;
+			inputSequence[tickNum] = noteName;
 		}
 	}
 
@@ -105,25 +105,29 @@ namespace ZS {
 				return p->; // return the index of pattern
 			}
 		}*/
+		
 		if (!patterns) {
+			GameMaster::GetInstance()->log("Error");
 			return -1;
 		}
 		for (int p = 0; p < patterns->size(); p++) {
-			bool match = true;
+			bool match = true; 
 			if (patterns->at(p).size() != tpb * bpb) {
 				match = false;
 				break;
 			}
-			for (int i = 0; i < inputSequence->size(); i++) {
-				if (inputSequence->at(i) != patterns->at(p).at(i)) {
+			for (int i = 0; i < inputSequence.size(); i++) {
+				if (inputSequence[i] != patterns->at(p)[i]) {
 					match = false;
 					break;
 				}
 			}
 			if (match) {
+				GameMaster::GetInstance()->log("Success");
 				return p; // return the index of pattern
 			}
 		}
+		GameMaster::GetInstance()->log("Fail");
 		return -1; // No match
 	}
 
@@ -132,22 +136,20 @@ namespace ZS {
 		// init settings
 		formatManager.registerBasicFormats();
 		part = "Med_";
+		musicSetup();
 
 		// load files
 		readFiles();
 
-		//test sequense
-		//NoteName** a = new NoteName*[2];
-		//int b[] = { 1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0 };
-		//int c[] = { 5,0,0,0,6,0,0,0,5,0,0,0,6,0,0,0 };
-		//a[0] = (NoteName*)b;
-		//a[1] = (NoteName*)c;
-		//std::vector<NoteName>  b { (NoteName)2, (NoteName)1, (NoteName)2 };
-		//Patterns a;
-		//a->push_back((std::vector<NoteName>)b);
 
-		//musicSetup(a);
-		//musicSetup();
+		// setup test
+		std::vector<NoteName>  b (16, REST);
+		b[0] = DO; b[4] = DO; b[8] = DO; b[12] = DO;
+		Patterns a = new std::vector<std::vector<NoteName>>();
+		a->push_back(b);
+		musicSetup(a);
+		
+		
 	}
 
 	void AudioSystem::readFiles() {
@@ -179,10 +181,11 @@ namespace ZS {
 			currentBarNum += 1; 
 			currentTickNum = 0;
 			
-			// 
-			inputSequence = &(std::vector<NoteName> { REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST });
-			//int res = identifySequence();
+			GameMaster::GetInstance()->log(to_string(currentBarNum));
+ 			int res = identifySequence();
 			// TODO return the action to core
+
+			inputSequence = std::vector<NoteName>(tpb * bpb, REST); 
 		}
 		else {
 			currentTickNum++;
@@ -192,7 +195,8 @@ namespace ZS {
 
 		// TODO: play solid music // test
 		if (currentTickNum % 4 == 0) {
-			//playSound((NoteName)(currentTickNum / 4));
+			inputSequence[currentTickNum] = DO; 
+			//playSound((NoteName)(currentTickNum / 4)); 
 		}
 	}
 }

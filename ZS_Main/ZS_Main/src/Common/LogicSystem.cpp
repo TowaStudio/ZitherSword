@@ -101,7 +101,7 @@ namespace ZS
             break;
 		case Mq::SDL_KEYEVENT:
 			//const SDL_Event *evt = reinterpret_cast<const SDL_Event*>(data);
-			GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
+			//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
 			if (reinterpret_cast<const SDL_Event*>(data)->type == SDL_EventType::SDL_KEYDOWN)
 				GameMaster::GetInstance()->getInputManager()->keydown(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym);
 			else 
