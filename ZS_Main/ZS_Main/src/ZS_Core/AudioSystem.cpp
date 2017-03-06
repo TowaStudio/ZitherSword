@@ -10,9 +10,10 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 	
-	void AudioSystem::musicSetup(Patterns _patterns = nullptr, int _bpm = 92, int _bpb = 4) {
+	void AudioSystem::musicSetup(Patterns _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
 		// setting properties
 		patterns = _patterns;
+		currentBarNum = -_initBarNum;
 		bpm = _bpm;
 		bpb = _bpb;
 		//part = _part; // TODO 3 sound levels
@@ -20,6 +21,8 @@ namespace ZS {
 		// hardcoding properties
 		tolerance = 0.25;
 		tpb = 4;
+		playerInCharge = false;
+		AIInCharge = false;
 
 		// calculating properties
 		interval = (60 * 1000) / (tpb * bpm);
@@ -31,14 +34,15 @@ namespace ZS {
 	void AudioSystem::startMusic() {
 		// init
 		setAudioChannels(0, 2);
-		currentBarNum = 0; // TODO prelude bars
-		currentTickNum = -1;
+		//currentBarNum = 0; // init in setup for prelude
+		//currentTickNum = -1;
 		currentTickTime = -1;
 		//nextTickTime = -1;
 
 		// start timer
 		//startTime = Time::currentTimeMillis();
 		startTimer(interval);
+		//TODO: play background music
 	}
 
 	void AudioSystem::stopMusic() {
@@ -72,12 +76,15 @@ namespace ZS {
 	}
 
 	void AudioSystem::recordNote(int tickNum, NoteName noteName) {
-		if (tickNum == tpb * bpb) {
-			// TODO next[0] = noteName;
-			inputSequence[0] = noteName;
+		if (tickNum == tpb * bpb) { // the last semi-part of a bar
+			if (!playerInCharge && currentBarNum + 1 >= 0) {
+				inputSequence[0] = noteName;
+			}
 		}
 		else {
-			inputSequence[tickNum] = noteName;
+			if (playerInCharge) {
+				inputSequence[tickNum] = noteName;
+			}
 		}
 	}
 
@@ -141,12 +148,26 @@ namespace ZS {
 		// load files
 		readFiles();
 
-
 		// setup test
-		std::vector<NoteName>  b (16, REST);
-		b[0] = DO; b[4] = DO; b[8] = DO; b[12] = DO;
+		std::vector<NoteName>  b0(16, REST);
+		std::vector<NoteName>  b1(16, REST);
+		std::vector<NoteName>  b2(16, REST);
+		std::vector<NoteName>  b3(16, REST);
+		std::vector<NoteName>  b4(16, REST);
+		std::vector<NoteName>  b5(16, REST);
+		b0[0] = DO; b0[4] = DO; b0[8] = DO; b0[12] = DO;
+		b1[0] = RE; b1[4] = RE; b1[8] = RE; b1[12] = RE;
+		b2[0] = MI; b2[4] = MI; b2[8] = MI; b2[12] = MI;
+		b3[0] = SO; b3[4] = SO; b3[8] = SO; b3[12] = SO;
+		b4[0] = LA; b4[4] = LA; b4[8] = LA; b4[12] = LA;
+		b5[0] = REST; b5[4] = REST; b5[8] = REST; b5[12] = REST;
 		Patterns a = new std::vector<std::vector<NoteName>>();
-		a->push_back(b);
+		a->push_back(b0);
+		a->push_back(b1);
+		a->push_back(b2);
+		a->push_back(b3);
+		a->push_back(b4);
+		a->push_back(b5);
 		musicSetup(a);
 		
 		
@@ -184,13 +205,60 @@ namespace ZS {
 	}
 
 	void AudioSystem::hiResTimerCallback() {
-		if (currentTickNum + 1 - tpb * bpb >= 0) {
+		currentTickTime = juce::Time::currentTimeMillis();
+		currentTickNum++;
+		
+		// Bar end
+		if (currentTickNum == tpb * bpb) {
+			currentBarNum++;
+			currentTickNum = 0;
+
+			// main music start
+			if (currentBarNum >=0) { 
+
+				// start player input
+				if (currentBarNum % 2 == 0) { 
+					playerInCharge = true;
+					AIInCharge = false;
+				}
+				// end player input
+				else { 
+					playerInCharge = false;
+					AIInCharge = true;
+
+					// identify sequence
+					int res = identifySequence();
+					GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
+					// TODO return the action to core
+
+					// reset input buffer
+					inputSequence = std::vector<NoteName>(tpb * bpb, REST);
+				}
+			}
+		}
+
+		// TODO: AI composing
+		// test
+		if (currentTickNum == 0) {
+			//inputSequence[currentTickNum] = DO; 
+			playSound(SO); 
+		}
+		else if (currentTickNum % 4 == 0){
+			playSound(DO);
+		}
+
+
+		/*if (currentTickNum + 1 - tpb * bpb >= 0) {
 			currentBarNum += 1; 
 			currentTickNum = 0;
 			
-			GameMaster::GetInstance()->log(to_string(currentBarNum));
- 			int res = identifySequence();
-			// TODO return the action to core
+			if (true) {// TODO: requiring identify
+				int res = identifySequence();
+				// TODO return the action to core
+				GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
+			}
+			//GameMaster::GetInstance()->log(to_string(currentBarNum));
+ 			
 
 			inputSequence = std::vector<NoteName>(tpb * bpb, REST); 
 		}
@@ -200,10 +268,6 @@ namespace ZS {
 		currentTickTime = juce::Time::currentTimeMillis();
 		//nextTickTime = currentTickTime + interval;
 
-		// TODO: play solid music // test
-		if (currentTickNum % 4 == 0) {
-			//inputSequence[currentTickNum] = DO; 
-			//playSound((NoteName)(currentTickNum / 4)); 
-		}
+		*/
 	}
 }

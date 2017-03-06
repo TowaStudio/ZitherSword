@@ -7,7 +7,7 @@
 #define _ZS_GAMEOBJECT_H
 
 #include "OgreVector3.h"
-#include "tinyxml2.h"
+#include "tinyxml/tinyxml2.h"
 #include <string>
 
 namespace ZS

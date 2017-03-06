@@ -35,10 +35,13 @@ namespace ZS {
 			return instance;
 		}
 
-		void musicSetup(Patterns patterns, int timePerBeat, int beatsPerBar);
+		void musicSetup(Patterns patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);
+
+		bool playerInCharge;
+		bool AIInCharge;
 
 		// get
 		float getBpm() {

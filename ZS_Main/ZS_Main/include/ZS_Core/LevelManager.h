@@ -6,7 +6,7 @@
 #ifndef _ZS_LEVELMANAGER_H
 #define _ZS_LEVELMANAGER_H
 
-#include "tinyxml2.h"
+#include "tinyxml/tinyxml2.h"
 #include "Swordsman.h"
 
 namespace ZS {
