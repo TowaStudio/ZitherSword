@@ -2,7 +2,7 @@
  * Project ZS
  */
 
-#include "LevelManager.h";
+#include "LevelManager.h"
 #include "GameMaster.h"
 #include "Enemy.h"
 
@@ -94,11 +94,12 @@ namespace ZS {
 	//------------------------------------Game Environments------------------------------------
 	//-----------------------------------------------------------------------------------
 	GameEntity* LevelManager::addGameEntity(Ogre::SceneMemoryMgrTypes type,
-												 const MovableObjectDefinition *moDefinition,
-												 const Ogre::Vector3 &initialPos,
-												 const Ogre::Quaternion &initialRot,
-												 const Ogre::Vector3 &initialScale) {
-		GameEntity *gameEntity = new GameEntity(currentId++, moDefinition, type);
+											const MovableObjectDefinition *moDefinition,
+											Behaviour* behaviour,
+											const Ogre::Vector3 &initialPos,
+											const Ogre::Quaternion &initialRot,
+											const Ogre::Vector3 &initialScale) {
+		GameEntity *gameEntity = new GameEntity(currentId++, moDefinition, behaviour, type);
 
 		CreatedGameEntity cge;
 		cge.gameEntity = gameEntity;
@@ -110,7 +111,7 @@ namespace ZS {
 		aquireTransformSlot(slot, bufferIdx);
 
 		gameEntity->mTransformBufferIdx = bufferIdx;
-		for(int i = 0; i<NUM_GAME_ENTITY_BUFFERS; ++i) {
+		for(int i = 0; i < NUM_GAME_ENTITY_BUFFERS; ++i) {
 			gameEntity->mTransform[i] = mTransformBuffers[bufferIdx] + slot + cNumTransforms * i;
 			memcpy(gameEntity->mTransform[i], &cge.initialTransform, sizeof(GameEntityTransform));
 		}

@@ -32,7 +32,7 @@ namespace ZS
 
         void finishFrameParallel(void);
 
-        LevelManager* getGameEntityManager(void)               { return mLevelManager; }
+        LevelManager* getLevelManager(void)               { return mLevelManager; }
         Ogre::uint32 getCurrentTransformIdx(void) const             { return mCurrentTransformIdx; }
     };
 }

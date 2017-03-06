@@ -19,7 +19,8 @@ namespace Mq
         GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT,
         //Graphics  -> Logic
         SDL_EVENT,
-		SDL_KEYEVENT,
+		SDL_KEYDOWN,
+		SDL_KEYUP,
 
         NUM_MESSAGE_TYPES
     };

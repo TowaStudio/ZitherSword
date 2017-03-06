@@ -92,18 +92,14 @@ namespace ZS
             mLevelManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
                                                                 data ) );
             break;
-        case Mq::SDL_EVENT:
+		case Mq::SDL_KEYDOWN:
+			GameMaster::GetInstance()->getInputManager()->keydown(reinterpret_cast<const SDL_KeyboardEvent*>(data)->keysym.sym);
+			break;
+		case Mq::SDL_KEYUP:
+			GameMaster::GetInstance()->getInputManager()->keyup(reinterpret_cast<const SDL_KeyboardEvent*>(data)->keysym.sym);
+			break;
+		case Mq::SDL_EVENT:
 			//TODO: Handle SDL_INPUT message;
-			//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
-			
-            break;
-		case Mq::SDL_KEYEVENT:
-			//const SDL_Event *evt = reinterpret_cast<const SDL_Event*>(data);
-			//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
-			if (reinterpret_cast<const SDL_Event*>(data)->type == SDL_EventType::SDL_KEYDOWN)
-				GameMaster::GetInstance()->getInputManager()->keydown(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym);
-			else 
-				GameMaster::GetInstance()->getInputManager()->keyup(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym);
 			break;
         default:
 			reinterpret_cast<const SDL_Event*>(data);

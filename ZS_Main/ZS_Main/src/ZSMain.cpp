@@ -25,6 +25,9 @@ int mainApp( int argc, const char *argv[] )
 
 namespace ZS
 {
+	extern const double FRAME_TIME;
+	const double FRAME_TIME = 1.0 / 60.0;
+
     void MainEntryPoints::createSystems( GameState **outGraphicsGameState,
                                          GraphicsSystem **outGraphicsSystem,
                                          GameState **outLogicGameState,
@@ -37,7 +40,7 @@ namespace ZS
 
 		GameMaster* gm = GameMaster::GetInstance();
 		LevelManager* levelManager = new LevelManager(zsGraphicsSystem, zsLogicSystem);
-
+		gm->bindLevelManager(levelManager);
 
 		ScreenLogger* screenLogger = ScreenLogger::GetInstance();
 		screenLogger->bindGraphicsGameState(zsGrahicsGameState);

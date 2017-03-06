@@ -6,7 +6,7 @@ namespace ZS {
 	public:
 		virtual ~Behaviour() {}
 
-		virtual void update();
+		virtual void update(float timeSinceLast) {}
 	};
 }
 

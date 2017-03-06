@@ -9,16 +9,14 @@
 #include "SDL_keycode.h"
 #include "AudioSystem.h"
 
-class InputManager {
+namespace ZS {
+	class InputManager {
 
-	//NoteInstruction(note) :Instruction
-
-	//Q -> instruction(do)
-
-public:
-	InputManager() {};
-	void keydown(SDL_Keycode key);
-	void keyup(SDL_Keycode key);
-};
+	public:
+		InputManager() {}
+		void keydown(SDL_Keycode key);
+		void keyup(SDL_Keycode key);
+	};
+}
 
 #endif //_INPUTMANAGER_H

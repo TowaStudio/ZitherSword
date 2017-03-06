@@ -38,4 +38,8 @@ namespace ZS {
 
 		return hit;
 	}
+
+	void Enemy::update() {
+		GameMaster::GetInstance()->log("Enemy log gm in update");
+	}
 }

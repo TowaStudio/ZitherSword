@@ -37,27 +37,25 @@
 
 namespace ZS
 {
+	extern const double FRAME_TIME;
+
     ZSGraphicsGameState::ZSGraphicsGameState() :
         DebugGameState(),
-        mAnimateObjects( true ),
 		gm(GameMaster::GetInstance())
     {
-        memset( mSceneNode, 0, sizeof(mSceneNode) );
+        
     }
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::createScene01(void)
     {
-        Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
-
-		const float armsLength = 2.5f;
+		Ogre::SceneManager* sceneManager = mGraphicsSystem->getSceneManager();
 
 		Ogre::v1::MeshPtr planeMeshV1 = Ogre::v1::MeshManager::getSingleton().createPlane("Plane v1",
 																						  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 200.0f, 200.0f,
+																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 50.0f, 50.0f,
 																						  1, 1, true, 1, 4.0f, 4.0f, Ogre::Vector3::UNIT_Z,
 																						  Ogre::v1::HardwareBuffer::HBU_STATIC,
 																						  Ogre::v1::HardwareBuffer::HBU_STATIC);
-
 
 		Ogre::MeshPtr planeMesh = Ogre::MeshManager::getSingleton().createManual(
 			"Plane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
@@ -72,7 +70,6 @@ namespace ZS
 			sceneNode->setPosition(0, -1, 0);
 			sceneNode->attachObject(item);
 
-			
 			//Change the addressing mode of the roughness map to wrap via code.
 			//Detail maps default to wrap, but the rest to clamp.
 			assert(dynamic_cast<Ogre::HlmsPbsDatablock*>(item->getSubItem(0)->getDatablock()));
@@ -86,221 +83,68 @@ namespace ZS
 			//Set the new samplerblock. The Hlms system will
 			//automatically create the API block if necessary
 			datablock->setSamplerblock(Ogre::PBSM_ROUGHNESS, samplerblock);
-			
 		}
 
-        {
-			Ogre::Item* item = sceneManager->createItem("ogrehead_v2.mesh",
-														Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
-														Ogre::SCENE_DYNAMIC);
-			item->setDatablock("InkShader");
-			Ogre::SceneNode* sceneNode = sceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->createChildSceneNode(Ogre::SCENE_DYNAMIC);
-			sceneNode->attachObject(item);
-			sceneNode->setPosition(0.0f, 2.0f, 2.0f);
-			sceneNode->scale(0.1f, 0.1f, 0.1f);
-        }
-		
+		Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
 
-		/*
+		Ogre::Light *light = sceneManager->createLight();
+		Ogre::SceneNode *lightNode = rootNode->createChildSceneNode();
+		lightNode->attachObject(light);
+		light->setPowerScale(1.0f);
+		light->setType(Ogre::Light::LT_DIRECTIONAL);
+		light->setDirection(Ogre::Vector3(-1, -1, -1).normalisedCopy());
 
-		for (int i = 0; i<4; ++i) {
-			for (int j = 0; j<4; ++j) {
-				Ogre::String meshName;
+		mLightNodes[0] = lightNode;
 
-				if (i == j)
-					meshName = "Sphere1000.mesh";
-				else
-					meshName = "Cube_d.mesh";
+		sceneManager->setAmbientLight(Ogre::ColourValue(0.3f, 0.5f, 0.7f) * 0.1f * 0.75f,
+									  Ogre::ColourValue(0.6f, 0.45f, 0.3f) * 0.065f * 0.75f,
+									  -light->getDirection() + Ogre::Vector3::UNIT_Y * 0.2f);
 
-				Ogre::Item *item = sceneManager->createItem(meshName,
-															Ogre::ResourceGroupManager::
-															AUTODETECT_RESOURCE_GROUP_NAME,
-															Ogre::SCENE_DYNAMIC);
-				if (i % 2 == 0)
-					item->setDatablock("Rocks");
-				else
-					item->setDatablock("Marble");
-
-				item->setVisibilityFlags(0x000000001);
-
-				size_t idx = i * 4 + j;
-
-				mSceneNode[idx] = sceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->
-					createChildSceneNode(Ogre::SCENE_DYNAMIC);
-
-				mSceneNode[idx]->setPosition((i - 1.5f) * armsLength,
-											 2.0f,
-											 (j - 1.5f) * armsLength);
-				mSceneNode[idx]->setScale(0.65f, 0.65f, 0.65f);
-
-				mSceneNode[idx]->roll(Ogre::Radian((Ogre::Real)idx));
-
-				mSceneNode[idx]->attachObject(item);
-			}
-		}*/
-
-		/*{
-			int mNumSpheres = 0;
-			Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
-			Ogre::HlmsTextureManager *hlmsTextureManager = hlmsManager->getTextureManager();
-
-			assert(dynamic_cast<Ogre::HlmsPbs*>(hlmsManager->getHlms(Ogre::HLMS_PBS)));
-
-			Ogre::HlmsPbs *hlmsPbs = static_cast<Ogre::HlmsPbs*>(hlmsManager->getHlms(Ogre::HLMS_PBS));
-
-			const int numX = 8;
-			const int numZ = 8;
-
-			const float armsLength = 1.0f;
-			const float startX = (numX - 1) / 2.0f;
-			const float startZ = (numZ - 1) / 2.0f;
-
-			for (int x = 0; x<numX; ++x) {
-				for (int z = 0; z<numZ; ++z) {
-					Ogre::String datablockName = "Test" + Ogre::StringConverter::toString(mNumSpheres++);
-					Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
-						hlmsPbs->createDatablock(datablockName,
-												 datablockName,
-												 Ogre::HlmsMacroblock(),
-												 Ogre::HlmsBlendblock(),
-												 Ogre::HlmsParamVec()));
-
-					Ogre::HlmsTextureManager::TextureLocation texLocation = hlmsTextureManager->
-						createOrRetrieveTexture("SaintPetersBasilica.dds",
-												Ogre::HlmsTextureManager::TEXTURE_TYPE_ENV_MAP);
-
-					datablock->setTexture(Ogre::PBSM_REFLECTION, texLocation.xIdx, texLocation.texture);
-					datablock->setDiffuse(Ogre::Vector3(0.0f, 1.0f, 0.0f));
-
-					datablock->setRoughness(std::max(0.02f, x / Ogre::max(1, (float)(numX - 1))));
-					datablock->setFresnel(Ogre::Vector3(z / Ogre::max(1, (float)(numZ - 1))), false);
-
-					Ogre::Item *item = sceneManager->createItem("Sphere1000.mesh",
-																Ogre::ResourceGroupManager::
-																AUTODETECT_RESOURCE_GROUP_NAME,
-																Ogre::SCENE_DYNAMIC);
-					item->setDatablock(datablock);
-					item->setVisibilityFlags(0x000000002);
-
-					Ogre::SceneNode *sceneNode = sceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->
-						createChildSceneNode(Ogre::SCENE_DYNAMIC);
-					sceneNode->setPosition(Ogre::Vector3(armsLength * x - startX,
-														 1.0f,
-														 armsLength * z - startZ));
-					sceneNode->attachObject(item);
-				}
-			}
-		}*/
-
-        Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
-		
-        Ogre::Light *light = sceneManager->createLight();
-        Ogre::SceneNode *lightNode = rootNode->createChildSceneNode();
-        lightNode->attachObject( light );
-        light->setPowerScale( 1.0f );
-        light->setType( Ogre::Light::LT_DIRECTIONAL );
-        light->setDirection( Ogre::Vector3( -1, -1, -1 ).normalisedCopy() );
-
-        mLightNodes[0] = lightNode;
-
-        sceneManager->setAmbientLight( Ogre::ColourValue( 0.3f, 0.5f, 0.7f ) * 0.1f * 0.75f,
-                                       Ogre::ColourValue( 0.6f, 0.45f, 0.3f ) * 0.065f * 0.75f,
-                                       -light->getDirection() + Ogre::Vector3::UNIT_Y * 0.2f );
-
-        light = sceneManager->createLight();
-        lightNode = rootNode->createChildSceneNode();
-        lightNode->attachObject( light );
-        light->setDiffuseColour( 0.8f, 0.4f, 0.2f ); //Warm
-        light->setSpecularColour( 0.8f, 0.4f, 0.2f );
+		light = sceneManager->createLight();
+		lightNode = rootNode->createChildSceneNode();
+		lightNode->attachObject(light);
+		light->setDiffuseColour(0.8f, 0.4f, 0.2f); //Warm
+		light->setSpecularColour(0.8f, 0.4f, 0.2f);
 		light->setPowerScale(Ogre::Math::PI);
-        light->setType( Ogre::Light::LT_SPOTLIGHT );
-        lightNode->setPosition( -10.0f, 10.0f, 10.0f );
-        light->setDirection( Ogre::Vector3( 1, -1, -1 ).normalisedCopy() );
-        light->setAttenuationBasedOnRadius( 10.0f, 0.01f );
+		light->setType(Ogre::Light::LT_SPOTLIGHT);
+		lightNode->setPosition(-10.0f, 10.0f, 10.0f);
+		light->setDirection(Ogre::Vector3(1, -1, -1).normalisedCopy());
+		light->setAttenuationBasedOnRadius(10.0f, 0.01f);
 
-        mLightNodes[1] = lightNode;
+		mLightNodes[1] = lightNode;
 
-        light = sceneManager->createLight();
-        lightNode = rootNode->createChildSceneNode();
-        lightNode->attachObject( light );
-        light->setDiffuseColour( 0.2f, 0.4f, 0.8f ); //Cold
-        light->setSpecularColour( 0.2f, 0.4f, 0.8f );
+		light = sceneManager->createLight();
+		lightNode = rootNode->createChildSceneNode();
+		lightNode->attachObject(light);
+		light->setDiffuseColour(0.2f, 0.4f, 0.8f); //Cold
+		light->setSpecularColour(0.2f, 0.4f, 0.8f);
 		light->setPowerScale(Ogre::Math::PI);
-        light->setType( Ogre::Light::LT_SPOTLIGHT );
-        lightNode->setPosition( 10.0f, 10.0f, -10.0f );
-        light->setDirection( Ogre::Vector3( -1, -1, 1 ).normalisedCopy() );
-        light->setAttenuationBasedOnRadius( 10.0f, 0.01f );
+		light->setType(Ogre::Light::LT_SPOTLIGHT);
+		lightNode->setPosition(10.0f, 10.0f, -10.0f);
+		light->setDirection(Ogre::Vector3(-1, -1, 1).normalisedCopy());
+		light->setAttenuationBasedOnRadius(10.0f, 0.01f);
 
-        mLightNodes[2] = lightNode;
+		mLightNodes[2] = lightNode;
 
-        mCameraController = new CameraController( mGraphicsSystem, false );
+		mCameraController = new CameraController(mGraphicsSystem, false);
 		//createShadowMapDebugOverlays();
 
-        DebugGameState::createScene01();
-		// for test
-		AudioSystem::GetInstance()->startMusic();
+		DebugGameState::createScene01();
     }
-	void ZSGraphicsGameState::createShadowMapDebugOverlays(void) {
-		Ogre::Root *root = mGraphicsSystem->getRoot();
-		Ogre::CompositorWorkspace *workspace = mGraphicsSystem->getCompositorWorkspace();
-		Ogre::Hlms *hlmsUnlit = root->getHlmsManager()->getHlms(Ogre::HLMS_UNLIT);
-
-		Ogre::HlmsMacroblock macroblock;
-		macroblock.mDepthCheck = false;
-		Ogre::HlmsBlendblock blendblock;
-
-		Ogre::CompositorShadowNode *shadowNode = workspace->findShadowNode("ZSShadowNode");
-		for(int i = 0; i<5; ++i) {
-			const Ogre::String datablockName("depthShadow" + Ogre::StringConverter::toString(i));
-			Ogre::HlmsUnlitDatablock *depthShadow = (Ogre::HlmsUnlitDatablock*)hlmsUnlit->createDatablock(
-				datablockName, datablockName,
-				macroblock, blendblock,
-				Ogre::HlmsParamVec());
-			Ogre::TexturePtr tex = shadowNode->getLocalTextures()[i].textures[0];
-			depthShadow->setTexture(0, 0, tex, 0);
-		}
-
-		Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
-		// Create an overlay
-		mDebugOverlayPSSM = overlayManager.create("PSSM Overlays");
-		mDebugOverlaySpotlights = overlayManager.create("Spotlight overlays");
-
-		for(int i = 0; i<3; ++i) {
-			// Create a panel
-			Ogre::v1::OverlayContainer* panel = static_cast<Ogre::v1::OverlayContainer*>(
-				overlayManager.createOverlayElement("Panel", "PanelName" +
-													Ogre::StringConverter::toString(i)));
-			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			panel->setPosition(100 + i * 1600, 10000 - 1600);
-			panel->setDimensions(1500, 1500);
-			panel->setMaterialName("depthShadow" + Ogre::StringConverter::toString(i));
-			mDebugOverlayPSSM->add2D(panel);
-		}
-
-		for(int i = 3; i<5; ++i) {
-			// Create a panel
-			Ogre::v1::OverlayContainer* panel = static_cast<Ogre::v1::OverlayContainer*>(
-				overlayManager.createOverlayElement("Panel", "PanelName" +
-													Ogre::StringConverter::toString(i)));
-			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			panel->setPosition(100 + i * 1600, 10000 - 1600);
-			panel->setDimensions(1500, 1500);
-			panel->setMaterialName("depthShadow" + Ogre::StringConverter::toString(i));
-			mDebugOverlaySpotlights->add2D(panel);
-		}
-
-		mDebugOverlayPSSM->show();
-		mDebugOverlaySpotlights->show();
-	}
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
     {
+		float weight = mGraphicsSystem->getAccumTimeSinceLastLogicFrame() / FRAME_TIME;
+		weight = std::min(1.0f, weight);
+
+		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
+											weight);
+
 		DebugGameState::update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::showFPS( float timeSinceLast, Ogre::String &outText )
     {
-		
 		DebugGameState::showFPS( timeSinceLast, outText );
     }
     //-----------------------------------------------------------------------------------
@@ -310,37 +154,6 @@ namespace ZS
 			mGraphicsSystem->setQuit();
 		}
 
-        if( (arg.keysym.mod & ~(KMOD_NUM|KMOD_CAPS|KMOD_LSHIFT|KMOD_RSHIFT)) != 0 )
-        {
-            DebugGameState::keyReleased( arg );
-            return;
-        }
-
-        if( arg.keysym.sym == SDLK_F2 )
-        {
-            mAnimateObjects = !mAnimateObjects;
-        }
-        /*else if( arg.keysym.sym == SDLK_F3 )
-        {
-            Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
-            bool showMovingObjects = (visibilityMask & 0x00000001);
-            showMovingObjects = !showMovingObjects;
-            visibilityMask &= ~0x00000001;
-            visibilityMask |= (Ogre::uint32)showMovingObjects;
-            mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
-        }
-        else if( arg.keysym.sym == SDLK_F4 )
-        {
-            Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
-            bool showPalette = (visibilityMask & 0x00000002) != 0;
-            showPalette = !showPalette;
-            visibilityMask &= ~0x00000002;
-            visibilityMask |= (Ogre::uint32)(showPalette) << 1;
-            mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
-        }*/
-        else
-        {
-            DebugGameState::keyReleased( arg );
-        }
+		DebugGameState::keyReleased(arg);
     }
 }

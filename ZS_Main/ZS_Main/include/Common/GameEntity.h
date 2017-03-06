@@ -5,6 +5,7 @@
 #include "OgreVector3.h"
 #include "OgreQuaternion.h"
 #include "OgreStringVector.h"
+#include "Behaviour.h"
 
 namespace ZS
 {
@@ -13,6 +14,7 @@ namespace ZS
     enum MovableObjectType
     {
         MoTypeItem,
+		MoTypeItemInk,
         MoTypeEntity,
         NumMovableObjectType
     };
@@ -46,6 +48,7 @@ namespace ZS
 
         //Your custom pointers go here, i.e. physics representation.
         //used only by Logic thread (hkpEntity, btRigidBody, etc)
+		Behaviour* behaviour;
 
         //----------------------------------------
         // Used by both Logic and Graphics threads
@@ -59,17 +62,18 @@ namespace ZS
         MovableObjectDefinition const   *mMoDefinition;
         size_t                   mTransformBufferIdx;
 
-        GameEntity( Ogre::uint32 id, const MovableObjectDefinition *moDefinition,
-                    Ogre::SceneMemoryMgrTypes type ) :
+        GameEntity( Ogre::uint32 id, const MovableObjectDefinition *moDefinition, Behaviour* _behaviour,
+                    Ogre::SceneMemoryMgrTypes type) :
             mId( id ),
-            mSceneNode( 0 ),
-            mMovableObject( 0 ),
+            mSceneNode( nullptr ),
+            mMovableObject( nullptr ),
+			behaviour(_behaviour),
             mType( type ),
             mMoDefinition( moDefinition ),
             mTransformBufferIdx( 0 )
         {
             for( int i=0; i<NUM_GAME_ENTITY_BUFFERS; ++i )
-                mTransform[i] = 0;
+                mTransform[i] = nullptr;
         }
 
         Ogre::uint32 getId(void) const          { return mId; }

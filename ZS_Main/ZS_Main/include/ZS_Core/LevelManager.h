@@ -80,6 +80,7 @@ namespace ZS {
 
 		GameEntity* addGameEntity(Ogre::SceneMemoryMgrTypes type,
 								  const MovableObjectDefinition *moDefinition,
+								  Behaviour* behaviour,
 								  const Ogre::Vector3 &initialPos,
 								  const Ogre::Quaternion &initialRot,
 								  const Ogre::Vector3 &initialScale);

@@ -594,11 +594,14 @@ namespace ZS
 
         cge->gameEntity->mSceneNode = sceneNode;
 
-        if( cge->gameEntity->mMoDefinition->moType == MoTypeItem )
+        if( cge->gameEntity->mMoDefinition->moType == MoTypeItem || cge->gameEntity->mMoDefinition->moType == MoTypeItemInk)
         {
             Ogre::Item *item = mSceneManager->createItem( cge->gameEntity->mMoDefinition->meshName,
                                                           cge->gameEntity->mMoDefinition->resourceGroup,
                                                           cge->gameEntity->mType );
+
+			if(cge->gameEntity->mMoDefinition->moType == MoTypeItemInk)
+				item->setDatablock(cge->gameEntity->mMoDefinition->submeshMaterials[0]);
 
             Ogre::StringVector materialNames = cge->gameEntity->mMoDefinition->submeshMaterials;
             size_t minMaterials = std::min( materialNames.size(), item->getNumSubItems() );

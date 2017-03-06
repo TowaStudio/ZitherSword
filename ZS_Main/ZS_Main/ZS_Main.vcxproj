@@ -75,7 +75,6 @@
     <ClInclude Include="include\ZS_Core\Weapon.h" />
     <ClInclude Include="JuceLibraryCode\AppConfig.h" />
     <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
-    <ClInclude Include="StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
@@ -92,7 +91,6 @@
     <ClCompile Include="JuceLibraryCode\juce_gui_extra.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_opengl.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_video.cpp" />
-    <ClCompile Include="src\cheatsheet.cpp" />
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +176,8 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -206,7 +205,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreHlmsInk_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

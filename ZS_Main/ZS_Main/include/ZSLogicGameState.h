@@ -15,6 +15,9 @@ namespace ZS {
 		LogicSystem *mLogicSystem;
 		GameMaster* gm;
 
+		GameEntityVec* entities;
+		GameEntity* entHead;
+
 	public:
 		ZSLogicGameState();
 		~ZSLogicGameState();
@@ -23,7 +26,6 @@ namespace ZS {
 
 		virtual void createScene01(void);
 		virtual void update(float timeSinceLast);
-		virtual void keyReleased(const SDL_KeyboardEvent& arg);
 	};
 }
 
