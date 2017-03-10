@@ -10,7 +10,8 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 	
-	void AudioSystem::musicSetup(Patterns _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
+	// setup
+	void AudioSystem::musicSetup(Patterns* _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
 		// setting properties
 		patterns = _patterns;
 		currentBarNum = -_initBarNum;
@@ -19,15 +20,21 @@ namespace ZS {
 		//part = _part; // TODO 3 sound levels
 
 		// hardcoding properties
+		inputPart = MED;
 		tolerance = 0.25;
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
 
-		// calculating properties
+		// calculating & initializing properties
 		interval = (60 * 1000) / (tpb * bpm);
 		thresTime = tolerance * interval;
-		inputSequence = std::vector<NoteName> (tpb * bpb, REST);
+		inputSequence = NoteSeq(tpb * bpb, REST);
+		noteSequence = new NoteSeq(tpb * bpb, REST);
+		partSequence = new PartSeq(tpb * bpb, MED);
+
+		// AI composer setup
+		AIComposer->SetupComposer(1, tpb * bpb);
 
 	}
 
@@ -49,6 +56,7 @@ namespace ZS {
 		stopTimer();
 	}
 
+	// input 
 	void AudioSystem::input(NoteName inputNote) {
 
 		// judge input
@@ -58,7 +66,7 @@ namespace ZS {
 		}
 
 		// play sound
-		playSound(inputNote);
+		playSound(inputNote, inputPart);
 
 	}
 
@@ -66,11 +74,9 @@ namespace ZS {
 		int timeDiff = currentTime - currentTickTime;
 		if (timeDiff < thresTime) { // current tick
 			recordNote(currentTickNum, noteName);
-		}
-		else if (timeDiff > interval - thresTime) { // next tick
+		} else if (timeDiff > interval - thresTime) { // next tick
 			recordNote(currentTickNum + 1, noteName);
-		}
-		else { // hit nothing
+		} else { // hit nothing
 
 		}
 	}
@@ -80,17 +86,17 @@ namespace ZS {
 			if (!playerInCharge && currentBarNum + 1 >= 0) {
 				inputSequence[0] = noteName;
 			}
-		}
-		else {
+		} else {
 			if (playerInCharge) {
 				inputSequence[tickNum] = noteName;
 			}
 		}
 	}
 
-	void AudioSystem::playSound(NoteName note) {
-		if (readers[note] != nullptr) {
-			transportSource.setSource(new AudioFormatReaderSource(readers[note], true), 0, nullptr, readers[note]->sampleRate);
+	void AudioSystem::playSound(NoteName note, PartName part) {
+		int index = part * 7 + note;
+		if (readers[index] != nullptr) {
+			transportSource.setSource(new AudioFormatReaderSource(readers[index], true), 0, nullptr, readers[index]->sampleRate);
 			mixer.addInputSource(&transportSource, true);
 			transportSource.setPosition(0.0);
 			transportSource.start();
@@ -142,26 +148,26 @@ namespace ZS {
 	AudioSystem::AudioSystem() {
 		// init settings
 		formatManager.registerBasicFormats();
-		part = "Med_";
+		AIComposer = new AudioComposer();
 		musicSetup();
 
 		// load files
-		readFiles();
+		loadFiles();
 
 		// setup test
-		std::vector<NoteName>  b0(16, REST);
-		std::vector<NoteName>  b1(16, REST);
-		std::vector<NoteName>  b2(16, REST);
-		std::vector<NoteName>  b3(16, REST);
-		std::vector<NoteName>  b4(16, REST);
-		std::vector<NoteName>  b5(16, REST);
+		NoteSeq  b0(16, REST);
+		NoteSeq  b1(16, REST);
+		NoteSeq  b2(16, REST);
+		NoteSeq  b3(16, REST);
+		NoteSeq  b4(16, REST);
+		NoteSeq  b5(16, REST);
 		b0[0] = DO; b0[4] = DO; b0[8] = DO; b0[12] = DO;
 		b1[0] = RE; b1[4] = RE; b1[8] = RE; b1[12] = RE;
 		b2[0] = MI; b2[4] = MI; b2[8] = MI; b2[12] = MI;
 		b3[0] = SO; b3[4] = SO; b3[8] = SO; b3[12] = SO;
 		b4[0] = LA; b4[4] = LA; b4[8] = LA; b4[12] = LA;
 		b5[0] = REST; b5[4] = REST; b5[8] = REST; b5[12] = REST;
-		Patterns a = new std::vector<std::vector<NoteName>>();
+		Patterns* a = new Patterns();
 		a->push_back(b0);
 		a->push_back(b1);
 		a->push_back(b2);
@@ -173,14 +179,16 @@ namespace ZS {
 		
 	}
 
-	void AudioSystem::readFiles() {
-		String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
-		for (int i = 0; i < 5; i++) {
-			String path = directory + part;
-			path += noteGroup[i];
-			path += ".wav";
-			File file = File(path);
-			readers[noteGroup[i]] = formatManager.createReaderFor(file);
+	void AudioSystem::loadFiles() {
+		String partsName[] = { "Low_", "Med_", "Hi_" };
+		for (int p = 0; p < 3; p++) {
+			for (int i = 0; i < 5; i++) {
+				String path = directory + partsName[p];
+				path += noteGroup[i];
+				path += ".wav";
+				File file = File(path);
+				readers[p * 7 + noteGroup[i]] = formatManager.createReaderFor(file);
+			}
 		}
 	}
 
@@ -226,28 +234,36 @@ namespace ZS {
 					playerInCharge = false;
 					AIInCharge = true;
 
+					// get AI composing
+					AIComposer->getNextSeq(noteSequence, partSequence, inputSequence, currentBarNum);
+
 					// identify sequence
 					int res = identifySequence();
 					GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
 					// TODO return the action to core
 
 					// reset input buffer
-					inputSequence = std::vector<NoteName>(tpb * bpb, REST);
+					inputSequence = NoteSeq(tpb * bpb, REST);
 				}
 			}
 		}
 
-		// TODO: AI composing
+		// play AI composing
+		if (AIInCharge) {
+			playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
+		}
+
 		// test
-		if (currentTickNum == 0) {
-			//inputSequence[currentTickNum] = DO; 
-			playSound(SO); 
+		if (playerInCharge) {
+			if (currentTickNum == 0) {
+				//inputSequence[currentTickNum] = DO; 
+				playSound(SO);
+			}
+			else if (currentTickNum % 4 == 0) {
+				playSound(DO);
+			}
 		}
-		else if (currentTickNum % 4 == 0){
-			playSound(DO);
-		}
-
-
+		
 		/*if (currentTickNum + 1 - tpb * bpb >= 0) {
 			currentBarNum += 1; 
 			currentTickNum = 0;
