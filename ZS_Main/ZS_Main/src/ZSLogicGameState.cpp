@@ -4,6 +4,7 @@
 #include "LevelManager.h"
 #include <SDL.h>
 #include "Enemy.h"
+#include "Path.h"
 
 namespace ZS {
 
@@ -38,8 +39,10 @@ namespace ZS {
 											  , Vec3(0.1f, 0.1f, 0.1f));
 				
 		entities->push_back(entHead);
-		// for test
-		AudioSystem::GetInstance()->startMusic();
+	}
+
+	void ZSLogicGameState::createScene02() {
+
 	}
 
 	void ZSLogicGameState::update(float timeSinceLast) {
@@ -54,7 +57,7 @@ namespace ZS {
 
 		for(auto itr = entities->begin(), end = entities->end(); itr != end; ++itr) {
 			if((*itr)->behaviour)
-				(*itr)->behaviour->update(float timeSinceLast);
+				(*itr)->behaviour->update(timeSinceLast);
 		}
 
 		GameState::update(timeSinceLast);

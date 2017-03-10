@@ -39,7 +39,7 @@ namespace ZS {
 		return hit;
 	}
 
-	void Enemy::update() {
+	void Enemy::update(float timeSinceLast) {
 		GameMaster::GetInstance()->log("Enemy log gm in update");
 	}
 }

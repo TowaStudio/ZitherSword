@@ -2,8 +2,9 @@
  * Project ZS
  */
 
-
 #include "InputManager.h"
+#include "AudioSystem.h"
+#include "GameMaster.h"
 
 namespace ZS {
 	void InputManager::keydown(SDL_Keycode key) {
@@ -26,6 +27,12 @@ namespace ZS {
 	}
 
 	void InputManager::keyup(SDL_Keycode key) {
-
+		switch(key) {
+			case SDLK_1:
+				GameMaster::GetInstance()->loadLevel(1);
+				break;
+			default:
+				break;
+		}
 	}
 }

@@ -19,8 +19,8 @@ namespace ZS {
 	private:
 		static GameMaster* instance;
 		GameMaster();
-		GameMaster(GameMaster const&) {};
-		GameMaster& operator= (GameMaster const&) {};
+		GameMaster(GameMaster const&) {}
+		GameMaster& operator= (GameMaster const&) {}
 
 		InputManager* inputManager;
 		LevelManager* levelManager;

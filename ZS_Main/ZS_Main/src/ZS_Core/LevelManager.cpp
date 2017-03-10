@@ -88,7 +88,9 @@ namespace ZS {
 	
 	void LevelManager::startLevel() {
 		//TODO: Start audio system and input manager;
-		
+
+		// for test
+		AudioSystem::GetInstance()->startMusic();
 	}
 
 	//------------------------------------Game Environments------------------------------------

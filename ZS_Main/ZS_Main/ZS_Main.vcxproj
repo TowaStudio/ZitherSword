@@ -75,6 +75,7 @@
     <ClInclude Include="include\ZS_Core\Weapon.h" />
     <ClInclude Include="JuceLibraryCode\AppConfig.h" />
     <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
+    <ClInclude Include="include\ZS_Core\Path.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
@@ -94,7 +95,7 @@
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ZS_Core\Behaviour.cpp" />
+    <ClCompile Include="src\ZS_Core\Path.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
     <ClCompile Include="src\Common\GraphicsSystem.cpp" />

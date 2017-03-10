@@ -99,7 +99,7 @@ namespace ZS
 			GameMaster::GetInstance()->getInputManager()->keyup(reinterpret_cast<const SDL_KeyboardEvent*>(data)->keysym.sym);
 			break;
 		case Mq::SDL_EVENT:
-			//TODO: Handle SDL_INPUT message;
+			//TODO: Handle other SDL_INPUT message;
 			break;
         default:
 			reinterpret_cast<const SDL_Event*>(data);
