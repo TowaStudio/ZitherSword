@@ -62,8 +62,7 @@ namespace ZS {
 
 		// Scenes
 		void mainMenu();
-		void loadLevel(int level);
-		
+		void loadLevel(int level);	
 
 	};
 }

@@ -10,7 +10,7 @@ namespace ZS {
 		UIManager& operator= (UIManager const&) {}
 
 	public:
-		static UIManager GetInstance() {
+		static UIManager* GetInstance() {
 			return instance;
 		}
 

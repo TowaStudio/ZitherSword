@@ -6,6 +6,8 @@
 #include "OgreQuaternion.h"
 #include "OgreStringVector.h"
 #include "Behaviour.h"
+#include "Animation/OgreSkeletonInstance.h";
+#include "AnimationController.h"
 
 namespace ZS
 {
@@ -15,6 +17,7 @@ namespace ZS
     {
         MoTypeItem,
 		MoTypeItemInk,
+		MoTypeItemSkeleton,
         MoTypeEntity,
         NumMovableObjectType
     };
@@ -46,6 +49,9 @@ namespace ZS
         Ogre::SceneNode         *mSceneNode;
         Ogre::MovableObject     *mMovableObject; //Could be Entity, InstancedEntity, Item.
 
+		bool hasAnimation;
+		AnimationController* animationController;
+
         //Your custom pointers go here, i.e. physics representation.
         //used only by Logic thread (hkpEntity, btRigidBody, etc)
 		Behaviour* behaviour;
@@ -67,6 +73,8 @@ namespace ZS
             mId( id ),
             mSceneNode( nullptr ),
             mMovableObject( nullptr ),
+			hasAnimation(false),
+			animationController(nullptr),
 			behaviour(_behaviour),
             mType( type ),
             mMoDefinition( moDefinition ),

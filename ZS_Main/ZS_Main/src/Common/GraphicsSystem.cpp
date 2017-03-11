@@ -25,6 +25,8 @@
 
 #include "OgreWindowEventUtilities.h"
 #include "GameMaster.h"
+#include "../../../../../../SDK/OgreMain/include/Animation/OgreSkeletonInstance.h"
+#include "AnimationController.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -39,29 +41,32 @@
 
 namespace ZS
 {
-    GraphicsSystem::GraphicsSystem( GameState *gameState,
-                                    Ogre::ColourValue backgroundColour ) :
-        BaseSystem( gameState ),
-        mLogicSystem( nullptr ),
-    #if OGRE_USE_SDL2
-        mSdlWindow( nullptr ),
-        mInputHandler( nullptr ),
-    #endif
-        mRoot( nullptr ),
-        mRenderWindow( nullptr ),
-        mSceneManager( nullptr ),
-        mCamera( nullptr ),
-        mWorkspace( nullptr ),
-        mOverlaySystem( nullptr ),
-        mAccumTimeSinceLastLogicFrame( 0 ),
-        mCurrentTransformIdx( 0 ),
-        mThreadGameEntityToUpdate( nullptr ),
-        mThreadWeight( 0 ),
-        mQuit( false ),
-        mAlwaysAskForConfig( true ),
-        mBackgroundColour( backgroundColour )
-    {
-    }
+	GraphicsSystem::GraphicsSystem(GameState *gameState,
+								   Ogre::ColourValue backgroundColour) :
+		BaseSystem(gameState),
+		mLogicSystem(nullptr),
+#if OGRE_USE_SDL2
+		mSdlWindow(nullptr),
+		mInputHandler(nullptr),
+#endif
+		mRoot(nullptr),
+		mRenderWindow(nullptr),
+		mSceneManager(nullptr),
+		mCamera(nullptr),
+		mWorkspace(nullptr),
+		mOverlaySystem(nullptr),
+		mAccumTimeSinceLastLogicFrame(0),
+		mCurrentTransformIdx(0),
+		mThreadGameEntityToUpdate(nullptr),
+		mThreadWeight(0),
+		isInitializingLevel(false),
+		initObjectCount(0),
+		mQuit(false),
+		mAlwaysAskForConfig(true),
+		mBackgroundColour(backgroundColour) {
+
+	}
+
     //-----------------------------------------------------------------------------------
     GraphicsSystem::~GraphicsSystem()
     {
@@ -387,6 +392,10 @@ namespace ZS
             this->queueSendMessage( mLogicSystem, Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT,
                                     *reinterpret_cast<const Ogre::uint32*>( data ) );
             break;
+		case Mq::INIT_LEVEL_START:
+			isInitializingLevel = true;
+			initObjectCount = *reinterpret_cast<const int*>(data);
+			break;
         default:
             break;
         }
@@ -594,14 +603,16 @@ namespace ZS
 
         cge->gameEntity->mSceneNode = sceneNode;
 
-        if( cge->gameEntity->mMoDefinition->moType == MoTypeItem || cge->gameEntity->mMoDefinition->moType == MoTypeItemInk)
+        if( cge->gameEntity->mMoDefinition->moType == MoTypeItem
+			|| cge->gameEntity->mMoDefinition->moType == MoTypeItemInk
+			|| cge->gameEntity->mMoDefinition->moType == MoTypeItemSkeleton)
         {
             Ogre::Item *item = mSceneManager->createItem( cge->gameEntity->mMoDefinition->meshName,
                                                           cge->gameEntity->mMoDefinition->resourceGroup,
                                                           cge->gameEntity->mType );
 
 			if(cge->gameEntity->mMoDefinition->moType == MoTypeItemInk)
-				item->setDatablock(cge->gameEntity->mMoDefinition->submeshMaterials[0]);
+				item->setDatablock("InkShader");
 
             Ogre::StringVector materialNames = cge->gameEntity->mMoDefinition->submeshMaterials;
             size_t minMaterials = std::min( materialNames.size(), item->getNumSubItems() );
@@ -613,10 +624,26 @@ namespace ZS
                                                                                     resourceGroup );
             }
 
+			if(cge->gameEntity->mMoDefinition->moType == MoTypeItemSkeleton) {
+				if(item->hasSkeleton() && item->getSkeletonInstance()->getAnimations().size() > 0) {
+					cge->gameEntity->hasAnimation = true;
+					cge->gameEntity->animationController = new AnimationController(item->getSkeletonInstance());
+				} else {
+					cge->gameEntity->hasAnimation = false;
+				}
+			}
             cge->gameEntity->mMovableObject = item;
         }
 
         sceneNode->attachObject( cge->gameEntity->mMovableObject );
+
+		if(isInitializingLevel) {
+			--initObjectCount;
+			if(initObjectCount == 0) {
+				queueSendMessage(mLogicSystem, Mq::INIT_LEVEL_DONE, nullptr);
+				isInitializingLevel = false;
+			}
+		}
 
         //Keep them sorted on how Ogre's internal memory manager assigned them memory,
         //to avoid false cache sharing when we update the nodes concurrently.
@@ -655,7 +682,7 @@ namespace ZS
         mThreadGameEntityToUpdate   = &gameEntities;
         mThreadWeight               = weight;
 
-        //Note: You could execute a non-blocking scalable task and do something else, you should
+		//Note: You could execute a non-blocking scalable task and do something else, you should
         //wait for the task to finish right before calling renderOneFrame or before trying to
         //execute another UserScalableTask (you would have to be careful, but it could work).
         mSceneManager->executeUserScalableTask( this, true );
@@ -687,6 +714,9 @@ namespace ZS
             Ogre::Quaternion interpQ = Ogre::Math::lerp( gEnt->mTransform[prevIdx]->qRot,
                                                          gEnt->mTransform[currIdx]->qRot, mThreadWeight );
             gEnt->mSceneNode->setOrientation( interpQ );
+
+			if(gEnt->hasAnimation && gEnt->animationController->isEnabled)
+				gEnt->animationController->update(0.05f * mThreadWeight);
 
             ++itor;
         }

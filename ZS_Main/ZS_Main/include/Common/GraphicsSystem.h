@@ -18,6 +18,7 @@
 
 namespace ZS
 {
+
     class SdlInputHandler;
 
     class GraphicsSystem : public BaseSystem, public Ogre::UniformScalableTask
@@ -48,6 +49,9 @@ namespace ZS
         GameEntityVec       mGameEntities[Ogre::NUM_SCENE_MEMORY_MANAGER_TYPES];
         GameEntityVec const *mThreadGameEntityToUpdate;
         float               mThreadWeight;
+
+		bool isInitializingLevel;
+		int initObjectCount;
 
         bool                mQuit;
         bool                mAlwaysAskForConfig;

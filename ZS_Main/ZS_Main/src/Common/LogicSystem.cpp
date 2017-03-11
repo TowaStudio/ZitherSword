@@ -101,6 +101,9 @@ namespace ZS
 		case Mq::SDL_EVENT:
 			//TODO: Handle other SDL_INPUT message;
 			break;
+		case Mq::INIT_LEVEL_DONE:
+			GameMaster::GetInstance()->getLevelManager()->startLevel();
+			break;
         default:
 			reinterpret_cast<const SDL_Event*>(data);
             break;

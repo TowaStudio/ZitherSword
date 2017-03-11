@@ -7,12 +7,7 @@
 
 namespace ZS {
 	GameMaster* GameMaster::instance = new GameMaster();
-
-	/**
-	* GameMaster implementation
-	*/
-
-
+	
 	GameMaster::GameMaster() :
 		inputManager(nullptr),
 		levelManager(nullptr),
@@ -72,5 +67,4 @@ namespace ZS {
 		levelManager->loadLevel(0); //TODO
 		currentLevel = level;
 	}
-
 };

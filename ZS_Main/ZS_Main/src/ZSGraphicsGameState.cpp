@@ -139,7 +139,6 @@ namespace ZS
 
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
-
 		DebugGameState::update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------

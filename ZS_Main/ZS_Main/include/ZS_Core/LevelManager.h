@@ -13,6 +13,7 @@
 #include "ZSLogicSystem.h"
 
 namespace ZS {
+	class GameMaster;
 
 	class LevelManager {
 	public:
@@ -23,8 +24,11 @@ namespace ZS {
 
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
 
+		GameEntity* entSwordsman;
+
 	private:
 		//Game Content
+		GameMaster* gm;
 		int level;
 		int unitsCount;
 		int jointCount;

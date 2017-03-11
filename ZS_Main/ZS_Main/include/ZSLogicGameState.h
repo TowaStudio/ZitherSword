@@ -16,7 +16,6 @@ namespace ZS {
 		GameMaster* gm;
 
 		GameEntityVec* entities;
-		GameEntity* entHead;
 
 	public:
 		ZSLogicGameState();

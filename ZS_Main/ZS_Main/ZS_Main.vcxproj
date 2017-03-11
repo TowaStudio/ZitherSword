@@ -40,7 +40,6 @@
     <ClInclude Include="include\Common\tinyxml\tinyxml2.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
-    <ClInclude Include="include\ZSGameObjectManager.h" />
     <ClInclude Include="include\ZSGraphicsSystem.h" />
     <ClInclude Include="include\ZSLogicGameState.h" />
     <ClInclude Include="include\ZSLogicSystem.h" />
@@ -76,6 +75,8 @@
     <ClInclude Include="JuceLibraryCode\AppConfig.h" />
     <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
     <ClInclude Include="include\ZS_Core\Path.h" />
+    <ClInclude Include="include\UIManager.h" />
+    <ClInclude Include="include\AnimationController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
@@ -95,6 +96,8 @@
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\UIManager.cpp" />
+    <ClCompile Include="src\AnimationController.cpp" />
     <ClCompile Include="src\ZS_Core\Path.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
@@ -110,7 +113,6 @@
     <ClCompile Include="src\Common\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
-    <ClCompile Include="src\ZSGameObjectManager.cpp" />
     <ClCompile Include="src\ZSGraphicsSystem.cpp" />
     <ClCompile Include="src\ZSLogicGameState.cpp" />
     <ClCompile Include="src\ZSLogicSystem.cpp" />

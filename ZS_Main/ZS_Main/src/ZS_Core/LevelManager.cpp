@@ -10,10 +10,11 @@ namespace ZS {
 	const size_t cNumTransforms = 512;
 
 	LevelManager::LevelManager(Mq::MessageQueueSystem* _graphicsSystem, LogicSystem* _logicSystem) :
+		gm(GameMaster::GetInstance()),
 		level(-1),
 		unitsCount(0),
 		jointCount(0),
-		swordsman(nullptr),
+		swordsman(nullptr), entSwordsman(nullptr),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
 	{
@@ -75,19 +76,35 @@ namespace ZS {
 		//TODO: Create Objects and setup player, input;
 		Vec3 pos = Vec3(0.0f, 0.0f, 0.0f);
 		Vec3 enemyPos = Vec3(5.0f, 0.0f, 0.0f);
-
-		GameMaster* gm = GameMaster::GetInstance();
 		
-		swordsman = new Swordsman(gm->getPlayerStats(), pos);
-		Enemy* enemyA = new Enemy("E1", enemyPos, 100.0f, 100.0f, 20.0f, 20.0f, 100.0f, 20.0f, 12.0f, Status::Normal, 200);
-		enemyA->attack();
+		// Create Swordsman
+		MovableObjectDefinition* moSwordsman = new MovableObjectDefinition();
+		moSwordsman->meshName = "swordsman.mesh";
+		moSwordsman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+		moSwordsman->submeshMaterials = Ogre::StringVector{"SwordsmanBody","SwordsmanShoe","SwordsmanFace","SwordsmanHead","SwordsmanBelt","SwordsmanArm"};
+		moSwordsman->moType = MoTypeItemSkeleton;
 
-		gm->log(Ogre::StringConverter::toString(swordsman->hp) + "/" + Ogre::StringConverter::toString(swordsman->maxhp));
-		startLevel();
+		swordsman = new Swordsman(gm->getPlayerStats(), pos);
+
+		int initObjectCount = 1;
+
+		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
+
+		entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
+									 , swordsman
+									 , Vec3(0.0f, 2.0f, 0.0f) // Change to Level data start pos
+									 , Ogre::Quaternion::IDENTITY
+									 , Vec3::UNIT_SCALE);
+
+		
 	}
 	
 	void LevelManager::startLevel() {
 		//TODO: Start audio system and input manager;
+		InputManager* inputManager = gm->getInputManager();
+
+
+		entSwordsman->animationController->startAnimation("attack1_2");
 
 		// for test
 		AudioSystem::GetInstance()->startMusic();

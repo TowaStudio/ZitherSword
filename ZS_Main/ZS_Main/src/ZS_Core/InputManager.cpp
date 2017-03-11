@@ -31,6 +31,12 @@ namespace ZS {
 			case SDLK_1:
 				GameMaster::GetInstance()->loadLevel(1);
 				break;
+			case SDLK_i:
+				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("swordRun_1");
+				break;
+			case SDLK_o:
+				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("attack1_2");
+				break;
 			default:
 				break;
 		}
