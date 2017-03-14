@@ -11,9 +11,10 @@ namespace ZS {
 
 	ZSLogicGameState::ZSLogicGameState() :
 		mLogicSystem(nullptr),
-		gm(GameMaster::GetInstance())
+		gm(GameMaster::GetInstance()),
+		levelManager(nullptr)
 	{
-		entities = new GameEntityVec();
+		
 	}
 
 	ZSLogicGameState::~ZSLogicGameState() {
@@ -21,7 +22,7 @@ namespace ZS {
 	  
 	void ZSLogicGameState::createScene01() {
 		gm->log("Start in createScrene01");
-
+		levelManager = gm->getLevelManager();
 	}
 
 	void ZSLogicGameState::createScene02() {
@@ -32,9 +33,8 @@ namespace ZS {
 		const size_t currIdx = mLogicSystem->getCurrentTransformIdx();
 		const size_t prevIdx = (currIdx + NUM_GAME_ENTITY_BUFFERS - 1) % NUM_GAME_ENTITY_BUFFERS;
 
-		for(auto itr = entities->begin(), end = entities->end(); itr != end; ++itr) {
-			if((*itr)->behaviour)
-				(*itr)->behaviour->update(timeSinceLast);
+		if(levelManager->levelState == LS_PLAY) {
+			levelManager->update(currIdx, timeSinceLast);
 		}
 
 		GameState::update(timeSinceLast);

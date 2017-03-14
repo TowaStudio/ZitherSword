@@ -29,10 +29,12 @@ namespace ZS {
 	void InputManager::keyup(SDL_Keycode key) {
 		switch(key) {
 			case SDLK_1:
+				GameMaster::GetInstance()->load();
 				GameMaster::GetInstance()->loadLevel(1);
 				break;
 			case SDLK_i:
 				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("swordRun_1");
+				reinterpret_cast<Swordsman*>(GameMaster::GetInstance()->getLevelManager()->entSwordsman->behaviour)->moveVec = Vec3(1.0f, 0.0f, 0.0f);
 				break;
 			case SDLK_o:
 				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("attack1_2");

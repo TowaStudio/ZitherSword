@@ -11,14 +11,14 @@ namespace ZS {
 
 	LevelManager::LevelManager(Mq::MessageQueueSystem* _graphicsSystem, LogicSystem* _logicSystem) :
 		gm(GameMaster::GetInstance()),
-		level(-1),
-		unitsCount(0),
-		jointCount(0),
+		level(-1), levelState(LS_NOT_IN_LEVEL),
+		unitsCount(0), jointCount(0),
 		swordsman(nullptr), entSwordsman(nullptr),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
 	{
 		logicSystem->_notifyLevelManager(this);
+
 	}
 
 	LevelManager::~LevelManager() {
@@ -73,8 +73,9 @@ namespace ZS {
 	}
 
 	void LevelManager::initLevel() {
+		levelState = LS_LOAD;
 		//TODO: Create Objects and setup player, input;
-		Vec3 pos = Vec3(0.0f, 0.0f, 0.0f);
+		Vec3 pos = Vec3(0.5f, 0.0f, 0.0f);
 		Vec3 enemyPos = Vec3(5.0f, 0.0f, 0.0f);
 		
 		// Create Swordsman
@@ -92,10 +93,9 @@ namespace ZS {
 
 		entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
 									 , swordsman
-									 , Vec3(0.0f, 2.0f, 0.0f) // Change to Level data start pos
+									 , Vec3(0.0f, 0.0f, 0.0f) // Change to Level data start pos
 									 , Ogre::Quaternion::IDENTITY
 									 , Vec3::UNIT_SCALE);
-
 		
 	}
 	
@@ -103,11 +103,23 @@ namespace ZS {
 		//TODO: Start audio system and input manager;
 		InputManager* inputManager = gm->getInputManager();
 
-
-		entSwordsman->animationController->startAnimation("attack1_2");
-
 		// for test
 		AudioSystem::GetInstance()->startMusic();
+
+		levelState = LS_PLAY;
+	}
+
+	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
+		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {
+			for(auto itr = mGameEntities[Ogre::SCENE_DYNAMIC].begin(), end = mGameEntities[Ogre::SCENE_DYNAMIC].end(); itr != end; ++itr) {
+				//Update the internal model
+				if((*itr)->behaviour)
+					(*itr)->behaviour->update(timeSinceLast);
+
+				//Update scene model
+				(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
+			}
+		}
 	}
 
 	//------------------------------------Game Environments------------------------------------

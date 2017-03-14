@@ -22,6 +22,7 @@ namespace ZS {
 		HitInfo* skill();
 		HitInfo attack() override;
 		void heal(float amount) override;
+		void update(float timeSinceLast);
 	};
 }
 

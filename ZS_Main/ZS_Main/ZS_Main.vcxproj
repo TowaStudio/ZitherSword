@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Instructions.h" />
     <ClInclude Include="include\ZS_Core\Behaviour.h" />
     <ClInclude Include="include\Common\BaseSystem.h" />
     <ClInclude Include="include\Common\CameraController.h" />
@@ -60,7 +61,7 @@
     <ClInclude Include="include\ZS_Core\Instruction.h" />
     <ClInclude Include="include\ZS_Core\Item.h" />
     <ClInclude Include="include\ZS_Core\Joint.h" />
-    <ClInclude Include="include\ZS_Core\LevelManager.h" />
+    <ClInclude Include="include\LevelManager.h" />
     <ClInclude Include="include\ZS_Core\Logger.h" />
     <ClInclude Include="include\ZS_Core\PlayerStats.h" />
     <ClInclude Include="include\ZS_Core\SaveData.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Instructions.cpp" />
     <ClCompile Include="src\UIManager.cpp" />
     <ClCompile Include="src\AnimationController.cpp" />
     <ClCompile Include="src\ZS_Core\Path.cpp" />
@@ -131,7 +133,7 @@
     <ClCompile Include="src\ZS_Core\Instruction.cpp" />
     <ClCompile Include="src\ZS_Core\Item.cpp" />
     <ClCompile Include="src\ZS_Core\Joint.cpp" />
-    <ClCompile Include="src\ZS_Core\LevelManager.cpp" />
+    <ClCompile Include="src\LevelManager.cpp" />
     <ClCompile Include="src\ZS_Core\Logger.cpp" />
     <ClCompile Include="src\ZS_Core\PlayerStats.cpp" />
     <ClCompile Include="src\ZS_Core\SaveData.cpp" />

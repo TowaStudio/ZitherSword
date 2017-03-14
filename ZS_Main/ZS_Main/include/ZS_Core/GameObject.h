@@ -13,8 +13,6 @@
 
 namespace ZS
 {
-	typedef Ogre::Vector3 Vec3;
-
 	enum Tag {
 		PLAYER = 1 << 0,
 		ENEMY = 1 << 1,
@@ -31,7 +29,6 @@ namespace ZS
 
 		std::string name;
 		Tag tag;
-		Vec3 pos;
 	};
 
 	typedef std::vector<GameObject> GameObjectVec;

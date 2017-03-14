@@ -14,8 +14,7 @@ namespace ZS {
 	private:
 		LogicSystem *mLogicSystem;
 		GameMaster* gm;
-
-		GameEntityVec* entities;
+		LevelManager* levelManager;
 
 	public:
 		ZSLogicGameState();

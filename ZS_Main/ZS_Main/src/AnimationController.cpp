@@ -18,21 +18,17 @@ namespace ZS {
 	}
 
 	void AnimationController::startAnimation(Ogre::String _state, float _playbackSpeed) {
-		if(_state.compare("_CURRENT") != 0) {
-			changeAnimation(_state);
-		}
-
-		isEnabled = true;
-		currentAnim->setEnabled(true);
-		currentAnim->mFrameRate = _playbackSpeed;
-	}
-
-	void AnimationController::changeAnimation(Ogre::String _state) {
-		if(skeleton->hasAnimation(_state)) {
-			currentAnim->setEnabled(false);
-			currentAnim = skeleton->getAnimation(_state);
+		if(_state.compare("_CURRENT") == 0) {
 			currentAnim->setTime(0.0f);
+			isEnabled = true;
+			currentAnim->setEnabled(true);
+		} else if(skeleton->hasAnimation(_state)) {
+			stopAnimation();
+			currentAnim = skeleton->getAnimation(_state);
 			currentState = _state;
+
+			currentAnim->setTime(0.0f);
+			isEnabled = true;
 			currentAnim->setEnabled(true);
 		}
 	}
@@ -43,7 +39,6 @@ namespace ZS {
 	}
 
 	void AnimationController::update(float timeSinceLast) {
-		if(isEnabled)
-			currentAnim->addTime(timeSinceLast);
+		currentAnim->addTime(timeSinceLast);
 	}
 }

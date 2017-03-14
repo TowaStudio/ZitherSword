@@ -15,6 +15,15 @@
 namespace ZS {
 	class GameMaster;
 
+	enum LevelState {
+		LS_NOT_IN_LEVEL = 0,
+		LS_LOAD,
+		LS_PLAY,
+		LS_PASUE,
+		LS_END,
+		NUM_LEVEL_STATE
+	};
+
 	class LevelManager {
 	public:
 		struct CreatedGameEntity {
@@ -23,6 +32,8 @@ namespace ZS {
 		};
 
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
+
+		LevelState levelState;
 
 		GameEntity* entSwordsman;
 
@@ -79,6 +90,8 @@ namespace ZS {
 		void loadLevel(int level);
 		void initLevel();
 		void startLevel();
+
+		void update(const size_t currIdx, float timeSinceLast);
 
 		void trigger();
 

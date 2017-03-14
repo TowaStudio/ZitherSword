@@ -43,4 +43,9 @@ namespace ZS {
 		//TODO: Add scene out
 		Unit::heal(amount);
 	}
+
+	void Swordsman::update(float timeSinceLast) {
+		move(moveVec * timeSinceLast);
+		GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
+	}
 }

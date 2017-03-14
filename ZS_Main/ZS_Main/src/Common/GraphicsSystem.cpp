@@ -25,7 +25,7 @@
 
 #include "OgreWindowEventUtilities.h"
 #include "GameMaster.h"
-#include "../../../../../../SDK/OgreMain/include/Animation/OgreSkeletonInstance.h"
+#include "Animation/OgreSkeletonInstance.h"
 #include "AnimationController.h"
 
 #if OGRE_USE_SDL2
@@ -716,7 +716,7 @@ namespace ZS
             gEnt->mSceneNode->setOrientation( interpQ );
 
 			if(gEnt->hasAnimation && gEnt->animationController->isEnabled)
-				gEnt->animationController->update(0.05f * mThreadWeight);
+				gEnt->animationController->update(0.016f);
 
             ++itor;
         }
