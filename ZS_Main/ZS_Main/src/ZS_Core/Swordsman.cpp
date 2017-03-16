@@ -46,6 +46,6 @@ namespace ZS {
 
 	void Swordsman::update(float timeSinceLast) {
 		move(moveVec * timeSinceLast);
-		GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
+		//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
 	}
 }

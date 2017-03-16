@@ -43,6 +43,11 @@ namespace ZS {
 		return pos;
 	}
 
+	Vec3 Unit::moveTo(Vec3 _pos) {
+		pos = _pos;
+		return pos;
+	}
+
 	// BATTLE
 	void Unit::heal(float amount) {
 		hp += amount;

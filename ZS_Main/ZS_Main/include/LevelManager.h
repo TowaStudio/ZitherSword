@@ -11,16 +11,18 @@
 #include "GameEntity.h"
 #include "Threading/MessageQueueSystem.h"
 #include "ZSLogicSystem.h"
+#include "Path.h"
+#include "SwordsmanController.h"
 
 namespace ZS {
 	class GameMaster;
 
 	enum LevelState {
-		LS_NOT_IN_LEVEL = 0,
-		LS_LOAD,
-		LS_PLAY,
-		LS_PASUE,
-		LS_END,
+		LST_NOT_IN_LEVEL = 0,
+		LST_LOAD,
+		LST_PLAY,
+		LST_PASUE,
+		LST_END,
 		NUM_LEVEL_STATE
 	};
 
@@ -34,16 +36,18 @@ namespace ZS {
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
 
 		LevelState levelState;
-
-		GameEntity* entSwordsman;
-
+		SwordsmanController* ccSwordsman;
+		
 	private:
 		//Game Content
 		GameMaster* gm;
 		int level;
 		int unitsCount;
 		int jointCount;
+
+		Path* levelPath;
 		Swordsman* swordsman;
+		GameEntity* entSwordsman;
 
 		//Ogre environment, Thread synchronization
 		struct Region {
@@ -92,6 +96,7 @@ namespace ZS {
 		void startLevel();
 
 		void update(const size_t currIdx, float timeSinceLast);
+		Path* getLevelPath();
 
 		void trigger();
 

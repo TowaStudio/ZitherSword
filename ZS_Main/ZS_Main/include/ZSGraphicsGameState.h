@@ -17,13 +17,14 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         GameMaster* gm;
-
-        virtual void showFPS( float timeSinceLast, Ogre::String &outText );
+		Ogre::v1::Overlay* uiMusic;
+		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 
     public:
 		ZSGraphicsGameState();
 
 	    virtual void createScene01(void);
+		void createMusicUI();
 		virtual void update( float timeSinceLast );
 
         virtual void keyReleased( const SDL_KeyboardEvent &arg );

@@ -67,7 +67,6 @@ namespace ZS
             else
             {
                 camera->moveRelative( camMovementDir );
-				//GameMaster::GetInstance()->log("" + Ogre::StringConverter::toString(camMovementDir.x) + ", " + Ogre::StringConverter::toString(camMovementDir.y));
             }
         }
     }

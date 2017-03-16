@@ -33,11 +33,10 @@ namespace ZS {
 				GameMaster::GetInstance()->loadLevel(1);
 				break;
 			case SDLK_i:
-				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("swordRun_1");
-				reinterpret_cast<Swordsman*>(GameMaster::GetInstance()->getLevelManager()->entSwordsman->behaviour)->moveVec = Vec3(1.0f, 0.0f, 0.0f);
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_RUN);
 				break;
 			case SDLK_o:
-				GameMaster::GetInstance()->getLevelManager()->entSwordsman->animationController->startAnimation("attack1_2");
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_ATTACK);
 				break;
 			default:
 				break;

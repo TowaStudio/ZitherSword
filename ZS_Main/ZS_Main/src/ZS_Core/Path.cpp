@@ -22,7 +22,7 @@ namespace  ZS {
 
 		// Update the link & length
 		if(pointVec->size() > 1) {
-			PathPoint* lastPoint = pointVec->at(pointCount - 1);
+			PathPoint* lastPoint = pointVec->at(pointCount - 2);
 			lastPoint->next = newPoint;
 
 			float distance = lastPoint->pos.distance(newPoint->pos);

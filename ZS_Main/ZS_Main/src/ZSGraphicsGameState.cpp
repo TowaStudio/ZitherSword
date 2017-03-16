@@ -40,11 +40,13 @@ namespace ZS
 	extern const double FRAME_TIME;
 
     ZSGraphicsGameState::ZSGraphicsGameState() :
-        DebugGameState(),
-		gm(GameMaster::GetInstance())
-    {
-        
-    }
+		DebugGameState(),
+		gm(GameMaster::GetInstance()),
+		uiMusic(nullptr)
+	{
+
+	}
+
     //-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::createScene01(void)
     {
@@ -127,11 +129,32 @@ namespace ZS
 		mLightNodes[2] = lightNode;
 
 		mCameraController = new CameraController(mGraphicsSystem, false);
+
+		createMusicUI();
 		//createShadowMapDebugOverlays();
 
 		DebugGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
+	void ZSGraphicsGameState::createMusicUI() {
+		Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
+		uiMusic = overlayManager.create("MusicUI");
+
+		//Background
+		{
+			Ogre::v1::OverlayContainer *panel = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "MusicUIPanelBackground"));
+			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			panel->setPosition(0, 7500);
+			panel->setDimensions(10000 * 1280 / 720, 2500);
+			panel->setMaterialName("MusicUIBG");
+			uiMusic->add2D(panel);
+		}
+		
+
+		uiMusic->show();
+    }
+	//-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
     {
 		float weight = mGraphicsSystem->getAccumTimeSinceLastLogicFrame() / FRAME_TIME;

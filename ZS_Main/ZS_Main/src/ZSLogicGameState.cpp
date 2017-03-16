@@ -33,7 +33,7 @@ namespace ZS {
 		const size_t currIdx = mLogicSystem->getCurrentTransformIdx();
 		const size_t prevIdx = (currIdx + NUM_GAME_ENTITY_BUFFERS - 1) % NUM_GAME_ENTITY_BUFFERS;
 
-		if(levelManager->levelState == LS_PLAY) {
+		if(levelManager->levelState == LST_PLAY) {
 			levelManager->update(currIdx, timeSinceLast);
 		}
 

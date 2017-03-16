@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CameraPathController.h" />
     <ClInclude Include="include\Instructions.h" />
     <ClInclude Include="include\ZS_Core\Behaviour.h" />
     <ClInclude Include="include\Common\BaseSystem.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="include\ZS_Core\Joint.h" />
     <ClInclude Include="include\LevelManager.h" />
     <ClInclude Include="include\ZS_Core\Logger.h" />
+    <ClInclude Include="include\ZS_Core\PathFollowHelper.h" />
     <ClInclude Include="include\ZS_Core\PlayerStats.h" />
     <ClInclude Include="include\ZS_Core\SaveData.h" />
     <ClInclude Include="include\ZS_Core\ScreenLogger.h" />
@@ -78,8 +80,13 @@
     <ClInclude Include="include\ZS_Core\Path.h" />
     <ClInclude Include="include\UIManager.h" />
     <ClInclude Include="include\AnimationController.h" />
+    <ClInclude Include="include\CharacterController.h" />
+    <ClInclude Include="include\SwordsmanController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\CameraPathController.cpp" />
+    <ClCompile Include="src\SwordsmanController.cpp" />
+    <ClCompile Include="src\ZS_Core\PathFollowHelper.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_devices.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_formats.cpp" />
@@ -228,7 +235,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;..\..\JuceLibraryCode;E:\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
