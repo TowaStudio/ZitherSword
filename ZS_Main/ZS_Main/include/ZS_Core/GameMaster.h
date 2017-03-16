@@ -19,8 +19,8 @@ namespace ZS {
 	private:
 		static GameMaster* instance;
 		GameMaster();
-		GameMaster(GameMaster const&) {};
-		GameMaster& operator= (GameMaster const&) {};
+		GameMaster(GameMaster const&) {}
+		GameMaster& operator= (GameMaster const&) {}
 
 		InputManager* inputManager;
 		LevelManager* levelManager;
@@ -36,11 +36,13 @@ namespace ZS {
 
 		LevelManager* getLevelManager() {
 			if(!levelManager) {
-				levelManager = new LevelManager(-1);
+				//TODO: handle exceptions.
+				return nullptr;
 			}
-
-			return levelManager;			
+			return levelManager;
 		}
+
+		void bindLevelManager(LevelManager* _levelManager);
 
 		InputManager* getInputManager() {
 			if(!inputManager) {
@@ -60,8 +62,7 @@ namespace ZS {
 
 		// Scenes
 		void mainMenu();
-		void loadLevel(int level);
-		
+		void loadLevel(int level);	
 
 	};
 }

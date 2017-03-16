@@ -33,7 +33,7 @@ namespace ZS {
 		// MOVEMENT
 		Vec3 move();
 		Vec3 move(Vec3 _movement);
-		
+		Vec3 moveTo(Vec3 _pos);
 		// BATTLE
 		virtual HitInfo attack();
 		virtual void heal(float amount);

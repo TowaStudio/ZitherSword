@@ -5,6 +5,7 @@
 
 #include "OgreCamera.h"
 #include "OgreRenderWindow.h"
+#include "GameMaster.h"
 
 using namespace ZS;
 

@@ -153,7 +153,7 @@ namespace ZS {
 	}
 
 	void AudioSystem::readFiles() {
-		String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
+		String directory = "D:/Program.Houdou/OGRE/Projects/ZitherSword/ZS_Main/Assets/Audio/";
 		for (int i = 0; i < 5; i++) {
 			String path = directory + part;
 			path += noteGroup[i];

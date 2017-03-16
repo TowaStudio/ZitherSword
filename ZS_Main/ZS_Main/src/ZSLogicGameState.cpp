@@ -1,14 +1,20 @@
 #include "ZSLogicGameState.h"
 #include "Threading/MqMessages.h"
+#include "AudioSystem.h"
+#include "LevelManager.h"
 #include <SDL.h>
+#include "Enemy.h"
+#include "Path.h"
+#include "OgreStringVector.h"
 
 namespace ZS {
 
 	ZSLogicGameState::ZSLogicGameState() :
 		mLogicSystem(nullptr),
-		gm(GameMaster::GetInstance())
+		gm(GameMaster::GetInstance()),
+		levelManager(nullptr)
 	{
-
+		
 	}
 
 	ZSLogicGameState::~ZSLogicGameState() {
@@ -16,20 +22,21 @@ namespace ZS {
 	  
 	void ZSLogicGameState::createScene01() {
 		gm->log("Start in createScrene01");
+		levelManager = gm->getLevelManager();
+	}
+
+	void ZSLogicGameState::createScene02() {
+
 	}
 
 	void ZSLogicGameState::update(float timeSinceLast) {
+		const size_t currIdx = mLogicSystem->getCurrentTransformIdx();
+		const size_t prevIdx = (currIdx + NUM_GAME_ENTITY_BUFFERS - 1) % NUM_GAME_ENTITY_BUFFERS;
+
+		if(levelManager->levelState == LST_PLAY) {
+			levelManager->update(currIdx, timeSinceLast);
+		}
 
 		GameState::update(timeSinceLast);
-	}
-
-	void ZSLogicGameState::keyReleased(const SDL_KeyboardEvent& arg) {
-		//gm->log(Ogre::StringConverter::toString(arg.keysym.sym));
-		if(arg.keysym.sym == SDLK_l) {
-			gm->load();
-			gm->loadLevel(0);
-		} else {
-			GameState::keyPressed(arg);
-		}
 	}
 }

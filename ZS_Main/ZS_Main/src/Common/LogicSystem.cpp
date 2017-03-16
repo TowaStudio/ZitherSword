@@ -2,7 +2,7 @@
 #include "LogicSystem.h"
 #include "GameState.h"
 #include "SdlInputHandler.h"
-#include "GameEntityManager.h"
+#include "LevelManager.h"
 
 #include "OgreRoot.h"
 #include "OgreException.h"
@@ -30,7 +30,7 @@ namespace ZS
     LogicSystem::LogicSystem( GameState *gameState ) :
         BaseSystem( gameState ),
         mGraphicsSystem( nullptr ),
-        mGameEntityManager( nullptr ),
+        mLevelManager( nullptr ),
         mCurrentTransformIdx( 1 )
     {
         //mCurrentTransformIdx is 1, 0 and NUM_GAME_ENTITY_BUFFERS - 1 are taken by GraphicsSytem at startup
@@ -47,8 +47,8 @@ namespace ZS
     //-----------------------------------------------------------------------------------
     void LogicSystem::finishFrameParallel(void)
     {
-        if( mGameEntityManager )
-            mGameEntityManager->finishFrameParallel();
+        if( mLevelManager )
+            mLevelManager->finishFrameParallel();
 
         //Notify the GraphicsSystem we're done rendering this frame.
         if( mGraphicsSystem )
@@ -85,26 +85,24 @@ namespace ZS
 					assert( (mAvailableTransformIdx.empty() ||
 							newIdx == (mAvailableTransformIdx.back() + 1) % NUM_GAME_ENTITY_BUFFERS) &&
 							"Indices are arriving out of order!!!" );
-
                 mAvailableTransformIdx.push_back( newIdx );
             }
             break;
         case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
-            mGameEntityManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
+            mLevelManager->_notifyGameEntitiesRemoved( *reinterpret_cast<const Ogre::uint32*>(
                                                                 data ) );
             break;
-        case Mq::SDL_EVENT:
-			//TODO: Handle SDL_INPUT message;
-			//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
-			
-            break;
-		case Mq::SDL_KEYEVENT:
-			//const SDL_Event *evt = reinterpret_cast<const SDL_Event*>(data);
-			//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym));
-			if (reinterpret_cast<const SDL_Event*>(data)->type == SDL_EventType::SDL_KEYDOWN)
-				GameMaster::GetInstance()->getInputManager()->keydown(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym);
-			else 
-				GameMaster::GetInstance()->getInputManager()->keyup(reinterpret_cast<const SDL_Event*>(data)->key.keysym.sym);
+		case Mq::SDL_KEYDOWN:
+			GameMaster::GetInstance()->getInputManager()->keydown(reinterpret_cast<const SDL_KeyboardEvent*>(data)->keysym.sym);
+			break;
+		case Mq::SDL_KEYUP:
+			GameMaster::GetInstance()->getInputManager()->keyup(reinterpret_cast<const SDL_KeyboardEvent*>(data)->keysym.sym);
+			break;
+		case Mq::SDL_EVENT:
+			//TODO: Handle other SDL_INPUT message;
+			break;
+		case Mq::INIT_LEVEL_DONE:
+			GameMaster::GetInstance()->getLevelManager()->startLevel();
 			break;
         default:
 			reinterpret_cast<const SDL_Event*>(data);
