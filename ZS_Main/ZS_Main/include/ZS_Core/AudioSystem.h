@@ -7,21 +7,22 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioComposer.h"
+#include <queue>
 
 using namespace juce;
 
 namespace ZS {
 	class AudioSystem : 
 		private juce::AudioAppComponent, 
-		private juce::HighResolutionTimer, 
-		private juce::ChangeListener
+		//private juce::ChangeListener,
+		private juce::HighResolutionTimer
 	{
 	public:
 		static AudioSystem* GetInstance() {
 			return instance;
 		}
 
-		void musicSetup(Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
+		void musicSetup(int currentLevel = 1, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);
@@ -30,7 +31,7 @@ namespace ZS {
 		bool AIInCharge;
 
 		// get
-		float getBpm() {
+		int getBpm() {
 			return bpm;
 		}
 		float getTolerance() {
@@ -44,6 +45,7 @@ namespace ZS {
 		const int noteGroup[5] = { 1, 2, 3, 5, 6 }; // INTERNAL USE: for loading the music files
 
 		// setting variables
+		int currentLevel;
 		Patterns* patterns;
 		PartName inputPart; // the part that user can input
 		int bpm; // beats per minute
@@ -69,18 +71,22 @@ namespace ZS {
 
 		MixerAudioSource mixer;
 		AudioFormatManager formatManager;
-		AudioFormatReader* readers[22];
-		AudioTransportSource transportSource;
+		AudioFormatReader* sampleReaders[22];
+		AudioFormatReader* BGReaders[9];
+		std::queue<AudioTransportSource*> sampleTransportSources;
+		AudioTransportSource* BGTransportSource;
 
 		void loadFiles();
+		void loadBGM();
 		void inputJudge(int64 currentTime, NoteName noteName);
 		void recordNote(int tickNum, NoteName noteName);
 		void playSound(NoteName note, PartName part = MED);
+		void playBGM(int index);
 		int identifySequence();
 
 		static AudioSystem* instance;
 		AudioSystem();
-		AudioSystem(AudioSystem const&) {};
+		//AudioSystem(AudioSystem const&) {};
 		AudioSystem& operator= (AudioSystem const&) {};
 
 		// override AudioAppComponent
@@ -92,7 +98,7 @@ namespace ZS {
 		void hiResTimerCallback() override;
 
 		// override ChangeListener
-		void changeListenerCallback(ChangeBroadcaster* source) override;
+		//void changeListenerCallback(ChangeBroadcaster* source) override;
 
 	};
 }

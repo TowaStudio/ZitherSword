@@ -22,6 +22,8 @@ void InputManager::keydown(SDL_Keycode key){
 		ZS::AudioSystem::GetInstance()->input(ZS::NoteName::SO); break;
 	case SDLK_SEMICOLON:
 		ZS::AudioSystem::GetInstance()->input(ZS::NoteName::LA); break;
+	//case SDLK_s:
+		//ZS::AudioSystem::GetInstance()->startMusic();
 	}
 
 }

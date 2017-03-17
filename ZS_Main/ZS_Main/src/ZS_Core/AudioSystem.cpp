@@ -11,13 +11,13 @@ namespace ZS {
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 	
 	// setup
-	void AudioSystem::musicSetup(Patterns* _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
+	void AudioSystem::musicSetup(int _currentLevel, Patterns* _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
 		// setting properties
+		currentLevel = _currentLevel;
 		patterns = _patterns;
 		currentBarNum = -_initBarNum;
 		bpm = _bpm;
 		bpb = _bpb;
-		//part = _part; // TODO 3 sound levels
 
 		// hardcoding properties
 		inputPart = MED;
@@ -28,13 +28,13 @@ namespace ZS {
 
 		// calculating & initializing properties
 		interval = (60 * 1000) / (tpb * bpm);
-		thresTime = tolerance * interval;
+		thresTime = static_cast<int>(tolerance * interval);
 		inputSequence = NoteSeq(tpb * bpb, REST);
 		noteSequence = new NoteSeq(tpb * bpb, REST);
 		partSequence = new PartSeq(tpb * bpb, MED);
 
 		// AI composer setup
-		AIComposer->SetupComposer(1, tpb * bpb);
+		AIComposer->SetupComposer(currentLevel, tpb * bpb);
 
 	}
 
@@ -49,7 +49,10 @@ namespace ZS {
 		// start timer
 		//startTime = Time::currentTimeMillis();
 		startTimer(interval);
+
 		//TODO: play background music
+		mixer.addInputSource(BGTransportSource, true);
+		playBGM(0);
 	}
 
 	void AudioSystem::stopMusic() {
@@ -71,7 +74,7 @@ namespace ZS {
 	}
 
 	void AudioSystem::inputJudge(int64 currentTime, NoteName noteName) {
-		int timeDiff = currentTime - currentTickTime;
+		int timeDiff = static_cast<int>(currentTime - currentTickTime);
 		if (timeDiff < thresTime) { // current tick
 			recordNote(currentTickNum, noteName);
 		} else if (timeDiff > interval - thresTime) { // next tick
@@ -95,29 +98,36 @@ namespace ZS {
 
 	void AudioSystem::playSound(NoteName note, PartName part) {
 		int index = part * 7 + note;
-		if (readers[index] != nullptr) {
-			transportSource.setSource(new AudioFormatReaderSource(readers[index], true), 0, nullptr, readers[index]->sampleRate);
-			mixer.addInputSource(&transportSource, true);
-			transportSource.setPosition(0.0);
-			transportSource.start();
+		//AudioTransportSource *transportSource = new AudioTransportSource();
+		//transportSource->addChangeListener(this);
+		if (index < 0 || index >= sizeof(sampleReaders)){
+			// index error
+			return;
+		}
+		if (sampleReaders[index] != nullptr) {
+			AudioTransportSource* transportSource = new AudioTransportSource;
+			sampleTransportSources.push(transportSource);
+			//AudioTransportSource transportSource = sampleTransportSources.back();
+			transportSource->setSource(new AudioFormatReaderSource(sampleReaders[index], true), 0, nullptr, sampleReaders[index]->sampleRate);
+			mixer.addInputSource(transportSource, true);
+			transportSource->setPosition(0.0);
+			transportSource->start();
+		}
+	}
+
+	void AudioSystem::playBGM(int index) {
+		if (index < 0 || index >= sizeof(BGReaders)) {
+			// index error
+			return;
+		}
+		if (BGReaders[index] != nullptr) {
+			BGTransportSource->setSource(new AudioFormatReaderSource(BGReaders[index], true), 0, nullptr, BGReaders[index]->sampleRate);
+			BGTransportSource->setPosition(0.0);
+			BGTransportSource->start();
 		}
 	}
 
 	int AudioSystem::identifySequence() {
-		/*for (std::vector<std::vector<NoteName>>::iterator p = patterns->begin(); p != patterns->end(); ++p)
-		{
-			bool match = true;
-			if (p->size() != tpb * bpb) {
-				match = false;
-				break;
-			}
-			for (std::vector<NoteName>::iterator i = p->begin(); i != p->end(); ++i) {
-				
-			}
-			if (match) {
-				return p->; // return the index of pattern
-			}
-		}*/
 		
 		if (!patterns) {
 			GameMaster::GetInstance()->log("Error");
@@ -174,7 +184,10 @@ namespace ZS {
 		a->push_back(b3);
 		a->push_back(b4);
 		a->push_back(b5);
-		musicSetup(a);
+		musicSetup(1, a);
+
+		// test
+		//transportSource.addChangeListener(this);
 		
 		
 	}
@@ -187,9 +200,13 @@ namespace ZS {
 				path += noteGroup[i];
 				path += ".wav";
 				File file = File(path);
-				readers[p * 7 + noteGroup[i]] = formatManager.createReaderFor(file);
+				sampleReaders[p * 7 + noteGroup[i]] = formatManager.createReaderFor(file);
 			}
 		}
+	}
+
+	void AudioSystem::loadBGM() {
+		// TODO
 	}
 
 	// override 
@@ -205,12 +222,12 @@ namespace ZS {
 		mixer.releaseResources();
 	}
 	
-	void AudioSystem::changeListenerCallback(ChangeBroadcaster* source) {
-		AudioTransportSource* transportSource = (AudioTransportSource*)source;
+	/*void AudioSystem::changeListenerCallback(ChangeBroadcaster* source) {
+		AudioTransportSource* transportSource = static_cast<AudioTransportSource*>(source);
 		if (!transportSource->isPlaying()) {
-			transportSource->releaseResources();
+			mixer.removeInputSource(transportSource);
 		}
-	}
+	}*/
 
 	void AudioSystem::hiResTimerCallback() {
 		currentTickTime = juce::Time::currentTimeMillis();
@@ -228,6 +245,7 @@ namespace ZS {
 				if (currentBarNum % 2 == 0) { 
 					playerInCharge = true;
 					AIInCharge = false;
+
 				}
 				// end player input
 				else { 
@@ -245,6 +263,9 @@ namespace ZS {
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);
 				}
+
+				// change BGM
+				playBGM(AIComposer->getNextBGMIndex()); // TODO
 			}
 		}
 
@@ -253,37 +274,34 @@ namespace ZS {
 			playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
 		}
 
+		// detect run-out
+		while (sampleTransportSources.size() > 0) {
+			if (sampleTransportSources.size() <= 20 && sampleTransportSources.front()->isPlaying()) {
+				break;
+			} else {
+				mixer.removeInputSource(sampleTransportSources.front());
+				sampleTransportSources.pop();
+			}
+		}
+		GameMaster::GetInstance()->log(to_string(sampleTransportSources.size()));
+
+
+		/*for (int i = 0; i < sampleTransportSources.size(); i++) {
+			if (!sampleTransportSources[i]->isPlaying()) {
+				mixer.removeInputSource(sampleTransportSources[i]);
+			}
+		}*/
+
 		// test
-		if (playerInCharge) {
-			if (currentTickNum == 0) {
-				//inputSequence[currentTickNum] = DO; 
-				playSound(SO);
-			}
-			else if (currentTickNum % 4 == 0) {
-				playSound(DO);
-			}
-		}
+		//if (playerInCharge) {
+		//	if (currentTickNum == 0) {
+		//		//inputSequence[currentTickNum] = DO; 
+		//		playSound(SO);
+		//	}
+		//	else if (currentTickNum % 4 == 0) {
+		//		playSound(DO);
+		//	}
+		//}
 		
-		/*if (currentTickNum + 1 - tpb * bpb >= 0) {
-			currentBarNum += 1; 
-			currentTickNum = 0;
-			
-			if (true) {// TODO: requiring identify
-				int res = identifySequence();
-				// TODO return the action to core
-				GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
-			}
-			//GameMaster::GetInstance()->log(to_string(currentBarNum));
- 			
-
-			inputSequence = std::vector<NoteName>(tpb * bpb, REST); 
-		}
-		else {
-			currentTickNum++;
-		}
-		currentTickTime = juce::Time::currentTimeMillis();
-		//nextTickTime = currentTickTime + interval;
-
-		*/
 	}
 }

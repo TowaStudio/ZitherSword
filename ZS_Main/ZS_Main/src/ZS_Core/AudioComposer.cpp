@@ -26,7 +26,8 @@ namespace ZS {
 		// TODO
 	}
 
-	void AudioComposer::getNextBGMIndex(){
+	int AudioComposer::getNextBGMIndex(){
+		return 0;
 		// TODO
 	}
 }

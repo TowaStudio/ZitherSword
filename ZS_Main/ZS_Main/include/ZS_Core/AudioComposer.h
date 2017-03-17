@@ -27,26 +27,51 @@ namespace ZS {
 	typedef std::vector<NoteName> NoteSeq;
 	typedef std::vector<NoteSeq> Patterns;
 
-	/*struct Note {
-	NoteName name = REST;
-	float value = 1; // 1 = 1 meter
-	float startMoment = 0; // 1 = 1 meter
-	int barNum = 1;
-	};*/
-
 	class AudioComposer {
 	public: 
+		enum Cadence {
+			NIL_,
+			DO_,
+			RE_,
+			MI_,
+			FA_,
+			SO_,
+			LA_
+		};
+
+		struct LevelData {
+			int level;
+			int numBarLoop;
+			std::vector<Cadence> cadenceLoop;
+			std::vector<int> rhythmIntensity;
+
+		};
+
+		// AI CORE FILES! DO NOT MODIFY UNLESS YOU REALLY UNDERSTAND!
+		const std::vector<LevelData> _LevelData_{
+			{ 0, 0,{},{} }, // default null level
+
+			// Lv. 1
+			{
+				1,
+				4,
+				{ LA_, SO_, LA_, SO_ },
+				{ 1, 0, 3, 1, 1, 4, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+			}
+		};
+		
 		AudioComposer();
 		void SetupComposer(int currentLevel = 0, int ticksPerBar = 16);
 
 		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar);
-		void getNextBGMIndex(); // TODO
+		int getNextBGMIndex(); // TODO 
 
 	private: 
 		int currentLevel;
 		int tNum;
 
 	};
+
 }
 
 #endif //_AUDIOCOMPOSER_H
