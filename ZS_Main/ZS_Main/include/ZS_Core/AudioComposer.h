@@ -64,7 +64,7 @@ namespace ZS {
 		void SetupComposer(int currentLevel = 0, int ticksPerBar = 16);
 
 		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar);
-		int getNextBGMIndex(); // TODO 
+		int getNextBGMIndex(int currentBar); // TODO 
 
 	private: 
 		int currentLevel;

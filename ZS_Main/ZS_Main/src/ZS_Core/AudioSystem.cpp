@@ -97,9 +97,10 @@ namespace ZS {
 	}
 
 	void AudioSystem::playSound(NoteName note, PartName part) {
+		if (note == REST) {
+			return; // nothing to play
+		}
 		int index = part * 7 + note;
-		//AudioTransportSource *transportSource = new AudioTransportSource();
-		//transportSource->addChangeListener(this);
 		if (index < 0 || index >= sizeof(sampleReaders)){
 			// index error
 			return;
@@ -159,9 +160,11 @@ namespace ZS {
 		// init settings
 		formatManager.registerBasicFormats();
 		AIComposer = new AudioComposer();
+		BGTransportSource = new AudioTransportSource;
 		musicSetup();
 
 		// load files
+		loadBGM();
 		loadFiles();
 
 		// setup test
@@ -184,29 +187,32 @@ namespace ZS {
 		a->push_back(b3);
 		a->push_back(b4);
 		a->push_back(b5);
-		musicSetup(1, a);
-
-		// test
-		//transportSource.addChangeListener(this);
-		
-		
+		musicSetup(1, a, 4, 0, 150);
+				
 	}
 
 	void AudioSystem::loadFiles() {
 		String partsName[] = { "Low_", "Med_", "Hi_" };
 		for (int p = 0; p < 3; p++) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 1; i <= 7; i++) {
 				String path = directory + partsName[p];
-				path += noteGroup[i];
+				path += i;
 				path += ".wav";
 				File file = File(path);
-				sampleReaders[p * 7 + noteGroup[i]] = formatManager.createReaderFor(file);
+				sampleReaders[p * 7 + i] = formatManager.createReaderFor(file);
 			}
 		}
 	}
 
 	void AudioSystem::loadBGM() {
-		// TODO
+		String prefix = "BG_" + to_string(currentLevel) + "_";
+		for (int i = 0; i <= 4; i++) {
+			String path = directory + prefix;
+			path += i;
+			path += ".wav";
+			File file = File(path);
+			BGReaders[i] = formatManager.createReaderFor(file);
+		}
 	}
 
 	// override 
@@ -246,6 +252,10 @@ namespace ZS {
 					playerInCharge = true;
 					AIInCharge = false;
 
+					// change BGM
+					int i = AIComposer->getNextBGMIndex(currentBarNum);
+					playBGM(i); // TODO
+
 				}
 				// end player input
 				else { 
@@ -263,9 +273,6 @@ namespace ZS {
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);
 				}
-
-				// change BGM
-				playBGM(AIComposer->getNextBGMIndex()); // TODO
 			}
 		}
 

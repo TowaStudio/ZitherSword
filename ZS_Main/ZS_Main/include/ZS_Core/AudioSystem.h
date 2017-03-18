@@ -42,7 +42,7 @@ namespace ZS {
 	private:
 		// editing variables
 		const String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
-		const int noteGroup[5] = { 1, 2, 3, 5, 6 }; // INTERNAL USE: for loading the music files
+		//const int noteGroup[7] = { 1, 2, 3, 4, 5, 6, 7 }; // INTERNAL USE: for loading the music files
 
 		// setting variables
 		int currentLevel;
