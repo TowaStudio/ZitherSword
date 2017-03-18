@@ -13,15 +13,14 @@ namespace ZS {
 	/**
 	* Swordsman implementation
 	*/
-	Swordsman::Swordsman(PlayerStats stats, Vec3 startPos) :
+	Swordsman::Swordsman(PlayerStats stats, Vec3 startPos, float startProgress) :
 		Unit("Swordsman", Tag::PLAYER, startPos, GameMaster::GetInstance()->getLevelManager()->getUnitID()
 			 , stats.hp, stats.maxhp
 			 , stats.sp, stats.maxsp
-			 , stats.str, stats.def, stats.spd, stats.status),
+			 , stats.str, stats.def, stats.spd, stats.status, startProgress),
 		level(stats.level),
-		exp(stats.exp)
-	{
-		
+		exp(stats.exp) {
+
 	}
 
 	Swordsman::~Swordsman() {
@@ -45,7 +44,7 @@ namespace ZS {
 	}
 
 	void Swordsman::update(float timeSinceLast) {
-		move(moveVec * timeSinceLast);
+		move(timeSinceLast);
 		//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
 	}
 }

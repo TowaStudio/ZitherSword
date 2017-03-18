@@ -2,7 +2,6 @@
 #include "OgreException.h"
 
 namespace  ZS {
-
 	Path::Path() :
 		pointCount(0), totalLength(0.0f)
 	{
@@ -65,6 +64,7 @@ namespace  ZS {
 		if(!referInSegment) {
 			float distanceFromStart = pos * totalLength;
 			
+			// Find the reference path point (in length-weighted segment)
 			float accDistance = 0.0f;
 			while(accDistance < distanceFromStart) {
 				++indexOfStartPoint;
@@ -78,6 +78,7 @@ namespace  ZS {
 		} else {
 			float segmentLength = 1.0f / pointCount;
 			
+			// Find the reference path point (in equally weighted segment)
 			float accDistance = 0.0f;
 			while(accDistance < pos) {
 				++indexOfStartPoint;
@@ -89,5 +90,24 @@ namespace  ZS {
 
 			return getPosInSegment(indexOfStartPoint, segmentPos);
 		}
+	}
+
+	int Path::getIndexFromPos(float _pos) {
+		int indexOfStartPoint = -1;
+		float distanceFromStart = _pos * totalLength;
+
+		float accDistance = 0.0f;
+		while(accDistance < distanceFromStart) {
+			++indexOfStartPoint;
+			accDistance += pointVec->at(indexOfStartPoint)->distanceToNext;
+		}
+		return indexOfStartPoint;
+	}
+
+	PathPoint* Path::getPoint(int index) {
+		if(pointCount > 0)
+			return pointVec->at(index);
+		else
+			return nullptr;
 	}
 }
