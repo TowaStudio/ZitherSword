@@ -18,6 +18,7 @@ namespace ZS
 
         GameMaster* gm;
 		Ogre::v1::Overlay* uiMusic;
+		Ogre::v1::OverlayContainer* uiScanLine;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 
     public:
