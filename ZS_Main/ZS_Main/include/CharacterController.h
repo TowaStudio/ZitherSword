@@ -1,7 +1,6 @@
 ﻿#ifndef _ZS_CHARACTERCONTROLLER_H
 #define _ZS_CHARACTERCONTROLLER_H
 #include "GameEntity.h"
-#include "PathFollowHelper.h"
 
 namespace ZS {
 	enum ControlState {
@@ -19,13 +18,11 @@ namespace ZS {
 	class CharacterController {
 	protected:
 		GameEntity* ent;
-		PathFollowHelper* pathFollowHelper;
 		ControlState cst;
 
 	public:
-		CharacterController(GameEntity* _ent, PathFollowHelper* _pafh) :
+		CharacterController(GameEntity* _ent) :
 			ent(_ent),
-			pathFollowHelper(_pafh),
 			cst(CST_IDLE)
 		{
 

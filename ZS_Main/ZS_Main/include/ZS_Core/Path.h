@@ -1,24 +1,9 @@
 #ifndef _ZS_PATH_H
 #define _ZS_PATH_H
 #include "GameObject.h"
+#include "PathPoint.h"
 
 namespace ZS {
-	struct PathPoint {
-	public:
-		Vec3 pos;
-		float distanceToNext;
-		PathPoint* next;
-
-		PathPoint(Vec3 _pos) :
-			pos(_pos), distanceToNext(0.0f),
-			next(nullptr)
-		{
-			
-		}
-	};
-
-	typedef std::vector<PathPoint*> PointVec;
-
 	class Path {
 	public:
 		PointVec* pointVec;
@@ -33,6 +18,7 @@ namespace ZS {
 		
 		Vec3 getPosInSegment(int indexOfStartPoint, float pos);
 		Vec3 getPosInPath(float pos, bool referInSegment = false);
+		int getIndexFromPos(float _pos);
 		PathPoint* getPoint(int index);
 	};
 }

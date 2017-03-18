@@ -2,8 +2,8 @@
 
 namespace ZS {
 
-	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman, PathFollowHelper* _pafh) :
-		CharacterController(_entSwordsman, _pafh) {
+	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman) :
+		CharacterController(_entSwordsman) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 

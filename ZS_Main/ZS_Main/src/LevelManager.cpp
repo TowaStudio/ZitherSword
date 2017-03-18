@@ -61,6 +61,10 @@ namespace ZS {
 		return swordsman;
 	}
 
+	Path* LevelManager::getLevelPath() {
+		return levelPath;
+	}
+
 	/**
 	* @return bool
 	*/
@@ -93,29 +97,44 @@ namespace ZS {
 		//TODO: Create Objects and setup player, input;
 		Vec3 pos = Vec3(0.5f, 0.0f, 0.0f);
 		Vec3 enemyPos = Vec3(5.0f, 0.0f, 0.0f);
+
 		
-		// Create Swordsman
-		MovableObjectDefinition* moSwordsman = new MovableObjectDefinition();
-		moSwordsman->meshName = "swordsman.mesh";
-		moSwordsman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-		moSwordsman->submeshMaterials = Ogre::StringVector{"SwordsmanBody","SwordsmanShoe","SwordsmanFace","SwordsmanHead","SwordsmanBelt","SwordsmanArm"};
-		moSwordsman->moType = MoTypeItemSkeleton;
-
-		// Define behaviour and data model
-		swordsman = new Swordsman(gm->getPlayerStats(), pos);
-
 		// Count the mesh to load and start level asynchronously.
+		// ------------------------------------------------------
+		// ---------------------IMPORTANT------------------------
+		//   The value of initObjectCount MUST be equal with the
+		// number of function addGameEntity called, or the level 
+		// will not start.
+		// ------------------------------------------------------
+
 		int initObjectCount = 1;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
-		// Define the scene models.
-		entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
-									 , swordsman
-									 , Vec3(0.0f, 0.0f, 0.0f) // Change to Level data start pos
-									 , Ogre::Quaternion::IDENTITY
-									 , Vec3::UNIT_SCALE);
-		// Create controller
-		ccSwordsman = new SwordsmanController(entSwordsman, new PathFollowHelper(swordsman, levelPath));
+		{ // 1
+			// Create Swordsman
+			MovableObjectDefinition* moSwordsman = new MovableObjectDefinition();
+			moSwordsman->meshName = "swordsman.mesh";
+			moSwordsman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moSwordsman->submeshMaterials = Ogre::StringVector{"SwordsmanBody","SwordsmanShoe","SwordsmanFace","SwordsmanHead","SwordsmanBelt","SwordsmanArm"};
+			moSwordsman->moType = MoTypeItemSkeleton;
+
+			// Define behaviour and data model
+			swordsman = new Swordsman(gm->getPlayerStats(), pos, 0.0f);
+			swordsman->bindPath(levelPath);
+
+			// Define the scene models.
+
+			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+			initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+			entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
+										 , swordsman
+										 , Vec3(0.0f, 0.0f, 0.0f) // Change to Level data start pos
+										 , initialQuaternion
+										 , Vec3::UNIT_SCALE);
+			// Create controller
+			ccSwordsman = new SwordsmanController(entSwordsman);
+		}
+		
 	}
 	
 	void LevelManager::startLevel() {
@@ -126,6 +145,10 @@ namespace ZS {
 		AudioSystem::GetInstance()->startMusic();
 
 		levelState = LST_PLAY;
+	}
+
+	void LevelManager::prepareResources() {
+		//TODO: Preload enemies' mesh file to avoid the lag in game.
 	}
 
 	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
@@ -146,9 +169,11 @@ namespace ZS {
 		}
 	}
 
-	Path* LevelManager::getLevelPath() {
-		return levelPath;
+	CharacterController* LevelManager::createEnemy() {
+		
+		return nullptr;
 	}
+
 
 	//------------------------------------Game Environments------------------------------------
 	//-----------------------------------------------------------------------------------

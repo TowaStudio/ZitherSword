@@ -90,13 +90,15 @@ namespace ZS {
 		int getJointID();
 
 		Swordsman* GetSwordsman() const;
-
+		Path* getLevelPath();
 		void loadLevel(int level);
 		void initLevel();
 		void startLevel();
 
+		void prepareResources();
+
 		void update(const size_t currIdx, float timeSinceLast);
-		Path* getLevelPath();
+		CharacterController* createEnemy();
 
 		void trigger();
 
