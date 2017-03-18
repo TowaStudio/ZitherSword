@@ -23,7 +23,9 @@ namespace ZS {
 		
 	public:
 		static ScreenLogger* GetInstance();
-		void log(string str) override;
+		void log(string content) override;
+		void log(int content) override;
+		void log(float content) override;
 		void bindGraphicsGameState(ZSGraphicsGameState* _zsGraphicsGameState);
 
 	};

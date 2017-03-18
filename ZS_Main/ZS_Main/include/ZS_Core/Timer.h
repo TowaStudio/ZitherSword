@@ -11,8 +11,8 @@ namespace ZS {
 		int time;
 
 	public:
-		Time(int time) {
-			this->time = time;
+		Time(int _time) {
+			time = _time;
 		}
 	};
 

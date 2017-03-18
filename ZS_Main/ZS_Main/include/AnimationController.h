@@ -1,7 +1,7 @@
 ﻿#ifndef _ZS_ANIMATIONCONTROLLER_H
 #define _ZS_ANIMATIONCONTROLLER_H
 
-#include "Animation/OgreSkeletonInstance.h";
+#include "Animation/OgreSkeletonInstance.h"
 
 namespace ZS {
 	class AnimationController {

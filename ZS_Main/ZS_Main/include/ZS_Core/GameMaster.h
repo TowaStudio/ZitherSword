@@ -12,6 +12,7 @@
 #include "Logger.h"
 #include "Stats.h"
 #include "AudioSystem.h"
+#include "MusicUIManager.h"
 
 namespace ZS {
 	class GameMaster {
@@ -25,6 +26,7 @@ namespace ZS {
 		InputManager* inputManager;
 		LevelManager* levelManager;
 		Logger* logger;
+		MusicUIManager* musicUIManager;
 
 		int currentLevel; // menu = 0, level
 		SaveData tempSave;
@@ -41,8 +43,16 @@ namespace ZS {
 			}
 			return levelManager;
 		}
-
 		void bindLevelManager(LevelManager* _levelManager);
+
+		MusicUIManager* getMusicUIManager() {
+			if(!musicUIManager) {
+				//TODO: handle exceptions.
+				return nullptr;
+			}
+			return musicUIManager;
+		}
+		void bindMusicUIManager(MusicUIManager* _musicUIManager);
 
 		InputManager* getInputManager() {
 			if(!inputManager) {
@@ -54,7 +64,8 @@ namespace ZS {
 
 		void setLogger(Logger* logger);
 		void log(std::string str);
-
+		void log(int content);
+		void log(float content);
 		// Save
 		bool save();
 		SaveData load();

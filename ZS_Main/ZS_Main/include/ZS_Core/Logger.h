@@ -23,6 +23,8 @@ namespace ZS {
 		}
 
 		virtual void log(string str) = 0;
+		virtual void log(int str) = 0;
+		virtual void log(float str) = 0;
 
 	};
 }

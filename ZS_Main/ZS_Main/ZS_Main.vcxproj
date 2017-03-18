@@ -20,7 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\CameraPathController.h" />
+    <ClInclude Include="include\GameUIManager.h" />
     <ClInclude Include="include\Instructions.h" />
+    <ClInclude Include="include\MusicUIManager.h" />
+    <ClInclude Include="include\UIBar.h" />
+    <ClInclude Include="include\UIElement.h" />
     <ClInclude Include="include\ZS_Core\Behaviour.h" />
     <ClInclude Include="include\Common\BaseSystem.h" />
     <ClInclude Include="include\Common\CameraController.h" />
@@ -79,14 +83,17 @@
     <ClInclude Include="JuceLibraryCode\AppConfig.h" />
     <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
     <ClInclude Include="include\ZS_Core\Path.h" />
-    <ClInclude Include="include\UIManager.h" />
     <ClInclude Include="include\AnimationController.h" />
     <ClInclude Include="include\CharacterController.h" />
     <ClInclude Include="include\SwordsmanController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\CameraPathController.cpp" />
+    <ClCompile Include="src\CameraPathController.cpp" />
+    <ClCompile Include="src\UIBar.cpp" />
+    <ClCompile Include="src\GameUIManager.cpp" />
+    <ClCompile Include="src\MusicUIManager.cpp" />
     <ClCompile Include="src\SwordsmanController.cpp" />
+    <ClCompile Include="src\UIElement.cpp" />
     <ClCompile Include="src\ZS_Core\PathFollowHelper.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_devices.cpp" />
@@ -106,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Instructions.cpp" />
-    <ClCompile Include="src\UIManager.cpp" />
     <ClCompile Include="src\AnimationController.cpp" />
     <ClCompile Include="src\ZS_Core\Path.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />

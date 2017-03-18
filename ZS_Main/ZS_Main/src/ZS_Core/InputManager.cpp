@@ -11,15 +11,25 @@ namespace ZS {
 		// test key down
 		switch(key) {
 			case SDLK_SPACE:
-				AudioSystem::GetInstance()->input(NoteName::DO); break;
+				AudioSystem::GetInstance()->input(NoteName::DO);
+				GameMaster::GetInstance()->getMusicUIManager()->addNote(NoteName::DO);
+				break;
 			case SDLK_j:
-				AudioSystem::GetInstance()->input(NoteName::RE); break;
+				AudioSystem::GetInstance()->input(NoteName::RE);
+				GameMaster::GetInstance()->getMusicUIManager()->addNote(NoteName::RE);
+				break;
 			case SDLK_k:
-				AudioSystem::GetInstance()->input(NoteName::MI); break;
+				AudioSystem::GetInstance()->input(NoteName::MI);
+				GameMaster::GetInstance()->getMusicUIManager()->addNote(NoteName::MI);
+				break;
 			case SDLK_l:
-				AudioSystem::GetInstance()->input(NoteName::SO); break;
+				AudioSystem::GetInstance()->input(NoteName::SO);
+				GameMaster::GetInstance()->getMusicUIManager()->addNote(NoteName::SO);
+				break;
 			case SDLK_SEMICOLON:
-				AudioSystem::GetInstance()->input(NoteName::LA); break;
+				AudioSystem::GetInstance()->input(NoteName::LA);
+				GameMaster::GetInstance()->getMusicUIManager()->addNote(NoteName::LA);
+				break;
 			default:
 				break;
 		}
