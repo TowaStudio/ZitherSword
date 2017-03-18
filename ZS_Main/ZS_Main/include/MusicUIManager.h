@@ -9,7 +9,7 @@ namespace ZS {
 	class MusicUIManager : public Behaviour {
 	private:
 		Ogre::v1::Overlay* uiMusic;
-		Ogre::v1::OverlayContainer* uiBg;
+		Ogre::v1::OverlayContainer* uiBackground;
 		Ogre::v1::OverlayContainer* uiScanline;
 		std::vector<Ogre::v1::OverlayContainer*> uiNotesVec;
 		bool isEnabled;

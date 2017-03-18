@@ -18,7 +18,7 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         GameMaster* gm;
-		MusicUIManager* musicUiManager;
+		MusicUIManager* musicUIManager;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 
     public:

@@ -36,7 +36,7 @@ namespace ZS {
 			uiScanline = static_cast<Ogre::v1::OverlayContainer*>(
 				overlayManager.createOverlayElement("Panel", "MusicUIPanelScanline"));
 			uiScanline->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			uiScanline->setPosition(0, 7500);
+			uiScanline->setPosition(2000 * 1280 / 720, 7500);
 			uiScanline->setDimensions(100 * 1280 / 720, 2500);
 			uiScanline->setMaterialName("MusicUIScanLine");
 			uiMusic->add2D(uiScanline);

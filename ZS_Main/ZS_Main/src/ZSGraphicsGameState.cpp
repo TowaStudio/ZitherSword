@@ -30,10 +30,10 @@
 
 #include "Common/Utils/HdrUtils.h"
 #include <iostream>
-#include <OgreTimer.h>
-#include <OgreOverlayManager.h>
-#include <OgreOverlayContainer.h>
-#include <OgreOverlay.h>
+#include "OgreTimer.h"
+#include "OgreOverlayManager.h"
+#include "OgreOverlayContainer.h"
+#include "OgreOverlay.h"
 
 namespace ZS
 {
