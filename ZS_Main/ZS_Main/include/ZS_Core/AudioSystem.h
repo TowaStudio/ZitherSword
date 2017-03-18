@@ -6,42 +6,32 @@
 #define _ZS_AUDIOSYSTEM_H
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "AudioComposer.h"
+#include <queue>
+
 using namespace juce;
 
 namespace ZS {
-	class GameMaster;
-
-	enum NoteName {
-		REST = 0,
-		DO = 1,
-		RE = 2,
-		MI = 3,
-		FA = 4,
-		SO = 5,
-		LA = 6,
-		SI = 7,
-	};
-	typedef std::vector<std::vector<NoteName>>* Patterns;
-	/*struct Note {
-		NoteName name = REST;
-		float value = 1; // 1 = 1 meter
-		float startMoment = 0; // 1 = 1 meter
-		int barNum = 1;
-	};*/
-
-	class AudioSystem : private AudioAppComponent, private HighResolutionTimer, private ChangeListener{
+	class AudioSystem : 
+		private juce::AudioAppComponent, 
+		//private juce::ChangeListener,
+		private juce::HighResolutionTimer
+	{
 	public:
 		static AudioSystem* GetInstance() {
 			return instance;
 		}
 
-		void musicSetup(Patterns patterns, int timePerBeat, int beatsPerBar);
+		void musicSetup(int currentLevel = 1, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);
 
+		bool playerInCharge;
+		bool AIInCharge;
+
 		// get
-		float getBpm() {
+		int getBpm() {
 			return bpm;
 		}
 		float getTolerance() {
@@ -50,18 +40,22 @@ namespace ZS {
 
 
 	private:
+		// editing variables
+		const String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
+		const int noteGroup[5] = { 1, 2, 3, 5, 6 }; // INTERNAL USE: for loading the music files
+
 		// setting variables
-		Patterns patterns;
+		int currentLevel;
+		Patterns* patterns;
+		PartName inputPart; // the part that user can input
 		int bpm; // beats per minute
 		int bpb; // beats per bar
-		String part; // Hi_, Low_, Med_
 
 		// computing variables
 		float tolerance; // 0: no tolerance - 0.5: full tolerance 
 		int tpb; // ticks per beat
 		int interval;
 		int thresTime;
-		const int noteGroup[5] = { 1, 2, 3, 5, 6 }; // INTERNAL USE
 
 		// run time variables
 		//int64 startTime;
@@ -69,22 +63,30 @@ namespace ZS {
 		int currentTickNum; // the current number of tick within a bar
 		int64 currentTickTime; 
 		//int64 nextTickTime;
-		std::vector<NoteName> inputSequence;
+		NoteSeq inputSequence;
+		NoteSeq* noteSequence; // used for AI composing
+		PartSeq* partSequence; // used for AI composing
+
+		AudioComposer* AIComposer;
 
 		MixerAudioSource mixer;
 		AudioFormatManager formatManager;
-		AudioFormatReader* readers[7];
-		AudioTransportSource transportSource;
+		AudioFormatReader* sampleReaders[22];
+		AudioFormatReader* BGReaders[9];
+		std::queue<AudioTransportSource*> sampleTransportSources;
+		AudioTransportSource* BGTransportSource;
 
-		void readFiles();
+		void loadFiles();
+		void loadBGM();
 		void inputJudge(int64 currentTime, NoteName noteName);
 		void recordNote(int tickNum, NoteName noteName);
-		void playSound(NoteName note);
+		void playSound(NoteName note, PartName part = MED);
+		void playBGM(int index);
 		int identifySequence();
 
 		static AudioSystem* instance;
 		AudioSystem();
-		AudioSystem(AudioSystem const&) {};
+		//AudioSystem(AudioSystem const&) {};
 		AudioSystem& operator= (AudioSystem const&) {};
 
 		// override AudioAppComponent
@@ -96,7 +98,7 @@ namespace ZS {
 		void hiResTimerCallback() override;
 
 		// override ChangeListener
-		void changeListenerCallback(ChangeBroadcaster* source) override;
+		//void changeListenerCallback(ChangeBroadcaster* source) override;
 
 	};
 }

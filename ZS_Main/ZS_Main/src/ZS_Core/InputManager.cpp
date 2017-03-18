@@ -23,7 +23,6 @@ namespace ZS {
 			default:
 				break;
 		}
-
 	}
 
 	void InputManager::keyup(SDL_Keycode key) {
