@@ -3,7 +3,6 @@
 #include "OgreOverlayContainer.h"
 
 namespace ZS {
-	// For bar(hp) modification encapsulation
 	class UIElement {
 	private:
 		Ogre::v1::OverlayContainer* element;
@@ -12,8 +11,6 @@ namespace ZS {
 		UIElement();
 		~UIElement();
 
-		void fill();
-		void lerp();
 		void update(float timeSinceLast);
 	};
 

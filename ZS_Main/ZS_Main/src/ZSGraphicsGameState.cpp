@@ -42,7 +42,7 @@ namespace ZS
     ZSGraphicsGameState::ZSGraphicsGameState() :
 		DebugGameState(),
 		gm(GameMaster::GetInstance()),
-		uiMusic(nullptr)
+		musicUIManager(nullptr)
 	{
 
 	}
@@ -137,33 +137,9 @@ namespace ZS
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
-		Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
-		uiMusic = overlayManager.create("MusicUI");
-
-		//Background
-		{
-			Ogre::v1::OverlayContainer *panel = static_cast<Ogre::v1::OverlayContainer*>(
-				overlayManager.createOverlayElement("Panel", "MusicUIPanelBackground"));
-			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			panel->setPosition(0, 7500);
-			panel->setDimensions(10000 * 1280 / 720, 2500);
-			panel->setMaterialName("MusicUIBG");
-			uiMusic->add2D(panel);
-		}
-
-		//Scanline
-		{
-			uiScanLine = static_cast<Ogre::v1::OverlayContainer*>(
-				overlayManager.createOverlayElement("Panel", "MusicUIPanelScanline"));
-			uiScanLine->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			uiScanLine->setPosition(0, 7500);
-			uiScanLine->setDimensions(100 * 1280 / 720, 2500);
-			uiScanLine->setMaterialName("MusicUIScanLine");
-			uiMusic->add2D(uiScanLine);
-		}
-		
-
-		uiMusic->show();
+		musicUIManager = new MusicUIManager();
+		musicUIManager->createMusicUI();
+		musicUIManager->showMusicUI(true);
     }
 	//-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
