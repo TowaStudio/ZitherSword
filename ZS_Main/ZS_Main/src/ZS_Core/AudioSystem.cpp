@@ -34,7 +34,7 @@ namespace ZS {
 		partSequence = new PartSeq(tpb * bpb, MED);
 
 		// AI composer setup
-		AIComposer->SetupComposer(currentLevel, tpb * bpb);
+		AIComposer->setupComposer(currentLevel, tpb * bpb);
 
 	}
 

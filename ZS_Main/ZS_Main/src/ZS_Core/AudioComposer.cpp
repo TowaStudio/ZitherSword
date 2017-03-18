@@ -2,19 +2,23 @@
 * Project ZS
 */
 #include "AudioComposer.h"
+#include <ctime>
 
 namespace ZS {
 	/**
 	* AudioComposer implementation
 	*/
 	AudioComposer::AudioComposer(){
+		srand(time(nullptr));
+
 		// setup
-		SetupComposer();
+		setupComposer();
 	}
 
-	void AudioComposer::SetupComposer(int _currentLevel, int _tNum){
+	void AudioComposer::setupComposer(int _currentLevel, int _tNum){
 		currentLevel = _currentLevel;
 		tNum = _tNum;
+		thisLevelData = &(_LevelData_[currentLevel]);
 	}
 
 	void AudioComposer::getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar){
@@ -22,6 +26,8 @@ namespace ZS {
 		*parts = PartSeq(16, MED);
 		// test
 		notes->at(0) = MI; notes->at(4) = REST; notes->at(8) = MI; notes->at(12) = REST;
+
+		Cadence currentCadence = thisLevelData->cadenceLoop[currentBar % thisLevelData->numBarLoop];
 
 		// TODO
 	}
@@ -31,11 +37,16 @@ namespace ZS {
 			return -1; // not yet start main music
 		}
 		if (currentBar % 8 == 0) {
-			return currentBar / 8 + 1;
-		} else {
-			return -1;
-		}
+			int barInLoop = currentBar % thisLevelData->numBarLoop;
+			return barInLoop / 8 + 1;
+		} 
 		return -1;
-		// TODO
 	}
+
+	void AudioComposer::getRandomNearNote(NoteName *notePtr, PartName *partPtr, NoteName noteInput, PartName partInput, int d) {
+		int num = rand() % d + 1;
+		int sign = (rand() % 2) * 2 - 1;
+
+	}
+
 }

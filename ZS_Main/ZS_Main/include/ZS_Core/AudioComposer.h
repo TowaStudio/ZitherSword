@@ -47,31 +47,40 @@ namespace ZS {
 
 		};
 
-		// AI CORE FILES! DO NOT MODIFY UNLESS YOU REALLY UNDERSTAND!
-		const std::vector<LevelData> _LevelData_{
-			{ 0, 0,{},{} }, // default null level
-
-			// Lv. 1
-			{
-				1,
-				4,
-				{ LA_, SO_, LA_, SO_ },
-				{ 1, 0, 3, 1, 1, 4, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
-			}
-		};
+		static const std::vector<LevelData> _LevelData_;
 		
 		AudioComposer();
-		void SetupComposer(int currentLevel = 0, int ticksPerBar = 16);
+		void setupComposer(int currentLevel = 0, int ticksPerBar = 16);
 
 		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar);
-		int getNextBGMIndex(int currentBar); // TODO 
+		int getNextBGMIndex(int currentBar); 
 
 	private: 
 		int currentLevel;
-		int tNum;
+		int tNum; // ticks per bar
+		const LevelData* thisLevelData;
+
+		void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
 
 	};
 
+	// AI CORE FILES! DO NOT MODIFY UNLESS YOU REALLY UNDERSTAND!
+	const std::vector<AudioComposer::LevelData> AudioComposer::_LevelData_{
+		{ 0, 0,{},{} }, // default null level
+
+		// Lv. 1
+		{
+			1,
+			32,
+			{ 
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_, 
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+				RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_, 
+				LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
+			},
+			{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+		}
+	};
 }
 
 #endif //_AUDIOCOMPOSER_H
