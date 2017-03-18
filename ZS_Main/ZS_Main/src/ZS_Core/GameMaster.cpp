@@ -22,12 +22,24 @@ namespace ZS {
 		levelManager = _levelManager;
 	}
 
+	void GameMaster::bindMusicUIManager(MusicUIManager* _musicUIManager) {
+		musicUIManager = _musicUIManager;
+	}
+
 	void GameMaster::setLogger(Logger* _logger) {
 		logger = _logger;
 	}
 
-	void GameMaster::log(std::string str) {
-		logger->log(str);
+	void GameMaster::log(std::string content) {
+		logger->log(content);
+	}
+
+	void GameMaster::log(int content) {
+		logger->log(content);
+	}
+
+	void GameMaster::log(float content) {
+		logger->log(content);
 	}
 
 	/**

@@ -7,6 +7,13 @@
 #define _ZS_INSTRUCTION_H
 
 namespace ZS {
+	enum INSTRUCTION {
+		INST_IDLE = 0,
+		INST_ATTACK,
+		INST_MOVE,
+		NUM_INSTRUCTION
+	};
+
 	class Instruction {
 	public:
 		Instruction();

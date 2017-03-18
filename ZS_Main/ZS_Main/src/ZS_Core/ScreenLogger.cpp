@@ -18,9 +18,19 @@ namespace ZS {
 		return instance;
 	}
 
-	void ScreenLogger::log(string str) {
-		logList->push_back(str);
-		zsGraphicsGameState->log(str);
+	void ScreenLogger::log(string content) {
+		logList->push_back(content);
+		zsGraphicsGameState->log(content);
+	}
+
+	void ScreenLogger::log(int content) {
+		logList->push_back(Ogre::StringConverter::toString(content));
+		zsGraphicsGameState->log(Ogre::StringConverter::toString(content));
+	}
+
+	void ScreenLogger::log(float content) {
+		logList->push_back(Ogre::StringConverter::toString(content));
+		zsGraphicsGameState->log(Ogre::StringConverter::toString(content));
 	}
 
 	void ScreenLogger::bindGraphicsGameState(ZSGraphicsGameState* _zsGraphicsGameState) {

@@ -43,7 +43,7 @@ namespace  ZS {
 		if(startPoint && endPoint) {
 			if(pos > 1.0f) return endPoint->pos;
 			if(pos < 0.0f) return startPoint->pos;
-			position = pos * endPoint->pos + (1.0 - pos) * startPoint->pos;
+			position = pos * endPoint->pos + (1.0f - pos) * startPoint->pos;
 		}
 
 		return position;

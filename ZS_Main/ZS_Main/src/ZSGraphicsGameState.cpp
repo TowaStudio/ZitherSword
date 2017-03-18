@@ -30,10 +30,10 @@
 
 #include "Common/Utils/HdrUtils.h"
 #include <iostream>
-#include <OgreTimer.h>
-#include <OgreOverlayManager.h>
-#include <OgreOverlayContainer.h>
-#include <OgreOverlay.h>
+#include "OgreTimer.h"
+#include "OgreOverlayManager.h"
+#include "OgreOverlayContainer.h"
+#include "OgreOverlay.h"
 
 namespace ZS
 {
@@ -42,7 +42,7 @@ namespace ZS
     ZSGraphicsGameState::ZSGraphicsGameState() :
 		DebugGameState(),
 		gm(GameMaster::GetInstance()),
-		uiMusic(nullptr)
+		musicUIManager(nullptr)
 	{
 
 	}
@@ -137,22 +137,10 @@ namespace ZS
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
-		Ogre::v1::OverlayManager &overlayManager = Ogre::v1::OverlayManager::getSingleton();
-		uiMusic = overlayManager.create("MusicUI");
-
-		//Background
-		{
-			Ogre::v1::OverlayContainer *panel = static_cast<Ogre::v1::OverlayContainer*>(
-				overlayManager.createOverlayElement("Panel", "MusicUIPanelBackground"));
-			panel->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			panel->setPosition(0, 7500);
-			panel->setDimensions(10000 * 1280 / 720, 2500);
-			panel->setMaterialName("MusicUIBG");
-			uiMusic->add2D(panel);
-		}
-		
-
-		uiMusic->show();
+		musicUIManager = new MusicUIManager();
+		gm->bindMusicUIManager(musicUIManager);
+		musicUIManager->createMusicUI();
+		musicUIManager->showMusicUI(true);
     }
 	//-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
@@ -160,6 +148,7 @@ namespace ZS
 		float weight = mGraphicsSystem->getAccumTimeSinceLastLogicFrame() / FRAME_TIME;
 		weight = std::min(1.0f, weight);
 
+		musicUIManager->update(timeSinceLast);
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
 		DebugGameState::update( timeSinceLast );

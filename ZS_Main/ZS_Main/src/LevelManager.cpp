@@ -122,7 +122,7 @@ namespace ZS {
 		//TODO: Start audio system and input manager;
 		InputManager* inputManager = gm->getInputManager();
 
-		// for test
+		gm->getMusicUIManager()->run();
 		AudioSystem::GetInstance()->startMusic();
 
 		levelState = LST_PLAY;

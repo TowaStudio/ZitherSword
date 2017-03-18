@@ -6,6 +6,7 @@
 #include "DebugGameState.h"
 #include "GameMaster.h"
 #include "OgreOverlayPrerequisites.h"
+#include "MusicUIManager.h"
 
 namespace ZS
 {
@@ -17,7 +18,7 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         GameMaster* gm;
-		Ogre::v1::Overlay* uiMusic;
+		MusicUIManager* musicUIManager;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 
     public:

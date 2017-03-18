@@ -1,7 +1,7 @@
 #ifndef _ZS_BEHAVIOUR_H
 #define _ZS_BEHAVIOUR_H
 
-#include "OgreVector3.h";
+#include "OgreVector3.h"
 
 namespace ZS {
 	typedef Ogre::Vector3 Vec3;
