@@ -138,6 +138,7 @@ namespace ZS
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
 		musicUIManager = new MusicUIManager();
+		gm->bindMusicUIManager(musicUIManager);
 		musicUIManager->createMusicUI();
 		musicUIManager->showMusicUI(true);
     }
@@ -147,6 +148,7 @@ namespace ZS
 		float weight = mGraphicsSystem->getAccumTimeSinceLastLogicFrame() / FRAME_TIME;
 		weight = std::min(1.0f, weight);
 
+		musicUIManager->update(timeSinceLast);
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
 		DebugGameState::update( timeSinceLast );

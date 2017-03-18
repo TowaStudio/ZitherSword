@@ -6,7 +6,7 @@
 #include "OgreQuaternion.h"
 #include "OgreStringVector.h"
 #include "Behaviour.h"
-#include "Animation/OgreSkeletonInstance.h";
+#include "Animation/OgreSkeletonInstance.h"
 #include "AnimationController.h"
 
 namespace ZS

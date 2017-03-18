@@ -4,15 +4,36 @@
 #include "OgreOverlayContainer.h"
 #include "OgreOverlay.h"
 #include "Behaviour.h"
+#include "OgreOverlayManager.h"
+#include "AudioSystem.h"
+#include "Instruction.h"
 
 namespace ZS {
 	class MusicUIManager : public Behaviour {
 	private:
+		bool isEnabled;
+
+		Ogre::v1::OverlayManager& overlayManager;
 		Ogre::v1::Overlay* uiMusic;
 		Ogre::v1::OverlayContainer* uiBackground;
+
+		static float BAR_LENGTH;
+		static float BAR_OFFSET;
 		Ogre::v1::OverlayContainer* uiScanline;
+		float currentScanlinePos;
+		float scanlineSpeed;
+
+		static float VERTICAL_OFFSET_DO;
+		static float VERTICAL_OFFSET_RE;
+		static float VERTICAL_OFFSET_MI;
+		static float VERTICAL_OFFSET_SO;
+		static float VERTICAL_OFFSET_LA;
+		Ogre::v1::Overlay* uiNotes;
 		std::vector<Ogre::v1::OverlayContainer*> uiNotesVec;
-		bool isEnabled;
+		int currentNoteCount;
+		int totalNoteCount;
+
+		Ogre::v1::OverlayContainer* uiResult;
 
 	public:
 		MusicUIManager();
@@ -20,15 +41,16 @@ namespace ZS {
 
 		void createMusicUI();
 		void showMusicUI(bool _show);
-		void update(float tineSinceLast);
+		void run();
+		void stop();
+		void update(float timeSinceLast);
 
-		void scanlineLoop();
-		void addNote();
+		void scanlineLoop(float timeSinceLast);
+		void addNote(NoteName _noteName);
 		void clearNotes();
 
 		// Scene part
-		void updateNotes();
-		void showResult();
+		void showResult(INSTRUCTION _inst);
 		void clearResult();
 
 	};

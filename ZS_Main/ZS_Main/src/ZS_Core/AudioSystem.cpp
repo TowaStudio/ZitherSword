@@ -283,7 +283,7 @@ namespace ZS {
 				sampleTransportSources.pop();
 			}
 		}
-		GameMaster::GetInstance()->log(to_string(sampleTransportSources.size()));
+		//GameMaster::GetInstance()->log(to_string(sampleTransportSources.size()));
 
 
 		/*for (int i = 0; i < sampleTransportSources.size(); i++) {
