@@ -47,6 +47,7 @@
     <ClInclude Include="include\ZSLogicSystem.h" />
     <ClInclude Include="include\ZSMain.h" />
     <ClInclude Include="include\ZSGraphicsGameState.h" />
+    <ClInclude Include="include\ZS_Core\AudioComposer.h" />
     <ClInclude Include="include\ZS_Core\AudioSystem.h" />
     <ClInclude Include="include\ZS_Core\BossEnemy.h" />
     <ClInclude Include="include\ZS_Core\BuffItem.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="src\ZSLogicSystem.cpp" />
     <ClCompile Include="src\ZSMain.cpp" />
     <ClCompile Include="src\ZSGraphicsGameState.cpp" />
+    <ClCompile Include="src\ZS_Core\AudioComposer.cpp" />
     <ClCompile Include="src\ZS_Core\AudioSystem.cpp" />
     <ClCompile Include="src\ZS_Core\BossEnemy.cpp" />
     <ClCompile Include="src\ZS_Core\BuffItem.cpp" />
