@@ -13,9 +13,8 @@ namespace ZS {
 	 * @param _tag 
 	 */
 	GameObject::GameObject(const std::string& _name, Tag _tag, Vec3 _pos) :
-		name(_name),
-		tag(_tag),
-		pos(_pos)
+		Behaviour(_pos),
+		name(_name), tag(_tag)
 	{
 		
 	}

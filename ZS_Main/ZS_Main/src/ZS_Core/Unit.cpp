@@ -6,8 +6,8 @@
 #include "Stats.h"
 
 namespace ZS {
-	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos,
-			int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, Vec3 _moveVec) :
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos
+		, int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, Vec3 _moveVec) :
 		GameObject(_name, _tag, _pos), id(_id)
 		, hp(_hp), maxhp(_maxhp)
 		, sp(_sp), maxsp(_maxsp)
@@ -40,6 +40,11 @@ namespace ZS {
 
 	Vec3 Unit::move(Vec3 _movement) {
 		pos += _movement;
+		return pos;
+	}
+
+	Vec3 Unit::moveTo(Vec3 _pos) {
+		pos = _pos;
 		return pos;
 	}
 

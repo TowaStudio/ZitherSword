@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CameraPathController.h" />
+    <ClInclude Include="include\Instructions.h" />
+    <ClInclude Include="include\ZS_Core\Behaviour.h" />
     <ClInclude Include="include\Common\BaseSystem.h" />
     <ClInclude Include="include\Common\CameraController.h" />
     <ClInclude Include="include\Common\GameEntity.h" />
-    <ClInclude Include="include\Common\GameEntityManager.h" />
     <ClInclude Include="include\Common\GameState.h" />
     <ClInclude Include="include\Common\GraphicsSystem.h" />
     <ClInclude Include="include\Common\InputListeners.h" />
@@ -40,7 +42,6 @@
     <ClInclude Include="include\Common\tinyxml\tinyxml2.h" />
     <ClInclude Include="include\Common\Utils\HdrUtils.h" />
     <ClInclude Include="include\Common\Utils\MeshUtils.h" />
-    <ClInclude Include="include\ZSGameObjectManager.h" />
     <ClInclude Include="include\ZSGraphicsSystem.h" />
     <ClInclude Include="include\ZSLogicGameState.h" />
     <ClInclude Include="include\ZSLogicSystem.h" />
@@ -62,8 +63,9 @@
     <ClInclude Include="include\ZS_Core\Instruction.h" />
     <ClInclude Include="include\ZS_Core\Item.h" />
     <ClInclude Include="include\ZS_Core\Joint.h" />
-    <ClInclude Include="include\ZS_Core\LevelManager.h" />
+    <ClInclude Include="include\LevelManager.h" />
     <ClInclude Include="include\ZS_Core\Logger.h" />
+    <ClInclude Include="include\ZS_Core\PathFollowHelper.h" />
     <ClInclude Include="include\ZS_Core\PlayerStats.h" />
     <ClInclude Include="include\ZS_Core\SaveData.h" />
     <ClInclude Include="include\ZS_Core\ScreenLogger.h" />
@@ -76,9 +78,16 @@
     <ClInclude Include="include\ZS_Core\Weapon.h" />
     <ClInclude Include="JuceLibraryCode\AppConfig.h" />
     <ClInclude Include="JuceLibraryCode\JuceHeader.h" />
-    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="include\ZS_Core\Path.h" />
+    <ClInclude Include="include\UIManager.h" />
+    <ClInclude Include="include\AnimationController.h" />
+    <ClInclude Include="include\CharacterController.h" />
+    <ClInclude Include="include\SwordsmanController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\CameraPathController.cpp" />
+    <ClCompile Include="src\SwordsmanController.cpp" />
+    <ClCompile Include="src\ZS_Core\PathFollowHelper.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_devices.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_formats.cpp" />
@@ -96,9 +105,12 @@
     <ClInclude Include="include\ZS_Core\StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Instructions.cpp" />
+    <ClCompile Include="src\UIManager.cpp" />
+    <ClCompile Include="src\AnimationController.cpp" />
+    <ClCompile Include="src\ZS_Core\Path.cpp" />
     <ClCompile Include="src\Common\BaseSystem.cpp" />
     <ClCompile Include="src\Common\CameraController.cpp" />
-    <ClCompile Include="src\Common\GameEntityManager.cpp" />
     <ClCompile Include="src\Common\GraphicsSystem.cpp" />
     <ClCompile Include="src\Common\LogicSystem.cpp" />
     <ClCompile Include="src\Common\SdlInputHandler.cpp" />
@@ -111,7 +123,6 @@
     <ClCompile Include="src\Common\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Common\Utils\HdrUtils.cpp" />
     <ClCompile Include="src\Common\Utils\MeshUtils.cpp" />
-    <ClCompile Include="src\ZSGameObjectManager.cpp" />
     <ClCompile Include="src\ZSGraphicsSystem.cpp" />
     <ClCompile Include="src\ZSLogicGameState.cpp" />
     <ClCompile Include="src\ZSLogicSystem.cpp" />
@@ -131,7 +142,7 @@
     <ClCompile Include="src\ZS_Core\Instruction.cpp" />
     <ClCompile Include="src\ZS_Core\Item.cpp" />
     <ClCompile Include="src\ZS_Core\Joint.cpp" />
-    <ClCompile Include="src\ZS_Core\LevelManager.cpp" />
+    <ClCompile Include="src\LevelManager.cpp" />
     <ClCompile Include="src\ZS_Core\Logger.cpp" />
     <ClCompile Include="src\ZS_Core\PlayerStats.cpp" />
     <ClCompile Include="src\ZS_Core\SaveData.cpp" />
@@ -208,7 +219,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\SDL\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreHlmsInk_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -226,7 +237,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;include\Common;include\Common\Utils;include\Common\Utils;include\ZS_Core;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\Samples\2.0\Common\include;$(OGRE_HOME)\SDL\include;..\..\JuceLibraryCode;E:\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

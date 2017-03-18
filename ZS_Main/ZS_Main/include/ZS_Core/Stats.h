@@ -7,7 +7,7 @@
 
 namespace ZS {
 	enum Status {
-		Normal = 0x0
+		ST_NORMAL = 0x0
 	};
 
 	struct Stats {
@@ -21,7 +21,7 @@ namespace ZS {
 			hp = maxhp = 0.0f;
 			sp = maxsp = 0.0f;
 			str = def = spd = 0.0f;
-			status = Status::Normal;
+			status = Status::ST_NORMAL;
 		}
 		Stats(float _hp, float _maxhp, float _sp, float _maxsp
 			, float _str, float _def, float _spd, Status _status) {

@@ -14,6 +14,7 @@ namespace ZS {
 	private:
 		LogicSystem *mLogicSystem;
 		GameMaster* gm;
+		LevelManager* levelManager;
 
 	public:
 		ZSLogicGameState();
@@ -22,8 +23,8 @@ namespace ZS {
 		void _notifyLogicSystem(LogicSystem *logicSystem) { mLogicSystem = logicSystem; }
 
 		virtual void createScene01(void);
+		virtual void createScene02(void);
 		virtual void update(float timeSinceLast);
-		virtual void keyReleased(const SDL_KeyboardEvent& arg);
 	};
 }
 

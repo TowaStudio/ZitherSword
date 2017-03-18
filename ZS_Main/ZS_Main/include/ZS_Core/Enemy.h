@@ -18,6 +18,8 @@ namespace ZS {
 		Enemy(const std::string& name, Vec3 pos, Stats stats, int exp);
 
 		HitInfo attack() override;
+
+		void update(float timeSinceLast) override;
 	};
 
 	typedef std::vector<Enemy> EnemyVec;

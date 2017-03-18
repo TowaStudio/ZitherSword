@@ -94,6 +94,7 @@ private:
                     your object management. Tut, tut. Always, always use ScopedPointers, OwnedArrays,
                     ReferenceCountedObjects, etc, and avoid the 'delete' operator at all costs!
                 */
+
                 //jassertfalse; // Remark for later
             }
         }

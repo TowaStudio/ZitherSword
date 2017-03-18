@@ -7,12 +7,7 @@
 
 namespace ZS {
 	GameMaster* GameMaster::instance = new GameMaster();
-
-	/**
-	* GameMaster implementation
-	*/
-
-
+	
 	GameMaster::GameMaster() :
 		inputManager(nullptr),
 		levelManager(nullptr),
@@ -21,6 +16,10 @@ namespace ZS {
 		tempSave(SaveData())
 	{
 		
+	}
+
+	void GameMaster::bindLevelManager(LevelManager * _levelManager) {
+		levelManager = _levelManager;
 	}
 
 	void GameMaster::setLogger(Logger* _logger) {
@@ -42,7 +41,7 @@ namespace ZS {
 	* @return SaveData
 	*/
 	SaveData GameMaster::load() {
-		SaveData save(0, PlayerStats(1, 0, 300.0f, 300.0f, 40.0f, 40.0f, 100.0f, 20.0f, 40.0f, Status::Normal));
+		SaveData save(0, PlayerStats(1, 0, 300.0f, 300.0f, 40.0f, 40.0f, 100.0f, 20.0f, 40.0f, ST_NORMAL));
 		//TODO: File system, load save data.
 		tempSave = save;
 
@@ -65,10 +64,7 @@ namespace ZS {
 	}
 
 	void GameMaster::loadLevel(int level) {
-		delete levelManager;
-		levelManager = new LevelManager(level);
-		levelManager->loadLevel(); //TODO
+		levelManager->loadLevel(0); //TODO
 		currentLevel = level;
 	}
-
 };
