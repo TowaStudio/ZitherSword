@@ -23,6 +23,7 @@ namespace ZS {
 		}
 
 		void musicSetup(int currentLevel = 1, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
+		void setChannel(); // should be called in render thread; dont ask why
 		void startMusic(); 
 		void stopMusic();
 		void input(NoteName inputKey);

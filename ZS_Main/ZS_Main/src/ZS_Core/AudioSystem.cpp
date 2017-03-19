@@ -3,6 +3,7 @@
  */
 #include "AudioSystem.h"
 #include "GameMaster.h"
+#include <wincon.h>
 
 namespace ZS {
 	/**
@@ -38,9 +39,13 @@ namespace ZS {
 
 	}
 
+	void AudioSystem::setChannel() {
+		setAudioChannels(0, 2);
+	}
+	
 	void AudioSystem::startMusic() {
 		// init
-		setAudioChannels(0, 2);
+		//setAudioChannels(0, 2);
 		//currentBarNum = 0; // init in setup for prelude
 		//currentTickNum = -1;
 		currentTickTime = -1;
@@ -158,9 +163,12 @@ namespace ZS {
 	// constructor
 	AudioSystem::AudioSystem() {
 		// init settings
+		// coi
+		//setAudioChannels(0, 2);
 		formatManager.registerBasicFormats();
 		AIComposer = new AudioComposer();
 		BGTransportSource = new AudioTransportSource;
+		
 		musicSetup();
 
 		// load files
