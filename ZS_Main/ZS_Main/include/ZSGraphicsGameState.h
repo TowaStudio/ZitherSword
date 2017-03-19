@@ -20,15 +20,16 @@ namespace ZS
         GameMaster* gm;
 		MusicUIManager* musicUIManager;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
-
-    public:
+		
+	public:
 		ZSGraphicsGameState();
 
 	    virtual void createScene01(void);
 		void createMusicUI();
 		virtual void update( float timeSinceLast );
 
-        virtual void keyReleased( const SDL_KeyboardEvent &arg );
+		virtual void keyPressed(const SDL_KeyboardEvent& arg);
+		virtual void keyReleased(const SDL_KeyboardEvent& arg);
     };
 }
 

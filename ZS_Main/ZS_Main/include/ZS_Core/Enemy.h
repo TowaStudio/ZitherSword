@@ -14,8 +14,8 @@ namespace ZS {
 	public:
 		int exp;
 
-		Enemy(const std::string& name, Vec3 pos, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, int exp);
-		Enemy(const std::string& name, Vec3 pos, Stats stats, int exp);
+		Enemy(const std::string& name, Vec3 pos, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, float progress, int exp);
+		Enemy(const std::string& name, Vec3 pos, Stats stats, float progress, int exp);
 
 		HitInfo attack() override;
 

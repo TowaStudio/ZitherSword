@@ -7,13 +7,20 @@
 namespace ZS {
 	class Trigger {
 	protected:
-		Event* event;
+		std::vector<Event*> eventVec;
+		int eventCount;
+
 	public:
+		Vec3 pos;
+
 		Trigger();
 		~Trigger();
 
-		Vec3 pos;
-		void execute();		
+		void addEvent(Event* _event);
+		void removeEvent(int index);
+		void removeAllEvents();
+
+		void execute();
 	};
 }
 

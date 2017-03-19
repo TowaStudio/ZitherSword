@@ -10,17 +10,17 @@
 namespace ZS {
 	Enemy::Enemy(const std::string& name, Vec3 pos,
 		float hp, float maxhp, float sp, float maxsp,
-		float str, float def, float spd, Status status, int exp) : 
+		float str, float def, float spd, Status status, float progress, int exp) :
 		Unit(name, Tag::ENEMY, pos, GameMaster::GetInstance()->getLevelManager()->getUnitID(),
-			hp, maxhp, sp, maxsp, str, def, spd, status),
+			hp, maxhp, sp, maxsp, str, def, spd, status, progress),
 		exp(exp)
 	{
 
 	}
 
 	Enemy::Enemy(const std::string& name, Vec3 pos,
-		Stats stats, int exp) : 
-		Unit(name, Tag::ENEMY, pos, GameMaster::GetInstance()->getLevelManager()->getUnitID(), stats),
+		Stats stats, float progress, int exp) : 
+		Unit(name, Tag::ENEMY, pos, GameMaster::GetInstance()->getLevelManager()->getUnitID(), stats, progress),
 		exp(exp)
 	{
 

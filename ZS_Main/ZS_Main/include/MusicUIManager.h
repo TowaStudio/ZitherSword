@@ -19,7 +19,7 @@ namespace ZS {
 
 		static float BAR_LENGTH;
 		static float BAR_OFFSET;
-		Ogre::v1::OverlayContainer* uiScanline;
+		Ogre::v1::OverlayElement* uiScanline;
 		float currentScanlinePos;
 		float scanlineSpeed;
 
@@ -29,11 +29,12 @@ namespace ZS {
 		static float VERTICAL_OFFSET_SO;
 		static float VERTICAL_OFFSET_LA;
 		Ogre::v1::Overlay* uiNotes;
-		std::vector<Ogre::v1::OverlayContainer*> uiNotesVec;
+		Ogre::v1::OverlayContainer* uiNotesGroup;
+		std::vector<Ogre::v1::OverlayElement*> uiNotesVec;
 		int currentNoteCount;
 		int totalNoteCount;
 
-		Ogre::v1::OverlayContainer* uiResult;
+		Ogre::v1::OverlayElement* uiResult;
 
 	public:
 		MusicUIManager();

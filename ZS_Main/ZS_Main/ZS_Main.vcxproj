@@ -69,7 +69,7 @@
     <ClInclude Include="include\ZS_Core\Joint.h" />
     <ClInclude Include="include\LevelManager.h" />
     <ClInclude Include="include\ZS_Core\Logger.h" />
-    <ClInclude Include="include\ZS_Core\PathFollowHelper.h" />
+    <ClInclude Include="include\ZS_Core\PathPoint.h" />
     <ClInclude Include="include\ZS_Core\PlayerStats.h" />
     <ClInclude Include="include\ZS_Core\SaveData.h" />
     <ClInclude Include="include\ZS_Core\ScreenLogger.h" />
@@ -88,13 +88,13 @@
     <ClInclude Include="include\SwordsmanController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ZS_Core\PathPoint.cpp" />
     <ClCompile Include="src\CameraPathController.cpp" />
     <ClCompile Include="src\UIBar.cpp" />
     <ClCompile Include="src\GameUIManager.cpp" />
     <ClCompile Include="src\MusicUIManager.cpp" />
     <ClCompile Include="src\SwordsmanController.cpp" />
     <ClCompile Include="src\UIElement.cpp" />
-    <ClCompile Include="src\ZS_Core\PathFollowHelper.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_basics.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_devices.cpp" />
     <ClCompile Include="JuceLibraryCode\juce_audio_formats.cpp" />

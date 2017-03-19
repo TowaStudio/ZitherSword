@@ -7,22 +7,22 @@
 
 namespace ZS {
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos
-		, int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, Vec3 _moveVec) :
+		, int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, float _progress, Vec3 _moveVec) :
 		GameObject(_name, _tag, _pos), id(_id)
 		, hp(_hp), maxhp(_maxhp)
 		, sp(_sp), maxsp(_maxsp)
 		, str(_str), def(_def), spd(_spd)
-		, status(_status), moveVec(_moveVec)
-	{
+		, status(_status), currentPathPointIndex(-1), progress(_progress)
+		, path(nullptr), moveVec(_moveVec) {
 	}
 
-	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats, Vec3 _moveVec) :
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
 		GameObject(_name, _tag, _pos), id(_id)
 		, hp(_stats.hp), maxhp(_stats.maxhp)
 		, sp(_stats.sp), maxsp(_stats.maxsp)
 		, str(_stats.str), def(_stats.def), spd(_stats.spd)
-		, status(_stats.status)
-	{
+		, status(_stats.status), currentPathPointIndex(-1), progress(_progress)
+		, path(nullptr), moveVec(_moveVec) {
 	}
 
 	Unit::~Unit() {
@@ -32,9 +32,31 @@ namespace ZS {
 		return HitInfo();
 	}
 
+	void Unit::bindPath(Path* _path) {
+		path = _path;
+	}
+
 	// MOVEMENT
-	Vec3 Unit::move() {
-		pos += moveVec;
+	Vec3 Unit::move(float _scale) {
+		if(path) {
+			float step = spd / path->totalLength;
+			float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
+
+			// Trigger event for the path point
+			int nextPathPointIndex = path->getIndexFromPos(nextProgress);
+			if(currentPathPointIndex != nextPathPointIndex) {
+				if(path->getPoint(nextPathPointIndex)->hasTrigger) {
+					path->getPoint(nextPathPointIndex)->trigger->execute();
+				}
+
+				currentPathPointIndex = nextPathPointIndex;
+			}
+			// Prevent from going outside
+			progress = nextProgress;
+
+			moveVec = path->getPosInPath(progress) - pos;
+		}
+		pos += moveVec * _scale;
 		return pos;
 	}
 

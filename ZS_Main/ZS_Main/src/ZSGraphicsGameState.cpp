@@ -51,7 +51,7 @@ namespace ZS
     void ZSGraphicsGameState::createScene01(void)
     {
 		Ogre::SceneManager* sceneManager = mGraphicsSystem->getSceneManager();
-
+		
 		Ogre::v1::MeshPtr planeMeshV1 = Ogre::v1::MeshManager::getSingleton().createPlane("Plane v1",
 																						  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 50.0f, 50.0f,
@@ -137,6 +137,8 @@ namespace ZS
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
+		
+
 		musicUIManager = new MusicUIManager();
 		gm->bindMusicUIManager(musicUIManager);
 		musicUIManager->createMusicUI();
@@ -159,12 +161,34 @@ namespace ZS
 		DebugGameState::showFPS( timeSinceLast, outText );
     }
     //-----------------------------------------------------------------------------------
-    void ZSGraphicsGameState::keyReleased( const SDL_KeyboardEvent &arg )
-    {
+	void ZSGraphicsGameState::keyPressed(const SDL_KeyboardEvent &arg) {
+		switch(arg.keysym.sym) {
+			case SDLK_SPACE:
+				musicUIManager->addNote(NoteName::DO);
+				break;
+			case SDLK_j:
+				musicUIManager->addNote(NoteName::RE); 
+				break;
+			case SDLK_k:
+				musicUIManager->addNote(NoteName::MI);
+				break;
+			case SDLK_l:
+				musicUIManager->addNote(NoteName::SO);
+				break;
+			case SDLK_SEMICOLON:
+				musicUIManager->addNote(NoteName::LA);
+				break;
+			default:
+				break;
+		}
+
+		DebugGameState::keyPressed(arg);
+    }
+	void ZSGraphicsGameState::keyReleased(const SDL_KeyboardEvent &arg) {
 		if(arg.keysym.sym == SDLK_ESCAPE) {
 			mGraphicsSystem->setQuit();
 		}
 
 		DebugGameState::keyReleased(arg);
-    }
+	}
 }

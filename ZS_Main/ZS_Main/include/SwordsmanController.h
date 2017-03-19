@@ -9,7 +9,7 @@ namespace ZS {
 	private:
 		Swordsman* swordsman;
 	public:
-		SwordsmanController(GameEntity* _entSwordsman, PathFollowHelper* _pafh);
+		SwordsmanController(GameEntity* _entSwordsman);
 		~SwordsmanController();
 
 		virtual void changeState(ControlState _cst);
