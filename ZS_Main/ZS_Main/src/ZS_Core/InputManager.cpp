@@ -36,6 +36,9 @@ namespace ZS {
 				GameMaster::GetInstance()->load();
 				GameMaster::GetInstance()->loadLevel(1);
 				break;
+			case SDLK_2:
+				AudioSystem::GetInstance()->stopMusic();
+				break;
 			case SDLK_i:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_RUN);
 				break;

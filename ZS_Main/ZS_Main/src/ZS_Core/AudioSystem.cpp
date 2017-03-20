@@ -3,7 +3,6 @@
  */
 #include "AudioSystem.h"
 #include "GameMaster.h"
-#include <wincon.h>
 
 namespace ZS {
 	/**
@@ -26,6 +25,8 @@ namespace ZS {
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
+		isGameRunning = false;
+		isGameClear = false;
 
 		// calculating & initializing properties
 		interval = (60 * 1000) / (tpb * bpm);
@@ -53,6 +54,7 @@ namespace ZS {
 
 		// start timer
 		//startTime = Time::currentTimeMillis();
+		isGameRunning = true;
 		startTimer(interval);
 
 		//TODO: play background music
@@ -60,8 +62,14 @@ namespace ZS {
 		playBGM(0);
 	}
 
-	void AudioSystem::stopMusic() {
-		stopTimer();
+	void AudioSystem::stopMusic(bool win) {
+		//stopTimer();
+		isGameRunning = false;
+		isGameClear = win;
+	}
+
+	void AudioSystem::clearAll() {
+		// TODO
 	}
 
 	// input 
@@ -128,6 +136,16 @@ namespace ZS {
 		}
 		if (BGReaders[index] != nullptr) {
 			BGTransportSource->setSource(new AudioFormatReaderSource(BGReaders[index], true), 0, nullptr, BGReaders[index]->sampleRate);
+			BGTransportSource->setPosition(0.0);
+			BGTransportSource->start();
+		}
+	}
+	
+	void AudioSystem::playEndingBGM() {
+		int index = 0;
+		if (isGameClear) index = 1;
+		if (EndReaders[index] != nullptr) {
+			BGTransportSource->setSource(new AudioFormatReaderSource(EndReaders[index], true), 0, nullptr, EndReaders[index]->sampleRate);
 			BGTransportSource->setPosition(0.0);
 			BGTransportSource->start();
 		}
@@ -214,12 +232,23 @@ namespace ZS {
 
 	void AudioSystem::loadBGM() {
 		String prefix = "BG_" + to_string(currentLevel) + "_";
+
+		// in game BGM
 		for (int i = 0; i <= 4; i++) {
 			String path = directory + prefix;
 			path += i;
 			path += ".wav";
 			File file = File(path);
 			BGReaders[i] = formatManager.createReaderFor(file);
+		}
+
+		// ending BGM
+		String path = directory + prefix;
+		String type[2] = {"FAL", "SUC"};
+		for (int i = 0; i < 2; i++) {
+			String fileDir = path + type[i] + ".wav";
+			File file = File(fileDir);
+			EndReaders[i] = formatManager.createReaderFor(file);
 		}
 	}
 
@@ -260,9 +289,16 @@ namespace ZS {
 					playerInCharge = true;
 					AIInCharge = false;
 
+					// detect game ending
+					if (!isGameRunning) {
+						stopTimer();
+						playerInCharge = false;
+						AIInCharge = false;
+						playEndingBGM();
+					}
+
 					// change BGM
-					int i = AIComposer->getNextBGMIndex(currentBarNum);
-					playBGM(i); // TODO
+					playBGM(AIComposer->getNextBGMIndex(currentBarNum));
 
 				}
 				// end player input

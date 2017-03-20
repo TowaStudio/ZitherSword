@@ -25,7 +25,8 @@ namespace ZS {
 		void musicSetup(int currentLevel = 1, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
 		void setChannel(); // should be called in render thread; dont ask why
 		void startMusic(); 
-		void stopMusic();
+		void stopMusic(bool win = true);
+		void clearAll();
 		void input(NoteName inputKey);
 
 		bool playerInCharge;
@@ -60,6 +61,8 @@ namespace ZS {
 
 		// run time variables
 		//int64 startTime;
+		bool isGameRunning;
+		bool isGameClear;
 		int currentBarNum; // the current number of bar
 		int currentTickNum; // the current number of tick within a bar
 		int64 currentTickTime; 
@@ -74,6 +77,7 @@ namespace ZS {
 		AudioFormatManager formatManager;
 		AudioFormatReader* sampleReaders[22];
 		AudioFormatReader* BGReaders[9];
+		AudioFormatReader* EndReaders[2];
 		std::queue<AudioTransportSource*> sampleTransportSources;
 		AudioTransportSource* BGTransportSource;
 
@@ -83,6 +87,7 @@ namespace ZS {
 		void recordNote(int tickNum, NoteName noteName);
 		void playSound(NoteName note, PartName part = MED);
 		void playBGM(int index);
+		void playEndingBGM();
 		int identifySequence();
 
 		static AudioSystem* instance;
