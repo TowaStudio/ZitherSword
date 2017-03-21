@@ -42,8 +42,8 @@ namespace ZS
     ZSGraphicsGameState::ZSGraphicsGameState() :
 		DebugGameState(),
 		gm(GameMaster::GetInstance()),
-		musicUIManager(nullptr)
-	{
+		musicUIManager(nullptr),
+		mainCameraPathController(nullptr) {
 
 	}
 
@@ -128,17 +128,19 @@ namespace ZS
 
 		mLightNodes[2] = lightNode;
 
-		mCameraController = new CameraController(mGraphicsSystem, false);
 
 		createMusicUI();
 		//createShadowMapDebugOverlays();
+
+		// Scene fly over controller
+		//mCameraController = new CameraController(mGraphicsSystem, false);
+		// Camera path following controller
+		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
 		DebugGameState::createScene01();
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
-		
-
 		musicUIManager = new MusicUIManager();
 		gm->bindMusicUIManager(musicUIManager);
 		musicUIManager->createMusicUI();
@@ -153,6 +155,12 @@ namespace ZS
 		musicUIManager->update(timeSinceLast);
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
+
+		if(mainCameraPathController->isEnabled) {
+			mainCameraPathController->update(timeSinceLast);
+		}
+			
+
 		DebugGameState::update( timeSinceLast );
     }
     //-----------------------------------------------------------------------------------
