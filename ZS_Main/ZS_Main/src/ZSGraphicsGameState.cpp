@@ -134,6 +134,9 @@ namespace ZS
 		//createShadowMapDebugOverlays();
 
 		DebugGameState::createScene01();
+
+		// test 
+		AudioSystem::GetInstance()->setChannel();
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
