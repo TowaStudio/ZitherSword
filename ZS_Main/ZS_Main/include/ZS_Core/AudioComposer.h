@@ -5,6 +5,7 @@
 #ifndef _ZS_AUDIOCOMPOSER_H
 #define _ZS_AUDIOCOMPOSER_H
 #include <vector>
+#include <map>
 
 namespace ZS {
 	enum NoteName {
@@ -48,30 +49,74 @@ namespace ZS {
 		};
 
 		// AI CORE FILES! DO NOT MODIFY UNLESS YOU REALLY UNDERSTAND!
-		const std::vector<LevelData> _LevelData_{
+		std::map<Cadence, std::vector<NoteName>> _CadenceNoteMap_ = {
+			{ DO_,{ DO, MI, SO } },
+			{ RE_,{ RE, FA, LA } },
+			{ MI_,{ MI, SO, SI } },
+			{ FA_,{ DO, FA, LA } },
+			{ SO_,{ RE, SO, SI } },
+			{ LA_,{ DO, MI, LA } }
+		};;
+		std::vector<LevelData> _LevelData_{
 			{ 0, 0,{},{} }, // default null level
 
 			// Lv. 1
 			{
 				1,
-				4,
-				{ LA_, SO_, LA_, SO_ },
-				{ 1, 0, 3, 1, 1, 4, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+				32,
+				{
+					LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+					LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+					RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_,
+					LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
+				},
+				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
 			}
-		};
-		
+		};;
+
 		AudioComposer();
-		void SetupComposer(int currentLevel = 0, int ticksPerBar = 16);
+		void setupComposer(int currentLevel = 0, int ticksPerBar = 16);
 
 		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar);
-		int getNextBGMIndex(); // TODO 
+		int getNextBGMIndex(int currentBar) const; 
 
 	private: 
 		int currentLevel;
-		int tNum;
+		int tNum; // ticks per bar
+		const LevelData* thisLevelData;
 
+		static void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
+
+		static PartName getHigherPart(PartName currentPart);
+
+		static PartName getLowerPart(PartName currentPart);
 	};
 
+	/*std::map<AudioComposer::Cadence, std::vector<NoteName>> AudioComposer::_CadenceNoteMap_ = {
+		{ DO_, { DO, MI, SO } }, 
+		{ RE_, { RE, FA, LA } }, 
+		{ MI_, { MI, SO, SI } },
+		{ FA_, { FA, LA, DO } },
+		{ SO_, { SO, SI, RE } },
+		{ LA_, { LA, DO, MI } }
+	};
+
+	std::vector<AudioComposer::LevelData> AudioComposer::_LevelData_{
+		{ 0, 0,{},{} }, // default null level
+
+		// Lv. 1
+		{
+			1,
+			32,
+			{
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+				RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_,
+				LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
+			},
+			{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+		}
+	};*/
 }
 
 #endif //_AUDIOCOMPOSER_H

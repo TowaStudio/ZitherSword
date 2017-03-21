@@ -25,6 +25,8 @@ namespace ZS {
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
+		isGameRunning = false;
+		isGameClear = false;
 
 		// calculating & initializing properties
 		interval = (60 * 1000) / (tpb * bpm);
@@ -34,13 +36,17 @@ namespace ZS {
 		partSequence = new PartSeq(tpb * bpb, MED);
 
 		// AI composer setup
-		AIComposer->SetupComposer(currentLevel, tpb * bpb);
+		AIComposer->setupComposer(currentLevel, tpb * bpb);
 
 	}
 
+	void AudioSystem::setChannel() {
+		setAudioChannels(0, 2);
+	}
+	
 	void AudioSystem::startMusic() {
 		// init
-		setAudioChannels(0, 2);
+		//setAudioChannels(0, 2);
 		//currentBarNum = 0; // init in setup for prelude
 		//currentTickNum = -1;
 		currentTickTime = -1;
@@ -48,6 +54,7 @@ namespace ZS {
 
 		// start timer
 		//startTime = Time::currentTimeMillis();
+		isGameRunning = true;
 		startTimer(interval);
 
 		//TODO: play background music
@@ -55,8 +62,16 @@ namespace ZS {
 		playBGM(0);
 	}
 
-	void AudioSystem::stopMusic() {
+	void AudioSystem::stopMusic(bool win) {
+		//stopTimer();
+		isGameRunning = false;
+		isGameClear = win;
+	}
+
+	void AudioSystem::terminate() {
 		stopTimer();
+		delete AIComposer;
+		delete instance;
 	}
 
 	// input 
@@ -97,9 +112,10 @@ namespace ZS {
 	}
 
 	void AudioSystem::playSound(NoteName note, PartName part) {
+		if (note == REST) {
+			return; // nothing to play
+		}
 		int index = part * 7 + note;
-		//AudioTransportSource *transportSource = new AudioTransportSource();
-		//transportSource->addChangeListener(this);
 		if (index < 0 || index >= sizeof(sampleReaders)){
 			// index error
 			return;
@@ -109,6 +125,7 @@ namespace ZS {
 			sampleTransportSources.push(transportSource);
 			//AudioTransportSource transportSource = sampleTransportSources.back();
 			transportSource->setSource(new AudioFormatReaderSource(sampleReaders[index], true), 0, nullptr, sampleReaders[index]->sampleRate);
+			transportSource->setGain(0.25f);
 			mixer.addInputSource(transportSource, true);
 			transportSource->setPosition(0.0);
 			transportSource->start();
@@ -122,6 +139,16 @@ namespace ZS {
 		}
 		if (BGReaders[index] != nullptr) {
 			BGTransportSource->setSource(new AudioFormatReaderSource(BGReaders[index], true), 0, nullptr, BGReaders[index]->sampleRate);
+			BGTransportSource->setPosition(0.0);
+			BGTransportSource->start();
+		}
+	}
+	
+	void AudioSystem::playEndingBGM() {
+		int index = 0;
+		if (isGameClear) index = 1;
+		if (EndReaders[index] != nullptr) {
+			BGTransportSource->setSource(new AudioFormatReaderSource(EndReaders[index], true), 0, nullptr, EndReaders[index]->sampleRate);
 			BGTransportSource->setPosition(0.0);
 			BGTransportSource->start();
 		}
@@ -157,11 +184,16 @@ namespace ZS {
 	// constructor
 	AudioSystem::AudioSystem() {
 		// init settings
+		// coi
+		//setAudioChannels(0, 2);
 		formatManager.registerBasicFormats();
 		AIComposer = new AudioComposer();
+		BGTransportSource = new AudioTransportSource;
+		
 		musicSetup();
 
 		// load files
+		loadBGM();
 		loadFiles();
 
 		// setup test
@@ -184,29 +216,43 @@ namespace ZS {
 		a->push_back(b3);
 		a->push_back(b4);
 		a->push_back(b5);
-		musicSetup(1, a);
-
-		// test
-		//transportSource.addChangeListener(this);
-		
-		
+		musicSetup(1, a, 4, 0, 150);
+				
 	}
 
 	void AudioSystem::loadFiles() {
 		String partsName[] = { "Low_", "Med_", "Hi_" };
 		for (int p = 0; p < 3; p++) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 1; i <= 7; i++) {
 				String path = directory + partsName[p];
-				path += noteGroup[i];
+				path += i;
 				path += ".wav";
 				File file = File(path);
-				sampleReaders[p * 7 + noteGroup[i]] = formatManager.createReaderFor(file);
+				sampleReaders[p * 7 + i] = formatManager.createReaderFor(file);
 			}
 		}
 	}
 
 	void AudioSystem::loadBGM() {
-		// TODO
+		String prefix = "BG_" + to_string(currentLevel) + "_";
+
+		// in game BGM
+		for (int i = 0; i <= 4; i++) {
+			String path = directory + prefix;
+			path += i;
+			path += ".wav";
+			File file = File(path);
+			BGReaders[i] = formatManager.createReaderFor(file);
+		}
+
+		// ending BGM
+		String path = directory + prefix;
+		String type[2] = {"FAL", "SUC"};
+		for (int i = 0; i < 2; i++) {
+			String fileDir = path + type[i] + ".wav";
+			File file = File(fileDir);
+			EndReaders[i] = formatManager.createReaderFor(file);
+		}
 	}
 
 	// override 
@@ -246,6 +292,17 @@ namespace ZS {
 					playerInCharge = true;
 					AIInCharge = false;
 
+					// detect game ending
+					if (!isGameRunning) {
+						stopTimer();
+						playerInCharge = false;
+						AIInCharge = false;
+						playEndingBGM();
+					}
+
+					// change BGM
+					playBGM(AIComposer->getNextBGMIndex(currentBarNum));
+
 				}
 				// end player input
 				else { 
@@ -263,20 +320,17 @@ namespace ZS {
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);
 				}
-
-				// change BGM
-				playBGM(AIComposer->getNextBGMIndex()); // TODO
 			}
 		}
 
 		// play AI composing
 		if (AIInCharge) {
-			playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
+			//playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
 		}
 
 		// detect run-out
 		while (sampleTransportSources.size() > 0) {
-			if (sampleTransportSources.size() <= 20 && sampleTransportSources.front()->isPlaying()) {
+			if (sampleTransportSources.size() <= 10 && sampleTransportSources.front()->isPlaying()) {
 				break;
 			} else {
 				mixer.removeInputSource(sampleTransportSources.front());

@@ -138,6 +138,9 @@ namespace ZS
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
 		DebugGameState::createScene01();
+
+		// test 
+		AudioSystem::GetInstance()->setChannel();
     }
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::createMusicUI() {
