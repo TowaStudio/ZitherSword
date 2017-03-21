@@ -2,7 +2,7 @@
 * Project ZS
 */
 #include "AudioComposer.h"
-#include <ctime>
+#include <time.h>
 
 namespace ZS {
 	/**

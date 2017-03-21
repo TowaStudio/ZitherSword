@@ -68,8 +68,10 @@ namespace ZS {
 		isGameClear = win;
 	}
 
-	void AudioSystem::clearAll() {
-		// TODO
+	void AudioSystem::terminate() {
+		stopTimer();
+		delete AIComposer;
+		delete instance;
 	}
 
 	// input 
@@ -123,6 +125,7 @@ namespace ZS {
 			sampleTransportSources.push(transportSource);
 			//AudioTransportSource transportSource = sampleTransportSources.back();
 			transportSource->setSource(new AudioFormatReaderSource(sampleReaders[index], true), 0, nullptr, sampleReaders[index]->sampleRate);
+			transportSource->setGain(0.25f);
 			mixer.addInputSource(transportSource, true);
 			transportSource->setPosition(0.0);
 			transportSource->start();
@@ -322,12 +325,12 @@ namespace ZS {
 
 		// play AI composing
 		if (AIInCharge) {
-			playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
+			//playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
 		}
 
 		// detect run-out
 		while (sampleTransportSources.size() > 0) {
-			if (sampleTransportSources.size() <= 20 && sampleTransportSources.front()->isPlaying()) {
+			if (sampleTransportSources.size() <= 10 && sampleTransportSources.front()->isPlaying()) {
 				break;
 			} else {
 				mixer.removeInputSource(sampleTransportSources.front());
