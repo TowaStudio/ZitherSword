@@ -53,7 +53,6 @@ namespace ZS {
 	* @return SaveData
 	*/
 	SaveData GameMaster::load() {
-		SaveData save(0, PlayerStats(1, 0, 300.0f, 300.0f, 40.0f, 40.0f, 100.0f, 20.0f, 40.0f, ST_NORMAL));
 		//TODO: File system, load save data.
 		tempSave = save;
 

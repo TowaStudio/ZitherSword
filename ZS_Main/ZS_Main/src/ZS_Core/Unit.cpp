@@ -4,6 +4,7 @@
 
 #include "Unit.h"
 #include "Stats.h"
+#include "GameMaster.h"
 
 namespace ZS {
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos
@@ -39,7 +40,7 @@ namespace ZS {
 	// MOVEMENT
 	Vec3 Unit::move(float _scale) {
 		if(path) {
-			float step = spd / path->totalLength;
+			float step = _scale * spd / path->totalLength;
 			float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
 
 			// Trigger event for the path point
@@ -56,7 +57,7 @@ namespace ZS {
 
 			moveVec = path->getPosInPath(progress) - pos;
 		}
-		pos += moveVec * _scale;
+		pos += moveVec;
 		return pos;
 	}
 

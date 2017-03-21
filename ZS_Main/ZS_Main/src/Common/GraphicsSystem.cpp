@@ -27,6 +27,7 @@
 #include "GameMaster.h"
 #include "Animation/OgreSkeletonInstance.h"
 #include "AnimationController.h"
+#include "ZSGraphicsGameState.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -395,6 +396,23 @@ namespace ZS
 		case Mq::INIT_LEVEL_START:
 			isInitializingLevel = true;
 			initObjectCount = *reinterpret_cast<const int*>(data);
+			break;
+		case Mq::CAMERA_FOLLOW_PATH:
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->bindPath(*reinterpret_cast<Path* const*>(data));
+			break;
+        case Mq::CAMERA_FOLLOW_CHARACTER:
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->bindCharacter(*reinterpret_cast<Unit* const*>(data));
+			break;
+		case Mq::CAMERA_FOLLOW_ENABLE:
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->isEnabled = true;
+			break;
+		case Mq::CAMERA_FOLLOW_CLEAR:
+        	{
+				CameraPathController* mcpc = reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController;
+				mcpc->isEnabled = false;
+				mcpc->bindPath(nullptr);
+				mcpc->bindCharacter(nullptr);
+			}
 			break;
         default:
             break;

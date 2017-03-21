@@ -5,14 +5,16 @@
 #include "LevelManager.h"
 #include "GameMaster.h"
 #include "Enemy.h"
+#include "GraphicsSystem.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
 
-	LevelManager::LevelManager(Mq::MessageQueueSystem* _graphicsSystem, LogicSystem* _logicSystem) :
+	LevelManager::LevelManager(GraphicsSystem* _graphicsSystem, LogicSystem* _logicSystem) :
 		gm(GameMaster::GetInstance()),
 		level(-1), levelState(LST_NOT_IN_LEVEL),
 		unitsCount(0), jointCount(0),
+		levelPath(nullptr), cameraPath(nullptr),
 		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
@@ -65,6 +67,10 @@ namespace ZS {
 		return levelPath;
 	}
 
+	Path* LevelManager::getCameraPath() {
+		return cameraPath;
+	}
+
 	/**
 	* @return bool
 	*/
@@ -83,10 +89,21 @@ namespace ZS {
 
 		//_DEBUG_
 		levelPath->addPoint(Vec3(0.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(4.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(6.0f, 0.0f, 3.0f));
-		levelPath->addPoint(Vec3(8.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(9.0f, 0.0f, -1.0f));
+		levelPath->addPoint(Vec3(10.0f, 0.0f, 0.0f));
+		levelPath->addPoint(Vec3(15.0f, 0.0f, -7.0f));
+		levelPath->addPoint(Vec3(20.0f, 0.0f, 0.0f));
+		levelPath->addPoint(Vec3(25.0f, 0.0f, 0.0f));
+		//_DEBUG_
+
+		//TODO: Load camera path;
+		cameraPath = new Path();
+
+		//_DEBUG_
+		cameraPath->addPoint(Vec3(3.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(13.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(18.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(23.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(28.0f, 5.0f, 15.0f));
 		//_DEBUG_
 
 		initLevel();
@@ -117,7 +134,7 @@ namespace ZS {
 			moSwordsman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 			moSwordsman->submeshMaterials = Ogre::StringVector{"SwordsmanBody","SwordsmanShoe","SwordsmanFace","SwordsmanHead","SwordsmanBelt","SwordsmanArm"};
 			moSwordsman->moType = MoTypeItemSkeleton;
-
+			 
 			// Define behaviour and data model
 			swordsman = new Swordsman(gm->getPlayerStats(), pos, 0.0f);
 			swordsman->bindPath(levelPath);
@@ -134,7 +151,10 @@ namespace ZS {
 			// Create controller
 			ccSwordsman = new SwordsmanController(entSwordsman);
 		}
-		
+
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
 	}
 	
 	void LevelManager::startLevel() {
@@ -143,6 +163,9 @@ namespace ZS {
 
 		gm->getMusicUIManager()->run();
 		AudioSystem::GetInstance()->startMusic();
+
+		// Set default animation
+		ccSwordsman->changeState(CST_IDLE);
 
 		levelState = LST_PLAY;
 	}
@@ -153,7 +176,6 @@ namespace ZS {
 
 	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
 		//Update Controllers
-		//TODO: Camera controller
 		//TODO: Character controllers
 
 		//Update game entities
@@ -167,6 +189,7 @@ namespace ZS {
 				(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
 			}
 		}
+
 	}
 
 	CharacterController* LevelManager::createEnemy() {

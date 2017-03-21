@@ -9,13 +9,14 @@
 #include "tinyxml/tinyxml2.h"
 #include "Swordsman.h"
 #include "GameEntity.h"
-#include "Threading/MessageQueueSystem.h"
 #include "ZSLogicSystem.h"
 #include "Path.h"
 #include "SwordsmanController.h"
+#include "CameraPathController.h"
 
 namespace ZS {
 	class GameMaster;
+	class GraphicsSystem;
 
 	enum LevelState {
 		LST_NOT_IN_LEVEL = 0,
@@ -37,7 +38,7 @@ namespace ZS {
 
 		LevelState levelState;
 		SwordsmanController* ccSwordsman;
-		
+		CameraPathController* mainCameraPathController;
 	private:
 		//Game Content
 		GameMaster* gm;
@@ -46,6 +47,7 @@ namespace ZS {
 		int jointCount;
 
 		Path* levelPath;
+		Path* cameraPath;
 		Swordsman* swordsman;
 		GameEntity* entSwordsman;
 
@@ -73,7 +75,7 @@ namespace ZS {
 		size_t              mScheduledForRemovalCurrentSlot;
 		std::vector<size_t> mScheduledForRemovalAvailableSlots;
 
-		Mq::MessageQueueSystem* graphicsSystem;
+		GraphicsSystem* graphicsSystem;
 		LogicSystem* logicSystem;
 
 		Ogre::uint32 getScheduledForRemovalAvailableSlot(void);
@@ -83,7 +85,7 @@ namespace ZS {
 		void releaseTransformSlot(size_t bufferIdx, GameEntityTransform *transform);
 
 	public:
-		LevelManager(Mq::MessageQueueSystem* graphicsSystem, LogicSystem* logicSystem);
+		LevelManager(GraphicsSystem* graphicsSystem, LogicSystem* logicSystem);
 		~LevelManager();
 
 		int getUnitID();
@@ -91,6 +93,7 @@ namespace ZS {
 
 		Swordsman* GetSwordsman() const;
 		Path* getLevelPath();
+		Path* getCameraPath();
 		void loadLevel(int level);
 		void initLevel();
 		void startLevel();
