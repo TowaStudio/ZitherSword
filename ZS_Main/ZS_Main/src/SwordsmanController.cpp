@@ -26,18 +26,18 @@ namespace ZS {
 
 		switch(cst) {
 			case CST_IDLE:
-				swordsman->spd = 0.0f;
+				swordsman->isMoving = false;
 				ent->animationController->startAnimation("swordIdle_6");
 				break;
 			case CST_WALK:
 				ent->animationController->startAnimation("walk_0");
 				break;
 			case CST_RUN:
-				swordsman->spd = 3.0f;
+				swordsman->isMoving = true;
 				ent->animationController->startAnimation("swordRun_1");
 				break;
 			case CST_ATTACK:
-				swordsman->spd = 0.0f;
+				swordsman->isMoving = false;
 				ent->animationController->startAnimation("attack1_2");
 				break;
 			case CST_SKILL:

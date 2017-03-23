@@ -35,6 +35,7 @@ namespace ZS {
 		Path* path;
 
 		Vec3 moveVec;
+		bool isMoving;
 
 		// MOVEMENT
 		void bindPath(Path* _path);

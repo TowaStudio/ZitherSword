@@ -39,6 +39,9 @@ namespace ZS {
 		LevelState levelState;
 		SwordsmanController* ccSwordsman;
 		CameraPathController* mainCameraPathController;
+
+		std::vector<CharacterController*> characterControllers;
+
 	private:
 		//Game Content
 		GameMaster* gm;

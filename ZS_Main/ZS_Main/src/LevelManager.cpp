@@ -6,6 +6,7 @@
 #include "GameMaster.h"
 #include "Enemy.h"
 #include "GraphicsSystem.h"
+#include "EnemyAController.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
@@ -124,7 +125,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 1;
+		int initObjectCount = 2;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -152,6 +153,26 @@ namespace ZS {
 			ccSwordsman = new SwordsmanController(entSwordsman);
 		}
 
+		{ // 2
+		  // Create Swordsman
+			MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
+			moEnemy->meshName = "enemy1.mesh";
+			moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
+			moEnemy->moType = MoTypeItemSkeleton;
+
+			Enemy* enemy1 = new Enemy("Enemy1", Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+
+			GameEntity* entEnemy1 = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
+										 , enemy1
+										 , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
+										 , Ogre::Quaternion::IDENTITY
+										 , Vec3(0.04f, 0.04f, 0.04f));
+			// Create controller
+			EnemyAController* ccEnemy1 = new EnemyAController(entEnemy1);
+			characterControllers.push_back(ccEnemy1);
+		}
+
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
@@ -166,6 +187,7 @@ namespace ZS {
 
 		// Set default animation
 		ccSwordsman->changeState(CST_IDLE);
+		characterControllers[0]->changeState(CST_ATTACK);
 
 		levelState = LST_PLAY;
 	}
@@ -193,8 +215,22 @@ namespace ZS {
 	}
 
 	CharacterController* LevelManager::createEnemy() {
-		
-		return nullptr;
+		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
+		moEnemy->meshName = "enemy1.mesh";
+		moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+		moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
+		moEnemy->moType = MoTypeItemSkeleton;
+
+		Enemy* enemy = new Enemy("Enemy" + getUnitID(), Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+
+		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
+											  , enemy
+											  , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
+											  , Ogre::Quaternion::IDENTITY
+											  , Vec3(0.04f, 0.04f, 0.04f));
+		// Create controller
+		EnemyAController* ccEnemy = new EnemyAController(entEnemy);
+		return ccEnemy;
 	}
 
 
