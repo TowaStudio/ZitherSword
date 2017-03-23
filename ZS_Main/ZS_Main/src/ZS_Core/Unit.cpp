@@ -4,6 +4,7 @@
 
 #include "Unit.h"
 #include "Stats.h"
+#include "GameMaster.h"
 
 namespace ZS {
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos
@@ -13,7 +14,7 @@ namespace ZS {
 		, sp(_sp), maxsp(_maxsp)
 		, str(_str), def(_def), spd(_spd)
 		, status(_status), currentPathPointIndex(-1), progress(_progress)
-		, path(nullptr), moveVec(_moveVec) {
+		, path(nullptr), moveVec(_moveVec), isMoving(false) {
 	}
 
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
@@ -22,7 +23,7 @@ namespace ZS {
 		, sp(_stats.sp), maxsp(_stats.maxsp)
 		, str(_stats.str), def(_stats.def), spd(_stats.spd)
 		, status(_stats.status), currentPathPointIndex(-1), progress(_progress)
-		, path(nullptr), moveVec(_moveVec) {
+		, path(nullptr), moveVec(_moveVec), isMoving(false) {
 	}
 
 	Unit::~Unit() {
@@ -39,7 +40,7 @@ namespace ZS {
 	// MOVEMENT
 	Vec3 Unit::move(float _scale) {
 		if(path) {
-			float step = spd / path->totalLength;
+			float step = _scale * spd / path->totalLength;
 			float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
 
 			// Trigger event for the path point
@@ -56,7 +57,7 @@ namespace ZS {
 
 			moveVec = path->getPosInPath(progress) - pos;
 		}
-		pos += moveVec * _scale;
+		pos += moveVec;
 		return pos;
 	}
 

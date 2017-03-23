@@ -1,5 +1,6 @@
 #include "Path.h"
 #include "OgreException.h"
+#include "GameMaster.h"
 
 namespace  ZS {
 	Path::Path() :
@@ -71,12 +72,12 @@ namespace  ZS {
 				accDistance += pointVec->at(indexOfStartPoint)->distanceToNext;
 			}
 			// index
-			float distanceInSegment = accDistance - distanceFromStart;
-			segmentPos = distanceInSegment / pointVec->at(indexOfStartPoint)->distanceToNext;
+			float remainDistanceInSegment = accDistance - distanceFromStart;
+			segmentPos = 1.0f - remainDistanceInSegment / pointVec->at(indexOfStartPoint)->distanceToNext;
 
 			return getPosInSegment(indexOfStartPoint, segmentPos);
 		} else {
-			float segmentLength = 1.0f / pointCount;
+			float segmentLength = 1.0f / static_cast<float>(pointCount - 1);
 			
 			// Find the reference path point (in equally weighted segment)
 			float accDistance = 0.0f;
@@ -84,17 +85,17 @@ namespace  ZS {
 				++indexOfStartPoint;
 				accDistance += segmentLength;
 			}
-			// index
-			float distanceInSegment = accDistance - segmentLength;
-			segmentPos = distanceInSegment / pointVec->at(indexOfStartPoint)->distanceToNext;
+			float remainDistanceInSegment = accDistance - pos;
+			segmentPos = 1.0f - remainDistanceInSegment / segmentLength;
+			GameMaster::GetInstance()->log(segmentPos);
 
 			return getPosInSegment(indexOfStartPoint, segmentPos);
 		}
 	}
 
-	int Path::getIndexFromPos(float _pos) {
+	int Path::getIndexFromPos(float pos) {
 		int indexOfStartPoint = -1;
-		float distanceFromStart = _pos * totalLength;
+		float distanceFromStart = pos * totalLength;
 
 		float accDistance = 0.0f;
 		while(accDistance < distanceFromStart) {
@@ -102,6 +103,24 @@ namespace  ZS {
 			accDistance += pointVec->at(indexOfStartPoint)->distanceToNext;
 		}
 		return indexOfStartPoint;
+	}
+
+	float Path::getSegmentPosFromPos(float pos) {
+		int indexOfStartPoint = -1;
+		float distanceFromStart = pos * totalLength;
+
+		// Find the reference path point (in length-weighted segment)
+		float accDistance = 0.0f;
+		while(accDistance < distanceFromStart) {
+			++indexOfStartPoint;
+			accDistance += pointVec->at(indexOfStartPoint)->distanceToNext;
+		}
+		// index
+		float remainDistanceInSegment = accDistance - distanceFromStart;
+		float segmentPos = static_cast<float>(indexOfStartPoint) + 1.0f - remainDistanceInSegment / pointVec->at(indexOfStartPoint)->distanceToNext;
+		segmentPos = segmentPos / static_cast<float>(pointCount - 1);
+
+		return segmentPos;
 	}
 
 	PathPoint* Path::getPoint(int index) {

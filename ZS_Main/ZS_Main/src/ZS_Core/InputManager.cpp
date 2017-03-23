@@ -32,6 +32,7 @@ namespace ZS {
 
 	void InputManager::keyup(SDL_Keycode key) {
 		switch(key) {
+			//_DEBUG_
 			case SDLK_1:
 				GameMaster::GetInstance()->load();
 				GameMaster::GetInstance()->loadLevel(1);
@@ -45,6 +46,7 @@ namespace ZS {
 			case SDLK_o:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_ATTACK);
 				break;
+			//_DEBUG_
 			default:
 				break;
 		}

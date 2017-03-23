@@ -5,14 +5,17 @@
 #include "LevelManager.h"
 #include "GameMaster.h"
 #include "Enemy.h"
+#include "GraphicsSystem.h"
+#include "EnemyAController.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
 
-	LevelManager::LevelManager(Mq::MessageQueueSystem* _graphicsSystem, LogicSystem* _logicSystem) :
+	LevelManager::LevelManager(GraphicsSystem* _graphicsSystem, LogicSystem* _logicSystem) :
 		gm(GameMaster::GetInstance()),
 		level(-1), levelState(LST_NOT_IN_LEVEL),
 		unitsCount(0), jointCount(0),
+		levelPath(nullptr), cameraPath(nullptr),
 		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
@@ -65,6 +68,10 @@ namespace ZS {
 		return levelPath;
 	}
 
+	Path* LevelManager::getCameraPath() {
+		return cameraPath;
+	}
+
 	/**
 	* @return bool
 	*/
@@ -83,10 +90,21 @@ namespace ZS {
 
 		//_DEBUG_
 		levelPath->addPoint(Vec3(0.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(4.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(6.0f, 0.0f, 3.0f));
-		levelPath->addPoint(Vec3(8.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(9.0f, 0.0f, -1.0f));
+		levelPath->addPoint(Vec3(10.0f, 0.0f, 0.0f));
+		levelPath->addPoint(Vec3(15.0f, 0.0f, -7.0f));
+		levelPath->addPoint(Vec3(20.0f, 0.0f, 0.0f));
+		levelPath->addPoint(Vec3(25.0f, 0.0f, 0.0f));
+		//_DEBUG_
+
+		//TODO: Load camera path;
+		cameraPath = new Path();
+
+		//_DEBUG_
+		cameraPath->addPoint(Vec3(3.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(13.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(18.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(23.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(28.0f, 5.0f, 15.0f));
 		//_DEBUG_
 
 		initLevel();
@@ -107,7 +125,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 1;
+		int initObjectCount = 2;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -117,7 +135,7 @@ namespace ZS {
 			moSwordsman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 			moSwordsman->submeshMaterials = Ogre::StringVector{"SwordsmanBody","SwordsmanShoe","SwordsmanFace","SwordsmanHead","SwordsmanBelt","SwordsmanArm"};
 			moSwordsman->moType = MoTypeItemSkeleton;
-
+			 
 			// Define behaviour and data model
 			swordsman = new Swordsman(gm->getPlayerStats(), pos, 0.0f);
 			swordsman->bindPath(levelPath);
@@ -134,7 +152,30 @@ namespace ZS {
 			// Create controller
 			ccSwordsman = new SwordsmanController(entSwordsman);
 		}
-		
+
+		{ // 2
+		  // Create Swordsman
+			MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
+			moEnemy->meshName = "enemy1.mesh";
+			moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
+			moEnemy->moType = MoTypeItemSkeleton;
+
+			Enemy* enemy1 = new Enemy("Enemy1", Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+
+			GameEntity* entEnemy1 = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
+										 , enemy1
+										 , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
+										 , Ogre::Quaternion::IDENTITY
+										 , Vec3(0.04f, 0.04f, 0.04f));
+			// Create controller
+			EnemyAController* ccEnemy1 = new EnemyAController(entEnemy1);
+			characterControllers.push_back(ccEnemy1);
+		}
+
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
 	}
 	
 	void LevelManager::startLevel() {
@@ -143,6 +184,10 @@ namespace ZS {
 
 		gm->getMusicUIManager()->run();
 		AudioSystem::GetInstance()->startMusic();
+
+		// Set default animation
+		ccSwordsman->changeState(CST_IDLE);
+		characterControllers[0]->changeState(CST_ATTACK);
 
 		levelState = LST_PLAY;
 	}
@@ -153,7 +198,6 @@ namespace ZS {
 
 	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
 		//Update Controllers
-		//TODO: Camera controller
 		//TODO: Character controllers
 
 		//Update game entities
@@ -167,11 +211,26 @@ namespace ZS {
 				(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
 			}
 		}
+
 	}
 
 	CharacterController* LevelManager::createEnemy() {
-		
-		return nullptr;
+		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
+		moEnemy->meshName = "enemy1.mesh";
+		moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+		moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
+		moEnemy->moType = MoTypeItemSkeleton;
+
+		Enemy* enemy = new Enemy("Enemy" + getUnitID(), Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+
+		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
+											  , enemy
+											  , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
+											  , Ogre::Quaternion::IDENTITY
+											  , Vec3(0.04f, 0.04f, 0.04f));
+		// Create controller
+		EnemyAController* ccEnemy = new EnemyAController(entEnemy);
+		return ccEnemy;
 	}
 
 

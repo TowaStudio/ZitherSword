@@ -1,11 +1,11 @@
 ﻿#ifndef _ZS_UIELEMENT_H
 #define _ZS_UIELEMENT_H
-#include "OgreOverlayContainer.h"
+#include "OgreOverlayElement.h"
 
 namespace ZS {
 	class UIElement {
 	private:
-		Ogre::v1::OverlayContainer* element;
+		Ogre::v1::OverlayElement* element;
 
 	public:
 		UIElement();

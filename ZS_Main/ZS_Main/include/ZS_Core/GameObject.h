@@ -8,7 +8,6 @@
 
 #include "OgreVector3.h"
 #include "tinyxml/tinyxml2.h"
-#include <string>
 #include "Behaviour.h"
 
 namespace ZS

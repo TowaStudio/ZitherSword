@@ -86,8 +86,10 @@
     <ClInclude Include="include\AnimationController.h" />
     <ClInclude Include="include\CharacterController.h" />
     <ClInclude Include="include\SwordsmanController.h" />
+    <ClInclude Include="src\EnemyAController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemyAController.cpp" />
     <ClCompile Include="src\ZS_Core\PathPoint.cpp" />
     <ClCompile Include="src\CameraPathController.cpp" />
     <ClCompile Include="src\UIBar.cpp" />

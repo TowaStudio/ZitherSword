@@ -18,8 +18,8 @@ namespace ZS {
 
 		int level;
 		int exp;
-				
-		HitInfo* skill();
+
+		HitInfo skill();
 		HitInfo attack() override;
 		void heal(float amount) override;
 		void update(float timeSinceLast);

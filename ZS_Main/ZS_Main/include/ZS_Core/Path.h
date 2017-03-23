@@ -18,7 +18,8 @@ namespace ZS {
 		
 		Vec3 getPosInSegment(int indexOfStartPoint, float pos);
 		Vec3 getPosInPath(float pos, bool referInSegment = false);
-		int getIndexFromPos(float _pos);
+		int getIndexFromPos(float pos);
+		float getSegmentPosFromPos(float pos);
 		PathPoint* getPoint(int index);
 	};
 }

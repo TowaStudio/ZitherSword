@@ -22,6 +22,8 @@ namespace ZS
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 		
 	public:
+		CameraPathController* mainCameraPathController;
+
 		ZSGraphicsGameState();
 
 	    virtual void createScene01(void);
