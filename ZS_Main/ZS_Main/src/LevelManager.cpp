@@ -43,7 +43,7 @@ namespace ZS {
 			OGRE_FREE_SIMD(*itor, Ogre::MEMCATEGORY_SCENE_OBJECTS);
 			++itor;
 		}
-
+		
 		mTransformBuffers.clear();
 		mAvailableTransforms.clear();
 	}
@@ -71,11 +71,11 @@ namespace ZS {
 	void LevelManager::loadLevel(int _level) {
 		//TODO: Clean scene and all data.
 
+		level = _level;
 
 		//TODO: Load scene and enemy profile;
-		//LevelData;
+		readLevelData(); //LevelData
 		//PathData
-		level = _level;
 
 		// Define level path.
 		levelPath = new Path();
@@ -90,6 +90,32 @@ namespace ZS {
 		//_DEBUG_
 
 		initLevel();
+	}
+
+	void LevelManager::readLevelData() {
+		using namespace tinyxml2;
+		XMLDocument doc;
+		doc.LoadFile("F:/ZitherSword/ZS_Main/ZS_Main/resources/LevelData.xml");
+		XMLElement *levelRoot = doc.FirstChildElement("LEVELS")->FirstChildElement("level");
+		bool flag = true;
+		while (flag) {
+			if (levelRoot->Attribute("id")) {
+				if (level == atoi(levelRoot->Attribute("id"))) {
+					break;
+				}
+			}
+			if (levelRoot->NextSiblingElement()) {
+				levelRoot = levelRoot->NextSiblingElement();
+			} else {
+				flag = false;
+			}
+		}
+		if (!flag) { // level data not found
+			return;
+		}
+		XMLElement *buildings = levelRoot->FirstChildElement("buildings");
+		String aaa = buildings->FirstChildElement("building")->Attribute("x");
+
 	}
 
 	void LevelManager::initLevel() {

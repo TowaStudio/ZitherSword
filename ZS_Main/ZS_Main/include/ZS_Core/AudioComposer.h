@@ -40,7 +40,7 @@ namespace ZS {
 			LA_
 		};
 
-		struct LevelData {
+		struct AudioLevelData {
 			int level;
 			int numBarLoop;
 			std::vector<Cadence> cadenceLoop;
@@ -57,7 +57,7 @@ namespace ZS {
 			{ SO_,{ RE, SO, SI } },
 			{ LA_,{ DO, MI, LA } }
 		};;
-		std::vector<LevelData> _LevelData_{
+		std::vector<AudioLevelData> _AudioLevelData_{
 			{ 0, 0,{},{} }, // default null level
 
 			// Lv. 1
@@ -83,7 +83,7 @@ namespace ZS {
 	private: 
 		int currentLevel;
 		int tNum; // ticks per bar
-		const LevelData* thisLevelData;
+		const AudioLevelData* thisLevelData;
 
 		static void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
 
@@ -101,7 +101,7 @@ namespace ZS {
 		{ LA_, { LA, DO, MI } }
 	};
 
-	std::vector<AudioComposer::LevelData> AudioComposer::_LevelData_{
+	std::vector<AudioComposer::AudioLevelData> AudioComposer::_AudioLevelData_{
 		{ 0, 0,{},{} }, // default null level
 
 		// Lv. 1
