@@ -125,7 +125,7 @@ namespace ZS {
 			sampleTransportSources.push(transportSource);
 			//AudioTransportSource transportSource = sampleTransportSources.back();
 			transportSource->setSource(new AudioFormatReaderSource(sampleReaders[index], true), 0, nullptr, sampleReaders[index]->sampleRate);
-			transportSource->setGain(0.25f);
+			//transportSource->setGain(0.25f);
 			mixer.addInputSource(transportSource, true);
 			transportSource->setPosition(0.0);
 			transportSource->start();
