@@ -144,7 +144,7 @@ namespace ZS {
 		void finishFrameParallel(void);
 
 	private:
-		void readLevelData();
+		void loadLevelScene();
 	};
 
 }

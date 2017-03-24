@@ -1,0 +1,326 @@
+material "Trunk"
+{
+	technique Trunk_technique
+	{
+		pass Trunk_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.396078 0.266667 0.0588235 1
+			specular 0.045 0.045 0.045 0.05 63.75
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Branch0"
+{
+	technique Branch0_technique
+	{
+		pass Branch0_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.396078 0.266667 0.0588235 1
+			specular 0.045 0.045 0.045 0.05 63.75
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Leaves"
+{
+	technique Leaves_technique
+	{
+		pass Leaves_standard
+		{
+			cull_hardware none
+			cull_software none
+			ambient 0.101961 0.101961 0.101961 1
+			diffuse 0.117647 0.462745 0.0901961 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+
+			texture_unit Leaves_Unknown#0
+			{
+				texture jag3leaf.tga
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}
+material "defaultM"
+{
+	technique defaultM_technique
+	{
+		pass defaultM_standard
+		{
+			ambient 0.588 0.588 0.588 1
+			diffuse 0.588 0.588 0.588 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk_1"
+{
+	technique Trunk_1_technique
+	{
+		pass Trunk_1_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.27451 0.14902 0.0117647 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Branch0_1"
+{
+	technique Branch0_1_technique
+	{
+		pass Branch0_1_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.27451 0.14902 0.0117647 1
+			specular 0.045 0.045 0.045 0.05 63.75
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Leaves_1"
+{
+	technique Leaves_1_technique
+	{
+		pass Leaves_1_standard
+		{
+			cull_hardware none
+			cull_software none
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.764706 0.341176 0.0588235 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+
+			texture_unit Leaves_1_Unknown#0
+			{
+				texture oakleaf.tga
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}
+material "Trunk_2"
+{
+	technique Trunk_2_technique
+	{
+		pass Trunk_2_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.435294 0 0 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Branch0_2"
+{
+	technique Branch0_2_technique
+	{
+		pass Branch0_2_standard
+		{
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.435294 0 0 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Needles"
+{
+	technique Needles_technique
+	{
+		pass Needles_standard
+		{
+			cull_hardware none
+			cull_software none
+			ambient 0.1 0.1 0.1 1
+			diffuse 0.0509804 0.396078 0.262745 1
+			specular 0 0 0 0 0
+			emissive 0 0 0 1
+
+			texture_unit Needles_Unknown#0
+			{
+				texture fir2.tga
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}
+material "_07_-_Default"
+{
+	technique _07_-_Default_technique
+	{
+		pass _07_-_Default_standard
+		{
+			ambient 0.215686 0.223529 0.294118 1
+			diffuse 0.215686 0.223529 0.294118 1
+			specular 0.045 0.045 0.045 0.05 63.75
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Material__258"
+{
+	technique Material__258_technique
+	{
+		pass Material__258_standard
+		{
+			ambient 0.509804 0.509804 0.509804 1
+			diffuse 0.509804 0.509804 0.509804 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "_01_-_Grey"
+{
+	technique _01_-_Grey_technique
+	{
+		pass _01_-_Grey_standard
+		{
+			ambient 0.313726 0.313726 0.313726 1
+			diffuse 0.313726 0.313726 0.313726 1
+			specular 0.045 0.045 0.045 0.05 63.75
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk111"
+{
+	technique Trunk111_technique
+	{
+		pass Trunk111_standard
+		{
+			ambient 0.376471 0.227451 0.160784 1
+			diffuse 0.376471 0.227451 0.160784 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Material__156"
+{
+	technique Material__156_technique
+	{
+		pass Material__156_standard
+		{
+			ambient 0.678431 0.698039 0.376471 1
+			diffuse 0.678431 0.698039 0.376471 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Material__168"
+{
+	technique Material__168_technique
+	{
+		pass Material__168_standard
+		{
+			ambient 0.054902 0.0431373 0.0431373 1
+			diffuse 0.054902 0.0431373 0.0431373 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk111_1"
+{
+	technique Trunk111_1_technique
+	{
+		pass Trunk111_1_standard
+		{
+			ambient 0.376471 0.227451 0.160784 1
+			diffuse 0.376471 0.227451 0.160784 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk222"
+{
+	technique Trunk222_technique
+	{
+		pass Trunk222_standard
+		{
+			ambient 0.317647 0.14902 0.0745098 1
+			diffuse 0.317647 0.14902 0.0745098 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk111_2"
+{
+	technique Trunk111_2_technique
+	{
+		pass Trunk111_2_standard
+		{
+			ambient 0.376471 0.227451 0.160784 1
+			diffuse 0.376471 0.227451 0.160784 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Trunk111_3"
+{
+	technique Trunk111_3_technique
+	{
+		pass Trunk111_3_standard
+		{
+			ambient 0.376471 0.227451 0.160784 1
+			diffuse 0.376471 0.227451 0.160784 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "Material__270"
+{
+	technique Material__270_technique
+	{
+		pass Material__270_standard
+		{
+			ambient 0.588 0.588 0.588 1
+			diffuse 0.588 0.588 0.588 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "red"
+{
+	technique red_technique
+	{
+		pass red_standard
+		{
+			ambient 0.588235 0.027451 0.027451 1
+			diffuse 0.588235 0.027451 0.027451 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
+material "grey"
+{
+	technique grey_technique
+	{
+		pass grey_standard
+		{
+			ambient 0.384314 0.384314 0.384314 1
+			diffuse 0.384314 0.384314 0.384314 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+		}
+	}
+}
