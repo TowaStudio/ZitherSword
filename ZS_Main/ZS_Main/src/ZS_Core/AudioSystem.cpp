@@ -247,7 +247,7 @@ namespace ZS {
 
 		// ending BGM
 		String path = directory + prefix;
-		String type[2] = {"FAL", "SUC"};
+		String type[2] = {"FAL", "CLR"};
 		for (int i = 0; i < 2; i++) {
 			String fileDir = path + type[i] + ".wav";
 			File file = File(fileDir);
@@ -298,6 +298,7 @@ namespace ZS {
 						playerInCharge = false;
 						AIInCharge = false;
 						playEndingBGM();
+						return;
 					}
 
 					// change BGM
