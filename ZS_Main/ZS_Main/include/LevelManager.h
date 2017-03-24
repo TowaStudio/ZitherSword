@@ -27,6 +27,26 @@ namespace ZS {
 		NUM_LEVEL_STATE
 	};
 
+	struct LevelData {
+		struct Building {
+			Vec3 pos;
+			Vec3 scale;
+			Vec3 rotation;
+			int index;
+			// other properties...
+		};
+		struct Enemy {
+			float relPos;
+			// other
+		};
+
+		std::vector<Building> buildings;
+		std::vector<Enemy> enemies;
+
+		// others
+
+	};
+
 	class LevelManager {
 	public:
 		struct CreatedGameEntity {
@@ -37,6 +57,7 @@ namespace ZS {
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
 
 		LevelState levelState;
+		LevelData levelData;
 		SwordsmanController* ccSwordsman;
 		CameraPathController* mainCameraPathController;
 
@@ -127,6 +148,9 @@ namespace ZS {
 
 		/// Must be called every frame from the LOGIC THREAD.
 		void finishFrameParallel(void);
+
+	private:
+		void loadLevelScene();
 	};
 
 }
