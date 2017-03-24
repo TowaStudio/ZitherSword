@@ -74,7 +74,8 @@ namespace ZS {
 		level = _level;
 
 		//TODO: Load scene and enemy profile;
-		loadLevelScene(); //LevelData
+		loadLevelScene(); 
+		loadLevelData();//LevelData
 		//PathData
 
 		// Define level path.
@@ -92,30 +93,25 @@ namespace ZS {
 		initLevel();
 	}
 
+	Ogre::String getFileName(Ogre::String fileName) { // TODO where to put it??
+		char buffer[MAX_PATH];
+		GetCurrentDirectory(MAX_PATH, buffer);
+		Ogre::String cwd = buffer;
+		replace(cwd.begin(), cwd.end(), '\\', '/');
+		cwd += fileName;
+		return cwd;
+	}
+
 	void LevelManager::loadLevelScene() {
 		using namespace tinyxml2;
 		using namespace Ogre;
+		
 		XMLDocument doc;
-		doc.LoadFile("F:/ZitherSword/ZS_Main/ZS_Main/resources/LevelScene1.xml"); // TODO find xml file
-		XMLElement *rootNode = doc.FirstChildElement("scene")->FirstChildElement("nodes");
-		/*bool flag = true;
-		while (flag) {
-			if (levelRoot->Attribute("id")) {
-				if (level == atoi(levelRoot->Attribute("id"))) {
-					break;
-				}
-			}
-			if (levelRoot->NextSiblingElement()) {
-				levelRoot = levelRoot->NextSiblingElement();
-			} else {
-				flag = false;
-			}
+		if (doc.LoadFile(getFileName("/ZSResources/LevelScene1.xml").c_str()) != XML_SUCCESS) {
+			return; // file error
 		}
-		if (!flag) { // level data not found
-			return;
-		}*/
-		//XMLElement *buildings = levelRoot->FirstChildElement("buildings");
-		//String aaa = buildings->FirstChildElement("building")->Attribute("x");
+		XMLElement *rootNode = doc.FirstChildElement("scene")->FirstChildElement("nodes");
+
 		XMLElement *node = rootNode->FirstChildElement("node");
 		while (node != nullptr) {
 			// get node info
@@ -152,6 +148,44 @@ namespace ZS {
 			node = node->NextSiblingElement("node");
 
 		}
+	}
+
+	void LevelManager::loadLevelData() {
+		using namespace tinyxml2;
+		using namespace Ogre;
+
+		XMLDocument doc;
+		if (doc.LoadFile(getFileName("/ZSResources/LevelData.xml").c_str()) != XML_SUCCESS) {
+			return; // file error
+		}
+
+		XMLElement *levelNode = doc.FirstChildElement("levels")->FirstChildElement("level");
+		while (levelNode != nullptr) {
+			if (level == atoi(levelNode->Attribute("id"))) {
+				break;
+			}
+			levelNode = levelNode->NextSiblingElement("level");
+		}
+		if (levelNode == nullptr) { // level data not found
+			return; 
+		}
+
+		// enemies
+		XMLElement *enemyNode = levelNode->FirstChildElement("enemies")->FirstChildElement("enemy");
+		while (enemyNode != nullptr) {
+			// get object info
+			int type; 
+			Ogre::Real loc;
+			type = StringConverter::parseInt(enemyNode->Attribute("type"));
+			loc = StringConverter::parseReal(enemyNode->Attribute("loc"));
+
+			// TODO load enemy mesh
+
+			// get next object
+			enemyNode = enemyNode->NextSiblingElement("enemy");
+		}
+
+		// other possible level data
 	}
 
 	void LevelManager::initLevel() {

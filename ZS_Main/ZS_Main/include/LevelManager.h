@@ -145,6 +145,8 @@ namespace ZS {
 
 	private:
 		void loadLevelScene();
+
+		void loadLevelData();
 	};
 
 }
