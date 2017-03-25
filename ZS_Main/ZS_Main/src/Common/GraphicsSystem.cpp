@@ -13,6 +13,7 @@
 #include "OgreRenderWindow.h"
 #include "OgreCamera.h"
 #include "OgreItem.h"
+#include "Animation/OgreTagPoint.h"
 
 #include "Hlms/Unlit/OgreHlmsUnlit.h"
 #include "Hlms/Pbs/OgreHlmsPbs.h"
@@ -388,6 +389,9 @@ namespace ZS
         case Mq::GAME_ENTITY_REMOVED:
             gameEntityRemoved( *reinterpret_cast<GameEntity * const *>( data ) );
             break;
+		case Mq::GAME_ENTITY_BIND:
+			bindObject(*reinterpret_cast<LevelManager::BindDefinition* const*>(data));
+			break;
         case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
             //Acknowledge/notify back that we're done with this slot.
             this->queueSendMessage( mLogicSystem, Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT,
@@ -738,5 +742,12 @@ namespace ZS
 
             ++itor;
         }
+    }
+
+	void GraphicsSystem::bindObject(const LevelManager::BindDefinition* bd) {
+		Ogre::TagPoint* bindTagPoint = mSceneManager->createTagPoint();
+		bd->source->mSceneNode->getParentSceneNode()->removeChild(bd->source->mSceneNode);
+		bindTagPoint->addChild(bd->source->mSceneNode);
+		bd->target->mMovableObject->getSkeletonInstance()->getBone(bd->boneName)->addTagPoint(bindTagPoint);
     }
 }

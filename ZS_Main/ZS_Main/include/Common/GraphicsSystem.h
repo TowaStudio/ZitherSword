@@ -108,8 +108,9 @@ namespace ZS
 
         /// Overload Ogre::UniformScalableTask. @see updateGameEntities
         virtual void execute( size_t threadId, size_t numThreads );
+	    void bindObject(const LevelManager::BindDefinition* bd);
 
-        /// Returns the GameEntities that are ready to be rendered. May include entities
+	    /// Returns the GameEntities that are ready to be rendered. May include entities
         /// that are scheduled to be removed (i.e. they are no longer updated by logic)
         const GameEntityVec& getGameEntities( Ogre::SceneMemoryMgrTypes type ) const
                                                                 { return mGameEntities[type]; }

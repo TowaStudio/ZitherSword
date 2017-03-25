@@ -54,6 +54,12 @@ namespace ZS {
 			GameEntityTransform initialTransform;
 		};
 
+		struct BindDefinition {
+			GameEntity* source;
+			GameEntity* target;
+			std::string boneName;
+		};
+
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
 
 		LevelState levelState;
@@ -127,7 +133,9 @@ namespace ZS {
 		void prepareResources();
 
 		void update(const size_t currIdx, float timeSinceLast);
-		CharacterController* createEnemy();
+		CharacterController* createEnemy(Vec3 pos);
+		Unit* getEnemy(int unitID);
+		Unit* getClosestEnemy(float _pos, float threshold);
 
 		void trigger();
 

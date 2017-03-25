@@ -21,12 +21,16 @@ namespace ZS {
 		ControlState cst;
 
 	public:
-		CharacterController(GameEntity* _ent) :
+		int id;
+
+		CharacterController(GameEntity* _ent, int _id) :
 			ent(_ent),
-			cst(CST_IDLE)
+			cst(CST_IDLE),
+			id(_id)
 		{
 
 		}
+
 		virtual ~CharacterController() {}
 
 		virtual void changeState(ControlState _cst) {

@@ -3,7 +3,7 @@
 namespace ZS {
 
 	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman) :
-		CharacterController(_entSwordsman) {
+		CharacterController(_entSwordsman, 0) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 

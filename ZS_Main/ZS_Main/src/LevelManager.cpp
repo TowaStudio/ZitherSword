@@ -265,27 +265,23 @@ namespace ZS {
 												 , Vec3(0.0f, 0.0f, 0.0f)
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
+
+			BindDefinition* bo = new BindDefinition();
+			bo->source = entSword;
+			bo->target = entSwordsman;
+			bo->boneName = "Bip01 R Finger1";
+			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
 
+		{//Bind the sword to swordsman
+			
+		}
+
+		//_DEBUG_
 		{ // 3
-		  // Create Swordsman
-			MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
-			moEnemy->meshName = "enemy1.mesh";
-			moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-			moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
-			moEnemy->moType = MoTypeItemSkeleton;
-
-			Enemy* enemy1 = new Enemy("Enemy1", Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
-
-			GameEntity* entEnemy1 = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
-										 , enemy1
-										 , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
-										 , Ogre::Quaternion::IDENTITY
-										 , Vec3(0.04f, 0.04f, 0.04f));
-			// Create controller
-			EnemyAController* ccEnemy1 = new EnemyAController(entEnemy1);
-			characterControllers.push_back(ccEnemy1);
+			characterControllers.push_back(createEnemy(Vec3(8.0f, 0.0f, 0.0f)));
 		}
+		//_DEBUG_
 
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
@@ -325,25 +321,47 @@ namespace ZS {
 
 	}
 
-	CharacterController* LevelManager::createEnemy() {
+	CharacterController* LevelManager::createEnemy(Vec3 pos) {
 		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
 		moEnemy->meshName = "enemy1.mesh";
 		moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 		moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
 		moEnemy->moType = MoTypeItemSkeleton;
 
-		Enemy* enemy = new Enemy("Enemy" + getUnitID(), Vec3(10.0f, 0.0f, 0.0f), 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+		int unitID = getUnitID();
+
+		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), pos, 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, 0.25f, 100);
+		unitVec.push_back(enemy);
 
 		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
 											  , enemy
-											  , Vec3(10.0f, 0.0f, 0.0f) // Change to Level data start pos
+											  , pos // Change to Level data start pos
 											  , Ogre::Quaternion::IDENTITY
 											  , Vec3(0.04f, 0.04f, 0.04f));
 		// Create controller
-		EnemyAController* ccEnemy = new EnemyAController(entEnemy);
+		EnemyAController* ccEnemy = new EnemyAController(entEnemy, unitID);
 		return ccEnemy;
 	}
-
+	Unit* LevelManager::getEnemy(int unitID) {
+		Unit* enemy = nullptr;
+		for(auto itr = unitVec.begin(); itr != unitVec.end(); ++itr) {
+			if((*itr)->name.compare("Enemy" + Ogre::StringConverter::toString(unitID)) == 0) {
+				enemy = *itr;
+			}
+		}
+		return enemy;
+	}
+	Unit* LevelManager::getClosestEnemy(float _pos, float threshold) {
+		Unit* enemy = nullptr;
+		float distance = threshold / levelPath->totalLength;
+		for(auto itr = unitVec.begin(); itr != unitVec.end(); ++itr) {
+			if((*itr)->progress > _pos && (*itr)->progress - _pos < distance) {
+				enemy = *itr;
+				distance = (*itr)->progress - _pos;
+			}
+		}
+		return enemy;
+	}
 
 	//------------------------------------Game Environments------------------------------------
 	//-----------------------------------------------------------------------------------

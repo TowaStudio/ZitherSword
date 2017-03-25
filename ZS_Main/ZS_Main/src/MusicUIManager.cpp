@@ -135,11 +135,11 @@ namespace ZS {
 		currentScanlinePos = nextScanlinePos;
 	}
 
-	float MusicUIManager::VERTICAL_OFFSET_DO = 200.0f;
-	float MusicUIManager::VERTICAL_OFFSET_RE = 600.0f;
+	float MusicUIManager::VERTICAL_OFFSET_DO = 1800.0f;
+	float MusicUIManager::VERTICAL_OFFSET_RE = 1400.0f;
 	float MusicUIManager::VERTICAL_OFFSET_MI = 1000.0f;
-	float MusicUIManager::VERTICAL_OFFSET_SO = 1400.0f;
-	float MusicUIManager::VERTICAL_OFFSET_LA = 1800.0f;
+	float MusicUIManager::VERTICAL_OFFSET_SO = 600.0f;
+	float MusicUIManager::VERTICAL_OFFSET_LA = 200.0f;
 
 	void MusicUIManager::addNote(NoteName _noteName) {
 		if(!isEnabled) return;

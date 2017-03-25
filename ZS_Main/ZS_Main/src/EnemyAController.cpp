@@ -2,8 +2,8 @@
 
 namespace ZS {
 
-	EnemyAController::EnemyAController(GameEntity* _entEnemy):
-		CharacterController(_entEnemy) {
+	EnemyAController::EnemyAController(GameEntity* _entEnemy, int _id) :
+		CharacterController(_entEnemy, _id) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
 	}
 

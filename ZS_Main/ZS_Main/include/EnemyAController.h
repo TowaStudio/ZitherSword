@@ -9,7 +9,7 @@ namespace ZS {
 		Enemy* enemy;
 
 	public:
-		EnemyAController(GameEntity* _entEnemy);
+		EnemyAController(GameEntity* _entEnemy, int _id);
 		~EnemyAController();
 
 		virtual void changeState(ControlState _cst);
