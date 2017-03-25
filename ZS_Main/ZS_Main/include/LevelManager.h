@@ -67,6 +67,8 @@ namespace ZS {
 		//Game Content
 		GameMaster* gm;
 		int level;
+
+		std::vector<Unit*> unitVec;
 		int unitsCount;
 		int jointCount;
 

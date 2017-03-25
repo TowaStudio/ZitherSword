@@ -115,7 +115,6 @@ namespace ZS
 
 		mLightNodes[2] = lightNode;
 
-
 		createMusicUI();
 		createGameUI();
 		//createShadowMapDebugOverlays();

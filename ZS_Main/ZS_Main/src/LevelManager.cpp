@@ -15,6 +15,7 @@ namespace ZS {
 		gm(GameMaster::GetInstance()),
 		level(-1), levelState(LST_NOT_IN_LEVEL),
 		unitsCount(0), jointCount(0),
+		unitVec(std::vector<Unit*>()),
 		levelPath(nullptr), cameraPath(nullptr),
 		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
@@ -101,11 +102,11 @@ namespace ZS {
 		cameraPath = new Path();
 
 		//_DEBUG_
-		cameraPath->addPoint(Vec3(3.0f, 5.0f, 15.0f));
-		cameraPath->addPoint(Vec3(13.0f, 5.0f, 15.0f));
-		cameraPath->addPoint(Vec3(18.0f, 5.0f, 15.0f));
-		cameraPath->addPoint(Vec3(23.0f, 5.0f, 15.0f));
-		cameraPath->addPoint(Vec3(28.0f, 5.0f, 15.0f));
+		cameraPath->addPoint(Vec3(3.0f, 2.0f, 15.0f));
+		cameraPath->addPoint(Vec3(13.0f, 2.0f, 15.0f));
+		cameraPath->addPoint(Vec3(18.0f, 2.0f, 15.0f));
+		cameraPath->addPoint(Vec3(23.0f, 2.0f, 15.0f));
+		cameraPath->addPoint(Vec3(28.0f, 2.0f, 15.0f));
 		//_DEBUG_
 
 		initLevel();

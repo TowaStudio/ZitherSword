@@ -15,6 +15,7 @@ namespace ZS {
 		Ogre::v1::OverlayContainer* uiHPBar;
 		Ogre::v1::OverlayElement* uiHPFill;
 
+		float targetHPFill;
 		float hpFill;
 		
 
@@ -24,7 +25,10 @@ namespace ZS {
 
 		void createGameUI();
 		void showGameUI(bool _show);
+
+		void update(float timeSinceLast);
 		void updateHPFill(float _fill);
+		void setHPFill(float _fill);
 
 
 	};

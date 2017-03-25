@@ -77,14 +77,15 @@ namespace ZS {
 		if(std::abs(hpFill - targetHPFill) > 0.001f) {
 			float smoothingFactor = 4.0f * timeSinceLast + 0.02f;
 			hpFill = smoothingFactor * targetHPFill + (1.0f - smoothingFactor) * hpFill;
+			uiHPFill->setWidth(hpFill * 950.0f * 1280 / 720.0f);
 		}
 	}
 
 	void GameUIManager::updateHPFill(float _fill) {
 		targetHPFill = _fill > 1.0f ? 1.0f : (_fill < 0.0f ? 0.0f : _fill);
 	}
+
 	void GameUIManager::setHPFill(float _fill) {
-		//
-		uiHPFill->setWidth(hpFill * 950.0f * 1280 / 720.0f);
+		uiHPFill->setWidth(_fill * 950.0f * 1280 / 720.0f);
 	}
 }
