@@ -39,14 +39,14 @@ namespace ZS {
 		destroyAllGameEntitiesIn(mGameEntities[Ogre::SCENE_DYNAMIC]);
 		destroyAllGameEntitiesIn(mGameEntities[Ogre::SCENE_STATIC]);
 
-		std::vector<GameEntityTransform*>::const_iterator itor = mTransformBuffers.begin();
-		std::vector<GameEntityTransform*>::const_iterator end = mTransformBuffers.end();
+		vector<GameEntityTransform*>::const_iterator itor = mTransformBuffers.begin();
+		vector<GameEntityTransform*>::const_iterator end = mTransformBuffers.end();
 
 		while(itor != end) {
 			OGRE_FREE_SIMD(*itor, Ogre::MEMCATEGORY_SCENE_OBJECTS);
 			++itor;
 		}
-
+		
 		mTransformBuffers.clear();
 		mAvailableTransforms.clear();
 	}
@@ -78,11 +78,12 @@ namespace ZS {
 	void LevelManager::loadLevel(int _level) {
 		//TODO: Clean scene and all data.
 
+		level = _level;
 
 		//TODO: Load scene and enemy profile;
-		//LevelData;
+		loadLevelScene(); 
+		loadLevelData();//LevelData
 		//PathData
-		level = _level;
 
 		// Define level path.
 		levelPath = new Path();
@@ -112,6 +113,100 @@ namespace ZS {
 
 	void LevelManager::prepareResources() {
 		//TODO: Preload enemies' mesh file to avoid the lag in game.
+	}
+	Ogre::String getFileName(Ogre::String fileName) { // TODO where to put it??
+		char buffer[MAX_PATH];
+		GetCurrentDirectory(MAX_PATH, buffer);
+		Ogre::String cwd = buffer;
+		replace(cwd.begin(), cwd.end(), '\\', '/');
+		cwd += fileName;
+		return cwd;
+	}
+
+	void LevelManager::loadLevelScene() {
+		using namespace tinyxml2;
+		using namespace Ogre;
+		
+		XMLDocument doc;
+		if (doc.LoadFile(getFileName("/ZSResources/LevelScene1.xml").c_str()) != XML_SUCCESS) {
+			return; // file error
+		}
+		XMLElement *rootNode = doc.FirstChildElement("scene")->FirstChildElement("nodes");
+
+		XMLElement *node = rootNode->FirstChildElement("node");
+		while (node != nullptr) {
+			// get node info
+			Ogre::String nodeName, entityName, meshFile;
+			int nodeId, entityId;
+			Vec3 pos, scale;
+			Ogre::Quaternion rotation;
+			std::vector<Ogre::String> subentities;
+
+			nodeName = node->Attribute("name");
+			entityName = node->FirstChildElement("entity")->Attribute("name");
+			meshFile = node->FirstChildElement("entity")->Attribute("meshFile");
+			nodeId = StringConverter::parseInt(node->Attribute("id"));
+			entityId = StringConverter::parseInt(node->FirstChildElement("entity")->Attribute("id"));
+			pos.x = StringConverter::parseReal(node->FirstChildElement("position")->Attribute("x"));
+			pos.y = StringConverter::parseReal(node->FirstChildElement("position")->Attribute("y"));
+			pos.z = StringConverter::parseReal(node->FirstChildElement("position")->Attribute("z"));
+			scale.x = StringConverter::parseReal(node->FirstChildElement("scale")->Attribute("x"));
+			scale.y = StringConverter::parseReal(node->FirstChildElement("scale")->Attribute("y"));
+			scale.z = StringConverter::parseReal(node->FirstChildElement("scale")->Attribute("z"));
+			rotation.x = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qx"));
+			rotation.y = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qy"));
+			rotation.z = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qz"));
+			rotation.w = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qw"));
+			XMLElement *subentity = node->FirstChildElement("entity")->FirstChildElement("subentities")->FirstChildElement("subentity");
+			while (subentity != nullptr) {
+				subentities.push_back(subentity->Attribute("materialName"));
+				subentity = subentity->NextSiblingElement("subentity");				 
+			}
+
+			// TODO load node to scene
+
+			// get next node
+			node = node->NextSiblingElement("node");
+
+		}
+	}
+
+	void LevelManager::loadLevelData() {
+		using namespace tinyxml2;
+		using namespace Ogre;
+
+		XMLDocument doc;
+		if (doc.LoadFile(getFileName("/ZSResources/LevelData.xml").c_str()) != XML_SUCCESS) {
+			return; // file error
+		}
+
+		XMLElement *levelNode = doc.FirstChildElement("levels")->FirstChildElement("level");
+		while (levelNode != nullptr) {
+			if (level == atoi(levelNode->Attribute("id"))) {
+				break;
+			}
+			levelNode = levelNode->NextSiblingElement("level");
+		}
+		if (levelNode == nullptr) { // level data not found
+			return; 
+		}
+
+		// enemies
+		XMLElement *enemyNode = levelNode->FirstChildElement("enemies")->FirstChildElement("enemy");
+		while (enemyNode != nullptr) {
+			// get object info
+			int type; 
+			Ogre::Real loc;
+			type = StringConverter::parseInt(enemyNode->Attribute("type"));
+			loc = StringConverter::parseReal(enemyNode->Attribute("loc"));
+
+			// TODO load enemy mesh
+
+			// get next object
+			enemyNode = enemyNode->NextSiblingElement("enemy");
+		}
+
+		// other possible level data
 	}
 
 	void LevelManager::initLevel() {
@@ -284,7 +379,7 @@ namespace ZS {
 	void LevelManager::removeGameEntity(GameEntity *toRemove) {
 		Ogre::uint32 slot = getScheduledForRemovalAvailableSlot();
 		mScheduledForRemoval[slot].push_back(toRemove);
-		GameEntityVec::iterator itor = std::lower_bound(mGameEntities[toRemove->mType].begin(),
+		GameEntityVec::iterator itor = lower_bound(mGameEntities[toRemove->mType].begin(),
 														mGameEntities[toRemove->mType].end(),
 														toRemove);
 		assert(itor != mGameEntities[toRemove->mType].end() && *itor == toRemove);
@@ -334,8 +429,8 @@ namespace ZS {
 		//prevent fragmentation, see StagingBuffer::mergeContiguousBlocks implementation.
 		const size_t slot = transform - mTransformBuffers[bufferIdx];
 
-		std::vector<Region>::iterator itor = mAvailableTransforms.begin();
-		std::vector<Region>::iterator end = mAvailableTransforms.end();
+		vector<Region>::iterator itor = mAvailableTransforms.begin();
+		vector<Region>::iterator end = mAvailableTransforms.end();
 
 		while(itor != end) {
 			if(itor->bufferIdx == bufferIdx &&

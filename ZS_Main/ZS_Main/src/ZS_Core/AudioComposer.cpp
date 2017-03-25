@@ -18,7 +18,7 @@ namespace ZS {
 	void AudioComposer::setupComposer(int _currentLevel, int _tNum){
 		currentLevel = _currentLevel;
 		tNum = _tNum;
-		thisLevelData = &(_LevelData_[currentLevel]);
+		thisLevelData = &(_AudioLevelData_[currentLevel]);
 	}
 
 	void AudioComposer::getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar){

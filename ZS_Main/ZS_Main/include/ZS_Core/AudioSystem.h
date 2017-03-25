@@ -26,7 +26,7 @@ namespace ZS {
 		void setChannel(); // should be called in render thread; dont ask why
 		void startMusic(); 
 		void stopMusic(bool win = true);
-		void terminate();
+		void terminate(); // use when to force shut down
 		void input(NoteName inputKey);
 
 		bool playerInCharge;
