@@ -23,6 +23,10 @@ namespace ZS {
 	MusicUIManager::~MusicUIManager() {
 	}
 
+	float MusicUIManager::SEGMENT_OFFSET_X = 2000;
+	float MusicUIManager::SEGMENT_OFFSET_Y = 0;
+	float MusicUIManager::SEGMENT_INTERVAL = 600;
+
 	void MusicUIManager::createMusicUI() {
 		uiMusic = overlayManager.create("MusicUI");
 		uiNotes = overlayManager.create("MusicNotes");
@@ -43,10 +47,31 @@ namespace ZS {
 			uiScanline = static_cast<Ogre::v1::OverlayElement*>(
 				overlayManager.createOverlayElement("Panel", "MusicUIScanline"));
 			uiScanline->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			uiScanline->setPosition(BAR_OFFSET * 1280.0f / 720.0f, 0.0f);
+			uiScanline->setPosition((BAR_OFFSET - 50.0f) * 1280.0f / 720.0f, 0.0f);
 			uiScanline->setDimensions(100.0f * 1280.0f / 720.0f, 2500.0f);
 			uiScanline->setMaterialName("MusicUIScanLine");
 			uiBackground->addChild(uiScanline);
+		}
+
+		//Segments
+		{
+			uiSegmentLineGroup = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "MusicUISegmentLines"));
+			uiSegmentLineGroup->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			uiSegmentLineGroup->setPosition(0.0f, SEGMENT_OFFSET_Y * 1280.0f / 720.0f);
+			uiSegmentLineGroup->setDimensions(5000.0f * 1280.0f / 720.0f, 10000.0f * 100.0f / 720.0f);
+
+			//Segment indicator
+			for(int i = 0; i < 5; ++i) {
+				Ogre::v1::OverlayElement* uiSegmentLine = static_cast<Ogre::v1::OverlayElement*>(
+					overlayManager.createOverlayElement("Panel", "MusicUISegmentLine" + Ogre::StringConverter::toString(i)));
+				uiSegmentLine->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+				uiSegmentLine->setPosition((SEGMENT_OFFSET_X + i * SEGMENT_INTERVAL - 40.0f) * 1280.0f / 720.0f, 0.0f);
+				uiSegmentLine->setDimensions(80.0f * 1280.0f / 720.0f, 240.0f * 1280.0f / 720.0f);
+				uiSegmentLine->setMaterialName("MusicUISegmentLine");
+				uiSegmentLineGroup->addChild(uiSegmentLine);
+			}
+			uiBackground->addChild(uiSegmentLineGroup);
 		}
 
 		//Result
@@ -59,7 +84,7 @@ namespace ZS {
 			uiBackground->addChild(uiResult);
 		}
 
-		//Background
+		//Notes group
 		{
 			uiNotesGroup = static_cast<Ogre::v1::OverlayContainer*>(
 				overlayManager.createOverlayElement("Panel", "MusicNotesGroup"));
@@ -151,7 +176,7 @@ namespace ZS {
 		GameMaster::GetInstance()->log("MusicUINote" + Ogre::StringConverter::toString(++totalNoteCount, 3, '0'));
 		note->setMaterialName(noteDisplayMaterial);
 		note->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-		note->setPosition((currentScanlinePos + BAR_OFFSET) * 1280.0f / 720.0f, verticalOffset);
+		note->setPosition((currentScanlinePos + BAR_OFFSET) * 1280.0f / 720.0f - 250.0f, verticalOffset);
 		note->setDimensions(500.0f, 500.0f);
 		uiNotesVec.push_back(note);
 		uiNotesGroup->addChild(note);

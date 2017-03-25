@@ -12,10 +12,10 @@ namespace ZS {
 		inputManager(nullptr),
 		levelManager(nullptr),
 		logger(nullptr),
+		musicUIManager(nullptr), gameUIManager(nullptr),
 		currentLevel(-1),
-		tempSave(SaveData())
-	{
-		
+		tempSave(SaveData()) {
+
 	}
 
 	void GameMaster::bindLevelManager(LevelManager * _levelManager) {
@@ -24,6 +24,10 @@ namespace ZS {
 
 	void GameMaster::bindMusicUIManager(MusicUIManager* _musicUIManager) {
 		musicUIManager = _musicUIManager;
+	}
+
+	void GameMaster::bindGameUIManager(GameUIManager* _gameUiManager) {
+		gameUIManager = _gameUiManager;
 	}
 
 	void GameMaster::setLogger(Logger* _logger) {

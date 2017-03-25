@@ -58,14 +58,16 @@ namespace ZS
         mDebugText = static_cast<Ogre::v1::TextAreaOverlayElement*>(
                     overlayManager.createOverlayElement( "TextArea", "DebugText" ) );
         mDebugText->setFontName( "Helvetica" );
-        mDebugText->setCharHeight( 0.03f );
+		mDebugText->setCharHeight( 0.03f );
+		mDebugText->setColour(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
+		mDebugText->setPosition(0.8f, 0.015f);
 
         mDebugTextShadow= static_cast<Ogre::v1::TextAreaOverlayElement*>(
-                    overlayManager.createOverlayElement( "TextArea", "0DebugTextShadow" ) );
+                    overlayManager.createOverlayElement( "TextArea", "DebugTextShadow" ) );
         mDebugTextShadow->setFontName( "Helvetica" );
         mDebugTextShadow->setCharHeight( 0.03f );
         mDebugTextShadow->setColour( Ogre::ColourValue::Black );
-        mDebugTextShadow->setPosition( 0.001f, 0.001f );
+        mDebugTextShadow->setPosition( 0.8005f, 0.0155f );
 
         panel->addChild( mDebugTextShadow );
         panel->addChild( mDebugText );

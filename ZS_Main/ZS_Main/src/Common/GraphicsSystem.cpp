@@ -617,6 +617,7 @@ namespace ZS
                                       cge->initialTransform.vPos,
                                       cge->initialTransform.qRot );
 
+        sceneNode->setScale( cge->initialTransform.vScale );
 
         cge->gameEntity->mSceneNode = sceneNode;
 
@@ -653,8 +654,6 @@ namespace ZS
         }
 
         sceneNode->attachObject( cge->gameEntity->mMovableObject );
-
-		sceneNode->setScale(cge->initialTransform.vScale);
 
 		if(isInitializingLevel) {
 			--initObjectCount;

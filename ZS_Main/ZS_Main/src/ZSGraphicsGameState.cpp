@@ -42,7 +42,7 @@ namespace ZS
     ZSGraphicsGameState::ZSGraphicsGameState() :
 		DebugGameState(),
 		gm(GameMaster::GetInstance()),
-		musicUIManager(nullptr),
+		musicUIManager(nullptr), gameUIManager(nullptr),
 		mainCameraPathController(nullptr) {
 
 	}
@@ -51,10 +51,11 @@ namespace ZS
     void ZSGraphicsGameState::createScene01(void)
     {
 		Ogre::SceneManager* sceneManager = mGraphicsSystem->getSceneManager();
+		sceneManager->getRenderQueue()->setRenderQueueMode(10, Ogre::RenderQueue::V1_FAST);
 		
 		Ogre::v1::MeshPtr planeMeshV1 = Ogre::v1::MeshManager::getSingleton().createPlane("Plane v1",
 																						  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 50.0f, 50.0f,
+																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 50.0f, 4.0f,
 																						  1, 1, true, 1, 4.0f, 4.0f, Ogre::Vector3::UNIT_Z,
 																						  Ogre::v1::HardwareBuffer::HBU_STATIC,
 																						  Ogre::v1::HardwareBuffer::HBU_STATIC);
@@ -71,20 +72,6 @@ namespace ZS
 				createChildSceneNode(Ogre::SCENE_DYNAMIC);
 			sceneNode->setPosition(0, -1, 0);
 			sceneNode->attachObject(item);
-
-			//Change the addressing mode of the roughness map to wrap via code.
-			//Detail maps default to wrap, but the rest to clamp.
-			assert(dynamic_cast<Ogre::HlmsPbsDatablock*>(item->getSubItem(0)->getDatablock()));
-			Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
-				item->getSubItem(0)->getDatablock());
-			//Make a hard copy of the sampler block
-			Ogre::HlmsSamplerblock samplerblock(*datablock->getSamplerblock(Ogre::PBSM_ROUGHNESS));
-			samplerblock.mU = Ogre::TAM_WRAP;
-			samplerblock.mV = Ogre::TAM_WRAP;
-			samplerblock.mW = Ogre::TAM_WRAP;
-			//Set the new samplerblock. The Hlms system will
-			//automatically create the API block if necessary
-			datablock->setSamplerblock(Ogre::PBSM_ROUGHNESS, samplerblock);
 		}
 
 		Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
@@ -130,12 +117,25 @@ namespace ZS
 
 
 		createMusicUI();
+		createGameUI();
 		//createShadowMapDebugOverlays();
 
 		// Scene fly over controller
 		//mCameraController = new CameraController(mGraphicsSystem, false);
 		// Camera path following controller
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
+
+		{
+			Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);
+			bill->setRenderQueueGroup(10);
+			bill->setMaterialName("SwordA", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+			Ogre::SceneNode* billScene = sceneManager->getRootSceneNode()->createChildSceneNode(Ogre::SCENE_DYNAMIC);
+			billScene->attachObject(bill);
+			Ogre::v1::Billboard* sunBillboard = bill->createBillboard(
+				Ogre::Vector3(0, 1.0f, 0));
+			sunBillboard->setDimensions(1.0, 1.0);
+		}
+		
 
 		DebugGameState::createScene01();
 
@@ -149,6 +149,12 @@ namespace ZS
 		musicUIManager->createMusicUI();
 		musicUIManager->showMusicUI(true);
     }
+	void ZSGraphicsGameState::createGameUI() {
+		gameUIManager = new GameUIManager();
+		gm->bindGameUIManager(gameUIManager);
+		gameUIManager->createGameUI();
+		gameUIManager->showGameUI(true);
+	}
 	//-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
     {

@@ -16,30 +16,30 @@ namespace ZS {
 		switch(cst) {
 			case CST_IDLE:
 				enemy->isMoving = false;
-				//ent->animationController->startAnimation("swordIdle_6");
+				ent->animationController->startAnimation("Idle");
 				break;
 			case CST_WALK:
-				//ent->animationController->startAnimation("walk_0");
+				ent->animationController->startAnimation("Walk");
 				break;
 			case CST_RUN:
 				enemy->isMoving = true;
-				//ent->animationController->startAnimation("swordRun_1");
+				ent->animationController->startAnimation("Run");
 				break;
 			case CST_ATTACK:
 				enemy->isMoving = false;
-				//ent->animationController->startAnimation("attack1_2");
+				ent->animationController->startAnimation("Attack1");
 				break;
 			case CST_SKILL:
-				//ent->animationController->startAnimation("attack2_3");
+				ent->animationController->startAnimation("Attack2");
 				break;
 			case CST_DEFENSE:
-				//ent->animationController->startAnimation("block_4");
+				ent->animationController->startAnimation("Block");
 				break;
 			case CST_DODGE:
-				//ent->animationController->startAnimation("dodge_5");
+				ent->animationController->startAnimation("Dodge");
 				break;
 			case CST_DEAD:
-				//ent->animationController->startAnimation("dead_7");
+				ent->animationController->startAnimation("Dead");
 				break;
 			default:
 				break;
