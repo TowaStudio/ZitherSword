@@ -3,7 +3,9 @@
 namespace ZS {
 
 	Trigger::Trigger() :
-		eventCount(0) {
+		eventVec(std::vector<Event*>()),
+		eventCount(0)
+	{
 	}
 
 	Trigger::~Trigger() {
@@ -21,5 +23,10 @@ namespace ZS {
 	}
 
 	void Trigger::execute() {
+		if(eventCount > 0) {
+			for(auto itr = eventVec.begin(); itr != eventVec.end(); ++itr) {
+				(*itr)->execute();
+			}
+		}
 	}
 }
