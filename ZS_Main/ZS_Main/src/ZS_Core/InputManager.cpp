@@ -43,12 +43,28 @@ namespace ZS {
 			case SDLK_3:
 				AudioSystem::GetInstance()->stopMusic(false);
 				break;
-			case SDLK_i:
+			case SDLK_3:
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_IDLE);
+				break;
+			case SDLK_4:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_RUN);
 				break;
-			case SDLK_o:
+			case SDLK_5:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_ATTACK);
 				break;
+			case SDLK_6:
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_DEAD);
+				break;
+			case SDLK_7:
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_DEFENSE);
+				break;
+			case SDLK_8:
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_DODGE);
+				break;
+			case SDLK_9:
+				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeState(CST_SKILL);
+				break;
+
 			//_DEBUG_
 			default:
 				break;

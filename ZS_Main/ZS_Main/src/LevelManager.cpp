@@ -111,6 +111,9 @@ namespace ZS {
 		initLevel();
 	}
 
+	void LevelManager::prepareResources() {
+		//TODO: Preload enemies' mesh file to avoid the lag in game.
+	}
 	Ogre::String getFileName(Ogre::String fileName) { // TODO where to put it??
 		char buffer[MAX_PATH];
 		GetCurrentDirectory(MAX_PATH, buffer);
@@ -221,7 +224,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 2;
+		int initObjectCount = 3;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -250,6 +253,20 @@ namespace ZS {
 		}
 
 		{ // 2
+			MovableObjectDefinition* moSword = new MovableObjectDefinition();
+			moSword->meshName = "sword.mesh";
+			moSword->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
+			moSword->moType = MoTypeItem;
+
+			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
+												 , nullptr
+												 , Vec3(0.0f, 0.0f, 0.0f)
+												 , Ogre::Quaternion::IDENTITY
+												 , Vec3(0.6f, 0.6f, 0.6f));
+		}
+
+		{ // 3
 		  // Create Swordsman
 			MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
 			moEnemy->meshName = "enemy1.mesh";
@@ -288,10 +305,6 @@ namespace ZS {
 		levelState = LST_PLAY;
 	}
 
-	void LevelManager::prepareResources() {
-		//TODO: Preload enemies' mesh file to avoid the lag in game.
-	}
-
 	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
 		//Update Controllers
 		//TODO: Character controllers
@@ -300,11 +313,12 @@ namespace ZS {
 		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {
 			for(auto itr = mGameEntities[Ogre::SCENE_DYNAMIC].begin(), end = mGameEntities[Ogre::SCENE_DYNAMIC].end(); itr != end; ++itr) {
 				//Update the internal model
-				if((*itr)->behaviour)
-					(*itr)->behaviour->update(timeSinceLast);
+				if((*itr)->behaviour != nullptr) {
 
-				//Update scene model
-				(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
+					(*itr)->behaviour->update(timeSinceLast);
+					//Update scene model
+					(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
+				}
 			}
 		}
 

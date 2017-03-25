@@ -7,6 +7,7 @@
 #include "GameMaster.h"
 #include "OgreOverlayPrerequisites.h"
 #include "MusicUIManager.h"
+#include "GameUIManager.h"
 
 namespace ZS
 {
@@ -19,6 +20,7 @@ namespace ZS
 
         GameMaster* gm;
 		MusicUIManager* musicUIManager;
+		GameUIManager* gameUIManager;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 		
 	public:
@@ -28,6 +30,7 @@ namespace ZS
 
 	    virtual void createScene01(void);
 		void createMusicUI();
+		void createGameUI();
 		virtual void update( float timeSinceLast );
 
 		virtual void keyPressed(const SDL_KeyboardEvent& arg);

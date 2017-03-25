@@ -16,12 +16,17 @@ namespace ZS {
 		Ogre::v1::OverlayManager& overlayManager;
 		Ogre::v1::Overlay* uiMusic;
 		Ogre::v1::OverlayContainer* uiBackground;
+		Ogre::v1::OverlayContainer* uiSegmentLineGroup;
 
 		static float BAR_LENGTH;
 		static float BAR_OFFSET;
 		Ogre::v1::OverlayElement* uiScanline;
 		float currentScanlinePos;
 		float scanlineSpeed;
+
+		static float SEGMENT_OFFSET_X;
+		static float SEGMENT_OFFSET_Y;
+		static float SEGMENT_INTERVAL;
 
 		static float VERTICAL_OFFSET_DO;
 		static float VERTICAL_OFFSET_RE;

@@ -86,7 +86,7 @@
     <ClInclude Include="include\AnimationController.h" />
     <ClInclude Include="include\CharacterController.h" />
     <ClInclude Include="include\SwordsmanController.h" />
-    <ClInclude Include="src\EnemyAController.h" />
+    <ClInclude Include="include\EnemyAController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EnemyAController.cpp" />
