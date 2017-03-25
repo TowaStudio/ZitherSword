@@ -157,7 +157,7 @@ namespace ZS {
 	int AudioSystem::identifySequence() {
 		
 		if (!patterns) {
-			GameMaster::GetInstance()->log("Error");
+			//GameMaster::GetInstance()->log("Error");
 			return -1;
 		}
 		for (int p = 0; p < patterns->size(); p++) {
@@ -173,11 +173,11 @@ namespace ZS {
 				}
 			}
 			if (match) {
-				GameMaster::GetInstance()->log("Success");
+				//GameMaster::GetInstance()->log("Success");
 				return p; // return the index of pattern
 			}
 		}
-		GameMaster::GetInstance()->log("Fail");
+		//GameMaster::GetInstance()->log("Fail");
 		return -1; // No match
 	}
 
@@ -315,7 +315,7 @@ namespace ZS {
 
 					// identify sequence
 					int res = identifySequence();
-					GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
+					//GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
 					// TODO return the action to core
 
 					// reset input buffer

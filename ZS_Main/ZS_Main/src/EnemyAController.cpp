@@ -10,39 +10,86 @@ namespace ZS {
 	EnemyAController::~EnemyAController() {
 	}
 
-	void EnemyAController::changeState(ControlState _cst) {
-		cst = _cst;
+	void EnemyAController::changeActionState() {
+
+		// get d
+		// TODO how to get distance
+		d = 3;
 
 		switch(cst) {
 			case CST_IDLE:
-				enemy->isMoving = false;
-				ent->animationController->startAnimation("Idle");
+				changeAstTo(cst);
 				break;
 			case CST_WALK:
-				ent->animationController->startAnimation("Walk");
+				if (d > runThres)
+					changeAstTo(cst);
+				else
+					changeAstTo(CST_IDLE);
 				break;
 			case CST_RUN:
-				enemy->isMoving = true;
-				ent->animationController->startAnimation("Run");
+				if (d > runThres)
+					changeAstTo(cst);
+				else 
+					changeAstTo(CST_IDLE);
 				break;
 			case CST_ATTACK:
-				enemy->isMoving = false;
-				ent->animationController->startAnimation("Attack1");
+				if (d < attackThres)
+					changeAstTo(cst);
+				else
+					changeAstTo(CST_RUN);
 				break;
 			case CST_SKILL:
-				ent->animationController->startAnimation("Attack2");
+				changeAstTo(cst);
 				break;
 			case CST_DEFENSE:
-				ent->animationController->startAnimation("Block");
+				changeAstTo(cst);
 				break;
 			case CST_DODGE:
-				ent->animationController->startAnimation("Dodge");
+				changeAstTo(cst);
 				break;
 			case CST_DEAD:
-				ent->animationController->startAnimation("Dead");
+				changeAstTo(cst);
 				break;
 			default:
 				break;
+		}
+	}
+
+	void EnemyAController::changeAstTo(ControlState _ast) {
+
+		if (_ast == ast) return;
+
+		ast = _ast;
+		switch (ast) {
+		case CST_IDLE:
+			enemy->isMoving = false;
+			ent->animationController->startAnimation("Idle");
+			break;
+		case CST_WALK:
+			ent->animationController->startAnimation("Walk");
+			break;
+		case CST_RUN:
+			enemy->isMoving = true;
+			ent->animationController->startAnimation("Run");
+			break;
+		case CST_ATTACK:
+			enemy->isMoving = false;
+			ent->animationController->startAnimation("Attack1");
+			break;
+		case CST_SKILL:
+			ent->animationController->startAnimation("Attack2");
+			break;
+		case CST_DEFENSE:
+			ent->animationController->startAnimation("Block");
+			break;
+		case CST_DODGE:
+			ent->animationController->startAnimation("Dodge");
+			break;
+		case CST_DEAD:
+			ent->animationController->startAnimation("Dead");
+			break;
+		default:
+			break;
 		}
 	}
 }

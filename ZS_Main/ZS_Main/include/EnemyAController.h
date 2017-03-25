@@ -8,11 +8,17 @@ namespace ZS {
 	private:
 		Enemy* enemy;
 
+		float d; // distance to the player
+		const float attackThres = 5.0f; // thres for attack
+		const float runThres = 1.0f; // thres for run
+
+		void changeAstTo(ControlState _ast) override;
+
 	public:
 		EnemyAController(GameEntity* _entEnemy);
 		~EnemyAController();
 
-		virtual void changeState(ControlState _cst);
+		void changeActionState() override;
 
 	};
 

@@ -15,10 +15,23 @@ namespace ZS {
 		NUM_CONTROL_STATE
 	};
 
+	/*enum ActionState {
+		AST_IDLE = 0, 
+		AST_WALK, 
+		AST_RUN, 
+		AST_ATTACK, 
+		AST_SKILL, 
+		AST_DEFENSE, 
+		AST_DODGE, 
+		AST_DEAD, 
+		NUM_ACTION_STATE
+	};*/
+
 	class CharacterController {
 	protected:
 		GameEntity* ent;
 		ControlState cst;
+		ControlState ast;
 
 	public:
 		CharacterController(GameEntity* _ent) :
@@ -29,8 +42,17 @@ namespace ZS {
 		}
 		virtual ~CharacterController() {}
 
-		virtual void changeState(ControlState _cst) {
+		void changeControlState(ControlState _cst) {
 			cst = _cst;
+		}
+
+		virtual void changeActionState() { // call in update
+			ast = cst;
+		}
+
+	protected:
+		virtual void changeAstTo(ControlState _ast) {
+			ast = _ast;
 		}
 	};
 }

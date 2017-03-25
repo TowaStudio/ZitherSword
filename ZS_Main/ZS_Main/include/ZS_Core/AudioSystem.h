@@ -43,7 +43,7 @@ namespace ZS {
 
 	private:
 		// editing variables
-		const String directory = "D:/Program.Houdou/OGRE/Projects/ZitherSword/ZS_Main/Assets/Audio/";
+		const String directory = "F:/ZitherSword/ZS_Main/Assets/Audio/";
 		//const int noteGroup[7] = { 1, 2, 3, 4, 5, 6, 7 }; // INTERNAL USE: for loading the music files
 
 		// setting variables
