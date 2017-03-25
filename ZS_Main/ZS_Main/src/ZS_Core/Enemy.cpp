@@ -26,11 +26,11 @@ namespace ZS {
 
 	}
 
-	HitInfo Enemy::attack() {
+	HitInfo Enemy::attack(Unit* target) {
 		//TODO: Scene Query to test attack range.
 
 		//DEBUG
-		Swordsman* player = GameMaster::GetInstance()->getLevelManager()->GetSwordsman();
+		Swordsman* player = GameMaster::GetInstance()->getLevelManager()->getSwordsman();
 		//Calculate dmg
 		float dmg = 200.0f;
 		player->damage(dmg);

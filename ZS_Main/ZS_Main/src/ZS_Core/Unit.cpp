@@ -14,7 +14,8 @@ namespace ZS {
 		, sp(_sp), maxsp(_maxsp)
 		, str(_str), def(_def), spd(_spd)
 		, status(_status), currentPathPointIndex(-1), progress(_progress)
-		, path(nullptr), moveVec(_moveVec), isMoving(false) {
+		, path(nullptr), moveVec(_moveVec), isMoving(false)
+		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
 	}
 
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
@@ -23,14 +24,29 @@ namespace ZS {
 		, sp(_stats.sp), maxsp(_stats.maxsp)
 		, str(_stats.str), def(_stats.def), spd(_stats.spd)
 		, status(_stats.status), currentPathPointIndex(-1), progress(_progress)
-		, path(nullptr), moveVec(_moveVec), isMoving(false) {
+		, path(nullptr), moveVec(_moveVec), isMoving(false)
+		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
 	}
 
 	Unit::~Unit() {
 	}
 
-	HitInfo Unit::attack() {
-		return HitInfo();
+	HitInfo Unit::attack(Unit* target) {
+		//TODO: Scene Query and get enemy list;
+		HitInfo hit;
+		if(target != nullptr) {
+			hit.source = this;
+			hit.target = target;
+			hit.dmg = Unit::CalculateDamage(this, target);
+			hit.isCritical = false; // TODO: random critical
+			hit.isFatal = hit.dmg >= target->hp;
+			hit.valid = false;
+
+			gm->log(name + " hit " + target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
+		}
+
+		attackTimer = 1.0f / (weapon == nullptr ? 0.5f : weapon->rate);
+		return hit;
 	}
 
 	void Unit::bindPath(Path* _path) {
@@ -71,6 +87,10 @@ namespace ZS {
 		return pos;
 	}
 
+	void Unit::useWeapon(Weapon* _weapon) {
+		weapon = _weapon;
+	}
+
 	// BATTLE
 	void Unit::heal(float amount) {
 		hp += amount;
@@ -90,17 +110,28 @@ namespace ZS {
 		return false;
 	}
 
-	float Unit::DamageCalculate(Unit* source, Unit* target) {
-		float dmg;
-		dmg = std::max(1.0f, source->str - target->def);
+	float Unit::CalculateDamage(Unit* source, Unit* target) {
 		//TODO: Full damage calculation;
+		float dmg = 0.0f;
+
+		if(source->weapon == nullptr) {
+			dmg = source->str - target->def;
+		} else {
+			dmg = source->str + source->weapon->atk - target->def;
+		}
+		
+		// Minimal 1 damage
+		dmg = std::max(1.0f, dmg);
+
 		return dmg;
 	}
 
-	float Unit::DamageCalculate(FlyingProps* source, Unit* target) {
-		float dmg;
-		dmg = std::max(1.0f, source->atk - target->def);
+	float Unit::CalculateDamage(FlyingProps* source, Unit* target) {
 		//TODO: Full damage calculation (Flying props);
+		float dmg = 0.0f;
+
+		dmg = std::max(1.0f, source->atk - target->def);
+		
 		return dmg;
 	}
 }

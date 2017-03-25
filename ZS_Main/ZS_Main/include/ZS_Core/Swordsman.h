@@ -20,7 +20,7 @@ namespace ZS {
 		int exp;
 
 		HitInfo skill();
-		HitInfo attack() override;
+		virtual HitInfo attack(Unit* target) override;
 		void heal(float amount) override;
 		void update(float timeSinceLast);
 	};

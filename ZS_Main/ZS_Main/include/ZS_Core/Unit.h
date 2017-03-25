@@ -11,6 +11,7 @@
 #include "Stats.h"
 #include "FlyingProps.h"
 #include "Path.h"
+#include "Weapon.h"
 
 namespace ZS {
 
@@ -37,19 +38,25 @@ namespace ZS {
 		Vec3 moveVec;
 		bool isMoving;
 
+		Weapon* weapon;
+		bool isAttacking;
+		float attackTimer;
+
 		// MOVEMENT
 		void bindPath(Path* _path);
 		Vec3 move(float _scale = 1.0f);
 		Vec3 move(Vec3 _movement);
 		Vec3 moveTo(Vec3 _pos);
 		// BATTLE
-		virtual HitInfo attack();
+		void useWeapon(Weapon* _weapon);
+
+		virtual HitInfo attack(Unit* target);
 		virtual void heal(float amount);
 		bool damage(float dmg);
 		
 
-		static float DamageCalculate(Unit* source, Unit* target);
-		static float DamageCalculate(FlyingProps* source, Unit* target);
+		static float CalculateDamage(Unit* source, Unit* target);
+		static float CalculateDamage(FlyingProps* source, Unit* target);
 	};
 }
 

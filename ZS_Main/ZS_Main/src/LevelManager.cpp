@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "GraphicsSystem.h"
 #include "EnemyAController.h"
+#include "GenerateEnemyEvent.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
@@ -14,7 +15,7 @@ namespace ZS {
 	LevelManager::LevelManager(GraphicsSystem* _graphicsSystem, LogicSystem* _logicSystem) :
 		gm(GameMaster::GetInstance()),
 		level(-1), levelState(LST_NOT_IN_LEVEL),
-		unitsCount(0), jointCount(0),
+		unitsCount(0), itemsCount(0),
 		unitVec(std::vector<Unit*>()),
 		levelPath(nullptr), cameraPath(nullptr),
 		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
@@ -57,12 +58,8 @@ namespace ZS {
 		return unitsCount++;
 	}
 
-	int LevelManager::getJointID() {
-		return jointCount++;
-	}
-
-	Swordsman* LevelManager::GetSwordsman() const {
-		return swordsman;
+	int LevelManager::getItemID() {
+		return itemsCount++;
 	}
 
 	Path* LevelManager::getLevelPath() {
@@ -93,6 +90,12 @@ namespace ZS {
 		//_DEBUG_
 		levelPath->addPoint(Vec3(0.0f, 0.0f, 0.0f));
 		levelPath->addPoint(Vec3(10.0f, 0.0f, 0.0f));
+		
+		GenerateEnemyEvent* gee = new GenerateEnemyEvent(Vec3(12.0f, 0.0f, 0.0f));
+		Trigger* trigger = new Trigger();
+		trigger->addEvent(gee);
+		levelPath->getPoint(1)->addTrigger(trigger);
+
 		levelPath->addPoint(Vec3(15.0f, 0.0f, -7.0f));
 		levelPath->addPoint(Vec3(20.0f, 0.0f, 0.0f));
 		levelPath->addPoint(Vec3(25.0f, 0.0f, 0.0f));
@@ -260,11 +263,15 @@ namespace ZS {
 			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 			moSword->moType = MoTypeItem;
 
+			Weapon* sword = new Weapon(getItemID(), 80.0f, 0.5f, 1.0f);
+
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
-												 , nullptr
+												 , sword
 												 , Vec3(0.0f, 0.0f, 0.0f)
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
+
+			swordsman->useWeapon(sword);
 
 			BindDefinition* bo = new BindDefinition();
 			bo->source = entSword;
@@ -308,13 +315,14 @@ namespace ZS {
 
 		//Update game entities
 		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {
-			for(auto itr = mGameEntities[Ogre::SCENE_DYNAMIC].begin(), end = mGameEntities[Ogre::SCENE_DYNAMIC].end(); itr != end; ++itr) {
+			for(auto i = 0; i < mGameEntities[Ogre::SCENE_DYNAMIC].size(); ++i) {
+				GameEntity* ent = mGameEntities[Ogre::SCENE_DYNAMIC][i];
 				//Update the internal model
-				if((*itr)->behaviour != nullptr) {
+				if(ent->behaviour != nullptr && ent->mSceneNode != nullptr) {
 
-					(*itr)->behaviour->update(timeSinceLast);
+					ent->behaviour->update(timeSinceLast);
 					//Update scene model
-					(*itr)->mTransform[currIdx]->vPos = (*itr)->behaviour->pos;
+					ent->mTransform[currIdx]->vPos = ent->behaviour->pos;
 				}
 			}
 		}
@@ -342,6 +350,11 @@ namespace ZS {
 		EnemyAController* ccEnemy = new EnemyAController(entEnemy, unitID);
 		return ccEnemy;
 	}
+
+	Swordsman* LevelManager::getSwordsman() {
+		return swordsman;
+	}
+
 	Unit* LevelManager::getEnemy(int unitID) {
 		Unit* enemy = nullptr;
 		for(auto itr = unitVec.begin(); itr != unitVec.end(); ++itr) {

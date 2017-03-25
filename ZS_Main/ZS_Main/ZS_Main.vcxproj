@@ -89,6 +89,7 @@
     <ClInclude Include="include\EnemyAController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ZS_Core\GenerateEnemyEvent.cpp" />
     <ClCompile Include="src\EnemyAController.cpp" />
     <ClCompile Include="src\ZS_Core\PathPoint.cpp" />
     <ClCompile Include="src\CameraPathController.cpp" />

@@ -1,9 +1,8 @@
 /**
  * Project ZS
  */
-
-
 #include "GameObject.h"
+#include "GameMaster.h"
 
 namespace ZS {
 
@@ -14,6 +13,7 @@ namespace ZS {
 	 */
 	GameObject::GameObject(const std::string& _name, Tag _tag, Vec3 _pos) :
 		Behaviour(_pos),
+		gm(GameMaster::GetInstance()),
 		name(_name), tag(_tag)
 	{
 		

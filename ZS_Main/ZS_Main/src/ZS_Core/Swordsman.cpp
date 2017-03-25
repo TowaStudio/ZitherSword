@@ -14,12 +14,13 @@ namespace ZS {
 	* Swordsman implementation
 	*/
 	Swordsman::Swordsman(PlayerStats stats, Vec3 startPos, float startProgress) :
-		Unit("Swordsman", Tag::PLAYER, startPos, GameMaster::GetInstance()->getLevelManager()->getUnitID()
-		     , stats.hp, stats.maxhp
-		     , stats.sp, stats.maxsp
-		     , stats.str, stats.def, stats.spd, stats.status, startProgress),
+		Unit("Swordsman", Tag::PLAYER, -startPos, GameMaster::GetInstance()->getLevelManager()->getUnitID()
+			 , stats.hp, stats.maxhp
+			 , stats.sp, stats.maxsp
+			 , stats.str, stats.def, stats.spd, stats.status, startProgress),
 		level(stats.level),
-		exp(stats.exp) {
+		exp(stats.exp)
+	{
 
 	}
 
@@ -33,9 +34,8 @@ namespace ZS {
 		return HitInfo();
 	}
 
-	HitInfo Swordsman::attack() {
-		//TODO: Scene Query and get enemy list;
-		return HitInfo();
+	HitInfo Swordsman::attack(Unit* target) {
+		return Unit::attack(target);
 	}
 
 	void Swordsman::heal(float amount) {
@@ -44,8 +44,20 @@ namespace ZS {
 	}
 
 	void Swordsman::update(float timeSinceLast) {
-		if(isMoving)
+		if(isMoving) {
 			move(timeSinceLast);
+		}
+			
+		if(isAttacking) {
+			if(attackTimer < 0.0f) {
+				Unit* enemy = gm->getLevelManager()->getClosestEnemy(progress, weapon == nullptr ? 0.5f : weapon->range);
+				attack(enemy);
+			}
+				
+			else
+				attackTimer -= timeSinceLast;
+		}
+			
 		//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
 	}
 }

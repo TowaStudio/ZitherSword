@@ -76,7 +76,7 @@ namespace ZS {
 
 		std::vector<Unit*> unitVec;
 		int unitsCount;
-		int jointCount;
+		int itemsCount;
 
 		Path* levelPath;
 		Path* cameraPath;
@@ -121,9 +121,8 @@ namespace ZS {
 		~LevelManager();
 
 		int getUnitID();
-		int getJointID();
+		int getItemID();
 
-		Swordsman* GetSwordsman() const;
 		Path* getLevelPath();
 		Path* getCameraPath();
 		void loadLevel(int level);
@@ -134,6 +133,8 @@ namespace ZS {
 
 		void update(const size_t currIdx, float timeSinceLast);
 		CharacterController* createEnemy(Vec3 pos);
+
+		Swordsman* getSwordsman(); 
 		Unit* getEnemy(int unitID);
 		Unit* getClosestEnemy(float _pos, float threshold);
 

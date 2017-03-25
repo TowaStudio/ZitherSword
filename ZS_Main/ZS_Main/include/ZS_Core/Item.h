@@ -13,6 +13,10 @@ namespace ZS {
 	class Item : public GameObject {
 	public:
 		int id;
+
+		Item(std::string _name, int _id);
+		~Item();
+		
 	};
 }
 
