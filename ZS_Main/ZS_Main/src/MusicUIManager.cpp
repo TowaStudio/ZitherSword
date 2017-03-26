@@ -172,7 +172,7 @@ namespace ZS {
 
 		Ogre::v1::OverlayElement* note = static_cast<Ogre::v1::OverlayElement*>(
 			overlayManager.createOverlayElement("Panel", "MusicUINote" + Ogre::StringConverter::toString(++currentNoteCount, 3, '0')));
-		GameMaster::GetInstance()->log("MusicUINote" + Ogre::StringConverter::toString(++totalNoteCount, 3, '0'));
+		//GameMaster::GetInstance()->log("MusicUINote" + Ogre::StringConverter::toString(++totalNoteCount, 3, '0'));
 		note->setMaterialName(noteDisplayMaterial);
 		note->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
 		note->setPosition((currentScanlinePos + BAR_OFFSET) * 1280.0f / 720.0f - 250.0f, verticalOffset);

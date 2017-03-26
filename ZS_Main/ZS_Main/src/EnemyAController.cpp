@@ -81,10 +81,10 @@ namespace ZS {
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
-			ent->animationController->startAnimation("enemyAtk2-3");
+			ent->animationController->startAnimation("enemyAtk2_3");
 			break;
 		case CST_SKILL:
-			ent->animationController->startAnimation("enemyAtk1-2");
+			ent->animationController->startAnimation("enemyAtk1_2");
 			break;
 		case CST_DEFENSE:
 			ent->animationController->startAnimation("Block");

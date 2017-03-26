@@ -3,6 +3,7 @@
  */
 #include "AudioSystem.h"
 #include "GameMaster.h"
+#include "EnemyAController.h"
 
 namespace ZS {
 	/**
@@ -203,19 +204,19 @@ namespace ZS {
 		NoteSeq  b3(16, REST);
 		NoteSeq  b4(16, REST);
 		NoteSeq  b5(16, REST);
-		b0[0] = DO; b0[4] = DO; b0[8] = DO; b0[12] = DO;
-		b1[0] = RE; b1[4] = RE; b1[8] = RE; b1[12] = RE;
-		b2[0] = MI; b2[4] = MI; b2[8] = MI; b2[12] = MI;
-		b3[0] = SO; b3[4] = SO; b3[8] = SO; b3[12] = SO;
-		b4[0] = LA; b4[4] = LA; b4[8] = LA; b4[12] = LA;
-		b5[0] = REST; b5[4] = REST; b5[8] = REST; b5[12] = REST;
+		b0[0] = DO; //b0[4] = DO; b0[8] = DO; b0[12] = DO;
+		b1[0] = RE; //b1[4] = RE; b1[8] = RE; b1[12] = RE;
+		b2[0] = MI; //b2[4] = MI; b2[8] = MI; b2[12] = MI;
+		b3[0] = SO; //b3[4] = SO; b3[8] = SO; b3[12] = SO;
+		b4[0] = LA; //b4[4] = LA; b4[8] = LA; b4[12] = LA;
+		//b5[0] = REST; b5[4] = REST; b5[8] = REST; b5[12] = REST;
 		Patterns* a = new Patterns();
 		a->push_back(b0);
 		a->push_back(b1);
 		a->push_back(b2);
 		a->push_back(b3);
 		a->push_back(b4);
-		a->push_back(b5);
+		//a->push_back(b5);
 		musicSetup(1, a, 4, 0, 150);
 
 	}
@@ -315,8 +316,9 @@ namespace ZS {
 
 					// identify sequence
 					int res = identifySequence();
-					//GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
-					// TODO return the action to core
+					GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
+					GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(static_cast<ControlState>(res));
+					reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);
