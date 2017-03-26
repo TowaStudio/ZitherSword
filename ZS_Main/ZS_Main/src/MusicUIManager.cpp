@@ -6,7 +6,7 @@ namespace ZS {
 	//Initialize
 	MusicUIManager::MusicUIManager() :
 		Behaviour(Vec3::ZERO),
-		isEnabled(false),
+		isEnabled(false), isInBar(false), bpm(0),
 		overlayManager(Ogre::v1::OverlayManager::getSingleton()),
 		uiMusic(nullptr),
 		uiBackground(nullptr), uiSegmentLineGroup(nullptr),
@@ -109,7 +109,10 @@ namespace ZS {
 		}
 	}
 
-	void MusicUIManager::run() {
+	void MusicUIManager::run(int _bpm) {
+		bpm = _bpm;
+		scanlineSpeed = BAR_LENGTH * static_cast<float>(bpm) / 240.0f;
+		currentScanlinePos = BAR_PRE_OFFSET;
 		isEnabled = true;
 	}
 
@@ -124,13 +127,26 @@ namespace ZS {
 	}
 
 	float MusicUIManager::BAR_LENGTH = 2400;
+	float MusicUIManager::BAR_PRE_OFFSET = BAR_LENGTH / 4.0f;
+	float MusicUIManager::BAR_POST_OFFSET = BAR_LENGTH / 4.0f;
 	float MusicUIManager::BAR_OFFSET = 2000;
 
 	void MusicUIManager::scanlineLoop(float timesinceLast) {
-		float nextScanlinePos = fmodf(currentScanlinePos + scanlineSpeed * timesinceLast, BAR_LENGTH);
+		float nextScanlinePos = fmodf(currentScanlinePos + scanlineSpeed * timesinceLast, 2 * BAR_LENGTH);
 		if(nextScanlinePos < currentScanlinePos)
 			clearNotes();
-		uiScanline->setLeft((nextScanlinePos + BAR_OFFSET) * 1280.0f / 720.0f);
+		uiScanline->setLeft((nextScanlinePos + BAR_OFFSET - BAR_PRE_OFFSET) * 1280.0f / 720.0f);
+
+		if(nextScanlinePos < BAR_PRE_OFFSET / 3.0f || nextScanlinePos > BAR_PRE_OFFSET + BAR_LENGTH + BAR_POST_OFFSET * 0.666f)
+			isInBar = false;
+		else
+			isInBar = true;
+
+		if(nextScanlinePos > BAR_PRE_OFFSET + BAR_LENGTH + BAR_POST_OFFSET)
+			uiScanline->hide();
+		else
+			uiScanline->show();
+
 		currentScanlinePos = nextScanlinePos;
 	}
 
@@ -141,7 +157,7 @@ namespace ZS {
 	float MusicUIManager::VERTICAL_OFFSET_LA = 200.0f;
 
 	void MusicUIManager::addNote(NoteName _noteName) {
-		if(!isEnabled) return;
+		if(!isEnabled || !isInBar) return;
 
 		Ogre::String noteDisplayMaterial;
 		float verticalOffset;
@@ -175,7 +191,7 @@ namespace ZS {
 		//GameMaster::GetInstance()->log("MusicUINote" + Ogre::StringConverter::toString(++totalNoteCount, 3, '0'));
 		note->setMaterialName(noteDisplayMaterial);
 		note->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-		note->setPosition((currentScanlinePos + BAR_OFFSET) * 1280.0f / 720.0f - 250.0f, verticalOffset);
+		note->setPosition((currentScanlinePos + BAR_OFFSET - BAR_PRE_OFFSET) * 1280.0f / 720.0f - 250.0f, verticalOffset);
 		note->setDimensions(500.0f, 500.0f);
 		uiNotesVec.push_back(note);
 		uiNotesGroup->addChild(note);

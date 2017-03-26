@@ -32,7 +32,7 @@ namespace ZS {
 			currentAnim->setEnabled(true);
 		}
 
-		currentAnim->mFrameRate = 3.0f;
+		currentAnim->mFrameRate = 4.0f;
 	}
 
 	void AnimationController::stopAnimation() {

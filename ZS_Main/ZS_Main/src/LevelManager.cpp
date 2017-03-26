@@ -312,7 +312,7 @@ namespace ZS {
 		//TODO: Start audio system and input manager;
 		InputManager* inputManager = gm->getInputManager();
 
-		gm->getMusicUIManager()->run();
+		gm->getMusicUIManager()->run(AudioSystem::GetInstance()->getBpm());
 		AudioSystem::GetInstance()->startMusic();
 
 		// Set default animation
