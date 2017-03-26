@@ -12,6 +12,8 @@ namespace ZS {
 	class MusicUIManager : public Behaviour {
 	private:
 		bool isEnabled;
+		bool isInBar;
+		int bpm;
 
 		Ogre::v1::OverlayManager& overlayManager;
 		Ogre::v1::Overlay* uiMusic;
@@ -20,6 +22,8 @@ namespace ZS {
 
 		static float BAR_LENGTH;
 		static float BAR_OFFSET;
+		static float BAR_PRE_OFFSET;
+		static float BAR_POST_OFFSET;
 		Ogre::v1::OverlayElement* uiScanline;
 		float currentScanlinePos;
 		float scanlineSpeed;
@@ -47,7 +51,7 @@ namespace ZS {
 
 		void createMusicUI();
 		void showMusicUI(bool _show);
-		void run();
+		void run(int _bpm);
 		void stop();
 		void update(float timeSinceLast);
 

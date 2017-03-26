@@ -30,7 +30,7 @@
 #include "AnimationController.h"
 #include "ZSGraphicsGameState.h"
 #include "OgreMeshManager2.h"
-#include "../../../../../../SDK/OgreMain/include/OgreMesh2.h"
+#include "OgreMesh2.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -772,7 +772,7 @@ namespace ZS
             gEnt->mSceneNode->setOrientation( interpQ );
 
 			if(gEnt->hasAnimation && gEnt->animationController->isEnabled)
-				gEnt->animationController->update(0.016f);
+				gEnt->animationController->update(0.016f * mThreadWeight);
 
             ++itor;
         }
