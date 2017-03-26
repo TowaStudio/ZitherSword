@@ -7,11 +7,11 @@
 namespace ZS {
 	class GenerateEnemyEvent : public Event {
 	private:
-		Vec3 pos;
+		float progress; 
 		EnemyVec enemyVec;
 
 	public:
-		GenerateEnemyEvent(Vec3 _pos);
+		GenerateEnemyEvent(float _progress);
 		virtual ~GenerateEnemyEvent();
 
 		void addEnemy(Enemy* enemy);
