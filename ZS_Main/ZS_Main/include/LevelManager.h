@@ -132,7 +132,7 @@ namespace ZS {
 		void prepareResources();
 
 		void update(const size_t currIdx, float timeSinceLast);
-		CharacterController* createEnemy(Vec3 pos);
+		CharacterController* createEnemy(float progress);
 
 		Swordsman* getSwordsman(); 
 		Unit* getEnemy(int unitID);

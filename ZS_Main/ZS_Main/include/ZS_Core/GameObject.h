@@ -25,7 +25,7 @@ namespace ZS
 		GameMaster* gm;
 
 	public:
-		GameObject(const std::string& name, Tag tag, Vec3 pos);
+		GameObject(const std::string& name, Tag tag, Vec3 pos, Ogre::Quaternion rot = Ogre::Quaternion::IDENTITY);
 		virtual ~GameObject();
 
 		virtual void update(float timeSinceLast) {}

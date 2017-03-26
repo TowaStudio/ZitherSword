@@ -13,7 +13,7 @@ namespace ZS {
 
 	class Swordsman : public Unit {
 	public:
-		Swordsman(PlayerStats stats, Vec3 startPos, float startProgress);
+		Swordsman(PlayerStats stats, Vec3 startPos, Ogre::Quaternion startRot, float startProgress);
 		~Swordsman();
 
 		int level;

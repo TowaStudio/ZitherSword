@@ -7,9 +7,9 @@
 #include "GameMaster.h"
 
 namespace ZS {
-	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos
-		, int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, float _progress, Vec3 _moveVec) :
-		GameObject(_name, _tag, _pos), id(_id)
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, Ogre::Quaternion _rot
+			   , int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, float _progress, Vec3 _moveVec) :
+		GameObject(_name, _tag, _pos, _rot), id(_id)
 		, hp(_hp), maxhp(_maxhp)
 		, sp(_sp), maxsp(_maxsp)
 		, str(_str), def(_def), spd(_spd)
@@ -18,8 +18,8 @@ namespace ZS {
 		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
 	}
 
-	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
-		GameObject(_name, _tag, _pos), id(_id)
+	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, Ogre::Quaternion _rot, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
+		GameObject(_name, _tag, _pos, _rot), id(_id)
 		, hp(_stats.hp), maxhp(_stats.maxhp)
 		, sp(_stats.sp), maxsp(_stats.maxsp)
 		, str(_stats.str), def(_stats.def), spd(_stats.spd)
@@ -72,6 +72,9 @@ namespace ZS {
 			progress = nextProgress;
 
 			moveVec = path->getPosInPath(progress) - pos;
+			Ogre::Quaternion q;
+			q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) - Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+			rot = q;
 		}
 		pos += moveVec;
 		return pos;

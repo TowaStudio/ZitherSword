@@ -17,8 +17,8 @@ namespace ZS {
 
 	class Unit : public GameObject {
 	public:
-		Unit(const std::string& name, Tag tag, Vec3 pos, int id, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, float progress, Vec3 moveVec = Vec3::ZERO);
-		Unit(const std::string& name, Tag tag, Vec3 pos, int id, Stats stats, float progress, Vec3 moveVec = Vec3::ZERO);
+		Unit(const std::string& _name, Tag _tag, Vec3 _pos, Ogre::Quaternion _rot, int _id, float _hp, float _maxhp, float _sp, float _maxsp, float _str, float _def, float _spd, Status _status, float _progress, Vec3 _moveVec = Vec3::ZERO);
+		Unit(const std::string& _name, Tag _tag, Vec3 _pos, Ogre::Quaternion _rot, int _id, Stats _stats, float _progress, Vec3 _moveVec = Vec3::ZERO);
 		~Unit();
 
 		int id;

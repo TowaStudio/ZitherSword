@@ -8,21 +8,19 @@
 #include "GameMaster.h"
 
 namespace ZS {
-	Enemy::Enemy(const std::string& name, Vec3 pos,
-		float hp, float maxhp, float sp, float maxsp,
-		float str, float def, float spd, Status status, float progress, int exp) :
-		Unit(name, Tag::ENEMY, pos, GameMaster::GetInstance()->getLevelManager()->getUnitID(),
-			hp, maxhp, sp, maxsp, str, def, spd, status, progress),
-		exp(exp)
-	{
+	Enemy::Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot,
+				 float hp, float maxhp, float sp, float maxsp,
+				 float str, float def, float spd, Status status, float progress, int exp) :
+		Unit(name, Tag::ENEMY, pos, rot, GameMaster::GetInstance()->getLevelManager()->getUnitID(),
+			 hp, maxhp, sp, maxsp, str, def, spd, status, progress),
+		exp(exp) {
 
 	}
 
-	Enemy::Enemy(const std::string& name, Vec3 pos,
-		Stats stats, float progress, int exp) : 
-		Unit(name, Tag::ENEMY, pos, GameMaster::GetInstance()->getLevelManager()->getUnitID(), stats, progress),
-		exp(exp)
-	{
+	Enemy::Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot,
+				 Stats stats, float progress, int exp) :
+		Unit(name, Tag::ENEMY, pos, rot, GameMaster::GetInstance()->getLevelManager()->getUnitID(), stats, progress),
+		exp(exp) {
 
 	}
 

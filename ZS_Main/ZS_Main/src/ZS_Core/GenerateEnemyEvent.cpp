@@ -3,8 +3,8 @@
 
 namespace ZS {
 
-	GenerateEnemyEvent::GenerateEnemyEvent(Vec3 _pos) {
-		pos = _pos;
+	GenerateEnemyEvent::GenerateEnemyEvent(float _progress) {
+		progress = _progress;
 	}
 
 	GenerateEnemyEvent::~GenerateEnemyEvent() {
@@ -15,6 +15,6 @@ namespace ZS {
 	}
 
 	void GenerateEnemyEvent::execute() {
-		GameMaster::GetInstance()->getLevelManager()->createEnemy(pos);
+		GameMaster::GetInstance()->getLevelManager()->createEnemy(progress);
 	}
 }
