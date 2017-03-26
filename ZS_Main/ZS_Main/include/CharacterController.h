@@ -11,6 +11,7 @@ namespace ZS {
 		CST_SKILL,
 		CST_DEFENSE,
 		CST_DODGE,
+		CST_HURT,
 		CST_DEAD,
 		NUM_CONTROL_STATE
 	};
@@ -22,12 +23,16 @@ namespace ZS {
 		ControlState ast;
 
 	public:
-		CharacterController(GameEntity* _ent) :
+		int id;
+
+		CharacterController(GameEntity* _ent, int _id) :
 			ent(_ent),
-			cst(CST_IDLE)
+			cst(CST_IDLE),
+			id(_id)
 		{
 
 		}
+
 		virtual ~CharacterController() {}
 
 		void changeControlState(ControlState _cst) {

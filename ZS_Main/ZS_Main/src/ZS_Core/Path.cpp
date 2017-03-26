@@ -87,7 +87,6 @@ namespace  ZS {
 			}
 			float remainDistanceInSegment = accDistance - pos;
 			segmentPos = 1.0f - remainDistanceInSegment / segmentLength;
-			GameMaster::GetInstance()->log(segmentPos);
 
 			return getPosInSegment(indexOfStartPoint, segmentPos);
 		}

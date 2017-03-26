@@ -14,6 +14,9 @@ namespace ZS {
 		float atk;
 		float rate;
 		float range;
+
+		Weapon(int _id, float _atk, float _rate, float _range);
+		~Weapon();
 	};
 }
 

@@ -25,7 +25,7 @@ namespace ZS {
 		void changeAstTo(ControlState _ast) override;
 
 	public:
-		EnemyAController(GameEntity* _entEnemy);
+		EnemyAController(GameEntity* _entEnemy, int _id);
 		~EnemyAController();
 
 		void changeActionState() override; // called in update

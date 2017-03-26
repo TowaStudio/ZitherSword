@@ -64,7 +64,6 @@ namespace ZS {
 			case SDLK_0:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_IDLE);
 				break;
-
 			//_DEBUG_
 			default:
 				break;

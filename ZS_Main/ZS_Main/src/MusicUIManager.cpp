@@ -9,14 +9,13 @@ namespace ZS {
 		isEnabled(false),
 		overlayManager(Ogre::v1::OverlayManager::getSingleton()),
 		uiMusic(nullptr),
-		uiBackground(nullptr),
+		uiBackground(nullptr), uiSegmentLineGroup(nullptr),
 		uiScanline(nullptr),
 		currentScanlinePos(0.0f), scanlineSpeed(1200.0f),
-		uiNotes(nullptr),
+		uiNotes(nullptr), uiNotesGroup(nullptr),
 		uiNotesVec(std::vector<Ogre::v1::OverlayElement*>()),
 		currentNoteCount(0), totalNoteCount(0),
-		uiResult(nullptr)
-	{
+		uiResult(nullptr) {
 
 	}
 
@@ -135,11 +134,11 @@ namespace ZS {
 		currentScanlinePos = nextScanlinePos;
 	}
 
-	float MusicUIManager::VERTICAL_OFFSET_DO = 200.0f;
-	float MusicUIManager::VERTICAL_OFFSET_RE = 600.0f;
+	float MusicUIManager::VERTICAL_OFFSET_DO = 1800.0f;
+	float MusicUIManager::VERTICAL_OFFSET_RE = 1400.0f;
 	float MusicUIManager::VERTICAL_OFFSET_MI = 1000.0f;
-	float MusicUIManager::VERTICAL_OFFSET_SO = 1400.0f;
-	float MusicUIManager::VERTICAL_OFFSET_LA = 1800.0f;
+	float MusicUIManager::VERTICAL_OFFSET_SO = 600.0f;
+	float MusicUIManager::VERTICAL_OFFSET_LA = 200.0f;
 
 	void MusicUIManager::addNote(NoteName _noteName) {
 		if(!isEnabled) return;

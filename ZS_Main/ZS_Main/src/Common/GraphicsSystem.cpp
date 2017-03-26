@@ -13,6 +13,7 @@
 #include "OgreRenderWindow.h"
 #include "OgreCamera.h"
 #include "OgreItem.h"
+#include "Animation/OgreTagPoint.h"
 
 #include "Hlms/Unlit/OgreHlmsUnlit.h"
 #include "Hlms/Pbs/OgreHlmsPbs.h"
@@ -28,6 +29,8 @@
 #include "Animation/OgreSkeletonInstance.h"
 #include "AnimationController.h"
 #include "ZSGraphicsGameState.h"
+#include "OgreMeshManager2.h"
+#include "../../../../../../SDK/OgreMain/include/OgreMesh2.h"
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -388,6 +391,9 @@ namespace ZS
         case Mq::GAME_ENTITY_REMOVED:
             gameEntityRemoved( *reinterpret_cast<GameEntity * const *>( data ) );
             break;
+		case Mq::GAME_ENTITY_BIND:
+			bindObject(*reinterpret_cast<LevelManager::BindDefinition* const*>(data));
+			break;
         case Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT:
             //Acknowledge/notify back that we're done with this slot.
             this->queueSendMessage( mLogicSystem, Mq::GAME_ENTITY_SCHEDULED_FOR_REMOVAL_SLOT,
@@ -653,6 +659,38 @@ namespace ZS
             cge->gameEntity->mMovableObject = item;
         }
 
+		if(cge->gameEntity->mMoDefinition->moType == MoTypeItemV1Mesh) {
+			Ogre::Item *item;
+
+			if(Ogre::MeshManager::getSingleton().getResourceByName(cge->gameEntity->mMoDefinition->meshName) == nullptr) {
+				Ogre::v1::MeshPtr meshV1 = Ogre::v1::MeshManager::getSingleton().load(cge->gameEntity->mMoDefinition->meshName,
+																					  Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
+																					  Ogre::v1::HardwareBuffer::HBU_STATIC,
+																					  Ogre::v1::HardwareBuffer::HBU_STATIC);
+
+				Ogre::MeshPtr meshV2 = Ogre::MeshManager::getSingleton().createManual(cge->gameEntity->mMoDefinition->meshName,
+																					  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+				meshV2->importV1(meshV1.get(), true, true, true);
+
+				item = mSceneManager->createItem(meshV2, Ogre::SCENE_STATIC);
+			} else {
+				item = mSceneManager->createItem(cge->gameEntity->mMoDefinition->meshName,
+												 Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
+												 Ogre::SCENE_STATIC);
+			}
+			
+			Ogre::StringVector materialNames = cge->gameEntity->mMoDefinition->submeshMaterials;
+			size_t minMaterials = std::min(materialNames.size(), item->getNumSubItems());
+
+			for(size_t i = 0; i<minMaterials; ++i) {
+				item->getSubItem(i)->setDatablockOrMaterialName(materialNames[i],
+																cge->gameEntity->mMoDefinition->
+																resourceGroup);
+			}
+
+			cge->gameEntity->mMovableObject = item;
+		}
+
         sceneNode->attachObject( cge->gameEntity->mMovableObject );
 
 		if(isInitializingLevel) {
@@ -738,5 +776,12 @@ namespace ZS
 
             ++itor;
         }
+    }
+
+	void GraphicsSystem::bindObject(const LevelManager::BindDefinition* bd) {
+		Ogre::TagPoint* bindTagPoint = mSceneManager->createTagPoint();
+		bd->source->mSceneNode->getParentSceneNode()->removeChild(bd->source->mSceneNode);
+		bindTagPoint->addChild(bd->source->mSceneNode);
+		bd->target->mMovableObject->getSkeletonInstance()->getBone(bd->boneName)->addTagPoint(bindTagPoint);
     }
 }

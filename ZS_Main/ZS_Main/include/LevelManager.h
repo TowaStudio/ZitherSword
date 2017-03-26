@@ -34,6 +34,12 @@ namespace ZS {
 			GameEntityTransform initialTransform;
 		};
 
+		struct BindDefinition {
+			GameEntity* source;
+			GameEntity* target;
+			std::string boneName;
+		};
+
 		typedef std::vector<GameEntityVec> GameEntityVecVec;
 
 		LevelState levelState;
@@ -49,7 +55,7 @@ namespace ZS {
 
 		std::vector<Unit*> unitVec;
 		int unitsCount;
-		int jointCount;
+		int itemsCount;
 
 		Path* levelPath;
 		Path* cameraPath;
@@ -94,9 +100,8 @@ namespace ZS {
 		~LevelManager();
 
 		int getUnitID();
-		int getJointID();
+		int getItemID();
 
-		Swordsman* GetSwordsman() const;
 		Path* getLevelPath();
 		Path* getCameraPath();
 		void loadLevel(int level);
@@ -106,7 +111,11 @@ namespace ZS {
 		void prepareResources();
 
 		void update(const size_t currIdx, float timeSinceLast);
-		CharacterController* createEnemy();
+		CharacterController* createEnemy(float progress);
+
+		Swordsman* getSwordsman(); 
+		Unit* getEnemy(int unitID);
+		Unit* getClosestEnemy(float _pos, float threshold);
 
 		void trigger();
 
