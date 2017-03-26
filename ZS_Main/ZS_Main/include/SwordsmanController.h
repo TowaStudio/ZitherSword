@@ -10,11 +10,13 @@ namespace ZS {
 		Swordsman* swordsman;
 
 		float d; // distance to the nearest enemy
-		const float attackThres = 5.0f; // thres for attack
-		const float runThres = 1.0f; // thres for run
-		const float skillThres = 7.0f; // thres for skill
+		const float attackThres = 3.0f; // thres for attack
+		const float runThres = 2.0f; // thres for run
+		const float skillThres = 5.0f; // thres for skill
+		const float detectThres = 20.0f;
 
 		void changeAstTo(ControlState _ast) override;
+		float getDistanceToClosestEnemy();
 
 	public:
 		SwordsmanController(GameEntity* _entSwordsman);

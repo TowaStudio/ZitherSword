@@ -1,4 +1,6 @@
 ﻿#include "SwordsmanController.h"
+#include "GameMaster.h"
+#include <winioctl.h>
 
 namespace ZS {
 
@@ -10,7 +12,18 @@ namespace ZS {
 	SwordsmanController::~SwordsmanController() {
 	}
 
-	void SwordsmanController::changeActionState() {
+	float SwordsmanController::getDistanceToClosestEnemy() {
+		Unit* closestEnemy = GameMaster::GetInstance()->getLevelManager()->getClosestEnemy(swordsman->progress, detectThres);
+		if (closestEnemy != nullptr) {
+			d = closestEnemy->progress - swordsman->progress;
+			d *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+		} else {
+			d = detectThres;
+		}
+		return d;
+	}
+
+	void SwordsmanController::changeActionState() { // called in update
 
 		//_DEBUG_
 		// Animation names
@@ -24,8 +37,7 @@ namespace ZS {
 		//DEAD dead_7
 
 		// get d
-		// TODO how to get distance
-		d = 3;
+		getDistanceToClosestEnemy();
 
 		switch (cst) {
 			case CST_IDLE:
