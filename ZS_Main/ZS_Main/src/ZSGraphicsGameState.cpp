@@ -52,27 +52,6 @@ namespace ZS
     {
 		Ogre::SceneManager* sceneManager = mGraphicsSystem->getSceneManager();
 		sceneManager->getRenderQueue()->setRenderQueueMode(10, Ogre::RenderQueue::V1_FAST);
-		
-		Ogre::v1::MeshPtr planeMeshV1 = Ogre::v1::MeshManager::getSingleton().createPlane("Plane v1",
-																						  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-																						  Ogre::Plane(Ogre::Vector3::UNIT_Y, 1.0f), 50.0f, 4.0f,
-																						  1, 1, true, 1, 4.0f, 4.0f, Ogre::Vector3::UNIT_Z,
-																						  Ogre::v1::HardwareBuffer::HBU_STATIC,
-																						  Ogre::v1::HardwareBuffer::HBU_STATIC);
-
-		Ogre::MeshPtr planeMesh = Ogre::MeshManager::getSingleton().createManual(
-			"Plane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-
-		planeMesh->importV1(planeMeshV1.get(), true, true, true);
-
-		{
-			Ogre::Item *item = sceneManager->createItem(planeMesh, Ogre::SCENE_DYNAMIC);
-			item->setDatablock("Marble");
-			Ogre::SceneNode *sceneNode = sceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->
-				createChildSceneNode(Ogre::SCENE_DYNAMIC);
-			sceneNode->setPosition(0, -1, 0);
-			sceneNode->attachObject(item);
-		}
 
 		Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
 
@@ -120,7 +99,7 @@ namespace ZS
 		//createShadowMapDebugOverlays();
 
 		// Scene fly over controller
-		//mCameraController = new CameraController(mGraphicsSystem, false);
+		mCameraController = new CameraController(mGraphicsSystem, false);
 		// Camera path following controller
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
@@ -165,7 +144,7 @@ namespace ZS
 											weight);
 
 		if(mainCameraPathController->isEnabled) {
-			mainCameraPathController->update(timeSinceLast);
+			//mainCameraPathController->update(timeSinceLast);
 		}
 			
 

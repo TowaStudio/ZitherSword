@@ -11,6 +11,7 @@ namespace ZS {
 		CST_SKILL,
 		CST_DEFENSE,
 		CST_DODGE,
+		CST_HURT,
 		CST_DEAD,
 		NUM_CONTROL_STATE
 	};

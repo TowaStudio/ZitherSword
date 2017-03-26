@@ -9,14 +9,13 @@ namespace ZS {
 		isEnabled(false),
 		overlayManager(Ogre::v1::OverlayManager::getSingleton()),
 		uiMusic(nullptr),
-		uiBackground(nullptr),
+		uiBackground(nullptr), uiSegmentLineGroup(nullptr),
 		uiScanline(nullptr),
 		currentScanlinePos(0.0f), scanlineSpeed(1200.0f),
-		uiNotes(nullptr),
+		uiNotes(nullptr), uiNotesGroup(nullptr),
 		uiNotesVec(std::vector<Ogre::v1::OverlayElement*>()),
 		currentNoteCount(0), totalNoteCount(0),
-		uiResult(nullptr)
-	{
+		uiResult(nullptr) {
 
 	}
 
