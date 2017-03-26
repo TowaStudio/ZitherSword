@@ -1,4 +1,5 @@
 ﻿#include "EnemyAController.h"
+#include "GameMaster.h"
 
 namespace ZS {
 
@@ -11,12 +12,16 @@ namespace ZS {
 	EnemyAController::~EnemyAController() {
 	}
 
+	float EnemyAController::getDistanceToPlayer() {
+		d = enemy->progress - GameMaster::GetInstance()->getLevelManager()->getSwordsman()->progress;
+		d *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+		return d;
+	}
+
 	void EnemyAController::changeActionState() { // called in update
 
 		// get d
-		// TODO how to get distance
-		d = 3;
-		
+		getDistanceToPlayer();
 
 		switch(cst) {
 			case CST_IDLE:
@@ -76,10 +81,10 @@ namespace ZS {
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
-			ent->animationController->startAnimation("enemyAtk1_2");
+			ent->animationController->startAnimation("enemyAtk2-3");
 			break;
 		case CST_SKILL:
-			ent->animationController->startAnimation("enemyAtk2_3");
+			ent->animationController->startAnimation("enemyAtk1-2");
 			break;
 		case CST_DEFENSE:
 			ent->animationController->startAnimation("Block");
@@ -101,7 +106,7 @@ namespace ZS {
 	void EnemyAController::changeAIState() { // called to make decision
 
 		// get d
-		d = 3;
+		getDistanceToPlayer();
 
 		// change state
 		switch (aist) {

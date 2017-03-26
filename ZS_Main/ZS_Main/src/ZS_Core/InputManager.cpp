@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "AudioSystem.h"
 #include "GameMaster.h"
+#include "EnemyAController.h"
 
 namespace ZS {
 	void InputManager::keydown(SDL_Keycode key) {
@@ -63,6 +64,9 @@ namespace ZS {
 				break;
 			case SDLK_0:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_IDLE);
+				break;
+			case SDLK_h:
+				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 				break;
 			//_DEBUG_
 			default:

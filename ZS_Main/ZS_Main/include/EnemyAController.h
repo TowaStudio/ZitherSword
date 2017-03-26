@@ -18,11 +18,12 @@ namespace ZS {
 		AIState aist;
 
 		float d; // distance to the player
-		const float attackThres = 5.0f; // thres for attack
-		const float runThres = 1.0f; // thres to stop run
-		const float detectThres = 15.0f; // thres to detect player
+		const float attackThres = 3.0f; // thres for attack
+		const float runThres = 2.0f; // thres to stop run
+		const float detectThres = 10.0f; // thres to detect player
 
 		void changeAstTo(ControlState _ast) override;
+		float getDistanceToPlayer();
 
 	public:
 		EnemyAController(GameEntity* _entEnemy, int _id);
