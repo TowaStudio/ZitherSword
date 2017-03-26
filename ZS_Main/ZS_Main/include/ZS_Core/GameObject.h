@@ -7,11 +7,12 @@
 #define _ZS_GAMEOBJECT_H
 
 #include "OgreVector3.h"
-#include "tinyxml/tinyxml2.h"
 #include "Behaviour.h"
 
 namespace ZS
 {
+	class GameMaster;
+
 	enum Tag {
 		PLAYER = 1 << 0,
 		ENEMY = 1 << 1,
@@ -20,8 +21,11 @@ namespace ZS
 	};
 
 	class GameObject : public Behaviour {
+	protected:
+		GameMaster* gm;
+
 	public:
-		GameObject(const std::string& name, Tag tag, Vec3 pos);
+		GameObject(const std::string& name, Tag tag, Vec3 pos, Ogre::Quaternion rot = Ogre::Quaternion::IDENTITY);
 		virtual ~GameObject();
 
 		virtual void update(float timeSinceLast) {}

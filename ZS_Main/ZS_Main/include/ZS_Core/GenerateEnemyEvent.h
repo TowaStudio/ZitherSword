@@ -3,19 +3,18 @@
 
 #include "Event.h"
 #include "Enemy.h"
-#include "GameMaster.h"
 
 namespace ZS {
 	class GenerateEnemyEvent : public Event {
 	private:
-		EnemyVec enemyList;
+		float progress; 
+		EnemyVec enemyVec;
 
 	public:
-		GenerateEnemyEvent() {
-			
-		}
+		GenerateEnemyEvent(float _progress);
 		virtual ~GenerateEnemyEvent();
 
+		void addEnemy(Enemy* enemy);
 
 		virtual void execute();
 	};

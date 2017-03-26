@@ -14,15 +14,15 @@ namespace ZS {
 	public:
 		int exp;
 
-		Enemy(const std::string& name, Vec3 pos, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, float progress, int exp);
-		Enemy(const std::string& name, Vec3 pos, Stats stats, float progress, int exp);
+		Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, float progress, int exp);
+		Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot, Stats stats, float progress, int exp);
 
-		HitInfo attack() override;
+		HitInfo attack(Unit* target) override;
 
 		void update(float timeSinceLast) override;
 	};
 
-	typedef std::vector<Enemy> EnemyVec;
+	typedef std::vector<Enemy*> EnemyVec;
 }
 
 #endif //_ENEMY_H

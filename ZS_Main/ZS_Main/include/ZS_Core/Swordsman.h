@@ -13,14 +13,14 @@ namespace ZS {
 
 	class Swordsman : public Unit {
 	public:
-		Swordsman(PlayerStats stats, Vec3 startPos, float startProgress);
+		Swordsman(PlayerStats stats, Vec3 startPos, Ogre::Quaternion startRot, float startProgress);
 		~Swordsman();
 
 		int level;
 		int exp;
 
 		HitInfo skill();
-		HitInfo attack() override;
+		virtual HitInfo attack(Unit* target) override;
 		void heal(float amount) override;
 		void update(float timeSinceLast);
 	};

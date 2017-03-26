@@ -83,7 +83,7 @@ namespace ZS
         virtual void createResourceListener(void) {}
 
         void gameEntityAdded( const LevelManager::CreatedGameEntity *createdGameEntity );
-        void gameEntityRemoved( GameEntity *toRemove );
+	    void gameEntityRemoved( GameEntity *toRemove );
     public:
         GraphicsSystem( GameState *gameState,
                         Ogre::ColourValue backgroundColour = Ogre::ColourValue( 0.2f, 0.4f, 0.6f ) );
