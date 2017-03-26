@@ -5,16 +5,18 @@ namespace ZS {
 	EnemyAController::EnemyAController(GameEntity* _entEnemy):
 		CharacterController(_entEnemy) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
+		aist = AIST_IDLE;
 	}
 
 	EnemyAController::~EnemyAController() {
 	}
 
-	void EnemyAController::changeActionState() {
+	void EnemyAController::changeActionState() { // called in update
 
 		// get d
 		// TODO how to get distance
 		d = 3;
+		
 
 		switch(cst) {
 			case CST_IDLE:
@@ -55,7 +57,7 @@ namespace ZS {
 		}
 	}
 
-	void EnemyAController::changeAstTo(ControlState _ast) {
+	void EnemyAController::changeAstTo(ControlState _ast) { // internal use
 
 		if (_ast == ast) return;
 
@@ -87,6 +89,53 @@ namespace ZS {
 			break;
 		case CST_DEAD:
 			ent->animationController->startAnimation("Dead");
+			break;
+		default:
+			break;
+		}
+	}
+
+	void EnemyAController::changeAIState() { // called to make decision
+
+		// get d
+		d = 3;
+
+		// change state
+		switch (aist) {
+			case AIST_IDLE: 
+				if (d < detectThres)
+					aist = AIST_RUN;
+				break;
+			case AIST_RUN: 
+				if (d < attackThres)
+					aist = AIST_REST1;
+				break;
+			case AIST_ATTACK: 
+				aist = AIST_REST1;
+				break;
+			case AIST_REST1: 
+				if (d > attackThres)
+					aist = AIST_RUN;
+				else
+					aist = AIST_ATTACK;
+				break;
+			default: 
+				break;
+		}
+
+		// change control
+		switch (aist) {
+		case AIST_IDLE:
+			changeControlState(CST_IDLE);
+			break;
+		case AIST_RUN:
+			changeControlState(CST_RUN);
+			break;
+		case AIST_ATTACK:
+			changeControlState(CST_ATTACK);
+			break;
+		case AIST_REST1:
+			changeControlState(CST_IDLE);
 			break;
 		default:
 			break;

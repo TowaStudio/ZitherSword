@@ -15,18 +15,6 @@ namespace ZS {
 		NUM_CONTROL_STATE
 	};
 
-	/*enum ActionState {
-		AST_IDLE = 0, 
-		AST_WALK, 
-		AST_RUN, 
-		AST_ATTACK, 
-		AST_SKILL, 
-		AST_DEFENSE, 
-		AST_DODGE, 
-		AST_DEAD, 
-		NUM_ACTION_STATE
-	};*/
-
 	class CharacterController {
 	protected:
 		GameEntity* ent;
