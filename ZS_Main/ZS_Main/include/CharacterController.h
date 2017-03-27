@@ -20,6 +20,7 @@ namespace ZS {
 	protected:
 		GameEntity* ent;
 		ControlState cst;
+		ControlState ast;
 
 	public:
 		int id;
@@ -34,8 +35,17 @@ namespace ZS {
 
 		virtual ~CharacterController() {}
 
-		virtual void changeState(ControlState _cst) {
+		void changeControlState(ControlState _cst) {
 			cst = _cst;
+		}
+
+		virtual void changeActionState() { // call in update
+			ast = cst;
+		}
+
+	protected:
+		virtual void changeAstTo(ControlState _ast) {
+			ast = _ast;
 		}
 	};
 }

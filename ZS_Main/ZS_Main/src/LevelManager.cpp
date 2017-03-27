@@ -196,6 +196,7 @@ namespace ZS {
 			return; // file error
 		}
 
+		// find the level data for the current level
 		XMLElement *levelNode = doc.FirstChildElement("levels")->FirstChildElement("level");
 		while (levelNode != nullptr) {
 			if (level == atoi(levelNode->Attribute("id"))) {
@@ -315,8 +316,9 @@ namespace ZS {
 		AudioSystem::GetInstance()->startMusic();
 
 		// Set default animation
-		ccSwordsman->changeState(CST_IDLE);
-		characterControllers[0]->changeState(CST_HURT);
+
+		ccSwordsman->changeControlState(CST_IDLE);
+		characterControllers[0]->changeControlState(CST_ATTACK);
 
 		levelState = LST_PLAY;
 	}
@@ -324,6 +326,8 @@ namespace ZS {
 	void LevelManager::update(const size_t currIdx, float timeSinceLast) {
 		//Update Controllers
 		//TODO: Character controllers
+		ccSwordsman->changeActionState();
+		characterControllers[0]->changeActionState();
 
 		//Update game entities
 		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {
