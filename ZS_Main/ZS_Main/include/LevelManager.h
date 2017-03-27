@@ -13,6 +13,7 @@
 #include "Path.h"
 #include "SwordsmanController.h"
 #include "CameraPathController.h"
+#include "AudioSystem.h"
 
 namespace ZS {
 	class GameMaster;
@@ -52,6 +53,7 @@ namespace ZS {
 		//Game Content
 		GameMaster* gm;
 		int level;
+		Patterns * patterns;
 
 		std::vector<Unit*> unitVec;
 		int unitsCount;

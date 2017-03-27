@@ -22,7 +22,7 @@ namespace ZS {
 			return instance;
 		}
 
-		void musicSetup(int currentLevel = 1, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int timePerBeat = 120, int beatsPerBar = 4);
+		void musicSetup(int currentLevel = 0, Patterns* patterns = nullptr, int preBarNum = 0, int preTickNum = 0, int bpm = 120, int beatsPerBar = 4);
 		void setChannel(); // should be called in render thread; dont ask why
 		void startMusic(); 
 		void stopMusic(bool win = true);

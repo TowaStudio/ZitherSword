@@ -62,7 +62,7 @@ namespace ZS {
 
 			// Lv. 1
 			{
-				1,
+				0,
 				32,
 				{
 					LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
@@ -72,7 +72,7 @@ namespace ZS {
 				},
 				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
 			}
-		};;
+		};
 
 		AudioComposer();
 		void setupComposer(int currentLevel = 0, int ticksPerBar = 16);
@@ -86,9 +86,11 @@ namespace ZS {
 		const AudioLevelData* thisLevelData;
 
 		static void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
+		static NoteName getNoteWithTendency(NoteName lastPCNote, Cadence currentCadence, int tendency);
 
+		static NoteName getHigherNote(NoteName currentNote, bool isPentatonic = true, PartName* currentPart = nullptr);
+		static NoteName getLowerNote(NoteName currentNote, bool isPentatonic = true, PartName* currentPart = nullptr);
 		static PartName getHigherPart(PartName currentPart);
-
 		static PartName getLowerPart(PartName currentPart);
 	};
 
