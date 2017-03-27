@@ -14,7 +14,7 @@ namespace ZS {
 	* Swordsman implementation
 	*/
 	Swordsman::Swordsman(PlayerStats stats, Vec3 startPos, Ogre::Quaternion startRotation, float startProgress) :
-		Unit("Swordsman", Tag::PLAYER, -startPos, startRotation, GameMaster::GetInstance()->getLevelManager()->getUnitID()
+		Unit("Swordsman", Tag::PLAYER, startPos, startRotation, GameMaster::GetInstance()->getLevelManager()->getUnitID()
 			 , stats.hp, stats.maxhp
 			 , stats.sp, stats.maxsp
 			 , stats.str, stats.def, stats.spd, stats.status, startProgress),
