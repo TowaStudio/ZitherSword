@@ -16,7 +16,7 @@ namespace ZS {
 		AnimationController(Ogre::SkeletonInstance* _character);
 		~AnimationController();
 
-		void startAnimation(Ogre::String _state = "_CURRENT", float _playbackSpeed = 1.0f);
+		void startAnimation(Ogre::String _state = "_CURRENT", bool _loop = true, float _playbackSpeed = 1.0f);
 		void changeAnimation(Ogre::String _state);
 		void stopAnimation();
 		void update(float timeSinceLast);

@@ -104,14 +104,14 @@ namespace ZS
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
 		{
-			Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);
+			/*Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);
 			bill->setRenderQueueGroup(10);
 			bill->setMaterialName("SwordA", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
 			Ogre::SceneNode* billScene = sceneManager->getRootSceneNode()->createChildSceneNode(Ogre::SCENE_DYNAMIC);
 			billScene->attachObject(bill);
 			Ogre::v1::Billboard* sunBillboard = bill->createBillboard(
 				Ogre::Vector3(0, 1.0f, 0));
-			sunBillboard->setDimensions(1.0, 1.0);
+			sunBillboard->setDimensions(1.0, 1.0);*/
 		}
 		
 
@@ -158,19 +158,19 @@ namespace ZS
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::keyPressed(const SDL_KeyboardEvent &arg) {
 		switch(arg.keysym.sym) {
-			case SDLK_SPACE:
+			case SDLK_d:
 				musicUIManager->addNote(NoteName::DO);
 				break;
-			case SDLK_j:
+			case SDLK_f:
 				musicUIManager->addNote(NoteName::RE); 
 				break;
-			case SDLK_k:
+			case SDLK_SPACE:
 				musicUIManager->addNote(NoteName::MI);
 				break;
-			case SDLK_l:
+			case SDLK_j:
 				musicUIManager->addNote(NoteName::SO);
 				break;
-			case SDLK_SEMICOLON:
+			case SDLK_k:
 				musicUIManager->addNote(NoteName::LA);
 				break;
 			default:

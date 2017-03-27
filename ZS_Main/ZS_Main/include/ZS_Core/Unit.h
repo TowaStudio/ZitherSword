@@ -31,6 +31,8 @@ namespace ZS {
 		float spd;
 		Status status;
 
+		bool isDead;
+
 		int currentPathPointIndex;
 		float progress;
 		Path* path;

@@ -19,6 +19,8 @@ namespace ZS {
 	}
 
 	void EnemyAController::changeActionState() { // called in update
+		if(enemy->isDead)
+			cst = CST_DEAD;
 
 		// get d
 		getDistanceToPlayer();
@@ -96,7 +98,7 @@ namespace ZS {
 			ent->animationController->startAnimation("dodge_5");
 			break;
 		case CST_DEAD:
-			ent->animationController->startAnimation("dead_7");
+			ent->animationController->startAnimation("dead_7", false);
 			break;
 		default:
 			break;

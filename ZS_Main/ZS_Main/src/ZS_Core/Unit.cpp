@@ -13,7 +13,7 @@ namespace ZS {
 		, hp(_hp), maxhp(_maxhp)
 		, sp(_sp), maxsp(_maxsp)
 		, str(_str), def(_def), spd(_spd)
-		, status(_status), currentPathPointIndex(-1), progress(_progress)
+		, status(_status), isDead(false), currentPathPointIndex(-1), progress(_progress)
 		, path(nullptr), moveVec(_moveVec), isMoving(false)
 		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
 	}
@@ -23,7 +23,7 @@ namespace ZS {
 		, hp(_stats.hp), maxhp(_stats.maxhp)
 		, sp(_stats.sp), maxsp(_stats.maxsp)
 		, str(_stats.str), def(_stats.def), spd(_stats.spd)
-		, status(_stats.status), currentPathPointIndex(-1), progress(_progress)
+		, status(_stats.status), isDead(false), currentPathPointIndex(-1), progress(_progress)
 		, path(nullptr), moveVec(_moveVec), isMoving(false)
 		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
 	}
@@ -42,7 +42,8 @@ namespace ZS {
 			hit.isFatal = hit.dmg >= target->hp;
 			hit.valid = false;
 
-			gm->log(name + " hit " + target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
+			hit.target->damage(hit.dmg);
+			gm->getLevelManager()->addHitInfo(hit);
 		}
 
 		attackTimer = 1.0f / (weapon == nullptr ? 0.5f : weapon->rate);
@@ -55,33 +56,36 @@ namespace ZS {
 
 	// MOVEMENT
 	Vec3 Unit::move(float _scale) {
-		if(path) {
-			float step = _scale * spd / path->totalLength;
-			float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
+		if(!isDead) {
+			if(path) {
+				float step = _scale * spd / path->totalLength;
+				float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
 
-			// Trigger event for the path point
-			int nextPathPointIndex = path->getIndexFromPos(nextProgress);
-			if(currentPathPointIndex != nextPathPointIndex) {
-				if(path->getPoint(nextPathPointIndex)->hasTrigger) {
-					path->getPoint(nextPathPointIndex)->trigger->execute();
+				// Trigger event for the path point
+				int nextPathPointIndex = path->getIndexFromPos(nextProgress);
+				if(currentPathPointIndex != nextPathPointIndex) {
+					if(path->getPoint(nextPathPointIndex)->hasTrigger) {
+						path->getPoint(nextPathPointIndex)->trigger->execute();
+					}
+
+					currentPathPointIndex = nextPathPointIndex;
 				}
+				// Prevent from going outside
+				progress = nextProgress;
 
-				currentPathPointIndex = nextPathPointIndex;
+				moveVec = path->getPosInPath(progress) - pos;
+				Ogre::Quaternion q;
+				q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) - Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+				rot = q;
 			}
-			// Prevent from going outside
-			progress = nextProgress;
-
-			moveVec = path->getPosInPath(progress) - pos;
-			Ogre::Quaternion q;
-			q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) - Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
-			rot = q;
+			pos += moveVec;
 		}
-		pos += moveVec;
 		return pos;
 	}
 
 	Vec3 Unit::move(Vec3 _movement) {
-		pos += _movement;
+		if(!isDead)
+			pos += _movement;
 		return pos;
 	}
 
@@ -108,6 +112,7 @@ namespace ZS {
 	bool Unit::damage(float dmg) {
 		hp -= dmg;
 		if(hp <= 0.0f) {
+			isDead = true;
 			return true;
 		}
 		return false;

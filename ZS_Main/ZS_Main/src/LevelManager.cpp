@@ -207,10 +207,6 @@ namespace ZS {
 
 	void LevelManager::initLevel() {
 		levelState = LST_LOAD;
-		//TODO: Create Objects and setup player, input;
-		Vec3 pos = levelPath->getPosInPath(0.0001f);
-		Vec3 enemyPos = Vec3(5.0f, 0.0f, 0.0f);
-
 		
 		// Count the mesh to load and start level asynchronously.
 		// ------------------------------------------------------
@@ -234,14 +230,15 @@ namespace ZS {
 			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
 			initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
+			Vec3 initPos = levelPath->getPosInPath(0.0001f);
 			// Define behaviour and data model
-			swordsman = new Swordsman(gm->getPlayerStats(), pos, initialQuaternion, 0.0001f);
+			swordsman = new Swordsman(gm->getPlayerStats(), initPos, initialQuaternion, 0.0001f);
 			swordsman->bindPath(levelPath);
 
 			// Define the scene models.
 			entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
 										 , swordsman
-										 , pos // Change to Level data start pos
+										 , initPos // Change to Level data start pos
 										 , initialQuaternion
 										 , 5.0f * Vec3::UNIT_SCALE);
 			// Create controller
@@ -255,11 +252,11 @@ namespace ZS {
 			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 			moSword->moType = MoTypeItem;
 
-			Weapon* sword = new Weapon(getItemID(), 80.0f, 0.5f, 3.0f);
+			Weapon* sword = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
 
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
 												 , sword
-												 , pos
+												 , Vec3::ZERO
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
 
@@ -274,7 +271,7 @@ namespace ZS {
 
 		//_DEBUG_
 		{ // 3
-			characterControllers.push_back(createEnemy(0.2f));
+			characterControllers.push_back(createEnemy(0.02f));
 		}
 		//_DEBUG_
 
@@ -323,6 +320,11 @@ namespace ZS {
 
 	}
 
+	void LevelManager::addHitInfo(const HitInfo& hit) {
+		gm->log(hit.source->name + " hit " + hit.target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
+		// Todo: Effect
+	}
+
 	CharacterController* LevelManager::createEnemy(float progress) {
 		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
 		moEnemy->meshName = "enemy1.mesh";
@@ -332,18 +334,21 @@ namespace ZS {
 
 		int unitID = getUnitID();
 
+		Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+		initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+
 		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
-								 Ogre::Quaternion::IDENTITY,
+								 initialQuaternion,
 								 200.0f, 200.0f, 40.0f, 40.0f,
-								 40.0f, 10.0f, 1.0f,
+								 40.0f, 10.0f, 7.0f,
 								 Status::ST_NORMAL, progress, 100);
 		unitVec.push_back(enemy);
 
 		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
 											  , enemy
 											  , levelPath->getPosInPath(progress) // Change to Level data start pos
-											  , Ogre::Quaternion::IDENTITY
-											  , Vec3(0.04f, 0.04f, 0.04f));
+											  , initialQuaternion
+											  , Vec3(0.2f, 0.2f, 0.2f));
 		// Create controller
 		EnemyAController* ccEnemy = new EnemyAController(entEnemy, unitID);
 		return ccEnemy;
@@ -366,7 +371,7 @@ namespace ZS {
 		Unit* enemy = nullptr;
 		float distance = threshold / levelPath->totalLength;
 		for(auto itr = unitVec.begin(); itr != unitVec.end(); ++itr) {
-			if((*itr)->progress > _pos && (*itr)->progress - _pos < distance) {
+			if(!(*itr)->isDead && (*itr)->progress > _pos && (*itr)->progress - _pos < distance) {
 				enemy = *itr;
 				distance = (*itr)->progress - _pos;
 			}

@@ -65,9 +65,11 @@ namespace ZS {
 			case SDLK_0:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_IDLE);
 				break;
+			/*
 			case SDLK_h:
 				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 				break;
+			*/
 			//_DEBUG_
 			default:
 				break;
