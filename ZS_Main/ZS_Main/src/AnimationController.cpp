@@ -17,19 +17,26 @@ namespace ZS {
 	AnimationController::~AnimationController() {
 	}
 
-	void AnimationController::startAnimation(Ogre::String _state, float _playbackSpeed) {
+	void AnimationController::startAnimation(Ogre::String _state, bool _loop, float _playbackSpeed) {
+		/*
+		 * BUG: Active animations iterator will return null pointer during update.
+		 * This may be related to the thread operations.
+		*/ 
+		// TODO: send message to graphics system to control the animation
+		stopAnimation();
 		if(_state.compare("_CURRENT") == 0) {
 			currentAnim->setTime(0.0f);
 			isEnabled = true;
+			currentAnim->setLoop(_loop);
 			currentAnim->setEnabled(true);
 		} else if(skeleton->hasAnimation(_state)) {
-			stopAnimation();
 			currentAnim = skeleton->getAnimation(_state);
 			currentState = _state;
 
 			currentAnim->setTime(0.0f);
-			isEnabled = true;
+			currentAnim->setLoop(_loop);
 			currentAnim->setEnabled(true);
+			isEnabled = true;
 		}
 
 		currentAnim->mFrameRate = 4.0f;
@@ -41,6 +48,7 @@ namespace ZS {
 	}
 
 	void AnimationController::update(float timeSinceLast) {
-		currentAnim->addTime(timeSinceLast);
+		if(isEnabled)
+			currentAnim->addTime(timeSinceLast);
 	}
 }

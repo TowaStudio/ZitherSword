@@ -17,7 +17,7 @@ namespace ZS {
 
 		AIState aist;
 
-		float d; // distance to the player
+		float distance; // distance to the player
 		const float attackThres = 3.0f; // thres for attack
 		const float runThres = 2.0f; // thres to stop run
 		const float detectThres = 10.0f; // thres to detect player

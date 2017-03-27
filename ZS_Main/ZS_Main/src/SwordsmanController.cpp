@@ -5,7 +5,7 @@
 namespace ZS {
 
 	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman) :
-		CharacterController(_entSwordsman, 0) {
+		CharacterController(_entSwordsman, 0), distance(0) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 
@@ -15,16 +15,17 @@ namespace ZS {
 	float SwordsmanController::getDistanceToClosestEnemy() {
 		Unit* closestEnemy = GameMaster::GetInstance()->getLevelManager()->getClosestEnemy(swordsman->progress, detectThres);
 		if (closestEnemy != nullptr) {
-			d = closestEnemy->progress - swordsman->progress;
-			d *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+			distance = closestEnemy->progress - swordsman->progress;
+			distance *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
 		} else {
-			d = detectThres;
+			distance = detectThres;
 		}
-		return d;
+		return distance;
 	}
 
 	void SwordsmanController::changeActionState() { // called in update
-
+		if(swordsman->isDead)
+			cst = CST_DEAD;
 		//_DEBUG_
 		// Animation names
 		//WALK walk_0
@@ -44,25 +45,25 @@ namespace ZS {
 				changeAstTo(cst);
 				break;
 			case CST_WALK:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_RUN:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_ATTACK:
-				if (d < attackThres)
+				if (distance < attackThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
 				break;
 			case CST_SKILL:
-				if (d < skillThres)
+				if (distance < skillThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
@@ -82,36 +83,49 @@ namespace ZS {
 	}
 
 	void SwordsmanController::changeAstTo(ControlState _ast) {
-		if (_ast == ast) return;
+		if (_ast == ast && ent->animationController->isEnabled) return;
 
 		ast = _ast;
 		switch (ast) {
 		case CST_IDLE:
 			swordsman->isMoving = false;
+			swordsman->isAttacking = false;
 			ent->animationController->startAnimation("swordIdle_6");
 			break;
 		case CST_WALK:
+			swordsman->isMoving = false;
+			swordsman->isAttacking = false;
 			ent->animationController->startAnimation("walk_0");
 			break;
 		case CST_RUN:
 			swordsman->isMoving = true;
+			swordsman->isAttacking = false;
 			ent->animationController->startAnimation("swordRun_1");
 			break;
 		case CST_ATTACK:
 			swordsman->isMoving = false;
+			swordsman->isAttacking = true;
 			ent->animationController->startAnimation("attack1_2");
 			break;
 		case CST_SKILL:
+			swordsman->isMoving = false;
+			swordsman->isAttacking = true;
 			ent->animationController->startAnimation("attack2_3");
 			break;
 		case CST_DEFENSE:
+			swordsman->isMoving = false;
+			swordsman->isAttacking = false;
 			ent->animationController->startAnimation("block_4");
 			break;
 		case CST_DODGE:
+			swordsman->isMoving = false;
+			swordsman->isAttacking = false;
 			ent->animationController->startAnimation("dodge_5");
 			break;
 		case CST_DEAD:
-			ent->animationController->startAnimation("dead_7");
+			swordsman->isMoving = false;
+			swordsman->isAttacking = false;
+			ent->animationController->startAnimation("dead_7", false);
 			break;
 		default:
 			break;

@@ -8,6 +8,7 @@ namespace ZS {
 		isEnabled(false),
 		camera(_camera), path(nullptr),
 		character(nullptr), characterPath(nullptr),
+		cameraPos(Vec3::ZERO), lookingPos(Vec3::ZERO), currentLookingPos(Vec3::ZERO),
 		progress(0.0f)
 	{
 
@@ -17,9 +18,10 @@ namespace ZS {
 		isEnabled(false),
 		camera(_camera), path(_path),
 		character(nullptr), characterPath(nullptr),
-		cameraPos(Vec3::ZERO), lookingPos(Vec3::ZERO), currentLookingPos(Vec3::ZERO),
-		progress(_progress) {
-
+		lookingPos(Vec3::ZERO), currentLookingPos(Vec3::ZERO),
+		progress(_progress)
+	{
+		cameraPos = _path->getPosInPath(_progress);
 	}
 
 	CameraPathController::~CameraPathController() {
@@ -45,7 +47,7 @@ namespace ZS {
 	}
 
 	void CameraPathController::update(float timeSinceLast) {
-		if(character) {
+		if(isEnabled && character) {
 			if(character->progress > progress) {
 				cameraPos = path->getPosInPath(characterPath->getSegmentPosFromPos(character->progress), true);
 				lookingPos = character->pos;
@@ -55,7 +57,7 @@ namespace ZS {
 			float smoothingFactor = 4.0f * timeSinceLast;
 			camera->setPosition(smoothingFactor * cameraPos + (1.0f - smoothingFactor) * camera->getPosition());
 			currentLookingPos = smoothingFactor * currentLookingPos + (1.0f - smoothingFactor) * lookingPos;
-			camera->lookAt(currentLookingPos);
+			camera->lookAt(currentLookingPos + Vec3(0.0f, 7.0f, 0.0f));
 		}
 	}
 }

@@ -19,11 +19,12 @@ namespace ZS
         Ogre::SceneNode     *mLightNodes[3];
 
         GameMaster* gm;
-		MusicUIManager* musicUIManager;
-		GameUIManager* gameUIManager;
 		virtual void showFPS( float timeSinceLast, Ogre::String &outText );
 		
 	public:
+		MusicUIManager* musicUIManager;
+		GameUIManager* gameUIManager;
+
 		CameraPathController* mainCameraPathController;
 
 		ZSGraphicsGameState();

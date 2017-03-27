@@ -9,7 +9,7 @@ namespace ZS {
 	private:
 		Swordsman* swordsman;
 
-		float d; // distance to the nearest enemy
+		float distance; // distance to the nearest enemy
 		const float attackThres = 3.0f; // thres for attack
 		const float runThres = 2.0f; // thres for run
 		const float skillThres = 5.0f; // thres for skill

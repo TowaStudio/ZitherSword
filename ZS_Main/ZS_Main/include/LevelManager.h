@@ -113,6 +113,7 @@ namespace ZS {
 		void prepareResources();
 
 		void update(const size_t currIdx, float timeSinceLast);
+		void addHitInfo(const HitInfo& hit);
 		CharacterController* createEnemy(float progress);
 
 		Swordsman* getSwordsman(); 

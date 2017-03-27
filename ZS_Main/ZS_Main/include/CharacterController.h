@@ -28,8 +28,8 @@ namespace ZS {
 		CharacterController(GameEntity* _ent, int _id) :
 			ent(_ent),
 			cst(CST_IDLE),
-			id(_id)
-		{
+			ast(CST_IDLE),
+			id(_id) {
 
 		}
 

@@ -403,6 +403,10 @@ namespace ZS
 			isInitializingLevel = true;
 			initObjectCount = *reinterpret_cast<const int*>(data);
 			break;
+		case Mq::SHOW_GAME_UI:
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->musicUIManager->showMusicUI(true);
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->gameUIManager->showGameUI(true);
+			break;
 		case Mq::CAMERA_FOLLOW_PATH:
 			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->bindPath(*reinterpret_cast<Path* const*>(data));
 			break;

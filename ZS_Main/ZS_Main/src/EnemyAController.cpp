@@ -4,7 +4,7 @@
 namespace ZS {
 
 	EnemyAController::EnemyAController(GameEntity* _entEnemy, int _id) :
-		CharacterController(_entEnemy, _id) {
+		CharacterController(_entEnemy, _id), distance(0) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
 		aist = AIST_IDLE;
 	}
@@ -13,12 +13,14 @@ namespace ZS {
 	}
 
 	float EnemyAController::getDistanceToPlayer() {
-		d = enemy->progress - GameMaster::GetInstance()->getLevelManager()->getSwordsman()->progress;
-		d *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
-		return d;
+		distance = enemy->progress - GameMaster::GetInstance()->getLevelManager()->getSwordsman()->progress;
+		distance *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+		return distance;
 	}
 
 	void EnemyAController::changeActionState() { // called in update
+		if(enemy->isDead)
+			cst = CST_DEAD;
 
 		// get d
 		getDistanceToPlayer();
@@ -28,19 +30,19 @@ namespace ZS {
 				changeAstTo(cst);
 				break;
 			case CST_WALK:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_RUN:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else 
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_ATTACK:
-				if (d < attackThres)
+				if (distance < attackThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
@@ -96,7 +98,7 @@ namespace ZS {
 			ent->animationController->startAnimation("dodge_5");
 			break;
 		case CST_DEAD:
-			ent->animationController->startAnimation("dead_7");
+			ent->animationController->startAnimation("dead_7", false);
 			break;
 		default:
 			break;
@@ -111,18 +113,18 @@ namespace ZS {
 		// change state
 		switch (aist) {
 			case AIST_IDLE: 
-				if (d < detectThres)
+				if (distance < detectThres)
 					aist = AIST_RUN;
 				break;
 			case AIST_RUN: 
-				if (d < attackThres)
+				if (distance < attackThres)
 					aist = AIST_REST1;
 				break;
 			case AIST_ATTACK: 
 				aist = AIST_REST1;
 				break;
 			case AIST_REST1: 
-				if (d > attackThres)
+				if (distance > attackThres)
 					aist = AIST_RUN;
 				else
 					aist = AIST_ATTACK;

@@ -11,19 +11,19 @@ namespace ZS {
 	void InputManager::keydown(SDL_Keycode key) {
 		// test key down
 		switch(key) {
-			case SDLK_SPACE:
+			case SDLK_d:
 				AudioSystem::GetInstance()->input(NoteName::DO);
 				break;
-			case SDLK_j:
+			case SDLK_f:
 				AudioSystem::GetInstance()->input(NoteName::RE);
 				break;
-			case SDLK_k:
+			case SDLK_SPACE:
 				AudioSystem::GetInstance()->input(NoteName::MI);
 				break;
-			case SDLK_l:
+			case SDLK_j:
 				AudioSystem::GetInstance()->input(NoteName::SO);
 				break;
-			case SDLK_SEMICOLON:
+			case SDLK_k:
 				AudioSystem::GetInstance()->input(NoteName::LA);
 				break;
 			default:
@@ -65,9 +65,11 @@ namespace ZS {
 			case SDLK_0:
 				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_IDLE);
 				break;
+			/*
 			case SDLK_h:
 				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 				break;
+			*/
 			//_DEBUG_
 			default:
 				break;
