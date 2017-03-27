@@ -20,9 +20,12 @@ namespace ZS {
 		bpm = _bpm;
 		bpb = _bpb;
 
+		// load bgm
+		loadBGM();
+
 		// hardcoding properties
 		inputPart = MED;
-		tolerance = 0.25;
+		tolerance = 0.3;
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
@@ -30,7 +33,7 @@ namespace ZS {
 		isGameClear = false;
 
 		// calculating & initializing properties
-		interval = (60 * 1000) / (tpb * bpm);
+		interval = 60 * 1000 / (tpb * bpm);
 		thresTime = static_cast<int>(tolerance * interval);
 		inputSequence = NoteSeq(tpb * bpb, REST);
 		noteSequence = new NoteSeq(tpb * bpb, REST);
@@ -194,11 +197,11 @@ namespace ZS {
 		musicSetup();
 
 		// load files
-		loadBGM();
+		//loadBGM();
 		loadFiles();
 
 		// setup test
-		NoteSeq  b0(16, REST);
+		/*NoteSeq  b0(16, REST);
 		NoteSeq  b1(16, REST);
 		NoteSeq  b2(16, REST);
 		NoteSeq  b3(16, REST);
@@ -217,7 +220,7 @@ namespace ZS {
 		a->push_back(b3);
 		a->push_back(b4);
 		//a->push_back(b5);
-		musicSetup(1, a, 4, 0, 150);
+		musicSetup(0, a, 4, 0, 150);*/
 
 	}
 
@@ -316,7 +319,17 @@ namespace ZS {
 
 					// identify sequence
 					int res = identifySequence();
-					GameMaster::GetInstance()->log("Input sequence ID: " + to_string(res));
+					/*Ogre::String debugStr = "";
+					for (int i = 0; i < 16; i += 4) {
+						debugStr += to_string(inputSequence[i]);
+						debugStr += to_string(inputSequence[i+1]);
+						debugStr += to_string(inputSequence[i+2]);
+						debugStr += to_string(inputSequence[i+3]);
+						debugStr += " ";
+					}
+					debugStr += ": "; 
+					debugStr += to_string(res);
+					GameMaster::GetInstance()->log(debugStr);*/
 					GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(static_cast<ControlState>(res));
 					reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 
@@ -328,7 +341,7 @@ namespace ZS {
 
 		// play AI composing
 		if(AIInCharge) {
-			//playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
+			playSound(noteSequence->at(currentTickNum), partSequence->at(currentTickNum));
 		}
 
 		// detect run-out

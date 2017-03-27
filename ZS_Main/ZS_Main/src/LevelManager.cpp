@@ -170,7 +170,7 @@ namespace ZS {
 				subentity = subentity->NextSiblingElement("subentity");				 
 			} 
 
-			// TODO load node to scene
+			// load node to scene
 			MovableObjectDefinition* mo = new MovableObjectDefinition();
 			mo->meshName = meshFile;
 			mo->moType = MoTypeItemV1Mesh;
@@ -209,18 +209,72 @@ namespace ZS {
 		}
 
 		// enemies
-		XMLElement *enemyNode = levelNode->FirstChildElement("enemies")->FirstChildElement("enemy");
-		while (enemyNode != nullptr) {
-			// get object info
-			int type; 
-			Ogre::Real loc;
-			type = StringConverter::parseInt(enemyNode->Attribute("type"));
-			loc = StringConverter::parseReal(enemyNode->Attribute("loc"));
+		{
+			XMLElement *enemyNode = levelNode->FirstChildElement("enemies")->FirstChildElement("enemy");
+			while (enemyNode != nullptr) {
+				// get object info
+				int type;
+				Ogre::Real loc;
+				type = StringConverter::parseInt(enemyNode->Attribute("type"));
+				loc = StringConverter::parseReal(enemyNode->Attribute("loc"));
 
-			// TODO load enemy mesh
+				// TODO load enemy mesh
 
-			// get next object
-			enemyNode = enemyNode->NextSiblingElement("enemy");
+				// get next object
+				enemyNode = enemyNode->NextSiblingElement("enemy");
+			}
+		}
+
+		// sequences
+		{
+			XMLElement *sequenceNode = levelNode->FirstChildElement("sequences")->FirstChildElement("sequence");
+			while (sequenceNode != nullptr) {
+				// get sequence info
+				Ogre::String type;
+				const char* content;
+				type = sequenceNode->Attribute("type");
+				content = sequenceNode->Attribute("content");
+
+				// load level patterns
+				NoteSeq seq;
+				for (int i = 0; i < strlen(content); i++) {
+					char num = content[i];
+					seq.push_back(static_cast<NoteName>(atoi(&num)));
+				}
+
+				if (patterns == nullptr) {
+					patterns = new Patterns(NUM_CONTROL_STATE, NoteSeq(strlen(content), REST));
+				}
+				
+				if (type.compare("idle") == 0) {
+					patterns->at(CST_IDLE) = seq;
+				} else if (type.compare("run") == 0) {
+					patterns->at(CST_RUN) = seq;
+				} else if (type.compare("attack") == 0) {
+					patterns->at(CST_ATTACK) = seq;
+				} else if(type.compare("defense") == 0) {
+					patterns->at(CST_DEFENSE) = seq;
+				} else if(type.compare("dodge") == 0) {
+					patterns->at(CST_DODGE) = seq;
+				} else if(type.compare("skill") == 0) {
+					patterns->at(CST_SKILL) = seq;
+				}
+
+				// get next object
+				sequenceNode = sequenceNode->NextSiblingElement("sequence");
+			}
+		}
+
+		// music & setup
+		{
+			XMLElement *musicNode = levelNode->FirstChildElement("music");
+			int preBarNum, preTickNum, bpm, bpb;
+			preBarNum = StringConverter::parseInt(musicNode->Attribute("preBarNum"));
+			preTickNum = StringConverter::parseInt(musicNode->Attribute("preTickNum"));
+			bpm = StringConverter::parseInt(musicNode->Attribute("bpm"));
+			bpb = StringConverter::parseInt(musicNode->Attribute("bpb"));
+
+			AudioSystem::GetInstance()->musicSetup(level + 1, patterns, preBarNum, preTickNum, bpm, bpb);
 		}
 
 		// other possible level data
