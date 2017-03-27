@@ -183,7 +183,9 @@ namespace ZS {
 	}
 
 	// constructor
-	AudioSystem::AudioSystem() {
+	AudioSystem::AudioSystem() : 
+		directory("D:/Program.Houdou/OGRE/Projects/ZitherSword/ZS_Main/Assets/Audio/")
+	{
 		// init settings
 		// coi
 		//setAudioChannels(0, 2);
