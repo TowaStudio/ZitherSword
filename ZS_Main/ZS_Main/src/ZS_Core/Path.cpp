@@ -56,8 +56,8 @@ namespace  ZS {
 
 		Vec3 position = Vec3::ZERO;
 
-		if(pos > 1.0f) return pointVec->at(pointCount - 1)->pos;
-		if(pos < 0.0f) return pointVec->at(0)->pos;
+		if(pos >= 1.0f) return pointVec->at(pointCount - 1)->pos;
+		if(pos <= 0.0f) return pointVec->at(0)->pos;
 
 		int indexOfStartPoint = -1;
 		float segmentPos = 0.0f;
