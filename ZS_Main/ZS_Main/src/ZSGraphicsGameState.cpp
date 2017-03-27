@@ -58,7 +58,7 @@ namespace ZS
 		Ogre::Light *light = sceneManager->createLight();
 		Ogre::SceneNode *lightNode = rootNode->createChildSceneNode();
 		lightNode->attachObject(light);
-		light->setPowerScale(1.0f);
+		light->setPowerScale(Ogre::Math::PI);
 		light->setType(Ogre::Light::LT_DIRECTIONAL);
 		light->setDirection(Ogre::Vector3(-1, -1, -1).normalisedCopy());
 
@@ -68,38 +68,38 @@ namespace ZS
 									  Ogre::ColourValue(0.6f, 0.45f, 0.3f) * 0.065f * 0.75f,
 									  -light->getDirection() + Ogre::Vector3::UNIT_Y * 0.2f);
 
-		light = sceneManager->createLight();
-		lightNode = rootNode->createChildSceneNode();
-		lightNode->attachObject(light);
-		light->setDiffuseColour(0.8f, 0.4f, 0.2f); //Warm
-		light->setSpecularColour(0.8f, 0.4f, 0.2f);
-		light->setPowerScale(Ogre::Math::PI);
-		light->setType(Ogre::Light::LT_SPOTLIGHT);
-		lightNode->setPosition(-10.0f, 10.0f, 10.0f);
-		light->setDirection(Ogre::Vector3(1, -1, -1).normalisedCopy());
-		light->setAttenuationBasedOnRadius(10.0f, 0.01f);
+		//light = sceneManager->createLight();
+		//lightNode = rootNode->createChildSceneNode();
+		//lightNode->attachObject(light);
+		//light->setDiffuseColour(0.8f, 0.4f, 0.2f); //Warm
+		//light->setSpecularColour(0.8f, 0.4f, 0.2f);
+		//light->setPowerScale(Ogre::Math::PI);
+		//light->setType(Ogre::Light::LT_SPOTLIGHT);
+		//lightNode->setPosition(-10.0f, 10.0f, 10.0f);
+		//light->setDirection(Ogre::Vector3(1, -1, -1).normalisedCopy());
+		//light->setAttenuationBasedOnRadius(10.0f, 0.01f);
 
-		mLightNodes[1] = lightNode;
+		//mLightNodes[1] = lightNode;
 
-		light = sceneManager->createLight();
-		lightNode = rootNode->createChildSceneNode();
-		lightNode->attachObject(light);
-		light->setDiffuseColour(0.2f, 0.4f, 0.8f); //Cold
-		light->setSpecularColour(0.2f, 0.4f, 0.8f);
-		light->setPowerScale(Ogre::Math::PI);
-		light->setType(Ogre::Light::LT_SPOTLIGHT);
-		lightNode->setPosition(10.0f, 10.0f, -10.0f);
-		light->setDirection(Ogre::Vector3(-1, -1, 1).normalisedCopy());
-		light->setAttenuationBasedOnRadius(10.0f, 0.01f);
+		//light = sceneManager->createLight();
+		//lightNode = rootNode->createChildSceneNode();
+		//lightNode->attachObject(light);
+		//light->setDiffuseColour(0.2f, 0.4f, 0.8f); //Cold
+		//light->setSpecularColour(0.2f, 0.4f, 0.8f);
+		//light->setPowerScale(Ogre::Math::PI);
+		//light->setType(Ogre::Light::LT_SPOTLIGHT);
+		//lightNode->setPosition(10.0f, 10.0f, -10.0f);
+		//light->setDirection(Ogre::Vector3(-1, -1, 1).normalisedCopy());
+		//light->setAttenuationBasedOnRadius(10.0f, 0.01f);
 
-		mLightNodes[2] = lightNode;
+		//mLightNodes[2] = lightNode;
 
 		createMusicUI();
 		createGameUI();
 		//createShadowMapDebugOverlays();
 
 		// Scene fly over controller
-		mCameraController = new CameraController(mGraphicsSystem, false);
+		//mCameraController = new CameraController(mGraphicsSystem, false);
 		// Camera path following controller
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
@@ -125,13 +125,13 @@ namespace ZS
 		musicUIManager = new MusicUIManager();
 		gm->bindMusicUIManager(musicUIManager);
 		musicUIManager->createMusicUI();
-		musicUIManager->showMusicUI(true);
+		//musicUIManager->showMusicUI(true);
     }
 	void ZSGraphicsGameState::createGameUI() {
 		gameUIManager = new GameUIManager();
 		gm->bindGameUIManager(gameUIManager);
 		gameUIManager->createGameUI();
-		gameUIManager->showGameUI(true);
+		//gameUIManager->showGameUI(true);
 	}
 	//-----------------------------------------------------------------------------------
     void ZSGraphicsGameState::update( float timeSinceLast )
@@ -144,7 +144,7 @@ namespace ZS
 											weight);
 
 		if(mainCameraPathController->isEnabled) {
-			//mainCameraPathController->update(timeSinceLast);
+			mainCameraPathController->update(timeSinceLast);
 		}
 			
 

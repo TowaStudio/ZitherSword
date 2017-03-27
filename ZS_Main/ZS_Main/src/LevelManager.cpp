@@ -78,42 +78,17 @@ namespace ZS {
 
 		level = _level;
 
+
+		// Initialize level path.
+		levelPath = new Path();
+
+		// Initialize camera path.
+		cameraPath = new Path();
+
 		//TODO: Load scene and enemy profile;
 		loadLevelScene(); 
 		loadLevelData();//LevelData
 		//PathData
-
-		// Define level path.
-		levelPath = new Path();
-		//TODO: Load path data from scene;
-
-		//_DEBUG_
-		levelPath->addPoint(Vec3(0.0f, 0.0f, 0.0f));
-
-		levelPath->addPoint(Vec3(8.0f, 0.0f, 0.0f));
-		
-		GenerateEnemyEvent* gee = new GenerateEnemyEvent(0.35f);
-		Trigger* trigger = new Trigger();
-		trigger->addEvent(gee);
-		levelPath->getPoint(1)->addTrigger(trigger);
-		levelPath->addPoint(Vec3(10.0f, 0.0f, 0.0f));
-
-		levelPath->addPoint(Vec3(15.0f, 0.0f, -7.0f));
-		levelPath->addPoint(Vec3(20.0f, 0.0f, 0.0f));
-		levelPath->addPoint(Vec3(25.0f, 0.0f, 0.0f));
-		//_DEBUG_
-
-		//TODO: Load camera path;
-		cameraPath = new Path();
-
-		//_DEBUG_
-		cameraPath->addPoint(Vec3(3.0f, 2.0f, 15.0f));
-		cameraPath->addPoint(Vec3(11.0f, 2.0f, 15.0f));
-		cameraPath->addPoint(Vec3(13.0f, 2.0f, 15.0f));
-		cameraPath->addPoint(Vec3(18.0f, 2.0f, 15.0f));
-		cameraPath->addPoint(Vec3(23.0f, 2.0f, 15.0f));
-		cameraPath->addPoint(Vec3(28.0f, 2.0f, 15.0f));
-		//_DEBUG_
 
 		initLevel();
 	}
@@ -170,15 +145,19 @@ namespace ZS {
 				subentity = subentity->NextSiblingElement("subentity");				 
 			} 
 
-			// TODO load node to scene
-			MovableObjectDefinition* mo = new MovableObjectDefinition();
-			mo->meshName = meshFile;
-			mo->moType = MoTypeItemV1Mesh;
-			mo->resourceGroup = ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-			mo->submeshMaterials = subentities;
+			if(nodeName.find("pathPoint") != string::npos) {
+				levelPath->addPoint(pos);
+			} else if(nodeName.find("cameraPoint") != string::npos) {
+				cameraPath->addPoint(pos);
+			} else {
+				MovableObjectDefinition* mo = new MovableObjectDefinition();
+				mo->meshName = meshFile;
+				mo->moType = MoTypeItemV1Mesh;
+				mo->resourceGroup = ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				mo->submeshMaterials = subentities;
 
-			addGameEntity(Ogre::SCENE_STATIC, mo, nullptr, pos, rotation, scale);
-
+				addGameEntity(Ogre::SCENE_STATIC, mo, nullptr, pos, rotation, scale);
+			}
 			// get next node
 			node = node->NextSiblingElement("node");
 
@@ -229,7 +208,7 @@ namespace ZS {
 	void LevelManager::initLevel() {
 		levelState = LST_LOAD;
 		//TODO: Create Objects and setup player, input;
-		Vec3 pos = Vec3(0.5f, 0.0f, 0.0f);
+		Vec3 pos = levelPath->getPosInPath(0.0001f);
 		Vec3 enemyPos = Vec3(5.0f, 0.0f, 0.0f);
 
 		
@@ -256,15 +235,15 @@ namespace ZS {
 			initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
 			// Define behaviour and data model
-			swordsman = new Swordsman(gm->getPlayerStats(), pos, initialQuaternion, 0.0f);
+			swordsman = new Swordsman(gm->getPlayerStats(), pos, initialQuaternion, 0.0001f);
 			swordsman->bindPath(levelPath);
 
 			// Define the scene models.
 			entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
 										 , swordsman
-										 , Vec3(0.0f, 0.0f, 0.0f) // Change to Level data start pos
+										 , pos // Change to Level data start pos
 										 , initialQuaternion
-										 , Vec3::UNIT_SCALE);
+										 , 5.0f * Vec3::UNIT_SCALE);
 			// Create controller
 			ccSwordsman = new SwordsmanController(entSwordsman);
 		}
@@ -280,7 +259,7 @@ namespace ZS {
 
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
 												 , sword
-												 , Vec3(0.0f, 0.0f, 0.0f)
+												 , pos
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
 
@@ -293,22 +272,20 @@ namespace ZS {
 			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
 
-		{//Bind the sword to swordsman
-			
-		}
-
 		//_DEBUG_
 		{ // 3
 			characterControllers.push_back(createEnemy(0.2f));
 		}
 		//_DEBUG_
 
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::SHOW_GAME_UI, nullptr);
 	}
 	
 	void LevelManager::startLevel() {
+
 		//TODO: Start audio system and input manager;
 		InputManager* inputManager = gm->getInputManager();
 
@@ -355,7 +332,11 @@ namespace ZS {
 
 		int unitID = getUnitID();
 
-		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress), Ogre::Quaternion::IDENTITY, 200.0f, 200.0f, 40.0f, 40.0f, 40.0f, 10.0f, 1.0f, Status::ST_NORMAL, progress, 100);
+		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
+								 Ogre::Quaternion::IDENTITY,
+								 200.0f, 200.0f, 40.0f, 40.0f,
+								 40.0f, 10.0f, 1.0f,
+								 Status::ST_NORMAL, progress, 100);
 		unitVec.push_back(enemy);
 
 		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
