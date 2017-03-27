@@ -5,7 +5,7 @@
 namespace ZS {
 
 	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman) :
-		CharacterController(_entSwordsman, 0) {
+		CharacterController(_entSwordsman, 0), distance(0) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 
@@ -15,12 +15,12 @@ namespace ZS {
 	float SwordsmanController::getDistanceToClosestEnemy() {
 		Unit* closestEnemy = GameMaster::GetInstance()->getLevelManager()->getClosestEnemy(swordsman->progress, detectThres);
 		if (closestEnemy != nullptr) {
-			d = closestEnemy->progress - swordsman->progress;
-			d *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+			distance = closestEnemy->progress - swordsman->progress;
+			distance *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
 		} else {
-			d = detectThres;
+			distance = detectThres;
 		}
-		return d;
+		return distance;
 	}
 
 	void SwordsmanController::changeActionState() { // called in update
@@ -44,25 +44,25 @@ namespace ZS {
 				changeAstTo(cst);
 				break;
 			case CST_WALK:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_RUN:
-				if (d > runThres)
+				if (distance > runThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_ATTACK:
-				if (d < attackThres)
+				if (distance < attackThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
 				break;
 			case CST_SKILL:
-				if (d < skillThres)
+				if (distance < skillThres)
 					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
