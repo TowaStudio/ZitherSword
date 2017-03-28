@@ -30,6 +30,7 @@ namespace ZS {
 	void CameraPathController::bindPath(Path* _path) {
 		path = _path;
 		cameraPos = path->getPoint(0)->pos;
+		camera->setPosition(path->getPoint(0)->pos);
 	}
 
 	void CameraPathController::bindCharacter(Unit* _unit) {

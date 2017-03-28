@@ -7,6 +7,7 @@
 #include "OgreOverlayManager.h"
 #include "AudioSystem.h"
 #include "Instruction.h"
+#include "CharacterController.h"
 
 namespace ZS {
 	class MusicUIManager : public Behaviour {
@@ -19,6 +20,7 @@ namespace ZS {
 		Ogre::v1::Overlay* uiMusic;
 		Ogre::v1::OverlayContainer* uiBackground;
 		Ogre::v1::OverlayContainer* uiSegmentLineGroup;
+		Ogre::v1::OverlayContainer* uiInstructions;
 
 		static float BAR_LENGTH;
 		static float BAR_OFFSET;
@@ -60,7 +62,7 @@ namespace ZS {
 		void clearNotes();
 
 		// Scene part
-		void showResult(INSTRUCTION _inst);
+		void showResult(ControlState _cst);
 		void clearResult();
 
 	};

@@ -407,6 +407,9 @@ namespace ZS
 			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->musicUIManager->showMusicUI(true);
 			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->gameUIManager->showGameUI(true);
 			break;
+		case Mq::SHOW_SEQUENCE_RESULT:
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->musicUIManager->showResult(*reinterpret_cast<const ControlState*>(data));
+			break;
 		case Mq::CAMERA_FOLLOW_PATH:
 			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->bindPath(*reinterpret_cast<Path* const*>(data));
 			break;

@@ -114,6 +114,7 @@ namespace ZS {
 
 		void update(const size_t currIdx, float timeSinceLast);
 		void addHitInfo(const HitInfo& hit);
+		void showResult(ControlState cst);
 		CharacterController* createEnemy(float progress);
 
 		Swordsman* getSwordsman(); 

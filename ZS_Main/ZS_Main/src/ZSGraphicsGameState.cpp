@@ -158,11 +158,26 @@ namespace ZS
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::keyPressed(const SDL_KeyboardEvent &arg) {
 		switch(arg.keysym.sym) {
-			case SDLK_d:
+			case SDLK_SPACE:
+				musicUIManager->addNote(NoteName::DO);
+				break;
+			case SDLK_j:
+				musicUIManager->addNote(NoteName::RE); 
+				break;
+			case SDLK_k:
+				musicUIManager->addNote(NoteName::MI);
+				break;
+			case SDLK_l:
+				musicUIManager->addNote(NoteName::SO);
+				break;
+			case SDLK_SEMICOLON:
+				musicUIManager->addNote(NoteName::LA);
+				break;
+			/*case SDLK_d:
 				musicUIManager->addNote(NoteName::DO);
 				break;
 			case SDLK_f:
-				musicUIManager->addNote(NoteName::RE); 
+				musicUIManager->addNote(NoteName::RE);
 				break;
 			case SDLK_SPACE:
 				musicUIManager->addNote(NoteName::MI);
@@ -172,7 +187,7 @@ namespace ZS
 				break;
 			case SDLK_k:
 				musicUIManager->addNote(NoteName::LA);
-				break;
+				break;*/
 			default:
 				break;
 		}
