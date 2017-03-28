@@ -41,6 +41,17 @@ namespace ZS {
 			uiMusic->add2D(uiBackground);
 		}
 
+		//Instructions
+		{
+			uiInstructions = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "MusicUIPanelInstructions"));
+			uiInstructions->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			uiInstructions->setPosition(500.0f * 1280.0f / 720.0f, 5000.0f);
+			uiInstructions->setDimensions(2656.0f * 1280.0f / 720.0f * 0.8f, 2916.0f * 0.8f);
+			uiInstructions->setMaterialName("MuiscUIInstruction");
+			uiMusic->add2D(uiInstructions);
+		}
+
 		//Scanline
 		{
 			uiScanline = static_cast<Ogre::v1::OverlayElement*>(
@@ -78,8 +89,9 @@ namespace ZS {
 			uiResult = static_cast<Ogre::v1::OverlayElement*>(
 				overlayManager.createOverlayElement("Panel", "MusicUIResult"));
 			uiResult->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			uiResult->setPosition(5000.0f * 1280.0f / 720.0f, 0.0f);
-			uiResult->setDimensions(100.0f * 1280.0f / 720.0f, 2500.0f);
+			uiResult->setPosition(7000.0f * 1280.0f / 720.0f, 0.0f);
+			uiResult->setDimensions(1875.0f * 1280.0f / 720.0f, 1944.4f);
+			uiResult->setMaterialName("MusicResultRun");
 			uiBackground->addChild(uiResult);
 		}
 
@@ -206,24 +218,33 @@ namespace ZS {
 		currentNoteCount = 0;
 	}
 
-	void MusicUIManager::showResult(INSTRUCTION _inst) {
+	void MusicUIManager::showResult(ControlState _cst) {
 		Ogre::String resultMaterial;
-		switch(_inst) {
+		switch(_cst) {
 			default:
-			case INST_IDLE:
-				resultMaterial = "";
+			case CST_IDLE:
+				resultMaterial = "MusicResultInvalid";
 				break;
-			case INST_ATTACK:
-				resultMaterial = "";
+			case CST_ATTACK:
+				resultMaterial = "MusicResultAttack";
 				break;
-			case INST_MOVE:
-				resultMaterial = "";
+			case CST_DEFENSE:
+				resultMaterial = "MusicResultBlock";
+				break;
+			case CST_DODGE:
+				resultMaterial = "MusicResultDodge";
+				break;
+			case CST_RUN:
+				resultMaterial = "MusicResultRun";
+				break;
+			case CST_WALK:
+				resultMaterial = "MusicResultWalk";
 				break;
 		}
 		uiResult->setMaterialName(resultMaterial);
 	}
 
 	void MusicUIManager::clearResult() {
-		showResult(INST_IDLE);
+		showResult(CST_IDLE);
 	}
 }

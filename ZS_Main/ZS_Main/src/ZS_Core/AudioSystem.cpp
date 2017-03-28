@@ -169,7 +169,7 @@ namespace ZS {
 		
 		if (!patterns) {
 			//GameMaster::GetInstance()->log("Error");
-			return -1;
+			return 0;
 		}
 		for(int p = 0; p < patterns->size(); p++) {
 			bool match = true;
@@ -189,7 +189,7 @@ namespace ZS {
 			}
 		}
 		//GameMaster::GetInstance()->log("Fail");
-		return -1; // No match
+		return 0; // No match
 	}
 
 	// constructor
@@ -348,8 +348,8 @@ namespace ZS {
 					}
 					debugStr += to_string(diffAvg);
 					//GameMaster::GetInstance()->log(debugStr);
-					GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(static_cast<ControlState>(res));
-					reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
+					GameMaster::GetInstance()->getInputManager()->setInstruction(static_cast<ControlState>(res));
+					GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
 
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);

@@ -380,6 +380,10 @@ namespace ZS {
 		// Todo: Effect
 	}
 
+	void LevelManager::showResult(ControlState cst) {
+		logicSystem->queueSendMessage(graphicsSystem, Mq::SHOW_SEQUENCE_RESULT, cst);
+	}
+
 	CharacterController* LevelManager::createEnemy(float progress) {
 		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
 		moEnemy->meshName = "enemy1.mesh";
