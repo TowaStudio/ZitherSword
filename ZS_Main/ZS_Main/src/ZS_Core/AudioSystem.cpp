@@ -28,7 +28,7 @@ namespace ZS {
 
 		// hardcoding properties
 		inputPart = MED;
-		tolerance = 0.45;
+		tolerance = 0.5;
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;

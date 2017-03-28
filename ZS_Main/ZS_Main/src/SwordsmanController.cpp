@@ -63,7 +63,7 @@ namespace ZS {
 				else if (distance >= detectThres)
 					changeAstTo(CST_IDLE);
 				else
-					changeAstTo(CST_WALK);
+					changeAstTo(CST_RUN);
 				break;
 			case CST_SKILL:
 				if (distance < skillThres)
