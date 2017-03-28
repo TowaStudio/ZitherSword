@@ -20,6 +20,7 @@ namespace ZS {
 		} else {
 			distance = detectThres;
 		}
+		GameMaster::GetInstance()->log(distance);
 		return distance;
 	}
 
@@ -59,14 +60,18 @@ namespace ZS {
 			case CST_ATTACK:
 				if (distance < attackThres)
 					changeAstTo(cst);
+				else if (distance >= detectThres)
+					changeAstTo(CST_IDLE);
 				else
-					changeAstTo(CST_RUN);
+					changeAstTo(CST_WALK);
 				break;
 			case CST_SKILL:
 				if (distance < skillThres)
 					changeAstTo(cst);
+				else if (distance >= detectThres)
+					changeAstTo(CST_IDLE);
 				else
-					changeAstTo(CST_RUN);
+					changeAstTo(CST_WALK);
 				break;
 			case CST_DEFENSE:
 				changeAstTo(cst);

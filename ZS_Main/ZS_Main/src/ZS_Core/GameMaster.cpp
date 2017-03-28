@@ -80,7 +80,7 @@ namespace ZS {
 	}
 
 	void GameMaster::loadLevel(int level) {
-		levelManager->loadLevel(1); //TODO
+		levelManager->loadLevel(level); //TODO
 		currentLevel = level;
 	}
 };

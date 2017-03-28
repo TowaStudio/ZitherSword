@@ -254,7 +254,7 @@ namespace ZS {
 			bpm = StringConverter::parseInt(musicNode->Attribute("bpm"));
 			bpb = StringConverter::parseInt(musicNode->Attribute("bpb"));
 
-			AudioSystem::GetInstance()->musicSetup(level + 1, patterns, preBarNum, preTickNum, bpm, bpb);
+			AudioSystem::GetInstance()->musicSetup(level, patterns, preBarNum, preTickNum, bpm, bpb);
 		}
 
 		// other possible level data

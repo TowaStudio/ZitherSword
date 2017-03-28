@@ -11,6 +11,9 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 
+	int timeDiffTT = 0; // DEBUG
+	int clickNum = 0; // DEBUG
+
 	// setup
 	void AudioSystem::musicSetup(int _currentLevel, Patterns* _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
 		// setting properties
@@ -25,7 +28,7 @@ namespace ZS {
 
 		// hardcoding properties
 		inputPart = MED;
-		tolerance = 0.3;
+		tolerance = 0.45;
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
@@ -94,10 +97,14 @@ namespace ZS {
 
 	void AudioSystem::inputJudge(int64 currentTime, NoteName noteName) {
 		int timeDiff = static_cast<int>(currentTime - currentTickTime);
+		timeDiff -= 30;
+		timeDiffTT += timeDiff; // DEBUG
+		clickNum += 1;
 		if(timeDiff < thresTime) { // current tick
 			recordNote(currentTickNum, noteName);
 		} else if(timeDiff > interval - thresTime) { // next tick
 			recordNote(currentTickNum + 1, noteName);
+			timeDiffTT -= interval; // DEBUG
 		} else { // hit nothing
 
 		}
@@ -187,7 +194,7 @@ namespace ZS {
 
 	// constructor
 	AudioSystem::AudioSystem() : 
-		directory("D:/Program.Houdou/OGRE/Projects/ZitherSword/ZS_Main/Assets/Audio/")
+		directory("F:/ZitherSword/ZS_Main/Assets/Audio/")
 	{
 		// init settings
 		// coi
@@ -321,7 +328,7 @@ namespace ZS {
 
 					// identify sequence
 					int res = identifySequence();
-					/*Ogre::String debugStr = "";
+					Ogre::String debugStr = "";
 					for (int i = 0; i < 16; i += 4) {
 						debugStr += to_string(inputSequence[i]);
 						debugStr += to_string(inputSequence[i+1]);
@@ -330,8 +337,13 @@ namespace ZS {
 						debugStr += " ";
 					}
 					debugStr += ": "; 
-					debugStr += to_string(res);
-					GameMaster::GetInstance()->log(debugStr);*/
+					int diffAvg = 0;
+					if (clickNum > 0) {
+						diffAvg = timeDiffTT / clickNum;
+						timeDiffTT = 0; clickNum = 0;
+					}
+					debugStr += to_string(diffAvg);
+					//GameMaster::GetInstance()->log(debugStr);
 					GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(static_cast<ControlState>(res));
 					reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 
