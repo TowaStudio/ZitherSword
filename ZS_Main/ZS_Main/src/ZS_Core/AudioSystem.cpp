@@ -64,7 +64,7 @@ namespace ZS {
 		isGameRunning = true;
 		startTimer(interval);
 
-		//TODO: play background music
+		// play background music
 		mixer.addInputSource(BGTransportSource, true);
 		playBGM(0);
 	}
@@ -193,11 +193,15 @@ namespace ZS {
 	}
 
 	// constructor
-	AudioSystem::AudioSystem() : 
-		directory("F:/ZitherSword/ZS_Main/Assets/Audio/")
-	{
+	AudioSystem::AudioSystem(){
 		// init settings
-		// coi
+		char buffer[MAX_PATH];
+		GetCurrentDirectory(MAX_PATH, buffer);
+		Ogre::String cwd = buffer;
+		replace(cwd.begin(), cwd.end(), '\\', '/');
+		cwd += "/ZSResources/Audio/";
+		directory = cwd;
+
 		//setAudioChannels(0, 2);
 		formatManager.registerBasicFormats();
 		AIComposer = new AudioComposer();
