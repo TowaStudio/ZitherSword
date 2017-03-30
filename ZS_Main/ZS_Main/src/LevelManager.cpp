@@ -271,7 +271,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 3;
+		int initObjectCount = 4;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -325,8 +325,11 @@ namespace ZS {
 		}
 
 		//_DEBUG_
-		{ // 3
+		{
+		// 3
 			characterControllers.push_back(createEnemy(0.02f));
+		// 4
+			characterControllers.push_back(createEnemy(0.08f));
 		}
 		//_DEBUG_
 
@@ -348,6 +351,7 @@ namespace ZS {
 
 		ccSwordsman->changeControlState(CST_IDLE);
 		characterControllers[0]->changeControlState(CST_ATTACK);
+		characterControllers[1]->changeControlState(CST_ATTACK);
 
 		levelState = LST_PLAY;
 	}
@@ -357,6 +361,7 @@ namespace ZS {
 		//TODO: Character controllers
 		ccSwordsman->changeActionState();
 		characterControllers[0]->changeActionState();
+		characterControllers[1]->changeActionState();
 
 		//Update game entities
 		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {

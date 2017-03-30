@@ -20,7 +20,7 @@ namespace ZS {
 		} else {
 			distance = detectThres;
 		}
-		GameMaster::GetInstance()->log(distance);
+		//GameMaster::GetInstance()->log(distance);
 		return distance;
 	}
 

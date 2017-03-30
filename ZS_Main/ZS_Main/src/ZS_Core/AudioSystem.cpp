@@ -347,7 +347,7 @@ namespace ZS {
 						timeDiffTT = 0; clickNum = 0;
 					}
 					debugStr += to_string(diffAvg);
-					//GameMaster::GetInstance()->log(debugStr);
+					GameMaster::GetInstance()->log(debugStr);
 					GameMaster::GetInstance()->getInputManager()->setInstruction(static_cast<ControlState>(res));
 					GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
 
