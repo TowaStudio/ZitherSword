@@ -28,7 +28,7 @@ namespace ZS {
 
 		// hardcoding properties
 		inputPart = MED;
-		tolerance = 0.5;
+		tolerance = 0.7;
 		tpb = 4;
 		playerInCharge = false;
 		AIInCharge = false;
@@ -37,7 +37,7 @@ namespace ZS {
 
 		// calculating & initializing properties
 		interval = 60 * 1000 / (tpb * bpm);
-		thresTime = static_cast<int>(tolerance * interval);
+		thresTime = int(tolerance * interval + 0.5f); // round
 		inputSequence = NoteSeq(tpb * bpb, REST);
 		noteSequence = new NoteSeq(tpb * bpb, REST);
 		partSequence = new PartSeq(tpb * bpb, MED);
@@ -97,17 +97,27 @@ namespace ZS {
 
 	void AudioSystem::inputJudge(int64 currentTime, NoteName noteName) {
 		int timeDiff = static_cast<int>(currentTime - currentTickTime);
-		timeDiff -= 30;
+		timeDiff -= 25;
 		timeDiffTT += timeDiff; // DEBUG
 		clickNum += 1;
-		if(timeDiff < thresTime) { // current tick
-			recordNote(currentTickNum, noteName);
-		} else if(timeDiff > interval - thresTime) { // next tick
-			recordNote(currentTickNum + 1, noteName);
-			timeDiffTT -= interval; // DEBUG
-		} else { // hit nothing
+		if (tolerance <= 0.5f)
+			if(timeDiff < thresTime) { // current tick
+				recordNote(currentTickNum, noteName);
+			} else if(timeDiff > interval - thresTime) { // next tick
+				recordNote(currentTickNum + 1, noteName);
+				timeDiffTT -= interval; // DEBUG
+			} else { // hit nothing
 
-		}
+			}
+		else
+			if (currentTickNum % 2 == 0 && timeDiff < thresTime) // current tick
+				recordNote(currentTickNum, noteName); 
+			else if (timeDiff > interval - thresTime) { // next tick
+					recordNote(currentTickNum + 1, noteName);
+					timeDiffTT -= interval; // DEBUG
+			} else { // hit nothing
+
+			}
 	}
 
 	void AudioSystem::recordNote(int tickNum, NoteName noteName) {
@@ -293,8 +303,8 @@ namespace ZS {
 	}*/
 
 	void AudioSystem::hiResTimerCallback() {
-		currentTickTime = juce::Time::currentTimeMillis();
 		currentTickNum++;
+		currentTickTime = juce::Time::currentTimeMillis();
 
 		// Bar end
 		if(currentTickNum == tpb * bpb) {
