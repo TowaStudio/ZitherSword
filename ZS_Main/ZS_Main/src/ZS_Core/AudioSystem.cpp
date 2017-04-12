@@ -165,6 +165,18 @@ namespace ZS {
 		}
 	}
 
+	void AudioSystem::playSoundEffect(int index) {
+		if (index < 0 || index >= sizeof(SEReaders)) {
+			// index error
+			return;
+		}
+		if(SEReaders[index] != nullptr) {
+			SETransportSource->setSource(new AudioFormatReaderSource(SEReaders[index], true), 0, nullptr, SEReaders[index]->sampleRate);
+			SETransportSource->setPosition(0.0);
+			SETransportSource->start();
+		}
+	}
+
 	void AudioSystem::playEndingBGM() {
 		int index = 0;
 		if(isGameClear) index = 1;
@@ -248,6 +260,8 @@ namespace ZS {
 	}
 
 	void AudioSystem::loadFiles() {
+
+		// samples
 		String partsName[] = {"Low_", "Med_", "Hi_"};
 		for(int p = 0; p < 3; p++) {
 			for(int i = 1; i <= 7; i++) {
@@ -257,6 +271,15 @@ namespace ZS {
 				File file = File(path);
 				sampleReaders[p * 7 + i] = formatManager.createReaderFor(file);
 			}
+		}
+
+		// sound effects
+		for (int i = 1; i <= sizeof(SEReaders); i++) {
+			String path = directory + "se_";
+			path += i;
+			path += ".wav";
+			File file = File(path);
+			SEReaders[i] = formatManager.createReaderFor(file);
 		}
 	}
 
