@@ -77,9 +77,11 @@ namespace ZS {
 		AudioFormatManager formatManager;
 		AudioFormatReader* sampleReaders[22];
 		AudioFormatReader* BGReaders[9];
+		AudioFormatReader* SEReaders[8];
 		AudioFormatReader* EndReaders[2];
 		std::queue<AudioTransportSource*> sampleTransportSources;
 		AudioTransportSource* BGTransportSource;
+		AudioTransportSource* SETransportSource;
 
 		void loadFiles();
 		void loadBGM();
@@ -87,6 +89,7 @@ namespace ZS {
 		void recordNote(int tickNum, NoteName noteName);
 		void playSound(NoteName note, PartName part = MED);
 		void playBGM(int index);
+		void playSoundEffect(int index);
 		void playEndingBGM();
 		int identifySequence();
 
