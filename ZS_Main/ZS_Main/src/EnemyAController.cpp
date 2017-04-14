@@ -3,8 +3,8 @@
 
 namespace ZS {
 
-	EnemyAController::EnemyAController(GameEntity* _entEnemy, int _id) :
-		CharacterController(_entEnemy, _id), distance(0) {
+	EnemyAController::EnemyAController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id) :
+		CharacterController(_levelManager, _entEnemy, _id), distance(0) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
 		aist = AIST_IDLE;
 	}
@@ -13,8 +13,8 @@ namespace ZS {
 	}
 
 	float EnemyAController::getDistanceToPlayer() {
-		distance = enemy->progress - GameMaster::GetInstance()->getLevelManager()->getSwordsman()->progress;
-		distance *= GameMaster::GetInstance()->getLevelManager()->getLevelPath()->totalLength;
+		distance = enemy->progress - levelManager->getSwordsman()->progress;
+		distance *= levelManager->getLevelPath()->totalLength;
 		return distance;
 	}
 
@@ -72,33 +72,48 @@ namespace ZS {
 		switch (ast) {
 		case CST_IDLE:
 			enemy->isMoving = false;
-			ent->animationController->startAnimation("swordIdle_6");
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "swordIdle_6", true);
 			break;
 		case CST_WALK:
-			ent->animationController->startAnimation("walk_0");
+			enemy->isMoving = true;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "walk_0", true);
 			break;
 		case CST_RUN:
 			enemy->isMoving = true;
-			ent->animationController->startAnimation("swordRun_1");
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "swordRun_1", true);
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
-			ent->animationController->startAnimation("enemyAtk2_3");
+			enemy->isAttacking = true;
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk2_3", true);
 			break;
 		case CST_SKILL:
-			ent->animationController->startAnimation("enemyAtk1_2");
+			enemy->isMoving = false;
+			enemy->isAttacking = true;
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk1_2", true);
 			break;
 		case CST_DEFENSE:
-			ent->animationController->startAnimation("Block");
+			enemy->isMoving = false;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "Block", true);
 			break;
 		case CST_HURT:
-			ent->animationController->startAnimation("hurt_4");
+			enemy->isMoving = false;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "hurt_4", true);
 			break;
 		case CST_DODGE:
-			ent->animationController->startAnimation("dodge_5");
+			enemy->isMoving = false;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "dodge_5", true);
 			break;
 		case CST_DEAD:
-			ent->animationController->startAnimation("dead_7", false);
+			enemy->isMoving = false;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "dead_7", false);
 			break;
 		default:
 			break;

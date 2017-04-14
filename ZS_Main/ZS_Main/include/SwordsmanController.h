@@ -19,7 +19,7 @@ namespace ZS {
 		float getDistanceToClosestEnemy();
 
 	public:
-		SwordsmanController(GameEntity* _entSwordsman);
+		SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman);
 		~SwordsmanController();
 
 		void changeActionState() override;

@@ -427,6 +427,12 @@ namespace ZS
 				mcpc->bindCharacter(nullptr);
 			}
 			break;
+		case Mq::GAME_ENTITY_PLAY_ANIMATION:
+			{
+				AnimationController::AnimationInstruction* aci = *reinterpret_cast<AnimationController::AnimationInstruction* const*>(data);
+				aci->ac->startAnimation(aci->state, aci->loop);
+			}
+			break;
         default:
             break;
         }

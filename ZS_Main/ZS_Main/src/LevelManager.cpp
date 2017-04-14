@@ -297,7 +297,7 @@ namespace ZS {
 										 , initialQuaternion
 										 , 5.0f * Vec3::UNIT_SCALE);
 			// Create controller
-			ccSwordsman = new SwordsmanController(entSwordsman);
+			ccSwordsman = new SwordsmanController(this, entSwordsman);
 		}
 
 		{ // 2
@@ -404,8 +404,10 @@ namespace ZS {
 		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 								 initialQuaternion,
 								 200.0f, 200.0f, 40.0f, 40.0f,
-								 40.0f, 10.0f, 7.0f,
+								 40.0f, 10.0f, -2.0f,
 								 Status::ST_NORMAL, progress, 100);
+		enemy->bindPath(levelPath);
+
 		unitVec.push_back(enemy);
 
 		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
@@ -414,8 +416,17 @@ namespace ZS {
 											  , initialQuaternion
 											  , Vec3(0.2f, 0.2f, 0.2f));
 		// Create controller
-		EnemyAController* ccEnemy = new EnemyAController(entEnemy, unitID);
+		EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
 		return ccEnemy;
+	}
+
+	void LevelManager::changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop) {
+		AnimationController::AnimationInstruction* aci = new AnimationController::AnimationInstruction();
+		aci->ac = ac;
+		aci->state = state;
+		aci->loop = loop;
+
+		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_PLAY_ANIMATION, aci);
 	}
 
 	Swordsman* LevelManager::getSwordsman() {

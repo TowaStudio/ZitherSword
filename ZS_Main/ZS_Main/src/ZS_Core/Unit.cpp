@@ -75,7 +75,7 @@ namespace ZS {
 
 				moveVec = path->getPosInPath(progress) - pos;
 				Ogre::Quaternion q;
-				q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) - Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+				q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) + Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 				rot = q;
 			}
 			pos += moveVec;

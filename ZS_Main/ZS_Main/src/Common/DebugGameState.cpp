@@ -137,7 +137,7 @@ namespace ZS
             Ogre::Hlms *hlms = hlmsManager->getHlms( Ogre::HLMS_USER0 );
             Ogre::GpuProgramManager::getSingleton().clearMicrocodeCache();
             hlms->reloadFrom( hlms->getDataFolder() );
-			GameMaster::GetInstance()->log(hlms->getDataFolder()->getName());
+			//GameMaster::GetInstance()->log(hlms->getDataFolder()->getName());
         }
         else if( arg.keysym.sym == SDLK_F2 && (arg.keysym.mod & (KMOD_LCTRL|KMOD_RCTRL)) )
         {

@@ -3,6 +3,8 @@
 #include "GameEntity.h"
 
 namespace ZS {
+	class LevelManager;
+
 	enum ControlState {
 		CST_IDLE = 0,
 		CST_WALK,
@@ -18,6 +20,7 @@ namespace ZS {
 
 	class CharacterController {
 	protected:
+		LevelManager* levelManager;
 		GameEntity* ent;
 		ControlState cst;
 		ControlState ast;
@@ -25,7 +28,8 @@ namespace ZS {
 	public:
 		int id;
 
-		CharacterController(GameEntity* _ent, int _id) :
+		CharacterController(LevelManager* _levelManager, GameEntity* _ent, int _id) :
+			levelManager(_levelManager),
 			ent(_ent),
 			cst(CST_IDLE),
 			ast(CST_IDLE),

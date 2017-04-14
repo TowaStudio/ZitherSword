@@ -4,8 +4,8 @@
 
 namespace ZS {
 
-	SwordsmanController::SwordsmanController(GameEntity* _entSwordsman) :
-		CharacterController(_entSwordsman, 0), distance(0) {
+	SwordsmanController::SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman) :
+		CharacterController(_levelManager, _entSwordsman, 0), distance(0) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 
@@ -95,42 +95,42 @@ namespace ZS {
 		case CST_IDLE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("swordIdle_6");
+			levelManager->changeAnimationOf(ent->animationController, "swordIdle_6", true);
 			break;
 		case CST_WALK:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("walk_0");
+			levelManager->changeAnimationOf(ent->animationController, "walk_0", true);
 			break;
 		case CST_RUN:
 			swordsman->isMoving = true;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("swordRun_1");
+			levelManager->changeAnimationOf(ent->animationController, "swordRun_1", true);
 			break;
 		case CST_ATTACK:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = true;
-			ent->animationController->startAnimation("attack1_2");
+			levelManager->changeAnimationOf(ent->animationController, "attack1_2", true);
 			break;
 		case CST_SKILL:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = true;
-			ent->animationController->startAnimation("attack2_3");
+			levelManager->changeAnimationOf(ent->animationController, "attack2_3", true);
 			break;
 		case CST_DEFENSE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("block_4");
+			levelManager->changeAnimationOf(ent->animationController, "block_4", true);
 			break;
 		case CST_DODGE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("dodge_5");
+			levelManager->changeAnimationOf(ent->animationController, "dodge_5", true);
 			break;
 		case CST_DEAD:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
-			ent->animationController->startAnimation("dead_7", false);
+			levelManager->changeAnimationOf(ent->animationController, "dead_7", false);
 			break;
 		default:
 			break;
