@@ -26,7 +26,7 @@ namespace ZS {
 		float getDistanceToPlayer();
 
 	public:
-		EnemyAController(GameEntity* _entEnemy, int _id);
+		EnemyAController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id);
 		~EnemyAController();
 
 		void changeActionState() override; // called in update

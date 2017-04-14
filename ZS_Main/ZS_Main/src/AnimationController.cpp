@@ -5,13 +5,15 @@ namespace ZS {
 
 	AnimationController::AnimationController(Ogre::SkeletonInstance* _skeleton) :
 		skeleton(_skeleton),
-		isEnabled(false)
+		isEnabled(false),
+		currentState(""),
+		currentAnim(nullptr)
 	{
 		if(skeleton->getAnimations().size() < 1)
 			OGRE_EXCEPT(Ogre::Exception::ERR_INVALIDPARAMS, "No animations found for character controller", "AnimationController");
 
-		currentState = skeleton->getAnimations()[0].getName().getFriendlyText();
-		currentAnim = skeleton->getAnimation(currentState);
+		/*currentState = skeleton->getAnimations()[0].getName().getFriendlyText();
+		currentAnim = skeleton->getAnimation(currentState);*/
 	}
 
 	AnimationController::~AnimationController() {
@@ -44,7 +46,8 @@ namespace ZS {
 
 	void AnimationController::stopAnimation() {
 		isEnabled = false;
-		currentAnim->setEnabled(false);
+		if(currentAnim)
+			currentAnim->setEnabled(false);
 	}
 
 	void AnimationController::update(float timeSinceLast) {

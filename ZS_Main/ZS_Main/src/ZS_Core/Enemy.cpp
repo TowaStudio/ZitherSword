@@ -25,19 +25,25 @@ namespace ZS {
 	}
 
 	HitInfo Enemy::attack(Unit* target) {
-		//TODO: Scene Query to test attack range.
-
-		//DEBUG
-		Swordsman* player = GameMaster::GetInstance()->getLevelManager()->getSwordsman();
-		//Calculate dmg
-		float dmg = 200.0f;
-		player->damage(dmg);
-		HitInfo hit(this, player, dmg, Time(0));
-
-		return hit;
+		return Unit::attack(target);
 	}
 
 	void Enemy::update(float timeSinceLast) {
 		//GameMaster::GetInstance()->log("Enemy log gm in update");
+		if(isMoving) {
+			move(timeSinceLast);
+		}
+
+		if(isAttacking) {
+			if(attackTimer < 0.0f) {
+				Unit* target = gm->getLevelManager()->getSwordsman();
+				attack(target);
+			}
+
+			else
+				attackTimer -= timeSinceLast;
+		}
+
+		//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
 	}
 }

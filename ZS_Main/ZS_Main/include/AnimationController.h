@@ -5,6 +5,13 @@
 
 namespace ZS {
 	class AnimationController {
+	public:
+		struct AnimationInstruction {
+			AnimationController* ac;
+			std::string state;
+			bool loop;
+		};
+
 	private:
 		Ogre::SkeletonInstance* skeleton;
 

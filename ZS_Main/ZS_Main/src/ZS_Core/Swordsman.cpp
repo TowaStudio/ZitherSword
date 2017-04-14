@@ -34,6 +34,34 @@ namespace ZS {
 		return HitInfo();
 	}
 
+	Vec3 Swordsman::move(float _scale) {
+		if(!isDead) {
+			if(path) {
+				float step = _scale * spd / path->totalLength;
+				float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
+
+				// Trigger event for the path point
+				int nextPathPointIndex = path->getIndexFromPos(nextProgress);
+				if(currentPathPointIndex != nextPathPointIndex) {
+					if(path->getPoint(nextPathPointIndex)->hasTrigger) {
+						path->getPoint(nextPathPointIndex)->trigger->execute();
+					}
+
+					currentPathPointIndex = nextPathPointIndex;
+				}
+				// Prevent from going outside
+				progress = nextProgress;
+
+				moveVec = path->getPosInPath(progress) - pos;
+				Ogre::Quaternion q;
+				q.FromAngleAxis(Ogre::Math::ATan2(-moveVec.z, moveVec.x) - Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+				rot = q;
+			}
+			pos += moveVec;
+		}
+		return pos;
+	}
+
 	HitInfo Swordsman::attack(Unit* target) {
 		return Unit::attack(target);
 	}

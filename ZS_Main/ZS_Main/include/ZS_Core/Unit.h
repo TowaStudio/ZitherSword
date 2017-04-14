@@ -46,7 +46,7 @@ namespace ZS {
 
 		// MOVEMENT
 		void bindPath(Path* _path);
-		Vec3 move(float _scale = 1.0f);
+		virtual Vec3 move(float _scale = 1.0f);
 		Vec3 move(Vec3 _movement);
 		Vec3 moveTo(Vec3 _pos);
 		// BATTLE

@@ -117,6 +117,8 @@ namespace ZS {
 		void showResult(ControlState cst);
 		CharacterController* createEnemy(float progress);
 
+		void changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop);
+
 		Swordsman* getSwordsman(); 
 		Unit* getEnemy(int unitID);
 		Unit* getClosestEnemy(float _pos, float threshold);
