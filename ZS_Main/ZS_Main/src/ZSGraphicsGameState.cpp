@@ -99,7 +99,7 @@ namespace ZS
 		//createShadowMapDebugOverlays();
 
 		// Scene fly over controller
-		//mCameraController = new CameraController(mGraphicsSystem, false);
+		// mCameraController = new CameraController(mGraphicsSystem, false);
 		// Camera path following controller
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
@@ -140,10 +140,11 @@ namespace ZS
 		weight = std::min(1.0f, weight);
 
 		musicUIManager->update(timeSinceLast);
+		gameUIManager->update(timeSinceLast);
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
 
-		if(mainCameraPathController->isEnabled) {
+		if(mainCameraPathController && mainCameraPathController->isEnabled) {
 			mainCameraPathController->update(timeSinceLast);
 		}
 			

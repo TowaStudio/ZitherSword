@@ -64,6 +64,9 @@ namespace ZS {
 		Swordsman* swordsman;
 		GameEntity* entSwordsman;
 
+		GameEntityVec sceneEntities;
+		GameEntityVec enemyEntities;
+
 		//Ogre environment, Thread synchronization
 		struct Region {
 			size_t slotOffset;
@@ -122,6 +125,7 @@ namespace ZS {
 		Swordsman* getSwordsman(); 
 		Unit* getEnemy(int unitID);
 		Unit* getClosestEnemy(float _pos, float threshold);
+		void UnloadLevel();
 
 		void trigger();
 

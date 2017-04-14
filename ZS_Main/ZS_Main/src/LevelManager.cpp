@@ -19,11 +19,11 @@ namespace ZS {
 		unitVec(std::vector<Unit*>()),
 		levelPath(nullptr), cameraPath(nullptr),
 		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
+		sceneEntities(GameEntityVec()), enemyEntities(GameEntityVec()),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
 	{
 		logicSystem->_notifyLevelManager(this);
-
 	}
 
 	LevelManager::~LevelManager() {
@@ -110,7 +110,7 @@ namespace ZS {
 		using namespace Ogre;
 		
 		XMLDocument doc;
-		if (doc.LoadFile(getFileName("/ZSResources/LevelScene1.xml").c_str()) != XML_SUCCESS) {
+		if (doc.LoadFile(getFileName("/ZSResources/LevelScene" + Ogre::StringConverter::toString(level) + ".xml").c_str()) != XML_SUCCESS) {
 			return; // file error
 		}
 		XMLElement *rootNode = doc.FirstChildElement("scene")->FirstChildElement("nodes");
@@ -124,7 +124,11 @@ namespace ZS {
 			Ogre::Quaternion rotation;
 			Ogre::StringVector subentities = Ogre::StringVector();
 
+			bool isTamWrap = false;
+
 			nodeName = node->Attribute("name");
+			if(node->Attribute("isTamWrap"))
+				isTamWrap = strcmp(node->Attribute("isTamWrap"), "true") == 0;
 			entityName = node->FirstChildElement("entity")->Attribute("name");
 			meshFile = node->FirstChildElement("entity")->Attribute("meshFile");
 			nodeId = StringConverter::parseInt(node->Attribute("id"));
@@ -139,6 +143,7 @@ namespace ZS {
 			rotation.y = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qy"));
 			rotation.z = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qz"));
 			rotation.w = StringConverter::parseReal(node->FirstChildElement("rotation")->Attribute("qw"));
+
 			XMLElement *subentity = node->FirstChildElement("entity")->FirstChildElement("subentities")->FirstChildElement("subentity");
 			while (subentity != nullptr) {
 				subentities.push_back(subentity->Attribute("materialName"));
@@ -153,11 +158,11 @@ namespace ZS {
 			} else {
 				MovableObjectDefinition* mo = new MovableObjectDefinition();
 				mo->meshName = meshFile;
-				mo->moType = MoTypeItemV1Mesh;
+				mo->moType = isTamWrap ? MoTypeItemV1MeshTAMWrap : MoTypeItemV1Mesh;
 				mo->resourceGroup = ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 				mo->submeshMaterials = subentities;
 
-				addGameEntity(Ogre::SCENE_STATIC, mo, nullptr, pos, rotation, scale);
+				sceneEntities.push_back(addGameEntity(Ogre::SCENE_STATIC, mo, nullptr, pos, rotation, scale));
 			}
 			// get next node
 			node = node->NextSiblingElement("node");
@@ -326,9 +331,9 @@ namespace ZS {
 
 		//_DEBUG_
 		{
-		// 3
+		// 3 4
 			characterControllers.push_back(createEnemy(0.02f));
-		// 4
+		// 5 6
 			characterControllers.push_back(createEnemy(0.08f));
 		}
 		//_DEBUG_
@@ -350,8 +355,8 @@ namespace ZS {
 		// Set default animation
 
 		ccSwordsman->changeControlState(CST_IDLE);
-		characterControllers[0]->changeControlState(CST_ATTACK);
-		characterControllers[1]->changeControlState(CST_ATTACK);
+		characterControllers[0]->changeControlState(CST_IDLE);
+		characterControllers[1]->changeControlState(CST_IDLE);
 
 		levelState = LST_PLAY;
 	}
@@ -383,6 +388,10 @@ namespace ZS {
 	void LevelManager::addHitInfo(const HitInfo& hit) {
 		gm->log(hit.source->name + " hit " + hit.target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
 		// Todo: Effect
+		if(hit.target->name.compare("Swordsman") == 0) {
+			// refreash UI
+			gm->getGameUIManager()->updateHPFill(hit.target->hp / hit.target->maxhp);
+		}
 	}
 
 	void LevelManager::showResult(ControlState cst) {
@@ -415,6 +424,33 @@ namespace ZS {
 											  , levelPath->getPosInPath(progress) // Change to Level data start pos
 											  , initialQuaternion
 											  , Vec3(0.2f, 0.2f, 0.2f));
+
+		enemyEntities.push_back(entEnemy);
+
+		
+		/*MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+		moEnemyWeapon->meshName = "enemy1weapon.mesh";
+		moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+		moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
+		moEnemyWeapon->moType = MoTypeItem;
+
+		Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+		enemy->useWeapon(enemyWeapon);
+
+		GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
+												, enemyWeapon
+												, Vec3::ZERO
+												, Ogre::Quaternion::IDENTITY
+												, Vec3(0.5f, 0.5f, 0.5f));
+		enemyEntities.push_back(entEnemyWeapon);
+				
+
+		BindDefinition* bo = new BindDefinition();
+		bo->source = entEnemyWeapon;
+		bo->target = entEnemy;
+		bo->boneName = "Bip01 R Finger1";
+		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
+
 		// Create controller
 		EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
 		return ccEnemy;
@@ -454,6 +490,28 @@ namespace ZS {
 		return enemy;
 	}
 
+	void LevelManager::UnloadLevel() {
+		// Stop updates
+		levelState = LST_END;
+
+		// Destroy everything
+		/*for(auto itr = mGameEntities[Ogre::SCENE_DYNAMIC].begin(); itr != mGameEntities[Ogre::SCENE_DYNAMIC].end(); ++itr) {
+			removeGameEntity(*itr);
+		}*/
+
+		gm->getMusicUIManager()->showMusicUI(false);
+		gm->getGameUIManager()->showGameUI(false);
+
+		for(auto itr = sceneEntities.begin(); itr != sceneEntities.end(); ++itr) {
+			if((*itr)->mMoDefinition->moType == MoTypeItemV1Mesh || (*itr)->mMoDefinition->moType == MoTypeItemV1MeshTAMWrap)
+				removeGameEntity(*itr);
+		}
+		for(auto itr = enemyEntities.begin(); itr != enemyEntities.end(); ++itr) {
+			removeGameEntity(*itr);
+		}
+		levelState = LST_NOT_IN_LEVEL;
+	}
+
 	//------------------------------------Game Environments------------------------------------
 	//-----------------------------------------------------------------------------------
 	GameEntity* LevelManager::addGameEntity(Ogre::SceneMemoryMgrTypes type,
@@ -489,12 +547,18 @@ namespace ZS {
 	void LevelManager::removeGameEntity(GameEntity *toRemove) {
 		Ogre::uint32 slot = getScheduledForRemovalAvailableSlot();
 		mScheduledForRemoval[slot].push_back(toRemove);
-		GameEntityVec::iterator itor = lower_bound(mGameEntities[toRemove->mType].begin(),
+		for(auto itr = mGameEntities[toRemove->mType].begin(); itr != mGameEntities[toRemove->mType].end(); ++itr) {
+			if((*itr)->getId() == toRemove->getId()) {
+				//assert(itr != mGameEntities[toRemove->mType].end() && *itor == toRemove);
+				mGameEntities[toRemove->mType].erase(itr);
+				logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_REMOVED, toRemove);
+				break;
+			}
+		}
+
+		/*GameEntityVec::iterator itor = lower_bound(mGameEntities[toRemove->mType].begin(),
 														mGameEntities[toRemove->mType].end(),
-														toRemove);
-		assert(itor != mGameEntities[toRemove->mType].end() && *itor == toRemove);
-		mGameEntities[toRemove->mType].erase(itor);
-		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_REMOVED, toRemove);
+														toRemove);*/
 	}
 	//-----------------------------------------------------------------------------------
 	void LevelManager::_notifyGameEntitiesRemoved(size_t slot) {
