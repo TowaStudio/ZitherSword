@@ -77,7 +77,7 @@ namespace ZS {
 		AudioComposer();
 		void setupComposer(int currentLevel = 0, int ticksPerBar = 16);
 
-		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar);
+		void getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar, int res);
 		int getNextBGMIndex(int currentBar) const; 
 
 	private: 
