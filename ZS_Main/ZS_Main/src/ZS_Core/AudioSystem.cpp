@@ -65,6 +65,7 @@ namespace ZS {
 		startTimer(interval);
 
 		// play background music
+		mixer.addInputSource(SETransportSource, true);
 		mixer.addInputSource(BGTransportSource, true);
 		playBGM(0);
 	}
@@ -165,6 +166,18 @@ namespace ZS {
 		}
 	}
 
+	void AudioSystem::playSoundEffect(int index) {
+		if (index < 0 || index >= sizeof(SEReaders)) {
+			// index error
+			return;
+		}
+		if(SEReaders[index] != nullptr) {
+			SETransportSource->setSource(new AudioFormatReaderSource(SEReaders[index], true), 0, nullptr, SEReaders[index]->sampleRate);
+			SETransportSource->setPosition(0.0);
+			SETransportSource->start();
+		}
+	}
+
 	void AudioSystem::playEndingBGM() {
 		int index = 0;
 		if(isGameClear) index = 1;
@@ -195,10 +208,14 @@ namespace ZS {
 			}
 			if (match) {
 				//GameMaster::GetInstance()->log("Success");
+				if (p <= 0) { // input nothing
+					playSoundEffect(2);
+				}
 				return p; // return the index of pattern
 			}
 		}
-		//GameMaster::GetInstance()->log("Fail");
+		
+		playSoundEffect(2);
 		return 0; // No match
 	}
 
@@ -216,6 +233,7 @@ namespace ZS {
 		formatManager.registerBasicFormats();
 		AIComposer = new AudioComposer();
 		BGTransportSource = new AudioTransportSource;
+		SETransportSource = new AudioTransportSource;
 
 		musicSetup();
 
@@ -248,6 +266,8 @@ namespace ZS {
 	}
 
 	void AudioSystem::loadFiles() {
+
+		// samples
 		String partsName[] = {"Low_", "Med_", "Hi_"};
 		for(int p = 0; p < 3; p++) {
 			for(int i = 1; i <= 7; i++) {
@@ -257,6 +277,15 @@ namespace ZS {
 				File file = File(path);
 				sampleReaders[p * 7 + i] = formatManager.createReaderFor(file);
 			}
+		}
+
+		// sound effects
+		for (int i = 0; i < 8; i++) {
+			String path = directory + "SE_";
+			path += i;
+			path += ".wav";
+			File file = File(path);
+			SEReaders[i] = formatManager.createReaderFor(file);
 		}
 	}
 
@@ -337,9 +366,6 @@ namespace ZS {
 					playerInCharge = false;
 					AIInCharge = true;
 
-					// get AI composing
-					AIComposer->getNextSeq(noteSequence, partSequence, inputSequence, currentBarNum);
-
 					// identify sequence
 					int res = identifySequence();
 					Ogre::String debugStr = "";
@@ -360,6 +386,9 @@ namespace ZS {
 					GameMaster::GetInstance()->log(debugStr);
 					GameMaster::GetInstance()->getInputManager()->setInstruction(static_cast<ControlState>(res));
 					GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
+
+					// get AI composing
+					AIComposer->getNextSeq(noteSequence, partSequence, inputSequence, currentBarNum, res);
 
 					// reset input buffer
 					inputSequence = NoteSeq(tpb * bpb, REST);
