@@ -19,12 +19,16 @@ namespace ZS {
 		thisLevelData = &(_AudioLevelData_[currentLevel]);
 	}
 
-	void AudioComposer::getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar) {
+	void AudioComposer::getNextSeq(NoteSeq * notes, PartSeq * parts, NoteSeq inputInfo, int currentBar, int res) {
 
 		srand(time(nullptr));
 
 		*notes = NoteSeq(16, REST);
 		*parts = PartSeq(16, MED);
+
+		if (res <= 0) {
+			return;
+		}
 		// test
 		//notes->at(0) = MI; notes->at(4) = REST; notes->at(8) = MI; notes->at(12) = REST;
 
