@@ -61,7 +61,7 @@ namespace ZS {
 				if (distance < attackThres)
 					changeAstTo(cst);
 				else if (distance >= detectThres)
-					changeAstTo(CST_IDLE);
+					changeAstTo(cst);
 				else
 					changeAstTo(CST_RUN);
 				break;

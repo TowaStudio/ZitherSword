@@ -63,6 +63,8 @@ namespace ZS {
 		Path* cameraPath;
 		Swordsman* swordsman;
 		GameEntity* entSwordsman;
+		std::vector<int> enemyTypes;
+		std::vector<float> enemyLocs;
 
 		//Ogre environment, Thread synchronization
 		struct Region {
