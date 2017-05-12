@@ -1,0 +1,2026 @@
+<scene upAxis="y" unitsPerMeter="1" unitType="meters" formatVersion="1.0" minOgreVersion="1.8" author="EasyOgreExporter">
+    <environment>
+        <colourAmbient r="0" g="0" b="0" />
+        <colourBackground r="0" g="0" b="0" />
+    </environment>
+    <nodes>
+        <node name="Foliage001" id="0" isTarget="false">
+            <position x="-1162.66" y="-14.263" z="276.546" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage001" id="1" meshFile="Foliage001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage002" id="2" isTarget="false">
+            <position x="-973.647" y="-14.263" z="276.546" />
+            <rotation qx="-0" qy="-0.984808" qz="-0" qw="-0.173648" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage002" id="3" meshFile="Foliage002.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage003" id="4" isTarget="false">
+            <position x="-559.507" y="-14.263" z="272.991" />
+            <rotation qx="-0" qy="-0.984808" qz="-0" qw="-0.173648" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage003" id="5" meshFile="Foliage003.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage004" id="6" isTarget="false">
+            <position x="-287.148" y="-14.263" z="74.9652" />
+            <rotation qx="-0" qy="-0.984808" qz="-0" qw="0.173648" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage004" id="7" meshFile="Foliage004.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage005" id="8" isTarget="false">
+            <position x="-93.8074" y="-14.263" z="-87.9835" />
+            <rotation qx="-0" qy="-0.984808" qz="-0" qw="0.173648" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage005" id="9" meshFile="Foliage005.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage006" id="10" isTarget="false">
+            <position x="147.849" y="-14.263" z="-237.634" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage006" id="11" meshFile="Foliage006.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Road" id="12" isTarget="false">
+            <position x="2509.74" y="-14.263" z="-739.883" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="2.14163" y="11.1624" z="11.1624" />
+            <entity name="Road" id="13" meshFile="Road.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="road" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage007" id="14" isTarget="false">
+            <position x="896.954" y="-14.263" z="-250.396" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage007" id="15" meshFile="Foliage007.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage008" id="16" isTarget="false">
+            <position x="973.879" y="-14.263" z="-237.634" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="11.8322" y="10.6043" z="11.1624" />
+            <entity name="Foliage008" id="17" meshFile="Foliage007.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage010" id="18" isTarget="false">
+            <position x="1263.7" y="-14.263" z="-237.634" />
+            <rotation qx="-0" qy="-0.939693" qz="-0" qw="0.34202" />
+            <scale x="13.2947" y="9.5704" z="11.1624" />
+            <entity name="Foliage010" id="19" meshFile="Foliage007.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage011" id="20" isTarget="false">
+            <position x="1503.17" y="-14.263" z="-244.399" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage011" id="21" meshFile="Foliage011.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage012" id="22" isTarget="false">
+            <position x="1134.57" y="-14.263" z="-237.634" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="10.6226" y="7.64683" z="8.9189" />
+            <entity name="Foliage012" id="23" meshFile="Foliage012.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage013" id="24" isTarget="false">
+            <position x="1192.56" y="-14.263" z="-250.069" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage013" id="25" meshFile="Foliage013.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage014" id="26" isTarget="false">
+            <position x="1056.32" y="-14.263" z="-262.966" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage014" id="27" meshFile="Foliage014.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage015" id="28" isTarget="false">
+            <position x="2621.51" y="-14.263" z="153.173" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="19.3702" y="19.3702" z="19.3702" />
+            <entity name="Foliage015" id="29" meshFile="Foliage015.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage016" id="30" isTarget="false">
+            <position x="1098.68" y="-14.263" z="-250.069" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="4.62682" y="4.62682" z="4.62682" />
+            <entity name="Foliage016" id="31" meshFile="Foliage016.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage017" id="32" isTarget="false">
+            <position x="930.198" y="-14.263" z="-250.069" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="4.62682" y="7.51635" z="4.62682" />
+            <entity name="Foliage017" id="33" meshFile="Foliage017.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage018" id="34" isTarget="false">
+            <position x="1359.1" y="-14.263" z="-237.634" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="10.6226" y="7.64683" z="8.9189" />
+            <entity name="Foliage018" id="35" meshFile="Foliage018.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                    <subentity index="2" materialName="Leaves" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage019" id="36" isTarget="false">
+            <position x="1749.8" y="-14.263" z="-153.102" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="8.04791" y="8.04791" z="8.04791" />
+            <entity name="Foliage019" id="37" meshFile="Foliage019.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage020" id="38" isTarget="false">
+            <position x="2551.14" y="-14.263" z="134.783" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="21.6073" z="11.1624" />
+            <entity name="Foliage020" id="39" meshFile="Foliage020.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage021" id="40" isTarget="false">
+            <position x="2180.37" y="-14.263" z="12.4603" />
+            <rotation qx="-0" qy="-0.953717" qz="-0" qw="0.300706" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage021" id="41" meshFile="Foliage021.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage022" id="42" isTarget="false">
+            <position x="2273.21" y="-14.263" z="45.4898" />
+            <rotation qx="-0" qy="-0.887011" qz="-0" qw="0.461748" />
+            <scale x="11.1624" y="15.1046" z="13.8191" />
+            <entity name="Foliage022" id="43" meshFile="Foliage022.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage023" id="44" isTarget="false">
+            <position x="2735.74" y="5.68773" z="212.09" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage023" id="45" meshFile="Foliage023.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage024" id="46" isTarget="false">
+            <position x="1577.87" y="-14.263" z="-217.792" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage024" id="47" meshFile="Foliage024.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_2" />
+                    <subentity index="1" materialName="Branch0_2" />
+                    <subentity index="2" materialName="Needles" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage025" id="48" isTarget="false">
+            <position x="2369.84" y="-14.263" z="74.125" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage025" id="49" meshFile="Foliage025.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_2" />
+                    <subentity index="1" materialName="Branch0_2" />
+                    <subentity index="2" materialName="Needles" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage026" id="50" isTarget="false">
+            <position x="1835.11" y="-14.263" z="-127.398" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage026" id="51" meshFile="Foliage026.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_2" />
+                    <subentity index="1" materialName="Branch0_2" />
+                    <subentity index="2" materialName="Needles" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage027" id="52" isTarget="false">
+            <position x="1324.89" y="-14.263" z="-268.684" />
+            <rotation qx="-0" qy="-0.173648" qz="-0" qw="-0.984808" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage027" id="53" meshFile="Foliage027.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                    <subentity index="2" materialName="Leaves_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage028" id="54" isTarget="false">
+            <position x="1423.74" y="-14.263" z="-247.174" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage028" id="55" meshFile="Foliage028.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_2" />
+                    <subentity index="1" materialName="Branch0_2" />
+                    <subentity index="2" materialName="Needles" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage029" id="56" isTarget="false">
+            <position x="1641.09" y="-14.263" z="-187.151" />
+            <rotation qx="-0" qy="-0.999048" qz="-0" qw="0.0436193" />
+            <scale x="11.8322" y="10.6043" z="11.1624" />
+            <entity name="Foliage029" id="57" meshFile="Foliage029.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage030" id="58" isTarget="false">
+            <position x="1597.41" y="-14.263" z="-199.587" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="4.62682" y="7.51635" z="4.62682" />
+            <entity name="Foliage030" id="59" meshFile="Foliage030.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage031" id="60" isTarget="false">
+            <position x="2488.61" y="-14.263" z="112.918" />
+            <rotation qx="-0" qy="-0.939693" qz="-0" qw="0.34202" />
+            <scale x="13.2947" y="9.5704" z="11.1624" />
+            <entity name="Foliage031" id="61" meshFile="Foliage031.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk" />
+                    <subentity index="1" materialName="Branch0" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage032" id="62" isTarget="false">
+            <position x="2060.3" y="-14.263" z="-31.8482" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage032" id="63" meshFile="Foliage032.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage033" id="64" isTarget="false">
+            <position x="1916.18" y="-14.263" z="-94.2139" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="4.62682" y="7.51635" z="4.62682" />
+            <entity name="Foliage033" id="65" meshFile="Foliage033.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_1" />
+                    <subentity index="1" materialName="Branch0_1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Foliage034" id="66" isTarget="false">
+            <position x="1954.32" y="-14.263" z="-77.8291" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="Foliage034" id="67" meshFile="Foliage034.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk_2" />
+                    <subentity index="1" materialName="Branch0_2" />
+                    <subentity index="2" materialName="Needles" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="gate" id="68" isTarget="false">
+            <position x="809.791" y="-14.508" z="-241.9" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="8.89086" z="8.6825" />
+            <entity name="gate" id="69" meshFile="gate.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin" id="70" isTarget="false">
+            <position x="-1015.68" y="2.15157" z="276.382" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin" id="71" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2F" id="72" isTarget="false">
+            <position x="-1066.17" y="-14.365" z="269.316" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2F" id="73" meshFile="cabin2F.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="light" id="74" isTarget="false">
+            <position x="-791.25" y="-14.263" z="274.603" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="light" id="75" meshFile="light.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk111_2" />
+                    <subentity index="1" materialName="red" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2FwithSide" id="76" isTarget="false">
+            <position x="-728.744" y="-14.365" z="269.005" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2FwithSide" id="77" meshFile="cabin2FwithSide.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide001" id="78" isTarget="false">
+            <position x="-1117.62" y="-14.2977" z="276.33" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide001" id="79" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="bridge" id="80" isTarget="false">
+            <position x="-901.746" y="-2.65405" z="298.364" />
+            <rotation qx="-0" qy="-1" qz="-0" qw="-7.54979e-08" />
+            <scale x="29.2475" y="11.1624" z="18.751" />
+            <entity name="bridge" id="81" meshFile="bridge.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="grey" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide035" id="82" isTarget="false">
+            <position x="-662.756" y="-14.2977" z="276.33" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide035" id="83" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin034" id="84" isTarget="false">
+            <position x="-622.254" y="2.15157" z="276.382" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin034" id="85" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin035" id="86" isTarget="false">
+            <position x="-592.057" y="2.15157" z="276.382" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin035" id="87" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2F005" id="88" isTarget="false">
+            <position x="-506.706" y="-14.365" z="249.86" />
+            <rotation qx="-0" qy="-0.258819" qz="-0" qw="-0.965926" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2F005" id="89" meshFile="cabin2F.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide036" id="90" isTarget="false">
+            <position x="-441.942" y="-14.2977" z="206.204" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide036" id="91" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin036" id="92" isTarget="false">
+            <position x="-407.505" y="2.15157" z="178.879" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin036" id="93" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="light009" id="94" isTarget="false">
+            <position x="-375.127" y="-14.263" z="148.092" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="light009" id="95" meshFile="light.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk111_2" />
+                    <subentity index="1" materialName="red" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2FwithSide003" id="96" isTarget="false">
+            <position x="-325.743" y="-14.365" z="104.546" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2FwithSide003" id="97" meshFile="cabin2FwithSide.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin037" id="98" isTarget="false">
+            <position x="-249.114" y="2.15157" z="43.2247" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin037" id="99" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin038" id="100" isTarget="false">
+            <position x="-163.457" y="2.15157" z="-29.0497" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin038" id="101" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2F006" id="102" isTarget="false">
+            <position x="-207.975" y="-14.365" z="4.66354" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2F006" id="103" meshFile="cabin2F.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide037" id="104" isTarget="false">
+            <position x="-126.057" y="-14.2977" z="-59.7368" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide037" id="105" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide038" id="106" isTarget="false">
+            <position x="-10.8072" y="-14.2977" z="-156.477" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide038" id="107" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="light010" id="108" isTarget="false">
+            <position x="-52.5428" y="-14.263" z="-118.71" />
+            <rotation qx="-0" qy="-0.34202" qz="-0" qw="-0.939693" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="light010" id="109" meshFile="light.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk111_2" />
+                    <subentity index="1" materialName="red" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2FwithSide004" id="110" isTarget="false">
+            <position x="62.3787" y="-14.365" z="-202.117" />
+            <rotation qx="-0" qy="-0.21644" qz="-0" qw="-0.976296" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2FwithSide004" id="111" meshFile="cabin2FwithSide.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin039" id="112" isTarget="false">
+            <position x="112.175" y="2.15157" z="-225.771" />
+            <rotation qx="-0" qy="-0.21644" qz="-0" qw="-0.976296" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin039" id="113" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide039" id="114" isTarget="false">
+            <position x="201.131" y="-14.2977" z="-249.178" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide039" id="115" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide040" id="116" isTarget="false">
+            <position x="341.321" y="-14.2977" z="-249.178" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide040" id="117" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin040" id="118" isTarget="false">
+            <position x="245.204" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin040" id="119" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin041" id="120" isTarget="false">
+            <position x="285.872" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin041" id="121" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="light011" id="122" isTarget="false">
+            <position x="387.617" y="-14.263" z="-244.601" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="light011" id="123" meshFile="light.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk111_2" />
+                    <subentity index="1" materialName="red" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2F007" id="124" isTarget="false">
+            <position x="441.609" y="-14.365" z="-250.76" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2F007" id="125" meshFile="cabin2F.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin042" id="126" isTarget="false">
+            <position x="491.866" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin042" id="127" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin043" id="128" isTarget="false">
+            <position x="532.534" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin043" id="129" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide041" id="130" isTarget="false">
+            <position x="587.983" y="-14.2977" z="-249.178" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide041" id="131" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin2F008" id="132" isTarget="false">
+            <position x="643.125" y="-14.365" z="-250.76" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="10.4968" y="15.4186" z="8.65235" />
+            <entity name="cabin2F008" id="133" meshFile="cabin2F.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_07_-_Default" />
+                    <subentity index="1" materialName="Material_258" />
+                    <subentity index="2" materialName="Trunk111_1" />
+                    <subentity index="3" materialName="Material_270" />
+                    <subentity index="4" materialName="Trunk111_2" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin044" id="134" isTarget="false">
+            <position x="695.854" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin044" id="135" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin045" id="136" isTarget="false">
+            <position x="736.522" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin045" id="137" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="light012" id="138" isTarget="false">
+            <position x="772.961" y="-14.263" z="-244.601" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="11.1624" y="11.1624" z="11.1624" />
+            <entity name="light012" id="139" meshFile="light.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Trunk111_2" />
+                    <subentity index="1" materialName="red" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin046" id="140" isTarget="false">
+            <position x="1023.86" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="0.21644" qz="-0" qw="-0.976296" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin046" id="141" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide042" id="142" isTarget="false">
+            <position x="1306.32" y="-14.2977" z="-243.454" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide042" id="143" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin047" id="144" isTarget="false">
+            <position x="1454.16" y="2.15157" z="-248.726" />
+            <rotation qx="-0" qy="0.21644" qz="-0" qw="-0.976296" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin047" id="145" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabinWithSide043" id="146" isTarget="false">
+            <position x="1694.84" y="-14.2977" z="-169.262" />
+            <rotation qx="-0" qy="0.173648" qz="-0" qw="-0.984808" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabinWithSide043" id="147" meshFile="cabinWithSide001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                    <subentity index="5" materialName="defaultLambert" />
+                    <subentity index="6" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cabin048" id="148" isTarget="false">
+            <position x="2120.07" y="2.15157" z="-16.0055" />
+            <rotation qx="-0" qy="0.21644" qz="-0" qw="-0.976296" />
+            <scale x="12.6024" y="10.3233" z="11.1624" />
+            <entity name="cabin048" id="149" meshFile="cabin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_01_-_Grey" />
+                    <subentity index="1" materialName="Material_156" />
+                    <subentity index="2" materialName="Material_168" />
+                    <subentity index="3" materialName="Trunk111" />
+                    <subentity index="4" materialName="Trunk222" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="RoadA" id="150" isTarget="false">
+            <position x="2509.74" y="-14.263" z="-739.883" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="2.14163" y="11.1624" z="11.1624" />
+            <entity name="RoadA" id="151" meshFile="RoadA.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="road" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint001" id="152" isTarget="false">
+            <position x="-1069.4" y="-14.2371" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint001" id="153" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint002" id="154" isTarget="false">
+            <position x="-999.404" y="-14.2371" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint002" id="155" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint003" id="156" isTarget="false">
+            <position x="-933.845" y="-6.40741" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint003" id="157" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint004" id="158" isTarget="false">
+            <position x="-909.244" y="-1.12276" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint004" id="159" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint005" id="160" isTarget="false">
+            <position x="-855.454" y="-0.978717" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint005" id="161" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint006" id="162" isTarget="false">
+            <position x="-835.055" y="-5.55187" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint006" id="163" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint007" id="164" isTarget="false">
+            <position x="-805.782" y="-14.2371" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint007" id="165" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint008" id="166" isTarget="false">
+            <position x="-579.404" y="-14.2371" z="302.19" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint008" id="167" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint009" id="168" isTarget="false">
+            <position x="-517.817" y="-14.2371" z="292.298" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint009" id="169" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint010" id="170" isTarget="false">
+            <position x="-468.644" y="-14.2371" z="267.69" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint010" id="171" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint011" id="172" isTarget="false">
+            <position x="-398.644" y="-14.2371" z="208.69" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint011" id="173" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint012" id="174" isTarget="false">
+            <position x="-328.644" y="-14.2371" z="149.69" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint012" id="175" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint013" id="176" isTarget="false">
+            <position x="-258.644" y="-14.2371" z="90.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint013" id="177" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint014" id="178" isTarget="false">
+            <position x="-188.644" y="-14.2371" z="31.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint014" id="179" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint015" id="180" isTarget="false">
+            <position x="-118.644" y="-14.2371" z="-27.3105" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint015" id="181" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint016" id="182" isTarget="false">
+            <position x="-48.6438" y="-14.2371" z="-86.3105" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint016" id="183" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint017" id="184" isTarget="false">
+            <position x="21.3562" y="-14.2371" z="-145.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint017" id="185" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint018" id="186" isTarget="false">
+            <position x="91.3562" y="-14.2371" z="-180.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint018" id="187" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint019" id="188" isTarget="false">
+            <position x="161.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint019" id="189" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint020" id="190" isTarget="false">
+            <position x="231.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint020" id="191" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint021" id="192" isTarget="false">
+            <position x="301.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint021" id="193" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint022" id="194" isTarget="false">
+            <position x="371.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint022" id="195" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint023" id="196" isTarget="false">
+            <position x="441.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint023" id="197" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint024" id="198" isTarget="false">
+            <position x="511.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint024" id="199" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint025" id="200" isTarget="false">
+            <position x="581.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint025" id="201" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint026" id="202" isTarget="false">
+            <position x="651.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint026" id="203" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint027" id="204" isTarget="false">
+            <position x="721.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint027" id="205" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint028" id="206" isTarget="false">
+            <position x="791.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint028" id="207" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint029" id="208" isTarget="false">
+            <position x="861.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint029" id="209" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint030" id="210" isTarget="false">
+            <position x="931.356" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint030" id="211" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint031" id="212" isTarget="false">
+            <position x="1001.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint031" id="213" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint032" id="214" isTarget="false">
+            <position x="1071.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint032" id="215" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint033" id="216" isTarget="false">
+            <position x="1141.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint033" id="217" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint034" id="218" isTarget="false">
+            <position x="1211.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint034" id="219" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint035" id="220" isTarget="false">
+            <position x="1281.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint035" id="221" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint036" id="222" isTarget="false">
+            <position x="1351.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint036" id="223" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint037" id="224" isTarget="false">
+            <position x="1421.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint037" id="225" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint038" id="226" isTarget="false">
+            <position x="1491.36" y="-14.2371" z="-215.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint038" id="227" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint039" id="228" isTarget="false">
+            <position x="1563.36" y="-14.2371" z="-189.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint039" id="229" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint040" id="230" isTarget="false">
+            <position x="1635.36" y="-14.2371" z="-163.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint040" id="231" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint041" id="232" isTarget="false">
+            <position x="1707.36" y="-14.2371" z="-137.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint041" id="233" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint042" id="234" isTarget="false">
+            <position x="1779.36" y="-14.2371" z="-111.31" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint042" id="235" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint043" id="236" isTarget="false">
+            <position x="1851.36" y="-14.2371" z="-85.3105" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint043" id="237" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint044" id="238" isTarget="false">
+            <position x="1923.36" y="-14.2371" z="-59.3105" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint044" id="239" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint045" id="240" isTarget="false">
+            <position x="1995.36" y="-14.2371" z="-33.3105" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint045" id="241" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint046" id="242" isTarget="false">
+            <position x="2067.36" y="-14.2371" z="-7.31049" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint046" id="243" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint047" id="244" isTarget="false">
+            <position x="2139.36" y="-14.2371" z="18.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint047" id="245" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint048" id="246" isTarget="false">
+            <position x="2211.36" y="-14.2371" z="44.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint048" id="247" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint049" id="248" isTarget="false">
+            <position x="2283.36" y="-14.2371" z="70.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint049" id="249" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint050" id="250" isTarget="false">
+            <position x="2355.36" y="-14.2371" z="96.6895" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint050" id="251" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint051" id="252" isTarget="false">
+            <position x="2427.36" y="-14.2371" z="122.69" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint051" id="253" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint052" id="254" isTarget="false">
+            <position x="2499.36" y="-14.2371" z="148.69" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint052" id="255" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint001" id="256" isTarget="false">
+            <position x="-1069.4" y="6.558" z="387.919" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint001" id="257" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint002" id="258" isTarget="false">
+            <position x="-999.404" y="6.558" z="387.878" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint002" id="259" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint003" id="260" isTarget="false">
+            <position x="-933.845" y="14.3877" z="388.167" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint003" id="261" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint004" id="262" isTarget="false">
+            <position x="-909.244" y="19.6723" z="388.17" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint004" id="263" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint005" id="264" isTarget="false">
+            <position x="-855.454" y="19.8164" z="388.17" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint005" id="265" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint006" id="266" isTarget="false">
+            <position x="-835.055" y="15.2432" z="388.17" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint006" id="267" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint007" id="268" isTarget="false">
+            <position x="-805.782" y="6.558" z="388.144" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint007" id="269" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint008" id="270" isTarget="false">
+            <position x="-578.851" y="6.558" z="388.144" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint008" id="271" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint009" id="272" isTarget="false">
+            <position x="-499.229" y="6.558" z="373.807" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint009" id="273" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint010" id="274" isTarget="false">
+            <position x="-424.528" y="6.558" z="338.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint010" id="275" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint011" id="276" isTarget="false">
+            <position x="-352.528" y="6.558" z="277.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint011" id="277" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint012" id="278" isTarget="false">
+            <position x="-280.528" y="6.558" z="216.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint012" id="279" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint013" id="280" isTarget="false">
+            <position x="-208.528" y="6.558" z="155.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint013" id="281" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint014" id="282" isTarget="false">
+            <position x="-136.528" y="6.558" z="94.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint014" id="283" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint015" id="284" isTarget="false">
+            <position x="-64.5281" y="6.558" z="33.406" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint015" id="285" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint016" id="286" isTarget="false">
+            <position x="7.47189" y="6.558" z="-27.594" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint016" id="287" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint017" id="288" isTarget="false">
+            <position x="72.1966" y="6.558" z="-82.135" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint017" id="289" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint018" id="290" isTarget="false">
+            <position x="125.428" y="6.558" z="-109.996" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint018" id="291" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint019" id="292" isTarget="false">
+            <position x="161.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint019" id="293" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint020" id="294" isTarget="false">
+            <position x="231.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint020" id="295" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint021" id="296" isTarget="false">
+            <position x="301.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint021" id="297" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint022" id="298" isTarget="false">
+            <position x="371.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint022" id="299" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint023" id="300" isTarget="false">
+            <position x="441.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint023" id="301" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint024" id="302" isTarget="false">
+            <position x="511.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint024" id="303" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint025" id="304" isTarget="false">
+            <position x="581.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint025" id="305" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint026" id="306" isTarget="false">
+            <position x="651.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint026" id="307" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint027" id="308" isTarget="false">
+            <position x="721.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint027" id="309" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint028" id="310" isTarget="false">
+            <position x="791.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint028" id="311" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint029" id="312" isTarget="false">
+            <position x="861.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint029" id="313" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint030" id="314" isTarget="false">
+            <position x="931.403" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint030" id="315" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint031" id="316" isTarget="false">
+            <position x="1001.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint031" id="317" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint032" id="318" isTarget="false">
+            <position x="1071.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint032" id="319" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint033" id="320" isTarget="false">
+            <position x="1141.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint033" id="321" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint034" id="322" isTarget="false">
+            <position x="1211.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint034" id="323" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint035" id="324" isTarget="false">
+            <position x="1281.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint035" id="325" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint036" id="326" isTarget="false">
+            <position x="1351.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint036" id="327" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint037" id="328" isTarget="false">
+            <position x="1421.4" y="6.558" z="-132.237" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint037" id="329" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint038" id="330" isTarget="false">
+            <position x="1478.23" y="6.558" z="-131.204" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint038" id="331" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint039" id="332" isTarget="false">
+            <position x="1544.52" y="6.558" z="-109.754" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint039" id="333" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint040" id="334" isTarget="false">
+            <position x="1615.52" y="6.558" z="-84.7535" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint040" id="335" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint041" id="336" isTarget="false">
+            <position x="1686.52" y="6.558" z="-59.7535" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint041" id="337" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint042" id="338" isTarget="false">
+            <position x="1757.52" y="6.558" z="-34.7535" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint042" id="339" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint043" id="340" isTarget="false">
+            <position x="1828.52" y="6.558" z="-9.75351" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint043" id="341" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint044" id="342" isTarget="false">
+            <position x="1899.52" y="6.558" z="15.2465" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint044" id="343" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint045" id="344" isTarget="false">
+            <position x="1970.52" y="6.558" z="40.2465" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint045" id="345" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint046" id="346" isTarget="false">
+            <position x="2041.52" y="6.558" z="65.2465" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint046" id="347" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint047" id="348" isTarget="false">
+            <position x="2112.52" y="6.558" z="90.2465" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint047" id="349" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint048" id="350" isTarget="false">
+            <position x="2183.52" y="6.558" z="115.246" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint048" id="351" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint049" id="352" isTarget="false">
+            <position x="2254.52" y="6.558" z="140.246" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint049" id="353" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint050" id="354" isTarget="false">
+            <position x="2325.52" y="6.558" z="165.246" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint050" id="355" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint051" id="356" isTarget="false">
+            <position x="2396.52" y="6.558" z="190.246" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint051" id="357" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint052" id="358" isTarget="false">
+            <position x="2467.52" y="6.558" z="215.246" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint052" id="359" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+    </nodes>
+</scene>

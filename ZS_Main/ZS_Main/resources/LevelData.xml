@@ -1,8 +1,0 @@
-<levels>
-	<level id="0">
-		<enemies>
-			<enemy type="0" loc="0.1" />
-			<enemy type="0" loc="0.2" />
-		</enemies>
-	</level>
-</levels>
