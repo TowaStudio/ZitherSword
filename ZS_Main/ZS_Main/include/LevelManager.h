@@ -63,6 +63,8 @@ namespace ZS {
 		Path* cameraPath;
 		Swordsman* swordsman;
 		GameEntity* entSwordsman;
+		std::vector<int> enemyTypes;
+		std::vector<float> enemyLocs;
 
 		GameEntityVec sceneEntities;
 		GameEntityVec enemyEntities;

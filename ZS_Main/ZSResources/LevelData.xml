@@ -1,0 +1,64 @@
+<levels>
+	<level id="1">
+		<music preBarNum="4" preTickNum="0" bpm="150" bpb="4" />
+		<sequences>
+			<sequence type="idle" content="0000000000000000" />
+			<sequence type="run" content="1000100020301000" />
+			<sequence type="attack" content="2000200030602000" />
+			<sequence type="defense" content="3000300060503000" />
+			<sequence type="dodge" content="6000200030502000" />
+			<sequence type="skill" content="6000600020306000" />
+		</sequences>
+		<enemies>
+			<enemy type="0" loc="0.1" />
+			<enemy type="0" loc="0.15" />
+			<enemy type="0" loc="0.2" />
+			<enemy type="0" loc="0.22" />
+			<enemy type="0" loc="0.3" />
+			<enemy type="0" loc="0.32" />
+			<enemy type="0" loc="0.35" />
+			<enemy type="0" loc="0.45" />
+			<enemy type="0" loc="0.55" />
+			<enemy type="0" loc="0.57" />
+			<enemy type="0" loc="0.58" />
+			<enemy type="0" loc="0.7" />
+			<enemy type="0" loc="0.72" />
+			<enemy type="0" loc="0.73" />
+			<enemy type="0" loc="0.75" />
+			<enemy type="0" loc="0.8" />
+			<enemy type="0" loc="0.83" />
+			<enemy type="0" loc="0.9" />
+		</enemies>
+	</level>
+	<level id="2">
+		<music preBarNum="4" preTickNum="0" bpm="150" bpb="4" />
+		<sequences>
+			<sequence type="idle" content="0000000000000000" />
+			<sequence type="run" content="1000100020301000" />
+			<sequence type="attack" content="2000200030602000" />
+			<sequence type="defense" content="3000300060503000" />
+			<sequence type="dodge" content="6000200030502000" />
+			<sequence type="skill" content="6000600020306000" />
+		</sequences>
+		<enemies>
+			<enemy type="0" loc="0.1" />
+			<enemy type="0" loc="0.15" />
+			<enemy type="0" loc="0.2" />
+			<enemy type="0" loc="0.22" />
+			<enemy type="0" loc="0.3" />
+			<enemy type="0" loc="0.32" />
+			<enemy type="0" loc="0.35" />
+			<enemy type="0" loc="0.45" />
+			<enemy type="0" loc="0.55" />
+			<enemy type="0" loc="0.57" />
+			<enemy type="0" loc="0.58" />
+			<enemy type="0" loc="0.7" />
+			<enemy type="0" loc="0.72" />
+			<enemy type="0" loc="0.73" />
+			<enemy type="0" loc="0.75" />
+			<enemy type="0" loc="0.8" />
+			<enemy type="0" loc="0.83" />
+			<enemy type="0" loc="0.9" />
+		</enemies>
+	</level>
+</levels>

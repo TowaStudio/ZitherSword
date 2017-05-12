@@ -85,12 +85,15 @@ namespace ZS {
 		// Initialize camera path.
 		cameraPath = new Path();
 
-		//TODO: Load scene and enemy profile;
+		//TODO: Load scene and enemy profile
+
 		loadLevelScene(); 
-		loadLevelData();//LevelData
-		//PathData
+		loadLevelData();
 
 		initLevel();
+		//PathData
+
+		
 	}
 
 	void LevelManager::prepareResources() {
@@ -203,7 +206,10 @@ namespace ZS {
 				type = StringConverter::parseInt(enemyNode->Attribute("type"));
 				loc = StringConverter::parseReal(enemyNode->Attribute("loc"));
 
-				// TODO load enemy mesh
+				// load enemy
+				//characterControllers.push_back(createEnemy(loc));
+				enemyTypes.push_back(type);
+				enemyLocs.push_back(loc);
 
 				// get next object
 				enemyNode = enemyNode->NextSiblingElement("enemy");
@@ -328,13 +334,20 @@ namespace ZS {
 			bo->boneName = "Bip01 R Finger1";
 			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
+		
+		// enemy
+		{
+			for (int i = 0; i < enemyTypes.size(); i++) {
+				characterControllers.push_back(createEnemy(enemyLocs[i]));
+			}
+		}
 
 		//_DEBUG_
 		{
-		// 3 4
-			characterControllers.push_back(createEnemy(0.02f));
-		// 5 6
-			characterControllers.push_back(createEnemy(0.08f));
+			// 3
+			//characterControllers.push_back(createEnemy(0.02f));
+			// 4
+			//characterControllers.push_back(createEnemy(0.08f));
 		}
 		//_DEBUG_
 
@@ -355,9 +368,11 @@ namespace ZS {
 		// Set default animation
 
 		ccSwordsman->changeControlState(CST_IDLE);
-		characterControllers[0]->changeControlState(CST_IDLE);
-		characterControllers[1]->changeControlState(CST_IDLE);
 
+		for (int i = 0; i < characterControllers.size(); i++) {
+			characterControllers[i]->changeControlState(CST_IDLE);			
+		}
+		
 		levelState = LST_PLAY;
 	}
 
@@ -365,8 +380,9 @@ namespace ZS {
 		//Update Controllers
 		//TODO: Character controllers
 		ccSwordsman->changeActionState();
-		characterControllers[0]->changeActionState();
-		characterControllers[1]->changeActionState();
+		for (int i = 0; i < characterControllers.size(); i++) {
+			characterControllers[i]->changeActionState();
+		}
 
 		//Update game entities
 		if(mGameEntities[Ogre::SCENE_DYNAMIC].size() > 0) {

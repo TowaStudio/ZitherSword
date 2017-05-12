@@ -71,6 +71,19 @@ namespace ZS {
 					LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
 				},
 				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+			}, 
+
+			// Lv. 2
+			{
+				0,
+				32,
+				{
+					LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
+					LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
+					DO_, SO_, LA_, MI_, FA_, DO_, RE_, SO_,
+					DO_, SO_, LA_, MI_, FA_, LA_, SO_, DO_
+				},
+				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
 			}
 		};
 

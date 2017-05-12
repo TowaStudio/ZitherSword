@@ -1,0 +1,1 @@
+Put files in this folder into: $OGRE_HOME/build/sdk/bin/debug/ZSResources
