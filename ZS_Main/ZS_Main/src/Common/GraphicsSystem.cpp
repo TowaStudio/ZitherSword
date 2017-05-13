@@ -16,6 +16,7 @@
 #include "Animation/OgreTagPoint.h"
 
 #include "Hlms/Unlit/OgreHlmsUnlit.h"
+#include "Hlms/Unlit/OgreHlmsUnlitDatablock.h"
 #include "Hlms/Pbs/OgreHlmsPbs.h"
 #include "OgreHlmsManager.h"
 #include "OgreArchiveManager.h"
@@ -31,6 +32,7 @@
 #include "ZSGraphicsGameState.h"
 #include "OgreMeshManager2.h"
 #include "OgreMesh2.h"
+#include <Hlms/Ink/OgreHlmsInk.h>
 
 #if OGRE_USE_SDL2
     #include <SDL_syswm.h>
@@ -433,6 +435,10 @@ namespace ZS
 				aci->ac->startAnimation(aci->state, aci->loop);
 			}
 			break;
+		case Mq::UNLOAD_LEVEL:
+			mGameEntities[Ogre::SCENE_STATIC].clear();
+			mGameEntities[Ogre::SCENE_DYNAMIC].clear();
+			break;
         default:
             break;
         }
@@ -672,7 +678,7 @@ namespace ZS
             cge->gameEntity->mMovableObject = item;
         }
 
-		if(cge->gameEntity->mMoDefinition->moType == MoTypeItemV1Mesh) {
+		if(cge->gameEntity->mMoDefinition->moType == MoTypeItemV1Mesh || cge->gameEntity->mMoDefinition->moType == MoTypeItemV1MeshTAMWrap) {
 			Ogre::Item *item;
 
 			if(Ogre::MeshManager::getSingleton().getResourceByName(cge->gameEntity->mMoDefinition->meshName) == nullptr) {
@@ -699,6 +705,20 @@ namespace ZS
 				item->getSubItem(i)->setDatablockOrMaterialName(materialNames[i],
 																cge->gameEntity->mMoDefinition->
 																resourceGroup);
+				
+				
+				if(cge->gameEntity->mMoDefinition->moType == MoTypeItemV1MeshTAMWrap) {
+					Ogre::HlmsUnlitDatablock *datablock = static_cast<Ogre::HlmsUnlitDatablock*>(
+						item->getSubItem(i)->getDatablock());
+					//Make a hard copy of the sampler block
+					Ogre::HlmsSamplerblock samplerblock(*datablock->getSamplerblock(0));
+					samplerblock.mU = Ogre::TAM_WRAP;
+					samplerblock.mV = Ogre::TAM_WRAP;
+					samplerblock.mW = Ogre::TAM_WRAP;
+					//Set the new samplerblock. The Hlms system will
+					//automatically create the API block if necessary
+					datablock->setSamplerblock(0, samplerblock);
+				}
 			}
 
 			cge->gameEntity->mMovableObject = item;

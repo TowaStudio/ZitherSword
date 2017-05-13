@@ -29,15 +29,21 @@ namespace ZS {
 
 	void CameraPathController::bindPath(Path* _path) {
 		path = _path;
-		cameraPos = path->getPoint(0)->pos;
-		camera->setPosition(path->getPoint(0)->pos);
+		if(path != nullptr) {
+			cameraPos = path->getPoint(0)->pos;
+			camera->setPosition(path->getPoint(0)->pos);
+		} else {
+			camera->setPosition(0.0f, 0.0f, 0.0f);
+		}
 	}
 
 	void CameraPathController::bindCharacter(Unit* _unit) {
-		if(_unit->path) {
-			character = _unit;
+		character = _unit;
+		if(_unit != nullptr && _unit->path) {
 			characterPath = _unit->path;
 			currentLookingPos = character->pos;
+			camera->setPosition(path->getPoint(0)->pos);
+			camera->lookAt(character->pos);
 		}
 	}
 

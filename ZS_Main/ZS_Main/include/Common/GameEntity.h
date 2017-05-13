@@ -19,6 +19,7 @@ namespace ZS
 		MoTypeItemInk,
 		MoTypeItemSkeleton,
 		MoTypeItemV1Mesh,
+		MoTypeItemV1MeshTAMWrap,
         MoTypeEntity,
         NumMovableObjectType
     };

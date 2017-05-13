@@ -47,6 +47,10 @@ namespace ZS {
 						path->getPoint(nextPathPointIndex)->trigger->execute();
 					}
 
+					if(path->getPoint(nextPathPointIndex)->next == nullptr) {
+						gm->getLevelManager()->EndLevel(true);
+					}
+
 					currentPathPointIndex = nextPathPointIndex;
 				}
 				// Prevent from going outside

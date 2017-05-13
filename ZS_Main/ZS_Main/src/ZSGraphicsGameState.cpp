@@ -99,11 +99,37 @@ namespace ZS
 		//createShadowMapDebugOverlays();
 
 		// Scene fly over controller
-		//mCameraController = new CameraController(mGraphicsSystem, false);
+		// mCameraController = new CameraController(mGraphicsSystem, false);
 		// Camera path following controller
 		mainCameraPathController = new CameraPathController(mGraphicsSystem->getCamera());
 
 		{
+			Ogre::v1::OverlayManager& overlayManager = Ogre::v1::OverlayManager::getSingleton();
+
+			uiLogo = overlayManager.create("LogoUI");
+
+			//Logo title
+			{
+				uiTitle = static_cast<Ogre::v1::OverlayContainer*>(
+					overlayManager.createOverlayElement("Panel", "LogoTitle"));
+				uiTitle->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+				uiTitle->setPosition(0.0f, 7500.0f);
+				uiTitle->setDimensions(10000.0f * 1280.0f / 720.0f, 10000.0f * 200.0f / 720.0f);
+				uiTitle->setMaterialName("LogoUITitle");
+				uiLogo->add2D(uiTitle);
+			}
+
+			//Instructions to start
+			{
+				uiPressToStart = static_cast<Ogre::v1::OverlayContainer*>(
+					overlayManager.createOverlayElement("Panel", "LogoPressToStart"));
+				uiPressToStart->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+				uiPressToStart->setPosition(500.0f * 1280.0f / 720.0f, 5000.0f);
+				uiPressToStart->setDimensions(2656.0f * 1280.0f / 720.0f * 0.8f, 2916.0f * 0.8f);
+				uiPressToStart->setMaterialName("LogoUIPressToStart");
+				uiLogo->add2D(uiPressToStart);
+			}
+
 			/*Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);
 			bill->setRenderQueueGroup(10);
 			bill->setMaterialName("SwordA", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
@@ -140,10 +166,11 @@ namespace ZS
 		weight = std::min(1.0f, weight);
 
 		musicUIManager->update(timeSinceLast);
+		gameUIManager->update(timeSinceLast);
 		mGraphicsSystem->updateGameEntities(mGraphicsSystem->getGameEntities(Ogre::SCENE_DYNAMIC),
 											weight);
 
-		if(mainCameraPathController->isEnabled) {
+		if(mainCameraPathController && mainCameraPathController->isEnabled) {
 			mainCameraPathController->update(timeSinceLast);
 		}
 			
@@ -201,4 +228,7 @@ namespace ZS
 
 		DebugGameState::keyReleased(arg);
 	}
+	void ZSGraphicsGameState::HideLogo() {
+		uiLogo->hide();
+    }
 }

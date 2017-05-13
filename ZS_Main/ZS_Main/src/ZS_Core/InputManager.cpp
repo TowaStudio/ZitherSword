@@ -49,36 +49,20 @@ namespace ZS {
 	void InputManager::keyup(SDL_Keycode key) {
 		switch(key) {
 			//_DEBUG_
-			case SDLK_1:
-				GameMaster::GetInstance()->load();
-				GameMaster::GetInstance()->loadLevel(1);
+			case SDLK_RETURN:
+				if(GameMaster::GetInstance()->getLevelManager()->levelState == LST_NOT_IN_LEVEL) {
+					GameMaster::GetInstance()->load();
+					GameMaster::GetInstance()->loadLevel(1);
+				}
 				break;
 			case SDLK_2:
-				AudioSystem::GetInstance()->stopMusic(true);
+				GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
 				break;
 			case SDLK_3:
 				AudioSystem::GetInstance()->stopMusic(false);
 				break;
 			case SDLK_4:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_RUN);
-				break;
-			case SDLK_5:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_ATTACK);
-				break;
-			case SDLK_6:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_DEAD);
-				break;
-			case SDLK_7:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_DEFENSE);
-				break;
-			case SDLK_8:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_DODGE);
-				break;
-			case SDLK_9:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_SKILL);
-				break;
-			case SDLK_0:
-				GameMaster::GetInstance()->getLevelManager()->ccSwordsman->changeControlState(CST_IDLE);
+				GameMaster::GetInstance()->getLevelManager()->EndLevel(true);
 				break;
 			/*
 			case SDLK_h:

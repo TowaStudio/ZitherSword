@@ -24,6 +24,10 @@ namespace ZS
 	public:
 		MusicUIManager* musicUIManager;
 		GameUIManager* gameUIManager;
+		
+		Ogre::v1::Overlay* uiLogo;
+		Ogre::v1::OverlayContainer* uiTitle;
+		Ogre::v1::OverlayContainer* uiPressToStart;
 
 		CameraPathController* mainCameraPathController;
 
@@ -36,7 +40,8 @@ namespace ZS
 
 		virtual void keyPressed(const SDL_KeyboardEvent& arg);
 		virtual void keyReleased(const SDL_KeyboardEvent& arg);
-    };
+		void HideLogo();
+	};
 }
 
 #endif

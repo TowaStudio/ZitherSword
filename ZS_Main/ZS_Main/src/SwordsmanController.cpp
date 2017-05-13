@@ -25,65 +25,71 @@ namespace ZS {
 	}
 
 	void SwordsmanController::changeActionState() { // called in update
-		if(swordsman->isDead)
+		if(swordsman->isDead) {
 			cst = CST_DEAD;
-		//_DEBUG_
-		// Animation names
-		//WALK walk_0
-		//RUN swordRun_1
-		//ATTACK attack1_2
-		//SKILL attack2_3
-		//BLOCK block_4
-		//DODGE dodge_5
-		//IDLE swordIdle_6
-		//DEAD dead_7
+			if(!deathEndLevelCalled) {
+				GameMaster::GetInstance()->getLevelManager()->EndLevel(false);
+				deathEndLevelCalled = true;
+			}
+		} else {
+			//_DEBUG_
+			// Animation names
+			//WALK walk_0
+			//RUN swordRun_1
+			//ATTACK attack1_2
+			//SKILL attack2_3
+			//BLOCK block_4
+			//DODGE dodge_5
+			//IDLE swordIdle_6
+			//DEAD dead_7
 
-		// get d
-		getDistanceToClosestEnemy();
+			// get d
+			getDistanceToClosestEnemy();
 
-		switch (cst) {
-			case CST_IDLE:
-				changeAstTo(cst);
-				break;
-			case CST_WALK:
-				if (distance > runThres)
+			switch(cst) {
+				case CST_IDLE:
 					changeAstTo(cst);
-				else
-					changeAstTo(CST_IDLE);
-				break;
-			case CST_RUN:
-				if (distance > runThres)
+					break;
+				case CST_WALK:
+					if(distance > runThres)
+						changeAstTo(cst);
+					else
+						changeAstTo(CST_IDLE);
+					break;
+				case CST_RUN:
+					if(distance > runThres)
+						changeAstTo(cst);
+					else
+						changeAstTo(CST_IDLE);
+					break;
+				case CST_ATTACK:
+					if(distance < attackThres)
+						changeAstTo(cst);
+					else if(distance >= detectThres)
+						changeAstTo(cst);
+					else
+						changeAstTo(CST_RUN);
+					break;
+				case CST_SKILL:
+					if(distance < skillThres)
+						changeAstTo(cst);
+					else if(distance >= detectThres)
+						changeAstTo(CST_IDLE);
+					else
+						changeAstTo(CST_WALK);
+					break;
+				case CST_DEFENSE:
 					changeAstTo(cst);
-				else
-					changeAstTo(CST_IDLE);
-				break;
-			case CST_ATTACK:
-				if (distance < attackThres)
+					break;
+				case CST_DODGE:
 					changeAstTo(cst);
-				else if (distance >= detectThres)
+					break;
+				case CST_DEAD:
 					changeAstTo(cst);
-				else
-					changeAstTo(CST_RUN);
-				break;
-			case CST_SKILL:
-				if (distance < skillThres)
-					changeAstTo(cst);
-				else if (distance >= detectThres)
-					changeAstTo(CST_IDLE);
-				else
-					changeAstTo(CST_WALK);
-				break;
-			case CST_DEFENSE:
-				changeAstTo(cst);
-				break;
-			case CST_DODGE:
-				changeAstTo(cst);
-				break;
-			case CST_DEAD:
-				changeAstTo(cst);
-				break;
-			default:
-				break;
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
