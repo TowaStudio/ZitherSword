@@ -8,6 +8,9 @@
 #include "GraphicsSystem.h"
 #include "EnemyAController.h"
 #include "GenerateEnemyEvent.h"
+#include "SwordsmanController.h"
+#include "ZitherWomanController.h"
+#include "Zitherwoman.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
@@ -18,7 +21,8 @@ namespace ZS {
 		unitsCount(0), itemsCount(0),
 		unitVec(std::vector<Unit*>()),
 		levelPath(nullptr), cameraPath(nullptr),
-		swordsman(nullptr), entSwordsmans(GameEntityVec()), ccSwordsman(nullptr),
+		swordsman(nullptr), entMainCharacters(GameEntityVec()),
+		ccSwordsman(nullptr), ccZitherwoman(nullptr),
 		sceneEntities(GameEntityVec()), enemyEntities(GameEntityVec()),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
@@ -281,7 +285,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 4;
+		int initObjectCount = 4 + enemyTypes.size() * 2;
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -301,13 +305,13 @@ namespace ZS {
 			swordsman->bindPath(levelPath);
 
 			// Define the scene models.
-			entSwordsmans.push_back(addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
+			entMainCharacters.push_back(addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
 												  , swordsman
 												  , initPos // Change to Level data start pos
 												  , initialQuaternion
 												  , 5.0f * Vec3::UNIT_SCALE));
 			// Create controller
-			ccSwordsman = new SwordsmanController(this, entSwordsmans[0]);
+			ccSwordsman = new SwordsmanController(this, entMainCharacters[0], getUnitID());
 		}
 
 		{ // 2
@@ -324,18 +328,106 @@ namespace ZS {
 												 , Vec3::ZERO
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
-			entSwordsmans.push_back(entSword);
+			entMainCharacters.push_back(entSword);
 
 			swordsman->useWeapon(sword);
 
 			BindDefinition* bo = new BindDefinition();
 			bo->source = entSword;
-			bo->target = entSwordsmans[0];
+			bo->target = entMainCharacters[0];
 			bo->boneName = "Bip01 R Finger1";
 			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
 		
-		// enemy
+		{ // 3
+			MovableObjectDefinition* moZitherWoman = new MovableObjectDefinition();
+			moZitherWoman->meshName = "zitherwoman.mesh";
+			moZitherWoman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moZitherWoman->submeshMaterials = Ogre::StringVector{"zither_body1", "zither_hair", "zither_face",
+				"zither_body2", "zither_body3","zither_body4", "zither_body5", "zither_colorW", "zither_colorB", "zither_body6"};
+			moZitherWoman->moType = MoTypeItemSkeleton;
+
+			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+			initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+
+			Vec3 initPos = levelPath->getPosInPath(0.0004f);
+			// Define behaviour and data model
+			//swordsman = new Swordsman(gm->getPlayerStats(), initPos, initialQuaternion, 0.0001f);
+			//swordsman->bindPath(levelPath);
+
+			Zitherwoman* zitherwoman = new Zitherwoman(initPos, initialQuaternion, 0.0001f);
+			zitherwoman->bindPath(levelPath);
+
+			// Define the scene models.
+			GameEntity* entZitherWoman = addGameEntity(Ogre::SCENE_DYNAMIC, moZitherWoman
+						  , zitherwoman
+						  , initPos + Vec3(0.0f, 5.0f, 0.0f) // Change to Level data start pos
+						  , Ogre::Quaternion::IDENTITY
+						  , 12.0f * Vec3::UNIT_SCALE);
+			entMainCharacters.push_back(entZitherWoman);
+
+			// Create controller
+			ccZitherwoman = new ZitherWomanController(this, entZitherWoman, getUnitID());
+		}
+
+		{ // 4
+			MovableObjectDefinition* moBoss = new MovableObjectDefinition();
+			moBoss->meshName = "boss.mesh";
+			moBoss->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moBoss->submeshMaterials = Ogre::StringVector{"BossHead", "BossBody", "BossArm", "BossFace", "BossShoe"};
+			moBoss->moType = MoTypeItemSkeleton;
+
+			int unitID = getUnitID();
+
+			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+			initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+
+			Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+									 initialQuaternion,
+									 200.0f, 200.0f, 40.0f, 40.0f,
+									 40.0f, 10.0f, -2.0f,
+									 Status::ST_NORMAL, 0.004f, 100);
+			enemy->bindPath(levelPath);
+
+			unitVec.push_back(enemy);
+
+			GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moBoss
+												 , enemy
+												 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+												 , initialQuaternion
+												 , Vec3(6.0f, 6.0f, 6.0f));
+
+			enemyEntities.push_back(entEnemy);
+
+
+			/*MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+			moEnemyWeapon->meshName = "enemy1weapon.mesh";
+			moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
+			moEnemyWeapon->moType = MoTypeItem;
+
+			Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+			enemy->useWeapon(enemyWeapon);
+
+			GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
+													   , enemyWeapon
+													   , Vec3::ZERO
+													   , Ogre::Quaternion::IDENTITY
+													   , Vec3(0.4f, 0.4f, 0.4f));
+			enemyEntities.push_back(entEnemyWeapon);*/
+
+
+			/*BindDefinition* bo = new BindDefinition();
+			bo->source = entEnemyWeapon;
+			bo->target = entEnemy;
+			bo->boneName = "Bip01 R Hand";
+			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
+
+			// Create controller
+			EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
+		}
+
+		// enemy * 2
 		{
 			for (int i = 0; i < enemyTypes.size(); i++) {
 				characterControllers.push_back(createEnemy(enemyLocs[i]));
@@ -368,6 +460,7 @@ namespace ZS {
 		// Set default animation
 
 		ccSwordsman->changeControlState(CST_IDLE);
+		ccZitherwoman->changeControlState(CST_ATTACK);
 
 		for (int i = 0; i < characterControllers.size(); i++) {
 			characterControllers[i]->changeControlState(CST_IDLE);			
@@ -380,7 +473,8 @@ namespace ZS {
 		//Update Controllers
 		//TODO: Character controllers
 		ccSwordsman->changeActionState();
-		for (int i = 0; i < characterControllers.size(); i++) {
+		ccZitherwoman->changeActionState();
+		for (size_t i = 0; i < characterControllers.size(); i++) {
 			characterControllers[i]->changeActionState();
 		}
 
@@ -458,7 +552,7 @@ namespace ZS {
 		enemyEntities.push_back(entEnemy);
 
 		
-		/*MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+		MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
 		moEnemyWeapon->meshName = "enemy1weapon.mesh";
 		moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
 		moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
@@ -471,15 +565,15 @@ namespace ZS {
 												, enemyWeapon
 												, Vec3::ZERO
 												, Ogre::Quaternion::IDENTITY
-												, Vec3(0.5f, 0.5f, 0.5f));
+												, Vec3(0.4f, 0.4f, 0.4f));
 		enemyEntities.push_back(entEnemyWeapon);
 				
 
 		BindDefinition* bo = new BindDefinition();
 		bo->source = entEnemyWeapon;
 		bo->target = entEnemy;
-		bo->boneName = "Bip01 R Finger1";
-		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
+		bo->boneName = "Bip01 R Hand";
+		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 
 		// Create controller
 		EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
@@ -533,6 +627,7 @@ namespace ZS {
 		gm->getGameUIManager()->showGameUI(false);
 
 		ccSwordsman->changeControlState(CST_IDLE);
+		ccZitherwoman->changeControlState(CST_IDLE);
 		for (CharacterController* characterController : characterControllers) {
 			characterController->changeControlState(CST_IDLE);
 		}
@@ -544,16 +639,17 @@ namespace ZS {
 		for(auto itr = enemyEntities.begin(); itr != enemyEntities.end(); ++itr) {
 			removeGameEntity(*itr);
 		}
-		for(auto itr = entSwordsmans.begin(); itr != entSwordsmans.end(); ++itr) {
+		for(auto itr = entMainCharacters.begin(); itr != entMainCharacters.end(); ++itr) {
 			removeGameEntity(*itr);
 		}
 
 		delete ccSwordsman;
+		delete ccZitherwoman;
 		characterControllers.clear();
 
 		sceneEntities.clear();
 		enemyEntities.clear();
-		entSwordsmans.clear();
+		entMainCharacters.clear();
 		unitVec.clear();
 		delete swordsman;
 

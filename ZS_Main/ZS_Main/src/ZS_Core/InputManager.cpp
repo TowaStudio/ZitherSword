@@ -6,6 +6,9 @@
 #include "AudioSystem.h"
 #include "GameMaster.h"
 #include "EnemyAController.h"
+#include "LevelManager.h"
+#include "SwordsmanController.h"
+#include "ZitherWomanController.h"
 
 namespace ZS {
 	void InputManager::keydown(SDL_Keycode key) {
@@ -69,6 +72,15 @@ namespace ZS {
 				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 				break;
 			*/
+			case SDLK_u:
+				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_IDLE);
+				break;
+			case SDLK_i:
+				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_UP);
+				break;
+			case SDLK_o:
+				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_DOWN);
+				break;
 			//_DEBUG_
 			default:
 				break;

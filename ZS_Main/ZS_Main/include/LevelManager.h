@@ -11,13 +11,15 @@
 #include "GameEntity.h"
 #include "ZSLogicSystem.h"
 #include "Path.h"
-#include "SwordsmanController.h"
+#include "CharacterController.h"
 #include "CameraPathController.h"
 #include "AudioSystem.h"
 
 namespace ZS {
 	class GameMaster;
 	class GraphicsSystem;
+	class SwordsmanController;
+	class ZitherWomanController;
 
 	enum LevelState {
 		LST_NOT_IN_LEVEL = 0,
@@ -45,6 +47,7 @@ namespace ZS {
 
 		LevelState levelState;
 		SwordsmanController* ccSwordsman;
+		ZitherWomanController* ccZitherwoman;
 		CameraPathController* mainCameraPathController;
 
 		std::vector<CharacterController*> characterControllers;
@@ -62,7 +65,7 @@ namespace ZS {
 		Path* levelPath;
 		Path* cameraPath;
 		Swordsman* swordsman;
-		GameEntityVec entSwordsmans;
+		GameEntityVec entMainCharacters;
 		std::vector<int> enemyTypes;
 		std::vector<float> enemyLocs;
 

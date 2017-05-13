@@ -748,11 +748,17 @@ namespace ZS
     void GraphicsSystem::gameEntityRemoved( GameEntity *toRemove )
     {
         const Ogre::Transform &transform = toRemove->mSceneNode->_getTransform();
-        GameEntityVec::iterator itGameEntity = std::lower_bound(
+
+		GameEntityVec::iterator itGameEntity = std::find(
+			mGameEntities[toRemove->mType].begin(),
+			mGameEntities[toRemove->mType].end(),
+			toRemove);
+
+        /*GameEntityVec::iterator itGameEntity = std::lower_bound(
                     mGameEntities[toRemove->mType].begin(),
                     mGameEntities[toRemove->mType].end(),
                     &transform.mDerivedTransform[transform.mIndex],
-                    GameEntityCmp() );
+                    GameEntityCmp() );*/
 
         assert( itGameEntity != mGameEntities[toRemove->mType].end() && *itGameEntity == toRemove );
         mGameEntities[toRemove->mType].erase( itGameEntity );
@@ -804,8 +810,9 @@ namespace ZS
                                                          gEnt->mTransform[currIdx]->qRot, mThreadWeight );
             gEnt->mSceneNode->setOrientation( interpQ );
 
-			if(gEnt->hasAnimation && gEnt->animationController->isEnabled)
+			if(gEnt->hasAnimation && gEnt->animationController->isEnabled) {
 				gEnt->animationController->update(0.01667f * mThreadWeight);
+			}
 
             ++itor;
         }
