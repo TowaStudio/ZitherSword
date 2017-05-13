@@ -78,7 +78,7 @@ namespace ZS {
 	void InputManager::setInstruction(ControlState cst) {
 		LevelManager* levelManager = GameMaster::GetInstance()->getLevelManager();
 		levelManager->showResult(cst);
-		levelManager->ccSwordsman->changeControlState(cst);
+		levelManager->ccSwordsman->changeCst(cst);
 		for(auto itr = levelManager->characterControllers.begin(); itr != levelManager->characterControllers.end(); ++itr) {
 			reinterpret_cast<EnemyAController*>(*itr)->changeAIState();
 		}

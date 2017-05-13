@@ -15,7 +15,7 @@ namespace ZS {
 		const float attackThres = 12.0f; // thres for attack
 		const float runThres = 8.0f; // thres for run
 		const float skillThres = 20.0f; // thres for skill
-		const float detectThres = 50.0f;
+		const float detectThres = 80.0f;
 
 		void changeAstTo(ControlState _ast) override;
 		float getDistanceToClosestEnemy();
@@ -25,6 +25,7 @@ namespace ZS {
 		~SwordsmanController();
 
 		void changeActionState() override;
+		void changeCst(ControlState cst);
 	};
 }
 

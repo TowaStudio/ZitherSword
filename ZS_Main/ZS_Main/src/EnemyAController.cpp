@@ -42,10 +42,7 @@ namespace ZS {
 					changeAstTo(CST_IDLE);
 				break;
 			case CST_ATTACK:
-				if (distance < attackThres)
-					changeAstTo(cst);
-				else
-					changeAstTo(CST_RUN);
+				changeAstTo(cst);
 				break;
 			case CST_SKILL:
 				changeAstTo(cst);
@@ -132,14 +129,17 @@ namespace ZS {
 					aist = AIST_RUN;
 				break;
 			case AIST_RUN: 
-				if (distance < attackThres)
+				if (distance < runThres)
 					aist = AIST_REST1;
 				break;
 			case AIST_ATTACK: 
-				aist = AIST_REST1;
+				if (distance > runawayThres)
+					aist = AIST_RUN;
+				else
+					aist = AIST_REST1;
 				break;
 			case AIST_REST1: 
-				if (distance > attackThres)
+				if (distance > runawayThres)
 					aist = AIST_RUN;
 				else
 					aist = AIST_ATTACK;

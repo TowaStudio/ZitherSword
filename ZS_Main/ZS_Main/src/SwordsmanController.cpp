@@ -24,6 +24,13 @@ namespace ZS {
 		return distance;
 	}
 
+	void SwordsmanController::changeCst(ControlState cst) { // decision of player
+		changeControlState(cst);
+		if (cst == CST_DODGE) {
+			swordsman->moveBack(8.0f);
+		}
+	}
+
 	void SwordsmanController::changeActionState() { // called in update
 		if(swordsman->isDead) {
 			cst = CST_DEAD;
@@ -65,18 +72,13 @@ namespace ZS {
 				case CST_ATTACK:
 					if(distance < attackThres)
 						changeAstTo(cst);
-					else if(distance >= detectThres)
-						changeAstTo(cst);
-					else
+					else if(distance < detectThres)
 						changeAstTo(CST_RUN);
+					else
+						changeAstTo(cst);
 					break;
 				case CST_SKILL:
-					if(distance < skillThres)
-						changeAstTo(cst);
-					else if(distance >= detectThres)
-						changeAstTo(CST_IDLE);
-					else
-						changeAstTo(CST_WALK);
+					changeAstTo(cst);
 					break;
 				case CST_DEFENSE:
 					changeAstTo(cst);
@@ -101,41 +103,49 @@ namespace ZS {
 		case CST_IDLE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "swordIdle_6", true);
 			break;
 		case CST_WALK:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "walk_0", true);
 			break;
 		case CST_RUN:
 			swordsman->isMoving = true;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "swordRun_1", true);
 			break;
 		case CST_ATTACK:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = true;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "attack1_2", true);
 			break;
 		case CST_SKILL:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = true;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "attack2_3", true);
 			break;
 		case CST_DEFENSE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = true;
 			levelManager->changeAnimationOf(ent->animationController, "block_4", true);
 			break;
 		case CST_DODGE:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "dodge_5", true);
 			break;
 		case CST_DEAD:
 			swordsman->isMoving = false;
 			swordsman->isAttacking = false;
+			swordsman->isDefensing = false;
 			levelManager->changeAnimationOf(ent->animationController, "dead_7", false);
 			break;
 		default:

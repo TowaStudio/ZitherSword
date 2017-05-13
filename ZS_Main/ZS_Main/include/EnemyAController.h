@@ -18,9 +18,9 @@ namespace ZS {
 		AIState aist;
 
 		float distance; // distance to the player
-		const float attackThres = 10.0f; // thres for attack
-		const float runThres = 8.0f; // thres to stop run
-		const float detectThres = 50.0f; // thres to detect player
+		const float runawayThres = 18.0f; // run out of attack range
+		const float runThres = 10.0f; // thres to stop run
+		const float detectThres = 100.0f; // thres to detect player
 
 		void changeAstTo(ControlState _ast) override;
 		float getDistanceToPlayer();

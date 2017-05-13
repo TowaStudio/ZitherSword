@@ -44,6 +44,8 @@ namespace ZS {
 		bool isAttacking;
 		float attackTimer;
 
+		bool isDefensing;
+
 		// MOVEMENT
 		void bindPath(Path* _path);
 		virtual Vec3 move(float _scale = 1.0f);
