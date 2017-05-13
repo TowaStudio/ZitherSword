@@ -1,24 +1,30 @@
-﻿#ifndef _ZS_ENEMYACONTROLLER_H
-#define _ZS_ENEMYACONTROLLER_H
+﻿#ifndef _ZS_ENEMYBOSSCONTROLLER_H
+#define _ZS_ENEMYBOSSCONTROLLER_H
 #include "CharacterController.h"
 #include "Enemy.h"
 
 namespace ZS {
-	class EnemyAController : public CharacterController {
+	class EnemyBossController : public CharacterController {
 	private:
 		Enemy* enemy;
 
 		enum AIState {
 			AIST_IDLE = 0,
-			AIST_RUN, 
-			AIST_ATTACK, 
-			AIST_REST1
+			AIST_RUN,
+			AIST_DOUDGE,
+			AIST_ATTACK1,
+			AIST_ATTACK2,
+			AIST_READY1, 
+			AIST_READY2
 		};
 
 		AIState aist;
+		int attackType;
+		bool isBackward;
 
 		float distance; // distance to the player
-		const float attackThres = 10.0f; // thres for attack
+		const float attack1Thres = 15.0f; // thres for attack
+		const float attack2Thres = 25.0f; // thres for attack
 		const float runThres = 8.0f; // thres to stop run
 		const float detectThres = 50.0f; // thres to detect player
 
@@ -26,8 +32,8 @@ namespace ZS {
 		float getDistanceToPlayer();
 
 	public:
-		EnemyAController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id);
-		~EnemyAController();
+		EnemyBossController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id);
+		~EnemyBossController();
 
 		void changeActionState() override; // called in update
 
@@ -38,3 +44,4 @@ namespace ZS {
 }
 
 #endif
+
