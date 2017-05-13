@@ -172,7 +172,6 @@ namespace ZS {
 
 		}
 
-
 	}
 
 	void LevelManager::loadLevelData() {
@@ -351,8 +350,8 @@ namespace ZS {
 		}
 		//_DEBUG_
 
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::SHOW_GAME_UI, nullptr);
 	}
@@ -412,6 +411,17 @@ namespace ZS {
 
 	void LevelManager::showResult(ControlState cst) {
 		logicSystem->queueSendMessage(graphicsSystem, Mq::SHOW_SEQUENCE_RESULT, cst);
+	}
+
+	void LevelManager::EndLevel(bool win) {
+		AudioSystem::GetInstance()->stopMusic(win);
+		if(level == 1) {
+			UnloadLevel();
+			Ogre::Threads::Sleep(3000);
+			gm->loadLevel(level + 1);
+		}
+			
+		// TODO: Show win lose result
 	}
 
 	CharacterController* LevelManager::createEnemy(float progress) {
@@ -518,6 +528,11 @@ namespace ZS {
 		gm->getMusicUIManager()->showMusicUI(false);
 		gm->getGameUIManager()->showGameUI(false);
 
+		ccSwordsman->changeControlState(CST_IDLE);
+		for (CharacterController* characterController : characterControllers) {
+			characterController->changeControlState(CST_IDLE);
+		}
+
 		for(auto itr = sceneEntities.begin(); itr != sceneEntities.end(); ++itr) {
 			if((*itr)->mMoDefinition->moType == MoTypeItemV1Mesh || (*itr)->mMoDefinition->moType == MoTypeItemV1MeshTAMWrap)
 				removeGameEntity(*itr);
@@ -525,6 +540,27 @@ namespace ZS {
 		for(auto itr = enemyEntities.begin(); itr != enemyEntities.end(); ++itr) {
 			removeGameEntity(*itr);
 		}
+		removeGameEntity(entSwordsman);
+
+		delete ccSwordsman;
+		characterControllers.clear();
+
+		sceneEntities.clear();
+		enemyEntities.clear();
+		unitVec.clear();
+		delete swordsman;
+
+		enemyTypes.clear();
+		enemyLocs.clear();
+
+		delete levelPath;
+		delete cameraPath;
+
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::UNLOAD_LEVEL, nullptr);
+
+		entSwordsman = nullptr;
+
 		levelState = LST_NOT_IN_LEVEL;
 	}
 
