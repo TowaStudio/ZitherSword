@@ -20,10 +20,11 @@ namespace ZS {
 		int exp;
 
 		HitInfo skill();
-		virtual Vec3 move(float _scale);
-		virtual HitInfo attack(Unit* target) override;
+		Vec3 move(float _scale) override;
+		Vec3 moveBack(float _distance) override;
+		HitInfo attack(Unit* target) override;
 		void heal(float amount) override;
-		void update(float timeSinceLast);
+		void update(float timeSinceLast) override;
 	};
 }
 

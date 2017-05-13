@@ -89,8 +89,21 @@ namespace ZS {
 		return pos;
 	}
 
+
 	Vec3 Unit::moveTo(Vec3 _pos) {
 		pos = _pos;
+		return pos;
+	}
+
+	Vec3 Unit::moveBack(float _distance) {
+		if (!isDead) {
+			if (path) {
+				float step = _distance / path->totalLength;
+				float nextProgress = std::min(std::max(progress - step, 0.0f), 1.0f);
+				progress = nextProgress;
+				moveTo(path->getPosInPath(nextProgress));
+			}
+		}
 		return pos;
 	}
 
