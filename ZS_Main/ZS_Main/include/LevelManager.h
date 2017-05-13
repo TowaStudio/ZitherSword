@@ -62,7 +62,7 @@ namespace ZS {
 		Path* levelPath;
 		Path* cameraPath;
 		Swordsman* swordsman;
-		GameEntity* entSwordsman;
+		GameEntityVec entSwordsmans;
 		std::vector<int> enemyTypes;
 		std::vector<float> enemyLocs;
 
@@ -120,6 +120,7 @@ namespace ZS {
 		void update(const size_t currIdx, float timeSinceLast);
 		void addHitInfo(const HitInfo& hit);
 		void showResult(ControlState cst);
+		void EndLevel(bool win);
 		CharacterController* createEnemy(float progress);
 
 		void changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop);
@@ -128,6 +129,7 @@ namespace ZS {
 		Unit* getEnemy(int unitID);
 		Unit* getClosestEnemy(float _pos, float threshold);
 		void UnloadLevel();
+		void ClearLevelData();
 
 		void trigger();
 

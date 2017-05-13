@@ -435,6 +435,10 @@ namespace ZS
 				aci->ac->startAnimation(aci->state, aci->loop);
 			}
 			break;
+		case Mq::UNLOAD_LEVEL:
+			mGameEntities[Ogre::SCENE_STATIC].clear();
+			mGameEntities[Ogre::SCENE_DYNAMIC].clear();
+			break;
         default:
             break;
         }
