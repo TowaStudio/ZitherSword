@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="include\CameraPathController.h" />
     <ClInclude Include="include\EnemyBossController.h" />
+    <ClInclude Include="include\EnemyEliteController.h" />
     <ClInclude Include="include\GameUIManager.h" />
     <ClInclude Include="include\Instructions.h" />
     <ClInclude Include="include\MusicUIManager.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="include\EnemyAController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\EnemyEliteController.cpp" />
     <ClCompile Include="src\EnemyBossController.cpp" />
     <ClCompile Include="src\ZS_Core\GenerateEnemyEvent.cpp" />
     <ClCompile Include="src\EnemyAController.cpp" />

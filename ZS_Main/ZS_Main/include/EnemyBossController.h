@@ -11,25 +11,26 @@ namespace ZS {
 		enum AIState {
 			AIST_IDLE = 0,
 			AIST_RUN,
-			AIST_DOUDGE,
+			AIST_DODGE,
 			AIST_ATTACK1,
 			AIST_ATTACK2,
 			AIST_READY1, 
-			AIST_READY2
+			AIST_READY2,
+			AIST_REST
 		};
 
 		AIState aist;
-		int attackType;
-		bool isBackward;
 
 		float distance; // distance to the player
-		const float attack1Thres = 15.0f; // thres for attack
-		const float attack2Thres = 25.0f; // thres for attack
+		const float readyThres = 30.0f; // thres for ready
+		const float attack1Thres = 15.0f; // thres for attack1
 		const float runThres = 8.0f; // thres to stop run
-		const float detectThres = 50.0f; // thres to detect player
+		const float detectThres = 70.0f; // thres to detect player
 
 		void changeAstTo(ControlState _ast) override;
 		float getDistanceToPlayer();
+
+		void RNG();
 
 	public:
 		EnemyBossController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id);

@@ -1,24 +1,24 @@
-﻿#include "EnemyBossController.h"
+#include "EnemyEliteController.h"
 #include "GameMaster.h"
 
 namespace ZS {
 
-	EnemyBossController::EnemyBossController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id) :
+	EnemyEliteController::EnemyEliteController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id) :
 		CharacterController(_levelManager, _entEnemy, _id), distance(0) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
 		aist = AIST_IDLE;
 	}
 
-	EnemyBossController::~EnemyBossController() {
+	EnemyEliteController::~EnemyEliteController() {
 	}
 
-	float EnemyBossController::getDistanceToPlayer() {
+	float EnemyEliteController::getDistanceToPlayer() {
 		distance = enemy->progress - levelManager->getSwordsman()->progress;
 		distance *= levelManager->getLevelPath()->totalLength;
 		return distance;
 	}
-	// TODO
-	void EnemyBossController::changeActionState() { // called in update
+
+	void EnemyEliteController::changeActionState() { // called in update
 		if (enemy->isDead)
 			cst = CST_DEAD;
 
@@ -33,10 +33,10 @@ namespace ZS {
 			if (distance > runThres)
 				changeAstTo(cst);
 			else
-				changeAstTo(CST_IDLE);
+				changeAstTo(CST_ATTACK);
 			break;
 		case CST_RUN:
-			if (distance > attack1Thres)
+			if (distance > runThres)
 				changeAstTo(cst);
 			else
 				changeAstTo(CST_ATTACK);
@@ -60,8 +60,8 @@ namespace ZS {
 			break;
 		}
 	}
-	
-	void EnemyBossController::changeAstTo(ControlState _ast) { // internal use
+
+	void EnemyEliteController::changeAstTo(ControlState _ast) { // internal use
 
 		if (_ast == ast) return;
 
@@ -116,8 +116,8 @@ namespace ZS {
 			break;
 		}
 	}
-	// TODO
-	void EnemyBossController::changeAIState() { // called to make decision
+
+	void EnemyEliteController::changeAIState() { // called to make decision
 
 		// get d
 		getDistanceToPlayer();
@@ -125,31 +125,24 @@ namespace ZS {
 		// change state
 		switch (aist) {
 		case AIST_IDLE:
-			if (distance < readyThres)
-				aist = AIST_ATTACK2;
-			else
-				aist = AIST_IDLE;
-			break;
-		case AIST_ATTACK1:
-			aist = AIST_REST;
-			break;
-		case AIST_ATTACK2:
-			aist = AIST_REST;
-			break;
-		case AIST_READY1:
-			aist = AIST_ATTACK1;
-			break;
-		case AIST_READY2:
-			aist = AIST_ATTACK1;
+			if (distance < detectThres)
+				aist = AIST_RUN;
 			break;
 		case AIST_RUN:
-			RNG();
+			if (distance < runThres)
+				aist = AIST_ATTACK;
 			break;
-		case AIST_DODGE: 
-			RNG();
+		case AIST_ATTACK:
+			if (distance > runawayThres)
+				aist = AIST_RUN;
+			else
+				aist = AIST_REST1;
 			break;
-		case AIST_REST: 
-			RNG();
+		case AIST_REST1:
+			if (distance > runawayThres)
+				aist = AIST_RUN;
+			else
+				aist = AIST_ATTACK;
 			break;
 		default:
 			break;
@@ -163,60 +156,14 @@ namespace ZS {
 		case AIST_RUN:
 			changeControlState(CST_RUN);
 			break;
-		case AIST_DODGE: 
-			changeControlState(CST_DODGE);
-			break;
-		case AIST_ATTACK1:
+		case AIST_ATTACK:
 			changeControlState(CST_ATTACK);
 			break;
-		case AIST_ATTACK2:
-			changeControlState(CST_SKILL);
-			break;
-		case AIST_READY1:
-			changeControlState(CST_RUN); // run to attack 1
-			break;
-		case AIST_READY2: 
-			changeControlState(CST_DODGE); // dodge to attack 2
-			break;
-		case AIST_REST: 
+		case AIST_REST1:
 			changeControlState(CST_IDLE);
 			break;
 		default:
 			break;
 		}
 	}
-
-	void EnemyBossController::RNG() { // internal use
-		if (distance > detectThres) {
-			// run rest
-			switch (rand() % 2) {
-				case 0: aist = AIST_RUN; break;
-				case 1: aist = AIST_REST; break;
-				default: break;
-			}
-		} else if (distance > readyThres) {
-			// run rest dodge
-			switch (rand() % 5) {
-				case 0: aist = AIST_RUN; break;
-				case 1: aist = AIST_RUN; break;
-				case 2: aist = AIST_REST; break;
-				case 3: aist = AIST_DODGE; break;
-				case 4: aist = AIST_DODGE; break;
-				default: break;
-			}
-		} else if (distance > runThres) {
-			// ready1 ready2 rest dodge
-			switch (rand() % 4) {
-				case 0: aist = AIST_READY1; break;
-				case 1: aist = AIST_READY2; break;
-				case 2: aist = AIST_REST; break;
-				case 3: aist = AIST_DODGE; break;
-				default: break;
-			}
-		} else {
-			aist = AIST_DODGE;
-		}
-	}
-
 }
-
