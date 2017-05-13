@@ -18,7 +18,7 @@ namespace ZS {
 		unitsCount(0), itemsCount(0),
 		unitVec(std::vector<Unit*>()),
 		levelPath(nullptr), cameraPath(nullptr),
-		swordsman(nullptr), entSwordsman(nullptr), ccSwordsman(nullptr),
+		swordsman(nullptr), entSwordsmans(GameEntityVec()), ccSwordsman(nullptr),
 		sceneEntities(GameEntityVec()), enemyEntities(GameEntityVec()),
 		currentId(0), mScheduledForRemovalCurrentSlot( static_cast<size_t>(-1)),
 		graphicsSystem(_graphicsSystem), logicSystem(_logicSystem)
@@ -301,13 +301,13 @@ namespace ZS {
 			swordsman->bindPath(levelPath);
 
 			// Define the scene models.
-			entSwordsman = addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
-										 , swordsman
-										 , initPos // Change to Level data start pos
-										 , initialQuaternion
-										 , 5.0f * Vec3::UNIT_SCALE);
+			entSwordsmans.push_back(addGameEntity(Ogre::SCENE_DYNAMIC, moSwordsman
+												  , swordsman
+												  , initPos // Change to Level data start pos
+												  , initialQuaternion
+												  , 5.0f * Vec3::UNIT_SCALE));
 			// Create controller
-			ccSwordsman = new SwordsmanController(this, entSwordsman);
+			ccSwordsman = new SwordsmanController(this, entSwordsmans[0]);
 		}
 
 		{ // 2
@@ -324,12 +324,13 @@ namespace ZS {
 												 , Vec3::ZERO
 												 , Ogre::Quaternion::IDENTITY
 												 , Vec3(0.6f, 0.6f, 0.6f));
+			entSwordsmans.push_back(entSword);
 
 			swordsman->useWeapon(sword);
 
 			BindDefinition* bo = new BindDefinition();
 			bo->source = entSword;
-			bo->target = entSwordsman;
+			bo->target = entSwordsmans[0];
 			bo->boneName = "Bip01 R Finger1";
 			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
@@ -418,7 +419,10 @@ namespace ZS {
 		if(level == 1) {
 			UnloadLevel();
 			Ogre::Threads::Sleep(3000);
-			gm->loadLevel(level + 1);
+			if(win)
+				gm->loadLevel(level + 1);
+			else
+				gm->loadLevel(level);
 		}
 			
 		// TODO: Show win lose result
@@ -540,13 +544,16 @@ namespace ZS {
 		for(auto itr = enemyEntities.begin(); itr != enemyEntities.end(); ++itr) {
 			removeGameEntity(*itr);
 		}
-		removeGameEntity(entSwordsman);
+		for(auto itr = entSwordsmans.begin(); itr != entSwordsmans.end(); ++itr) {
+			removeGameEntity(*itr);
+		}
 
 		delete ccSwordsman;
 		characterControllers.clear();
 
 		sceneEntities.clear();
 		enemyEntities.clear();
+		entSwordsmans.clear();
 		unitVec.clear();
 		delete swordsman;
 
@@ -558,8 +565,6 @@ namespace ZS {
 
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::UNLOAD_LEVEL, nullptr);
-
-		entSwordsman = nullptr;
 
 		levelState = LST_NOT_IN_LEVEL;
 	}
