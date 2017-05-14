@@ -9,7 +9,7 @@ namespace ZS {
 	private:
 		Swordsman* swordsman;
 
-		bool deathEndLevelCalled = false;
+		bool endLevelCalled;
 
 		float distance; // distance to the nearest enemy
 		const float attackThres = 12.0f; // thres for attack
