@@ -14,6 +14,7 @@ namespace ZS {
 		Ogre::v1::OverlayContainer* uiCharacter;
 		Ogre::v1::OverlayContainer* uiHPBar;
 		Ogre::v1::OverlayElement* uiHPFill;
+		Ogre::v1::OverlayContainer* uiCombo;
 
 		float targetHPFill;
 		float hpFill;
@@ -28,6 +29,7 @@ namespace ZS {
 
 		void update(float timeSinceLast);
 		void updateHPFill(float _fill);
+		void updateCombo(int combo);
 		void setHPFill(float _fill);
 
 

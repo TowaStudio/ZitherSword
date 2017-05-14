@@ -693,15 +693,16 @@ namespace ZS {
 		enemyEntities.clear();
 		entMainCharacters.clear();
 		unitVec.clear();
-		delete swordsman;
 
 		enemyTypes.clear();
 		enemyLocs.clear();
 
+		delete swordsman;
+
 		delete levelPath;
 		delete cameraPath;
 
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
+		//logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::UNLOAD_LEVEL, nullptr);
 
 		levelState = LST_NOT_IN_LEVEL;

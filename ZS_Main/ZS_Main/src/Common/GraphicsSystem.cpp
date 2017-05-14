@@ -730,8 +730,8 @@ namespace ZS
 		if(isInitializingLevel) {
 			--initObjectCount;
 			if(initObjectCount == 0) {
-				queueSendMessage(mLogicSystem, Mq::INIT_LEVEL_DONE, nullptr);
 				isInitializingLevel = false;
+				queueSendMessage(mLogicSystem, Mq::INIT_LEVEL_DONE, nullptr);
 			}
 		}
 

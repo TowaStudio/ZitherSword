@@ -130,6 +130,16 @@ namespace ZS
 				uiLogo->add2D(uiPressToStart);
 			}
 
+			{
+				uiCommand = static_cast<Ogre::v1::OverlayContainer*>(
+					overlayManager.createOverlayElement("Panel", "LogoCommand"));
+				uiCommand->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+				uiCommand->setPosition(10000.0f * 468.0f / 720.0f, 10000.0f * 600.0f / 720.0f);
+				uiCommand->setDimensions(10000.0f * 343.0f / 720.0f, 10000.0f * 99.0f / 720.0f);
+				uiCommand->setMaterialName("LogoUICommand");
+				uiLogo->add2D(uiCommand);
+			}
+
 			uiLogo->show();
 
 			/*Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);

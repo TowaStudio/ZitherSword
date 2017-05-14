@@ -28,6 +28,7 @@ namespace ZS
 		Ogre::v1::Overlay* uiLogo;
 		Ogre::v1::OverlayContainer* uiTitle;
 		Ogre::v1::OverlayContainer* uiPressToStart;
+		Ogre::v1::OverlayContainer* uiCommand;
 
 		CameraPathController* mainCameraPathController;
 
