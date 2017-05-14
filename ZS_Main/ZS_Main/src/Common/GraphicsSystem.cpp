@@ -420,6 +420,7 @@ namespace ZS
 			break;
 		case Mq::CAMERA_FOLLOW_ENABLE:
 			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->isEnabled = true;
+			reinterpret_cast<ZSGraphicsGameState*>(mCurrentGameState)->mainCameraPathController->reset();
 			break;
 		case Mq::CAMERA_FOLLOW_CLEAR:
         	{

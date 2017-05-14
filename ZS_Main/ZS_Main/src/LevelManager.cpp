@@ -11,6 +11,8 @@
 #include "SwordsmanController.h"
 #include "ZitherWomanController.h"
 #include "Zitherwoman.h"
+#include "EnemyEliteController.h"
+#include "EnemyBossController.h"
 
 namespace ZS {
 	const size_t cNumTransforms = 512;
@@ -338,7 +340,7 @@ namespace ZS {
 			bo->boneName = "Bip01 R Finger1";
 			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
 		}
-		
+
 		{ // 3
 			MovableObjectDefinition* moZitherWoman = new MovableObjectDefinition();
 			moZitherWoman->meshName = "zitherwoman.mesh";
@@ -370,6 +372,10 @@ namespace ZS {
 			ccZitherwoman = new ZitherWomanController(this, entZitherWoman, getUnitID());
 		}
 
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
+		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
+
 		// enemy * 2
 		{
 			for (int i = 0; i < enemyTypes.size(); i++) {
@@ -377,9 +383,6 @@ namespace ZS {
 			}
 		}
 
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_ENABLE, true);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::SHOW_GAME_UI, nullptr);
 	}
 	
@@ -390,7 +393,7 @@ namespace ZS {
 
 		gm->getMusicUIManager()->run(AudioSystem::GetInstance()->getBpm());
 		AudioSystem::GetInstance()->startMusic();
-		gm->getGameUIManager()->update(0.01f);
+		gm->getGameUIManager()->setHPFill(1.0f);
 
 		// Set default animation
 
@@ -400,7 +403,7 @@ namespace ZS {
 		for (int i = 0; i < characterControllers.size(); i++) {
 			characterControllers[i]->changeControlState(CST_IDLE);			
 		}
-		
+
 		levelState = LST_PLAY;
 	}
 
@@ -458,9 +461,9 @@ namespace ZS {
 
 	void LevelManager::NextLevel() {
 		UnloadLevel(); 
-		if(level == 0) {
+		if(level == 1) {
 			gm->loadLevel(level + 1);
-		} else if(level == 1) {
+		} else if(level == 2) {
 			gm->loadLevel(level);
 		}
 	}
@@ -559,8 +562,7 @@ namespace ZS {
 				enemyEntities.push_back(entEnemy);
 
 				// Create controller
-				// TODO: Change controller
-				EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
+				EnemyEliteController* ccEnemy = new EnemyEliteController(this, entEnemy, unitID);
 				return ccEnemy;
 			}
 			case 2: {
@@ -617,7 +619,7 @@ namespace ZS {
 				logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
 
 				// Create controller
-				EnemyAController* ccBoss = new EnemyAController(this, entEnemy, unitID);
+				EnemyBossController* ccBoss = new EnemyBossController(this, entEnemy, unitID);
 				return ccBoss;
 			}
 		}

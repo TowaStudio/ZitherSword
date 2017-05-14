@@ -15,6 +15,6 @@ namespace ZS {
 	}
 
 	void GenerateEnemyEvent::execute() {
-		GameMaster::GetInstance()->getLevelManager()->createEnemy(, progress);
+		GameMaster::GetInstance()->getLevelManager()->createEnemy(0, progress);
 	}
 }
