@@ -16,6 +16,9 @@ namespace ZS {
 		const float runThres = 8.0f; // thres for run
 		const float skillThres = 20.0f; // thres for skill
 		const float detectThres = 80.0f;
+		const int skillComboNum = 10;
+		int comboNum;
+		bool skillEnabled;
 
 		void changeAstTo(ControlState _ast) override;
 		float getDistanceToClosestEnemy();
@@ -24,6 +27,7 @@ namespace ZS {
 		SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman, int _id);
 		~SwordsmanController();
 
+		//void setComboNum(int _comboNum);
 		void changeActionState() override;
 		void changeCst(ControlState cst);
 	};
