@@ -287,7 +287,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 2 + enemyTypes.size();
+		int initObjectCount = 3 + enemyTypes.size();
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -527,7 +527,7 @@ namespace ZS {
 				moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
 				moEnemyWeapon->moType = MoTypeItem;
 
-				Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+				Weapon* enemyWeapon = new Weapon(getItemID(), 8.0f, 0.5f, 15.0f);
 				enemy->useWeapon(enemyWeapon);
 
 				GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
