@@ -2,8 +2,6 @@
 #include "GameMaster.h"
 
 namespace ZS {
-
-
 	SwordsmanController::SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman, int _id) :
 		CharacterController(_levelManager, _entSwordsman, 0), distance(0), comboNum(0), skillEnabled(false) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
@@ -58,12 +56,17 @@ namespace ZS {
 	void SwordsmanController::changeActionState() { // called in update
 		if(swordsman->isDead) {
 			cst = CST_DEAD;
-			if(!deathEndLevelCalled) {
+			if(!endLevelCalled) {
 				GameMaster::GetInstance()->getLevelManager()->EndLevel(false);
-				deathEndLevelCalled = true;
+				endLevelCalled = true;
 			}
 		} else {
-			//_DEBUG_
+			if(swordsman->reachEnd) {
+				if(!endLevelCalled) {
+					GameMaster::GetInstance()->getLevelManager()->EndLevel(true);
+					endLevelCalled = true;
+				}
+			}
 
 			// get d
 			getDistanceToClosestEnemy();

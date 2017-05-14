@@ -70,6 +70,16 @@ namespace ZS {
 			uiGame->add2D(uiCombo);
 		}
 
+		{
+			uiGameResult = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "GameUIGameEnd"));
+			uiGameResult->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			uiGameResult->setPosition(10000.0f * 263.0f / 720.0f, 10000.0f * 220.0f / 720.0f);
+			uiGameResult->setDimensions(10000.0f * 755.0f / 720.0f, 10000.0f * 136.0f / 720.0f);
+			uiGameResult->setMaterialName("GameUIEndBlank");
+			uiGame->add2D(uiGameResult);
+		}
+
 		uiGame->setRenderQueueGroup(254);
 
 		targetHPFill = hpFill = 1.0f;
@@ -93,6 +103,10 @@ namespace ZS {
 
 	void GameUIManager::updateHPFill(float _fill) {
 		targetHPFill = _fill > 1.0f ? 1.0f : (_fill < 0.0f ? 0.0f : _fill);
+	}
+
+	void GameUIManager::setHPFill(float _fill) {
+		uiHPFill->setWidth(_fill * 950.0f * 1280 / 720.0f);
 	}
 
 	void GameUIManager::updateCombo(int combo) {
@@ -128,7 +142,16 @@ namespace ZS {
 		uiCombo->setMaterialName(materialName);
 	}
 
-	void GameUIManager::setHPFill(float _fill) {
-		uiHPFill->setWidth(_fill * 950.0f * 1280 / 720.0f);
+	void GameUIManager::showEnd(bool win) {
+		std::string materialName = "GameUIEndBlank";
+		if(win)
+			materialName = "GameUIEndWin";
+		else
+			materialName = "GameUIEndLose";
+		uiGameResult->setMaterialName(materialName);
+	}
+	void GameUIManager::hideEnd() {
+		std::string materialName = "GameUIEndBlank";
+		uiGameResult->setMaterialName(materialName);
 	}
 }
