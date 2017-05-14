@@ -126,7 +126,7 @@ namespace ZS {
 		void EndLevel(bool win);
 		void NextLevel();
 		void RetryLevel();
-		CharacterController* createEnemy(float progress);
+		CharacterController* createEnemy(int type, float progress);
 
 		void changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop);
 
