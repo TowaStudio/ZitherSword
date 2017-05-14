@@ -108,8 +108,16 @@ namespace ZS
 
 			uiLogo = overlayManager.create("LogoUI");
 
+			uiTitle = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "LogoTitle"));
+			uiTitle->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			uiTitle->setPosition(10000.0f * 0.0f / 720.0f, 10000.0f * 0.0f / 720.0f);
+			uiTitle->setDimensions(10000.0f * 1280.0f / 720.0f, 10000.0f * 720.0f / 720.0f);
+			uiTitle->setMaterialName("LogoUIFull");
+			uiLogo->add2D(uiTitle);
+
 			//Logo title
-			{
+			/*{
 				uiTitle = static_cast<Ogre::v1::OverlayContainer*>(
 					overlayManager.createOverlayElement("Panel", "LogoTitle"));
 				uiTitle->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
@@ -118,27 +126,27 @@ namespace ZS
 				uiTitle->setMaterialName("LogoUITitle");
 				uiLogo->add2D(uiTitle);
 			}
+*/
+			////Instructions to start
+			//{
+			//	uiPressToStart = static_cast<Ogre::v1::OverlayContainer*>(
+			//		overlayManager.createOverlayElement("Panel", "LogoPressToStart"));
+			//	uiPressToStart->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			//	uiPressToStart->setPosition(10000.0f * 497.0f / 720.0f, 10000.0f * 400.0f / 720.0f);
+			//	uiPressToStart->setDimensions(10000.0f * 286.0f / 720.0f, 10000.0f * 62.0f / 720.0f);
+			//	uiPressToStart->setMaterialName("LogoUIPressToStart");
+			//	uiLogo->add2D(uiPressToStart);
+			//}
 
-			//Instructions to start
-			{
-				uiPressToStart = static_cast<Ogre::v1::OverlayContainer*>(
-					overlayManager.createOverlayElement("Panel", "LogoPressToStart"));
-				uiPressToStart->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-				uiPressToStart->setPosition(10000.0f * 497.0f / 720.0f, 10000.0f * 400.0f / 720.0f);
-				uiPressToStart->setDimensions(10000.0f * 286.0f / 720.0f, 10000.0f * 62.0f / 720.0f);
-				uiPressToStart->setMaterialName("LogoUIPressToStart");
-				uiLogo->add2D(uiPressToStart);
-			}
-
-			{
-				uiCommand = static_cast<Ogre::v1::OverlayContainer*>(
-					overlayManager.createOverlayElement("Panel", "LogoCommand"));
-				uiCommand->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-				uiCommand->setPosition(10000.0f * 468.0f / 720.0f, 10000.0f * 600.0f / 720.0f);
-				uiCommand->setDimensions(10000.0f * 343.0f / 720.0f, 10000.0f * 99.0f / 720.0f);
-				uiCommand->setMaterialName("LogoUICommand");
-				uiLogo->add2D(uiCommand);
-			}
+			//{
+			//	uiCommand = static_cast<Ogre::v1::OverlayContainer*>(
+			//		overlayManager.createOverlayElement("Panel", "LogoCommand"));
+			//	uiCommand->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			//	uiCommand->setPosition(10000.0f * 468.0f / 720.0f, 10000.0f * 600.0f / 720.0f);
+			//	uiCommand->setDimensions(10000.0f * 343.0f / 720.0f, 10000.0f * 99.0f / 720.0f);
+			//	uiCommand->setMaterialName("LogoUICommand");
+			//	uiLogo->add2D(uiCommand);
+			//}
 
 			uiLogo->show();
 

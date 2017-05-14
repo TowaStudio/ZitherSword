@@ -74,7 +74,7 @@ namespace ZS {
 			uiGameResult = static_cast<Ogre::v1::OverlayContainer*>(
 				overlayManager.createOverlayElement("Panel", "GameUIGameEnd"));
 			uiGameResult->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-			uiGameResult->setPosition(10000.0f * 263.0f / 720.0f, 10000.0f * 300.0f / 720.0f);
+			uiGameResult->setPosition(10000.0f * 263.0f / 720.0f, 10000.0f * 220.0f / 720.0f);
 			uiGameResult->setDimensions(10000.0f * 755.0f / 720.0f, 10000.0f * 136.0f / 720.0f);
 			uiGameResult->setMaterialName("GameUIEndBlank");
 			uiGame->add2D(uiGameResult);
@@ -142,12 +142,16 @@ namespace ZS {
 		uiCombo->setMaterialName(materialName);
 	}
 
-	void GameUIManager::updateEnd(bool win) {
-		std::string materialName = "GameUIBlank";
+	void GameUIManager::showEnd(bool win) {
+		std::string materialName = "GameUIEndBlank";
 		if(win)
 			materialName = "GameUIEndWin";
 		else
 			materialName = "GameUIEndLose";
+		uiGameResult->setMaterialName(materialName);
+	}
+	void GameUIManager::hideEnd() {
+		std::string materialName = "GameUIEndBlank";
 		uiGameResult->setMaterialName(materialName);
 	}
 }

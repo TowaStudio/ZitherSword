@@ -19,7 +19,8 @@ namespace ZS {
 			 , stats.sp, stats.maxsp
 			 , stats.str, stats.def, stats.spd, stats.status, startProgress),
 		level(stats.level),
-		exp(stats.exp)
+		exp(stats.exp),
+		reachEnd(false)
 	{
 
 	}
@@ -55,18 +56,14 @@ namespace ZS {
 			if(path) {
 				float step = _scale * spd / path->totalLength;
 				float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
-
+				
 				// Trigger event for the path point
 				int nextPathPointIndex = path->getIndexFromPos(nextProgress);
 				if(currentPathPointIndex != nextPathPointIndex) {
 					if(path->getPoint(nextPathPointIndex)->hasTrigger) {
 						path->getPoint(nextPathPointIndex)->trigger->execute();
 					}
-
-					if(path->getPoint(nextPathPointIndex)->next == nullptr) {
-						gm->getLevelManager()->EndLevel(true);
-					}
-
+					
 					currentPathPointIndex = nextPathPointIndex;
 				}
 				// Prevent from going outside
@@ -116,8 +113,10 @@ namespace ZS {
 				
 			else
 				attackTimer -= timeSinceLast;
+		}			
+		
+		if(progress >= 0.1f) {
+			reachEnd = true;
 		}
-			
-		//GameMaster::GetInstance()->log(Ogre::StringConverter::toString(this->pos.x));
 	}
 }

@@ -70,7 +70,7 @@ namespace ZS {
 				GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
 				break;
 			case SDLK_3:
-				AudioSystem::GetInstance()->stopMusic(false);
+				GameMaster::GetInstance()->getLevelManager()->EndLevel(false);
 				break;
 			case SDLK_4:
 				GameMaster::GetInstance()->getLevelManager()->EndLevel(true);

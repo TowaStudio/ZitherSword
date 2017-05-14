@@ -20,6 +20,7 @@ namespace ZS {
 		int exp;
 
 		int comboNum;
+		bool reachEnd;
 
 		void skill();
 		Vec3 move(float _scale) override;

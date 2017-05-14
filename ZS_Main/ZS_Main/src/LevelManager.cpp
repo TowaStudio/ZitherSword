@@ -501,6 +501,7 @@ namespace ZS {
 		gm->getMusicUIManager()->run(AudioSystem::GetInstance()->getBpm());
 		AudioSystem::GetInstance()->startMusic();
 		gm->getGameUIManager()->setHPFill(1.0f);
+		gm->getGameUIManager()->hideEnd();
 
 		// Set default animation
 
@@ -557,6 +558,8 @@ namespace ZS {
 		for(CharacterController* characterController : characterControllers) {
 			characterController->changeControlState(CST_IDLE);
 		}
+
+		gm->getGameUIManager()->showEnd(win);
 
 		// Stop updates
 		levelState = LST_END;

@@ -31,7 +31,8 @@ namespace ZS {
 		void update(float timeSinceLast);
 		void updateHPFill(float _fill);
 		void updateCombo(int combo);
-		void updateEnd(bool win);
+		void showEnd(bool win);
+		void hideEnd();
 		void setHPFill(float _fill);
 
 
