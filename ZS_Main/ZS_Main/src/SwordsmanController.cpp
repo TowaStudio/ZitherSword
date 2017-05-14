@@ -40,8 +40,7 @@ namespace ZS {
 		} else {
 			comboNum++;
 		}
-		// TODO show combo result
-		//GameMaster::GetInstance()->log("0123456789SSSSS!" + comboNum);
+		GameMaster::GetInstance()->getGameUIManager()->updateCombo(comboNum);
 			
 		if (cst == CST_DODGE) {
 			swordsman->moveBack(8.0f);

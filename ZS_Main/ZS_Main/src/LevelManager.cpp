@@ -544,7 +544,7 @@ namespace ZS {
 				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
 				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 400.0f, 400.0f, 50.0f, 50.0f,
 										 30.0f, 30.0f, -4.0f,
@@ -555,7 +555,7 @@ namespace ZS {
 
 				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyB
 													 , enemy
-													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , levelPath->getPosInPath(progress) // Change to Level data start pos
 													 , initialQuaternion
 													 , Vec3(10.0f, 10.0f, 10.0f));
 
@@ -577,10 +577,10 @@ namespace ZS {
 				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
 				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 1000.0f, 1000.0f, 50.0f, 50.0f,
-										 50.0f, 20.0f, -2.0f,
+										 50.0f, 20.0f, -5.0f,
 										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
@@ -588,7 +588,7 @@ namespace ZS {
 
 				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moBoss
 													 , enemy
-													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , levelPath->getPosInPath(progress) // Change to Level data start pos
 													 , initialQuaternion
 													 , Vec3(6.0f, 6.0f, 6.0f));
 
@@ -693,15 +693,16 @@ namespace ZS {
 		enemyEntities.clear();
 		entMainCharacters.clear();
 		unitVec.clear();
-		delete swordsman;
 
 		enemyTypes.clear();
 		enemyLocs.clear();
 
+		delete swordsman;
+
 		delete levelPath;
 		delete cameraPath;
 
-		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
+		//logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CLEAR, nullptr);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::UNLOAD_LEVEL, nullptr);
 
 		levelState = LST_NOT_IN_LEVEL;
