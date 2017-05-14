@@ -94,6 +94,12 @@ namespace ZS {
 		}
 	}
 
+	//void InputManager::setComboNum(int comboNum) {
+		//LevelManager* levelManager = GameMaster::GetInstance()->getLevelManager();
+		//levelManager->ccSwordsman->setComboNum(comboNum);
+	//}
+
+
 	void InputManager::setInstruction(ControlState cst) {
 		LevelManager* levelManager = GameMaster::GetInstance()->getLevelManager();
 		levelManager->showResult(cst);

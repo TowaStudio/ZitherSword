@@ -30,8 +30,24 @@ namespace ZS {
 	/**
 	* @return HitInfo
 	*/
-	HitInfo Swordsman::skill() {
-		return HitInfo();
+	void Swordsman::skill() {
+		vector<Unit*> enemies = gm->getLevelManager()->unitVec;
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies[i] == nullptr) continue;
+			float distance = (enemies[i]->progress - this->progress) * path->totalLength;
+			if (distance <= (weapon == nullptr ? 1.0f : weapon->range * 2)) { // 2 times of range
+				HitInfo hit;
+				hit.source = this;
+				hit.target = enemies[i];
+				hit.dmg = Unit::CalculateDamage(this, enemies[i]) * 4; // 4 times of dmg
+				hit.isCritical = false; // TODO: random critical
+				hit.isFatal = hit.dmg >= enemies[i]->hp;
+				hit.valid = false;
+
+				hit.target->damage(hit.dmg);
+				gm->getLevelManager()->addHitInfo(hit);
+			}
+		}
 	}
 
 	Vec3 Swordsman::move(float _scale) {

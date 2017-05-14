@@ -47,7 +47,9 @@ namespace ZS {
 
 		LevelState levelState;
 		SwordsmanController* ccSwordsman;
-		ZitherWomanController* ccZitherwoman;
+    ZitherWomanController* ccZitherwoman;
+		std::vector<Unit*> unitVec;
+
 		CameraPathController* mainCameraPathController;
 
 		std::vector<CharacterController*> characterControllers;
@@ -58,7 +60,6 @@ namespace ZS {
 		int level;
 		Patterns * patterns;
 
-		std::vector<Unit*> unitVec;
 		int unitsCount;
 		int itemsCount;
 
