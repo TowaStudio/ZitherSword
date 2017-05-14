@@ -62,6 +62,15 @@ namespace ZS {
 	}
 
 	void EnemyEliteController::changeAstTo(ControlState _ast) { // internal use
+		//Attack1
+		//Attack2
+		//Dead
+		//Dodge
+		//Hurt
+		//Idle
+		//Run
+		//Walk
+
 
 		if (_ast == ast) return;
 
