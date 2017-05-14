@@ -64,6 +64,7 @@ namespace ZS {
 				if(GameMaster::GetInstance()->getLevelManager()->levelState == LST_END) {
 					GameMaster::GetInstance()->getLevelManager()->RetryLevel();
 				}
+				break;
 			//_DEBUG_
 			case SDLK_2:
 				GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
@@ -79,6 +80,12 @@ namespace ZS {
 				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
 				break;
 			*/
+			case SDLK_9:
+				GameMaster::GetInstance()->getGameUIManager()->updateCombo(9);
+				break;
+			case SDLK_0:
+				GameMaster::GetInstance()->getGameUIManager()->updateCombo(10);
+				break;
 			case SDLK_u:
 				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_IDLE);
 				break;

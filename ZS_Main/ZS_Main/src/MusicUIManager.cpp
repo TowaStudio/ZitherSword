@@ -240,6 +240,9 @@ namespace ZS {
 			case CST_WALK:
 				resultMaterial = "MusicResultWalk";
 				break;
+			case CST_SKILL:
+				resultMaterial = "MusicResultUltimate";
+				break;
 		}
 		uiResult->setMaterialName(resultMaterial);
 	}

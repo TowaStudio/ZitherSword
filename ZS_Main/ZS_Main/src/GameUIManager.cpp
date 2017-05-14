@@ -60,6 +60,16 @@ namespace ZS {
 			uiGame->add2D(uiHPBar);
 		}
 
+		{
+			uiCombo = static_cast<Ogre::v1::OverlayContainer*>(
+				overlayManager.createOverlayElement("Panel", "GameUICombo"));
+			uiCombo->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
+			uiCombo->setPosition(10000.0f * 50.0f / 720.0f, 10000.0f * 140.0f / 720.0f);
+			uiCombo->setDimensions(10000.0f * 151.0f / 720.0f, 10000.0f * 57.0f / 720.0f);
+			uiCombo->setMaterialName("GameUICombo0");
+			uiGame->add2D(uiCombo);
+		}
+
 		uiGame->setRenderQueueGroup(254);
 
 		targetHPFill = hpFill = 1.0f;
@@ -83,6 +93,39 @@ namespace ZS {
 
 	void GameUIManager::updateHPFill(float _fill) {
 		targetHPFill = _fill > 1.0f ? 1.0f : (_fill < 0.0f ? 0.0f : _fill);
+	}
+
+	void GameUIManager::updateCombo(int combo) {
+		std::string materialName = "GameUICombo0";
+		switch(combo) {
+			case 3:
+				materialName = "GameUICombo3";
+				break;
+			case 4:
+				materialName = "GameUICombo4";
+				break;
+			case 5:
+				materialName = "GameUICombo5";
+				break;
+			case 6:
+				materialName = "GameUICombo6";
+				break;
+			case 7:
+				materialName = "GameUICombo7";
+				break;
+			case 8:
+				materialName = "GameUICombo8";
+				break;
+			case 9:
+				materialName = "GameUICombo9";
+				break;
+			default:
+				if(combo >= 10) {
+					materialName = "GameUIComboSkill";
+				}
+				break;
+		}
+		uiCombo->setMaterialName(materialName);
 	}
 
 	void GameUIManager::setHPFill(float _fill) {
