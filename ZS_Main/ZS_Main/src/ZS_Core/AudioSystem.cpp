@@ -58,7 +58,7 @@ namespace ZS {
 		//currentTickNum = -1;
 		currentTickTime = -1;
 		//nextTickTime = -1;
-		comboNum = 0;
+		//comboNum = 0;
 
 		// start timer
 		//startTime = Time::currentTimeMillis();
@@ -214,12 +214,12 @@ namespace ZS {
 				if (p <= 0) { // input nothing
 					break;
 				} else { // input correct
-					comboNum++;
+					//comboNum++;
 					return p; // return the index of pattern
 				}
 			}
 		}
-		comboNum = 0;
+		//comboNum = 0;
 		playSoundEffect(2);
 		return 0; // No match
 	}
@@ -389,7 +389,7 @@ namespace ZS {
 					}
 					debugStr += to_string(diffAvg);
 					GameMaster::GetInstance()->log(debugStr);*/
-					GameMaster::GetInstance()->getInputManager()->setComboNum(comboNum);
+					//GameMaster::GetInstance()->getInputManager()->setComboNum(comboNum);
 					GameMaster::GetInstance()->getInputManager()->setInstruction(static_cast<ControlState>(res));
 					//GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
 
