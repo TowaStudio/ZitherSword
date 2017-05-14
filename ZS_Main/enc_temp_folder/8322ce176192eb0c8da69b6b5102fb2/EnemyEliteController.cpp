@@ -79,27 +79,27 @@ namespace ZS {
 		case CST_IDLE:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Idle", true);
+			levelManager->changeAnimationOf(ent->animationController, "swordIdle_6", true);
 			break;
 		case CST_WALK:
 			enemy->isMoving = true;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Walk", true);
+			levelManager->changeAnimationOf(ent->animationController, "walk_0", true);
 			break;
 		case CST_RUN:
 			enemy->isMoving = true;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Run", true);
+			levelManager->changeAnimationOf(ent->animationController, "swordRun_1", true);
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
 			enemy->isAttacking = true;
-			levelManager->changeAnimationOf(ent->animationController, "Attack1", true);
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk2_3", true);
 			break;
 		case CST_SKILL:
 			enemy->isMoving = false;
 			enemy->isAttacking = true;
-			levelManager->changeAnimationOf(ent->animationController, "Attack2", true);
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk1_2", true);
 			break;
 		case CST_DEFENSE:
 			enemy->isMoving = false;
@@ -109,17 +109,17 @@ namespace ZS {
 		case CST_HURT:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Hurt", true);
+			levelManager->changeAnimationOf(ent->animationController, "hurt_4", true);
 			break;
 		case CST_DODGE:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Dodge", true);
+			levelManager->changeAnimationOf(ent->animationController, "dodge_5", true);
 			break;
 		case CST_DEAD:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Dead", false);
+			levelManager->changeAnimationOf(ent->animationController, "dead_7", false);
 			break;
 		default:
 			break;

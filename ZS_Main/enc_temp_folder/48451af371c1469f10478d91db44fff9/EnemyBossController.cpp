@@ -62,15 +62,6 @@ namespace ZS {
 	}
 	
 	void EnemyBossController::changeAstTo(ControlState _ast) { // internal use
-		//backward_5
-		//bossAtk1_2
-		//bossAtk2_3
-		//daijipose_6
-		//dead_7
-		//hurt_4
-		//run_1
-		//walk_0
-
 
 		if (_ast == ast) return;
 
@@ -79,7 +70,7 @@ namespace ZS {
 		case CST_IDLE:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "daijipose_6", true);
+			levelManager->changeAnimationOf(ent->animationController, "swordIdle_6", true);
 			break;
 		case CST_WALK:
 			enemy->isMoving = true;
@@ -89,17 +80,22 @@ namespace ZS {
 		case CST_RUN:
 			enemy->isMoving = true;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "run_1", true);
+			levelManager->changeAnimationOf(ent->animationController, "swordRun_1", true);
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
 			enemy->isAttacking = true;
-			levelManager->changeAnimationOf(ent->animationController, "bossAtk1_2", true);
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk2_3", true);
 			break;
 		case CST_SKILL:
 			enemy->isMoving = false;
 			enemy->isAttacking = true;
-			levelManager->changeAnimationOf(ent->animationController, "bossAtk2_3", true);
+			levelManager->changeAnimationOf(ent->animationController, "enemyAtk1_2", true);
+			break;
+		case CST_DEFENSE:
+			enemy->isMoving = false;
+			enemy->isAttacking = false;
+			levelManager->changeAnimationOf(ent->animationController, "Block", true);
 			break;
 		case CST_HURT:
 			enemy->isMoving = false;
@@ -109,7 +105,7 @@ namespace ZS {
 		case CST_DODGE:
 			enemy->isMoving = false;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "backward_5", true);
+			levelManager->changeAnimationOf(ent->animationController, "dodge_5", true);
 			break;
 		case CST_DEAD:
 			enemy->isMoving = false;
