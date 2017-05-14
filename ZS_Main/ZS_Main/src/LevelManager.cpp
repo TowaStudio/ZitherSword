@@ -544,18 +544,18 @@ namespace ZS {
 				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
 				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 200.0f, 200.0f, 40.0f, 40.0f,
 										 40.0f, 10.0f, -2.0f,
-										 Status::ST_NORMAL, 0.004f, 100);
+										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
 				unitVec.push_back(enemy);
 
 				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyB
 													 , enemy
-													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , levelPath->getPosInPath(progress) // Change to Level data start pos
 													 , initialQuaternion
 													 , Vec3(10.0f, 10.0f, 10.0f));
 
@@ -577,18 +577,18 @@ namespace ZS {
 				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
 				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 200.0f, 200.0f, 40.0f, 40.0f,
 										 40.0f, 10.0f, -2.0f,
-										 Status::ST_NORMAL, 0.004f, 100);
+										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
 				unitVec.push_back(enemy);
 
 				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moBoss
 													 , enemy
-													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , levelPath->getPosInPath(progress) // Change to Level data start pos
 													 , initialQuaternion
 													 , Vec3(6.0f, 6.0f, 6.0f));
 
