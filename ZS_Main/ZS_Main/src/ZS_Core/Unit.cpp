@@ -15,7 +15,7 @@ namespace ZS {
 		, str(_str), def(_def), spd(_spd)
 		, status(_status), isDead(false), currentPathPointIndex(-1), progress(_progress)
 		, path(nullptr), moveVec(_moveVec), isMoving(false)
-		, weapon(nullptr), isAttacking(false), attackTimer(0.0f) {
+		, weapon(nullptr), isAttacking(false), attackTimer(0.0f), isDefensing(false) {
 	}
 
 	Unit::Unit(const std::string& _name, Tag _tag, Vec3 _pos, Ogre::Quaternion _rot, int _id, Stats _stats, float _progress, Vec3 _moveVec) :
@@ -89,8 +89,21 @@ namespace ZS {
 		return pos;
 	}
 
+
 	Vec3 Unit::moveTo(Vec3 _pos) {
 		pos = _pos;
+		return pos;
+	}
+
+	Vec3 Unit::moveBack(float _distance) {
+		if (!isDead) {
+			if (path) {
+				float step = _distance / path->totalLength;
+				float nextProgress = std::min(std::max(progress - step, 0.0f), 1.0f);
+				progress = nextProgress;
+				moveTo(path->getPosInPath(nextProgress));
+			}
+		}
 		return pos;
 	}
 
@@ -110,7 +123,10 @@ namespace ZS {
 	 * @return bool
 	 */
 	bool Unit::damage(float dmg) {
-		hp -= dmg;
+		if (isDefensing)
+			hp -= dmg * 0.25f;
+		else
+			hp -= dmg;
 		if(hp <= 0.0f) {
 			isDead = true;
 			return true;

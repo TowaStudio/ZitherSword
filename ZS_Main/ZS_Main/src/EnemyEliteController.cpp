@@ -1,67 +1,67 @@
-﻿#include "EnemyAController.h"
+#include "EnemyEliteController.h"
 #include "GameMaster.h"
 
 namespace ZS {
 
-	EnemyAController::EnemyAController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id) :
+	EnemyEliteController::EnemyEliteController(LevelManager* _levelManager, GameEntity* _entEnemy, int _id) :
 		CharacterController(_levelManager, _entEnemy, _id), distance(0) {
 		enemy = dynamic_cast<Enemy*>(_entEnemy->behaviour);
 		aist = AIST_IDLE;
 	}
 
-	EnemyAController::~EnemyAController() {
+	EnemyEliteController::~EnemyEliteController() {
 	}
 
-	float EnemyAController::getDistanceToPlayer() {
+	float EnemyEliteController::getDistanceToPlayer() {
 		distance = enemy->progress - levelManager->getSwordsman()->progress;
 		distance *= levelManager->getLevelPath()->totalLength;
 		return distance;
 	}
 
-	void EnemyAController::changeActionState() { // called in update
-		if(enemy->isDead)
+	void EnemyEliteController::changeActionState() { // called in update
+		if (enemy->isDead)
 			cst = CST_DEAD;
 
 		// get d
 		getDistanceToPlayer();
 
-		switch(cst) {
-			case CST_IDLE:
+		switch (cst) {
+		case CST_IDLE:
+			changeAstTo(cst);
+			break;
+		case CST_WALK:
+			if (distance > runThres)
 				changeAstTo(cst);
-				break;
-			case CST_WALK:
-				if (distance > runThres)
-					changeAstTo(cst);
-				else
-					changeAstTo(CST_IDLE);
-				break;
-			case CST_RUN:
-				if (distance > runThres)
-					changeAstTo(cst);
-				else 
-					changeAstTo(CST_IDLE);
-				break;
-			case CST_ATTACK:
+			else
+				changeAstTo(CST_ATTACK);
+			break;
+		case CST_RUN:
+			if (distance > runThres)
 				changeAstTo(cst);
-				break;
-			case CST_SKILL:
-				changeAstTo(cst);
-				break;
-			case CST_DEFENSE:
-				changeAstTo(cst);
-				break;
-			case CST_DODGE:
-				changeAstTo(cst);
-				break;
-			case CST_DEAD:
-				changeAstTo(cst);
-				break;
-			default:
-				break;
+			else
+				changeAstTo(CST_ATTACK);
+			break;
+		case CST_ATTACK:
+			changeAstTo(cst);
+			break;
+		case CST_SKILL:
+			changeAstTo(cst);
+			break;
+		case CST_DEFENSE:
+			changeAstTo(cst);
+			break;
+		case CST_DODGE:
+			changeAstTo(cst);
+			break;
+		case CST_DEAD:
+			changeAstTo(cst);
+			break;
+		default:
+			break;
 		}
 	}
 
-	void EnemyAController::changeAstTo(ControlState _ast) { // internal use
+	void EnemyEliteController::changeAstTo(ControlState _ast) { // internal use
 
 		if (_ast == ast) return;
 
@@ -117,35 +117,35 @@ namespace ZS {
 		}
 	}
 
-	void EnemyAController::changeAIState() { // called to make decision
+	void EnemyEliteController::changeAIState() { // called to make decision
 
 		// get d
 		getDistanceToPlayer();
 
 		// change state
 		switch (aist) {
-			case AIST_IDLE: 
-				if (distance < detectThres)
-					aist = AIST_RUN;
-				break;
-			case AIST_RUN: 
-				if (distance < runThres)
-					aist = AIST_REST1;
-				break;
-			case AIST_ATTACK: 
-				if (distance > runawayThres)
-					aist = AIST_RUN;
-				else
-					aist = AIST_REST1;
-				break;
-			case AIST_REST1: 
-				if (distance > runawayThres)
-					aist = AIST_RUN;
-				else
-					aist = AIST_ATTACK;
-				break;
-			default: 
-				break;
+		case AIST_IDLE:
+			if (distance < detectThres)
+				aist = AIST_RUN;
+			break;
+		case AIST_RUN:
+			if (distance < runThres)
+				aist = AIST_ATTACK;
+			break;
+		case AIST_ATTACK:
+			if (distance > runawayThres)
+				aist = AIST_RUN;
+			else
+				aist = AIST_REST1;
+			break;
+		case AIST_REST1:
+			if (distance > runawayThres)
+				aist = AIST_RUN;
+			else
+				aist = AIST_ATTACK;
+			break;
+		default:
+			break;
 		}
 
 		// change control

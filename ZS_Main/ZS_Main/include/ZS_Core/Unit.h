@@ -44,11 +44,14 @@ namespace ZS {
 		bool isAttacking;
 		float attackTimer;
 
+		bool isDefensing;
+
 		// MOVEMENT
 		void bindPath(Path* _path);
 		virtual Vec3 move(float _scale = 1.0f);
 		Vec3 move(Vec3 _movement);
 		Vec3 moveTo(Vec3 _pos);
+		virtual Vec3 moveBack(float _distance = 2.0f);
 		// BATTLE
 		void useWeapon(Weapon* _weapon);
 

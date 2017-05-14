@@ -8,6 +8,46 @@ namespace ZS {
 	/**
 	* AudioComposer implementation
 	*/
+	const std::map<AudioComposer::Cadence, std::vector<NoteName>> AudioComposer::_CadenceNoteMap_{
+		{ NIL_,{ DO, RE, MI, FA, SO, LA, SI } },
+		{ DO_,{ DO, RE, MI, SO, LA } },
+		{ RE_,{ DO, RE, FA, SO, LA } },
+		{ MI_,{ RE, MI, SO, LA, SI } },
+		{ FA_,{ DO, RE, FA, SO, LA } },
+		{ SO_,{ RE, MI, SO, LA, SI } },
+		{ LA_,{ DO, RE, MI, SO, LA } }
+	};
+
+	const std::vector<AudioComposer::AudioLevelData> AudioComposer::_AudioLevelData_{
+		{ 0, 0,{},{} }, // default null level
+
+						// Lv. 1
+		{
+			0,
+			32,
+			{
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
+				RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_,
+				LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
+			},
+			{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+		},
+
+		// Lv. 2
+		{
+			0,
+			32,
+			{
+				LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
+				LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
+				DO_, SO_, LA_, MI_, FA_, DO_, RE_, SO_,
+				DO_, SO_, LA_, MI_, FA_, LA_, SO_, DO_
+			},
+			{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
+		}
+	};
+
 	AudioComposer::AudioComposer() {
 		// setup
 		setupComposer();
@@ -115,9 +155,9 @@ namespace ZS {
 				int tendency = rand() % 2;
 				PartName newPart = parts->at(i);
 				if (tendency == 0) {
-					notes->at(i) = getLowerNote(lastNote, true, &newPart);
+					notes->at(i) = getLowerNote(lastNote, DO_, &newPart);
 				} else {
-					notes->at(i) = getHigherNote(lastNote, true, &newPart);
+					notes->at(i) = getHigherNote(lastNote, DO_, &newPart);
 				}
 				parts->at(i) = newPart;
 				lastNote = notes->at(i);
@@ -127,9 +167,6 @@ namespace ZS {
 			notes->at(tNum / 2) = static_cast<NoteName>(currentCadence);
 		}
 
-
-
-		// TODO
 	}
 
 	int AudioComposer::getNextBGMIndex(int currentBar) const {
@@ -143,7 +180,7 @@ namespace ZS {
 		return -1;
 	}
 
-	void AudioComposer::getRandomNearNote(NoteName *notePtr, PartName *partPtr, NoteName noteInput, PartName partInput, int d) {
+	/*void AudioComposer::getRandomNearNote(NoteName *notePtr, PartName *partPtr, NoteName noteInput, PartName partInput, int d) {
 		int num = rand()%d + 1;
 		int sign = rand()%2 * 2 - 1;
 
@@ -175,42 +212,35 @@ namespace ZS {
 			default: ;
 		}
 		return REST;
-	}
+	}*/
 
-	NoteName AudioComposer::getHigherNote(NoteName currentNote, bool isPentatonic, PartName* currentPart) {
+	NoteName AudioComposer::getHigherNote(NoteName currentNote, Cadence currentCadence, PartName* currentPart) {
 
-		bool switchPart = false;
-		NoteName res = REST;
-		switch (currentNote) {
-
-			case REST: 
-				res = REST; break;
-			case DO: 
-				res = RE; break;
-			case RE: 
-				res = MI; break;
-			case MI: 
-				if (isPentatonic)
-					res = SO;
-				else
-					res = FA; 
-				break;
-			case FA: 
-				res = SO; break;
-			case SO: 
-				res = LA; break;
-			case LA: 
-				if (isPentatonic) {
-					res = DO;
-					switchPart = true;
-				} else
-					res = SI;
-				break;
-			case SI: 
-				res = DO;
-				switchPart = true;
-			default: ;
+		if (currentNote == REST) {
+			return REST;
 		}
+
+		std::vector<NoteName> noteLoop = _CadenceNoteMap_.at(currentCadence);
+		std::vector<NoteName> fullNoteLoop{ DO, RE, MI, FA, SO, LA, SI };
+		NoteName res = currentNote;
+		bool switchPart = false;
+
+		do {
+			switch (res) {
+				case REST: break;
+				case DO: res = RE; break;
+				case RE: res = MI; break;
+				case MI: res = FA; break;
+				case FA: res = SO; break;
+				case SO: res = LA; break;
+				case LA: res = SI; break;
+				case SI: res = DO; switchPart = true; break;
+				default: break;
+			}
+			if (res == REST)
+				break;
+		} while (std::find(noteLoop.begin(), noteLoop.end(), res) == noteLoop.end());
+		
 		if (currentPart != nullptr) {
 			if (switchPart)
 				*currentPart = getHigherPart(*currentPart);
@@ -218,39 +248,33 @@ namespace ZS {
 		return res;
 	}
 
-	NoteName AudioComposer::getLowerNote(NoteName currentNote, bool isPentatonic, PartName* currentPart) {
+	NoteName AudioComposer::getLowerNote(NoteName currentNote, Cadence currentCadence, PartName* currentPart) {
 
-		bool switchPart = false;
-		NoteName res = REST;
-		switch (currentNote) {
-
-		case REST:
-			res = REST; break;
-		case DO:
-			if (isPentatonic)
-				res = LA;
-			else
-				res = SI;
-			switchPart = true;
-			break;
-		case RE:
-			res = DO; break;
-		case MI:
-			res = RE; break;
-		case FA:
-			res = MI; break;
-		case SO:
-			if (isPentatonic)
-				res = MI;
-			else
-				res = FA;
-			break;
-		case LA:
-			res = SO; break;
-		case SI:
-			res = LA;
-		default:;
+		if (currentNote == REST) {
+			return REST;
 		}
+
+		std::vector<NoteName> noteLoop = _CadenceNoteMap_.at(currentCadence);
+		std::vector<NoteName> fullNoteLoop{ DO, RE, MI, FA, SO, LA, SI };
+		NoteName res = currentNote;
+		bool switchPart = false;
+
+		do {
+			switch (res) {
+			case REST: break;
+			case DO: res = SI; switchPart = true; break;
+			case RE: res = DO; break;
+			case MI: res = RE; break;
+			case FA: res = MI; break;
+			case SO: res = FA; break;
+			case LA: res = SO; break;
+			case SI: res = LA; break;
+			default: break;
+			}
+			if (res == REST)
+				break;
+		} while (std::find(noteLoop.begin(), noteLoop.end(), res) == noteLoop.end());
+
 		if (currentPart != nullptr) {
 			if (switchPart)
 				*currentPart = getLowerPart(*currentPart);
