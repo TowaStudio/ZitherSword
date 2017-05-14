@@ -66,6 +66,18 @@ namespace ZS {
 		return pos;
 	}
 
+	Vec3 Swordsman::moveBack(float _distance) {
+		if (!isDead) {
+			if (path) {
+				float step = _distance / path->totalLength;
+				float nextProgress = std::min(std::max(progress - step, 0.0f), 1.0f);
+				progress = nextProgress;
+				moveTo(path->getPosInPath(nextProgress));
+			}
+		}
+		return pos;
+	}
+	
 	HitInfo Swordsman::attack(Unit* target) {
 		return Unit::attack(target);
 	}

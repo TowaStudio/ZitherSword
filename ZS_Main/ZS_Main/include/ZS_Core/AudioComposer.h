@@ -49,43 +49,8 @@ namespace ZS {
 		};
 
 		// AI CORE FILES! DO NOT MODIFY UNLESS YOU REALLY UNDERSTAND!
-		std::map<Cadence, std::vector<NoteName>> _CadenceNoteMap_ = {
-			{ DO_,{ DO, MI, SO } },
-			{ RE_,{ RE, FA, LA } },
-			{ MI_,{ MI, SO, SI } },
-			{ FA_,{ DO, FA, LA } },
-			{ SO_,{ RE, SO, SI } },
-			{ LA_,{ DO, MI, LA } }
-		};;
-		std::vector<AudioLevelData> _AudioLevelData_{
-			{ 0, 0,{},{} }, // default null level
-
-			// Lv. 1
-			{
-				0,
-				32,
-				{
-					LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
-					LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
-					RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_,
-					LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
-				},
-				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
-			}, 
-
-			// Lv. 2
-			{
-				0,
-				32,
-				{
-					LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
-					LA_, SO_, FA_, LA_, RE_, LA_, FA_, MI_,
-					DO_, SO_, LA_, MI_, FA_, DO_, RE_, SO_,
-					DO_, SO_, LA_, MI_, FA_, LA_, SO_, DO_
-				},
-				{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
-			}
-		};
+		static const std::map<Cadence, std::vector<NoteName>> _CadenceNoteMap_;
+		static const std::vector<AudioLevelData> _AudioLevelData_;
 
 		AudioComposer();
 		void setupComposer(int currentLevel = 0, int ticksPerBar = 16);
@@ -98,40 +63,14 @@ namespace ZS {
 		int tNum; // ticks per bar
 		const AudioLevelData* thisLevelData;
 
-		static void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
-		static NoteName getNoteWithTendency(NoteName lastPCNote, Cadence currentCadence, int tendency);
+		//static void getRandomNearNote(NoteName* notePtr, PartName* partPtr, NoteName noteInput, PartName partInput, int distance = 1);
+		//static NoteName getNotLoop(Cadence currentCadence);
 
-		static NoteName getHigherNote(NoteName currentNote, bool isPentatonic = true, PartName* currentPart = nullptr);
-		static NoteName getLowerNote(NoteName currentNote, bool isPentatonic = true, PartName* currentPart = nullptr);
+		static NoteName getHigherNote(NoteName currentNote, Cadence currentCadence = NIL_, PartName* currentPart = nullptr);
+		static NoteName getLowerNote(NoteName currentNote, Cadence currentCadence = NIL_, PartName* currentPart = nullptr);
 		static PartName getHigherPart(PartName currentPart);
 		static PartName getLowerPart(PartName currentPart);
 	};
-
-	/*std::map<AudioComposer::Cadence, std::vector<NoteName>> AudioComposer::_CadenceNoteMap_ = {
-		{ DO_, { DO, MI, SO } }, 
-		{ RE_, { RE, FA, LA } }, 
-		{ MI_, { MI, SO, SI } },
-		{ FA_, { FA, LA, DO } },
-		{ SO_, { SO, SI, RE } },
-		{ LA_, { LA, DO, MI } }
-	};
-
-	std::vector<AudioComposer::AudioLevelData> AudioComposer::_AudioLevelData_{
-		{ 0, 0,{},{} }, // default null level
-
-		// Lv. 1
-		{
-			1,
-			32,
-			{
-				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
-				LA_, SO_, LA_, SO_, LA_, DO_, RE_, MI_,
-				RE_, MI_, LA_, SO_, RE_, FA_, LA_, MI_,
-				LA_, SO_, LA_, SO_, LA_, DO_, MI_, LA_
-			},
-			{ 1, 0, 0, 1, 1, 0, 1, 0, 1, 3, 2, 3, 2, 0, 0, 0 }
-		}
-	};*/
 }
 
 #endif //_AUDIOCOMPOSER_H
