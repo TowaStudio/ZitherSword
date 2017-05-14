@@ -285,7 +285,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 4 + enemyTypes.size() * 2;
+		int initObjectCount = 3 + enemyTypes.size();
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -370,78 +370,12 @@ namespace ZS {
 			ccZitherwoman = new ZitherWomanController(this, entZitherWoman, getUnitID());
 		}
 
-		{ // 4
-			MovableObjectDefinition* moBoss = new MovableObjectDefinition();
-			moBoss->meshName = "boss.mesh";
-			moBoss->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-			moBoss->submeshMaterials = Ogre::StringVector{"BossHead", "BossBody", "BossArm", "BossFace", "BossShoe"};
-			moBoss->moType = MoTypeItemSkeleton;
-
-			int unitID = getUnitID();
-
-			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
-			initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
-
-			Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
-									 initialQuaternion,
-									 200.0f, 200.0f, 40.0f, 40.0f,
-									 40.0f, 10.0f, -2.0f,
-									 Status::ST_NORMAL, 0.004f, 100);
-			enemy->bindPath(levelPath);
-
-			unitVec.push_back(enemy);
-
-			GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moBoss
-												 , enemy
-												 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
-												 , initialQuaternion
-												 , Vec3(6.0f, 6.0f, 6.0f));
-
-			enemyEntities.push_back(entEnemy);
-
-
-			/*MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
-			moEnemyWeapon->meshName = "enemy1weapon.mesh";
-			moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-			moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
-			moEnemyWeapon->moType = MoTypeItem;
-
-			Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
-			enemy->useWeapon(enemyWeapon);
-
-			GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
-													   , enemyWeapon
-													   , Vec3::ZERO
-													   , Ogre::Quaternion::IDENTITY
-													   , Vec3(0.4f, 0.4f, 0.4f));
-			enemyEntities.push_back(entEnemyWeapon);*/
-
-
-			/*BindDefinition* bo = new BindDefinition();
-			bo->source = entEnemyWeapon;
-			bo->target = entEnemy;
-			bo->boneName = "Bip01 R Hand";
-			logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
-
-			// Create controller
-			EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
-		}
-
 		// enemy * 2
 		{
 			for (int i = 0; i < enemyTypes.size(); i++) {
-				characterControllers.push_back(createEnemy(enemyLocs[i]));
+				characterControllers.push_back(createEnemy(enemyTypes[i], enemyLocs[i]));
 			}
 		}
-
-		//_DEBUG_
-		{
-			// 3
-			//characterControllers.push_back(createEnemy(0.02f));
-			// 4
-			//characterControllers.push_back(createEnemy(0.08f));
-		}
-		//_DEBUG_
 
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_CHARACTER, swordsman);
@@ -456,6 +390,7 @@ namespace ZS {
 
 		gm->getMusicUIManager()->run(AudioSystem::GetInstance()->getBpm());
 		AudioSystem::GetInstance()->startMusic();
+		gm->getGameUIManager()->update(0.01f);
 
 		// Set default animation
 
@@ -509,75 +444,183 @@ namespace ZS {
 	}
 
 	void LevelManager::EndLevel(bool win) {
-		AudioSystem::GetInstance()->stopMusic(win);
-		if(level == 1) {
-			UnloadLevel();
-			Ogre::Threads::Sleep(3000);
-			if(win)
-				gm->loadLevel(level + 1);
-			else
-				gm->loadLevel(level);
+		for(CharacterController* characterController : characterControllers) {
+			characterController->changeControlState(CST_IDLE);
 		}
-			
+
+		// Stop updates
+		levelState = LST_END;
+
+		AudioSystem::GetInstance()->stopMusic(win);
+
 		// TODO: Show win lose result
 	}
 
-	CharacterController* LevelManager::createEnemy(float progress) {
-		MovableObjectDefinition* moEnemy = new MovableObjectDefinition();
-		moEnemy->meshName = "enemy1.mesh";
-		moEnemy->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-		moEnemy->submeshMaterials = Ogre::StringVector{"Enemy1"};
-		moEnemy->moType = MoTypeItemSkeleton;
+	void LevelManager::NextLevel() {
+		UnloadLevel(); 
+		if(level == 0) {
+			gm->loadLevel(level + 1);
+		} else if(level == 1) {
+			gm->loadLevel(level);
+		}
+	}
+	void LevelManager::RetryLevel() {
+		UnloadLevel();
+		gm->loadLevel(level);
+	}
 
-		int unitID = getUnitID();
+	CharacterController* LevelManager::createEnemy(int type, float progress) {
+		switch(type) {
+			default:
+			case 0: {
+				MovableObjectDefinition* moEnemyA = new MovableObjectDefinition();
+				moEnemyA->meshName = "enemy1.mesh";
+				moEnemyA->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				moEnemyA->submeshMaterials = Ogre::StringVector{"Enemy1"};
+				moEnemyA->moType = MoTypeItemSkeleton;
 
-		Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
-		initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+				int unitID = getUnitID();
 
-		Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
-								 initialQuaternion,
-								 200.0f, 200.0f, 40.0f, 40.0f,
-								 40.0f, 10.0f, -2.0f,
-								 Status::ST_NORMAL, progress, 100);
-		enemy->bindPath(levelPath);
+				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+				initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-		unitVec.push_back(enemy);
+				Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
+										 initialQuaternion,
+										 200.0f, 200.0f, 40.0f, 40.0f,
+										 40.0f, 10.0f, -2.0f,
+										 Status::ST_NORMAL, progress, 100);
+				enemy->bindPath(levelPath);
 
-		GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemy
-											  , enemy
-											  , levelPath->getPosInPath(progress) // Change to Level data start pos
-											  , initialQuaternion
-											  , Vec3(0.2f, 0.2f, 0.2f));
+				unitVec.push_back(enemy);
 
-		enemyEntities.push_back(entEnemy);
+				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyA
+													 , enemy
+													 , levelPath->getPosInPath(progress) // Change to Level data start pos
+													 , initialQuaternion
+													 , Vec3(0.2f, 0.2f, 0.2f));
 
-		
-		MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
-		moEnemyWeapon->meshName = "enemy1weapon.mesh";
-		moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-		moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
-		moEnemyWeapon->moType = MoTypeItem;
+				enemyEntities.push_back(entEnemy);
 
-		Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
-		enemy->useWeapon(enemyWeapon);
 
-		GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
-												, enemyWeapon
-												, Vec3::ZERO
-												, Ogre::Quaternion::IDENTITY
-												, Vec3(0.4f, 0.4f, 0.4f));
-		enemyEntities.push_back(entEnemyWeapon);
-				
+				MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+				moEnemyWeapon->meshName = "enemy1weapon.mesh";
+				moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
+				moEnemyWeapon->moType = MoTypeItem;
 
-		BindDefinition* bo = new BindDefinition();
-		bo->source = entEnemyWeapon;
-		bo->target = entEnemy;
-		bo->boneName = "Bip01 R Hand";
-		logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
+				Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+				enemy->useWeapon(enemyWeapon);
 
-		// Create controller
-		EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
-		return ccEnemy;
+				GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
+														   , enemyWeapon
+														   , Vec3::ZERO
+														   , Ogre::Quaternion::IDENTITY
+														   , Vec3(0.4f, 0.4f, 0.4f));
+				enemyEntities.push_back(entEnemyWeapon);
+
+
+				BindDefinition* bo = new BindDefinition();
+				bo->source = entEnemyWeapon;
+				bo->target = entEnemy;
+				bo->boneName = "Bip01 R Hand";
+				logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);
+
+				// Create controller
+				EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
+				return ccEnemy;
+			}
+			case 1: {
+				MovableObjectDefinition* moEnemyB = new MovableObjectDefinition();
+				moEnemyB->meshName = "enemy2.mesh";
+				moEnemyB->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				moEnemyB->submeshMaterials = Ogre::StringVector{"Enemy2D", "Enemy2C", "Enemy2B", "Enemy2A"};
+				moEnemyB->moType = MoTypeItemSkeleton;
+
+				int unitID = getUnitID();
+
+				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+
+				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+										 initialQuaternion,
+										 200.0f, 200.0f, 40.0f, 40.0f,
+										 40.0f, 10.0f, -2.0f,
+										 Status::ST_NORMAL, 0.004f, 100);
+				enemy->bindPath(levelPath);
+
+				unitVec.push_back(enemy);
+
+				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyB
+													 , enemy
+													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , initialQuaternion
+													 , Vec3(10.0f, 10.0f, 10.0f));
+
+				enemyEntities.push_back(entEnemy);
+
+				// Create controller
+				// TODO: Change controller
+				EnemyAController* ccEnemy = new EnemyAController(this, entEnemy, unitID);
+				return ccEnemy;
+			}
+			case 2: {
+				MovableObjectDefinition* moBoss = new MovableObjectDefinition();
+				moBoss->meshName = "boss.mesh";
+				moBoss->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				moBoss->submeshMaterials = Ogre::StringVector{"BossHead", "BossBody", "BossArm", "BossFace", "BossShoe"};
+				moBoss->moType = MoTypeItemSkeleton;
+
+				int unitID = getUnitID();
+
+				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+
+				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
+										 initialQuaternion,
+										 200.0f, 200.0f, 40.0f, 40.0f,
+										 40.0f, 10.0f, -2.0f,
+										 Status::ST_NORMAL, 0.004f, 100);
+				enemy->bindPath(levelPath);
+
+				unitVec.push_back(enemy);
+
+				GameEntity* entEnemy = addGameEntity(Ogre::SCENE_DYNAMIC, moBoss
+													 , enemy
+													 , levelPath->getPosInPath(0.004f) // Change to Level data start pos
+													 , initialQuaternion
+													 , Vec3(6.0f, 6.0f, 6.0f));
+
+				enemyEntities.push_back(entEnemy);
+
+
+				/*MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+				moEnemyWeapon->meshName = "enemy1weapon.mesh";
+				moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+				moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
+				moEnemyWeapon->moType = MoTypeItem;
+
+				Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+				enemy->useWeapon(enemyWeapon);
+
+				GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
+														   , enemyWeapon
+														   , Vec3::ZERO
+														   , Ogre::Quaternion::IDENTITY
+														   , Vec3(0.4f, 0.4f, 0.4f));
+				enemyEntities.push_back(entEnemyWeapon);*/
+
+
+				/*BindDefinition* bo = new BindDefinition();
+				bo->source = entEnemyWeapon;
+				bo->target = entEnemy;
+				bo->boneName = "Bip01 R Hand";
+				logicSystem->queueSendMessage(graphicsSystem, Mq::GAME_ENTITY_BIND, bo);*/
+
+				// Create controller
+				EnemyAController* ccBoss = new EnemyAController(this, entEnemy, unitID);
+				return ccBoss;
+			}
+		}
 	}
 
 	void LevelManager::changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop) {
@@ -615,9 +658,6 @@ namespace ZS {
 	}
 
 	void LevelManager::UnloadLevel() {
-		// Stop updates
-		levelState = LST_END;
-
 		// Destroy everything
 		/*for(auto itr = mGameEntities[Ogre::SCENE_DYNAMIC].begin(); itr != mGameEntities[Ogre::SCENE_DYNAMIC].end(); ++itr) {
 			removeGameEntity(*itr);

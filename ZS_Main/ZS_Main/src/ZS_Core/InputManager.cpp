@@ -51,13 +51,20 @@ namespace ZS {
 
 	void InputManager::keyup(SDL_Keycode key) {
 		switch(key) {
-			//_DEBUG_
 			case SDLK_RETURN:
 				if(GameMaster::GetInstance()->getLevelManager()->levelState == LST_NOT_IN_LEVEL) {
 					GameMaster::GetInstance()->load();
 					GameMaster::GetInstance()->loadLevel(1);
 				}
+				if(GameMaster::GetInstance()->getLevelManager()->levelState == LST_END) {
+					GameMaster::GetInstance()->getLevelManager()->NextLevel();
+				}
 				break;
+			case SDLK_r:
+				if(GameMaster::GetInstance()->getLevelManager()->levelState == LST_END) {
+					GameMaster::GetInstance()->getLevelManager()->RetryLevel();
+				}
+			//_DEBUG_
 			case SDLK_2:
 				GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
 				break;

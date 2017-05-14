@@ -124,6 +124,8 @@ namespace ZS {
 		void addHitInfo(const HitInfo& hit);
 		void showResult(ControlState cst);
 		void EndLevel(bool win);
+		void NextLevel();
+		void RetryLevel();
 		CharacterController* createEnemy(float progress);
 
 		void changeAnimationOf(AnimationController* ac, Ogre::String state, bool loop);
