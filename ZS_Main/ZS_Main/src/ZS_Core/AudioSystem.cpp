@@ -11,8 +11,8 @@ namespace ZS {
 	*/
 	AudioSystem* AudioSystem::instance = new AudioSystem();
 
-	int timeDiffTT = 0; // DEBUG
-	int clickNum = 0; // DEBUG
+	//int timeDiffTT = 0; // DEBUG
+	//int clickNum = 0; // DEBUG
 
 	// setup
 	void AudioSystem::musicSetup(int _currentLevel, Patterns* _patterns, int _initBarNum, int _initTickNum, int _bpm, int _bpb) {
@@ -58,6 +58,7 @@ namespace ZS {
 		//currentTickNum = -1;
 		currentTickTime = -1;
 		//nextTickTime = -1;
+		comboNum = 0;
 
 		// start timer
 		//startTime = Time::currentTimeMillis();
@@ -78,8 +79,10 @@ namespace ZS {
 
 	void AudioSystem::terminate() {
 		stopTimer();
-		delete AIComposer;
-		delete instance;
+		isGameRunning = false;
+		isGameClear = false;
+		playerInCharge = false;
+		AIInCharge = false;
 	}
 
 	// input 
@@ -98,15 +101,15 @@ namespace ZS {
 
 	void AudioSystem::inputJudge(int64 currentTime, NoteName noteName) {
 		int timeDiff = static_cast<int>(currentTime - currentTickTime);
-		timeDiff -= 25;
-		timeDiffTT += timeDiff; // DEBUG
-		clickNum += 1;
+		timeDiff -= 20;
+		//timeDiffTT += timeDiff; // DEBUG
+		//clickNum += 1; // DEBUG
 		if (tolerance <= 0.5f)
 			if(timeDiff < thresTime) { // current tick
 				recordNote(currentTickNum, noteName);
 			} else if(timeDiff > interval - thresTime) { // next tick
 				recordNote(currentTickNum + 1, noteName);
-				timeDiffTT -= interval; // DEBUG
+				//timeDiffTT -= interval; // DEBUG
 			} else { // hit nothing
 
 			}
@@ -115,7 +118,7 @@ namespace ZS {
 				recordNote(currentTickNum, noteName); 
 			else if (timeDiff > interval - thresTime) { // next tick
 					recordNote(currentTickNum + 1, noteName);
-					timeDiffTT -= interval; // DEBUG
+					//timeDiffTT -= interval; // DEBUG
 			} else { // hit nothing
 
 			}
@@ -209,12 +212,14 @@ namespace ZS {
 			if (match) {
 				//GameMaster::GetInstance()->log("Success");
 				if (p <= 0) { // input nothing
-					playSoundEffect(2);
+					break;
+				} else { // input correct
+					comboNum++;
+					return p; // return the index of pattern
 				}
-				return p; // return the index of pattern
 			}
 		}
-		
+		comboNum = 0;
 		playSoundEffect(2);
 		return 0; // No match
 	}
@@ -368,7 +373,7 @@ namespace ZS {
 
 					// identify sequence
 					int res = identifySequence();
-					Ogre::String debugStr = "";
+					/*Ogre::String debugStr = "";
 					for (int i = 0; i < 16; i += 4) {
 						debugStr += to_string(inputSequence[i]);
 						debugStr += to_string(inputSequence[i+1]);
@@ -383,9 +388,10 @@ namespace ZS {
 						timeDiffTT = 0; clickNum = 0;
 					}
 					debugStr += to_string(diffAvg);
-					GameMaster::GetInstance()->log(debugStr);
+					GameMaster::GetInstance()->log(debugStr);*/
+					GameMaster::GetInstance()->getInputManager()->setComboNum(comboNum);
 					GameMaster::GetInstance()->getInputManager()->setInstruction(static_cast<ControlState>(res));
-					GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
+					//GameMaster::GetInstance()->getLevelManager()->showResult(static_cast<ControlState>(res));
 
 					// get AI composing
 					AIComposer->getNextSeq(noteSequence, partSequence, inputSequence, currentBarNum, res);

@@ -5,7 +5,7 @@
 namespace ZS {
 
 	SwordsmanController::SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman) :
-		CharacterController(_levelManager, _entSwordsman, 0), distance(0) {
+		CharacterController(_levelManager, _entSwordsman, 0), distance(0), comboNum(0), skillEnabled(false) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
 
@@ -24,10 +24,35 @@ namespace ZS {
 		return distance;
 	}
 
+	/*void SwordsmanController::setComboNum(int _comboNum) {
+		if (_comboNum >= skillComboNum)
+			skillEnabled = true;
+		else
+			skillEnabled = false;
+	}*/
+	
 	void SwordsmanController::changeCst(ControlState cst) { // decision of player
 		changeControlState(cst);
+
+		// calculate combo
+		if (cst == CST_IDLE) {
+			comboNum = 0;
+		} else {
+			comboNum++;
+		}
+		// TODO show combo result
+		//GameMaster::GetInstance()->log("0123456789SSSSS!" + comboNum);
+			
 		if (cst == CST_DODGE) {
 			swordsman->moveBack(8.0f);
+		} else if (cst == CST_SKILL) {
+			if (comboNum > 10) {
+				comboNum = 0;
+				skillEnabled = true;
+				swordsman->skill();
+			} else {
+				skillEnabled = false;
+			}
 		}
 	}
 
@@ -78,7 +103,10 @@ namespace ZS {
 						changeAstTo(cst);
 					break;
 				case CST_SKILL:
-					changeAstTo(cst);
+					if (skillEnabled)
+						changeAstTo(cst);
+					else
+						changeAstTo(CST_IDLE);
 					break;
 				case CST_DEFENSE:
 					changeAstTo(cst);

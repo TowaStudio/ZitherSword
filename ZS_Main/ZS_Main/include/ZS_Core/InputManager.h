@@ -16,6 +16,7 @@ namespace ZS {
 		InputManager() {}
 		void keydown(SDL_Keycode key);
 		void keyup(SDL_Keycode key);
+		void setComboNum(int comboNum);
 		void setInstruction(ControlState cst);
 
 		void registerKeyDownInstruction(SDL_Keycode _key, Instruction* _inst);

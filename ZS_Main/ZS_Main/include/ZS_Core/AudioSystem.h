@@ -63,6 +63,7 @@ namespace ZS {
 		//int64 startTime;
 		bool isGameRunning;
 		bool isGameClear;
+		int comboNum; // the number of combo
 		int currentBarNum; // the current number of bar
 		int currentTickNum; // the current number of tick within a bar
 		int64 currentTickTime; 

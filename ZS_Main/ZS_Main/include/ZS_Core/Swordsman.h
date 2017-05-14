@@ -19,7 +19,9 @@ namespace ZS {
 		int level;
 		int exp;
 
-		HitInfo skill();
+		int comboNum;
+
+		void skill();
 		Vec3 move(float _scale) override;
 		Vec3 moveBack(float _distance) override;
 		HitInfo attack(Unit* target) override;
