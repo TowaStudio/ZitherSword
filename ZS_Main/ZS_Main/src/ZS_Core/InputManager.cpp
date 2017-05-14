@@ -65,36 +65,36 @@ namespace ZS {
 				}
 				break;
 			//_DEBUG_
-			case SDLK_2:
-				GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
-				break;
-			case SDLK_3:
-				GameMaster::GetInstance()->getLevelManager()->EndLevel(false);
-				break;
-			case SDLK_4:
-				GameMaster::GetInstance()->getLevelManager()->EndLevel(true);
-				break;
-			/*
-			case SDLK_h:
-				reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
-				break;
-			*/
-			case SDLK_9:
-				GameMaster::GetInstance()->getGameUIManager()->updateCombo(9);
-				break;
-			case SDLK_0:
-				GameMaster::GetInstance()->getGameUIManager()->updateCombo(10);
-				break;
-			case SDLK_u:
-				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_IDLE);
-				break;
-			case SDLK_i:
-				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_UP);
-				break;
-			case SDLK_o:
-				GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_DOWN);
-				break;
-			//_DEBUG_
+			//case SDLK_2:
+			//	GameMaster::GetInstance()->getLevelManager()->UnloadLevel();
+			//	break;
+			//case SDLK_3:
+			//	GameMaster::GetInstance()->getLevelManager()->EndLevel(false);
+			//	break;
+			//case SDLK_4:
+			//	GameMaster::GetInstance()->getLevelManager()->EndLevel(true);
+			//	break;
+			///*
+			//case SDLK_h:
+			//	reinterpret_cast<EnemyAController*>(GameMaster::GetInstance()->getLevelManager()->characterControllers[0])->changeAIState();
+			//	break;
+			//*/
+			//case SDLK_9:
+			//	GameMaster::GetInstance()->getGameUIManager()->updateCombo(9);
+			//	break;
+			//case SDLK_0:
+			//	GameMaster::GetInstance()->getGameUIManager()->updateCombo(10);
+			//	break;
+			//case SDLK_u:
+			//	GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_IDLE);
+			//	break;
+			//case SDLK_i:
+			//	GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_UP);
+			//	break;
+			//case SDLK_o:
+			//	GameMaster::GetInstance()->getLevelManager()->ccZitherwoman->changeControlState(CST_ZITHER_JUMP_DOWN);
+			//	break;
+			////_DEBUG_
 			default:
 				break;
 		}
