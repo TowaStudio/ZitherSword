@@ -89,7 +89,7 @@ namespace ZS {
 		case CST_RUN:
 			enemy->isMoving = true;
 			enemy->isAttacking = false;
-			levelManager->changeAnimationOf(ent->animationController, "Run", true);
+			levelManager->changeAnimationOf(ent->animationController, "Walk", true);
 			break;
 		case CST_ATTACK:
 			enemy->isMoving = false;
@@ -135,21 +135,21 @@ namespace ZS {
 		switch (aist) {
 		case AIST_IDLE:
 			if (distance < detectThres)
-				aist = AIST_RUN;
+				aist = AIST_WALK;
 			break;
-		case AIST_RUN:
+		case AIST_WALK:
 			if (distance < runThres)
 				aist = AIST_ATTACK;
 			break;
 		case AIST_ATTACK:
 			if (distance > runawayThres)
-				aist = AIST_RUN;
+				aist = AIST_WALK;
 			else
 				aist = AIST_REST1;
 			break;
 		case AIST_REST1:
 			if (distance > runawayThres)
-				aist = AIST_RUN;
+				aist = AIST_WALK;
 			else
 				aist = AIST_ATTACK;
 			break;
@@ -162,8 +162,8 @@ namespace ZS {
 		case AIST_IDLE:
 			changeControlState(CST_IDLE);
 			break;
-		case AIST_RUN:
-			changeControlState(CST_RUN);
+		case AIST_WALK:
+			changeControlState(CST_WALK);
 			break;
 		case AIST_ATTACK:
 			changeControlState(CST_ATTACK);

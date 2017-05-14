@@ -10,7 +10,7 @@ namespace ZS {
 
 		enum AIState {
 			AIST_IDLE = 0,
-			AIST_RUN,
+			AIST_WALK,
 			AIST_ATTACK,
 			AIST_REST1
 		};
@@ -31,7 +31,7 @@ namespace ZS {
 
 		void changeActionState() override; // called in update
 
-		void changeAIState();
+		void changeAIState() override;
 
 	};
 

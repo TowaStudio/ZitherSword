@@ -30,6 +30,7 @@ namespace ZS {
 		//void setComboNum(int _comboNum);
 		void changeActionState() override;
 		void changeCst(ControlState cst);
+		void changeAIState() override;
 	};
 }
 
