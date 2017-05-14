@@ -323,7 +323,7 @@ namespace ZS {
 			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 			moSword->moType = MoTypeItem;
 
-			Weapon* sword = new Weapon(getItemID(), 80.0f, 0.5f, 14.0f);
+			Weapon* sword = new Weapon(getItemID(), 40.0f, 1.3f, 14.0f);
 
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
 												 , sword
@@ -489,8 +489,8 @@ namespace ZS {
 
 				Enemy* enemy = new Enemy("Enemy" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
-										 200.0f, 200.0f, 40.0f, 40.0f,
-										 40.0f, 10.0f, -2.0f,
+										 200.0f, 200.0f, 50.0f, 50.0f,
+										 20.0f, 20.0f, -6.0f,
 										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
@@ -511,7 +511,7 @@ namespace ZS {
 				moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
 				moEnemyWeapon->moType = MoTypeItem;
 
-				Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+				Weapon* enemyWeapon = new Weapon(getItemID(), 20.0f, 0.8f, 12.0f);
 				enemy->useWeapon(enemyWeapon);
 
 				GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
@@ -546,9 +546,9 @@ namespace ZS {
 
 				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
 										 initialQuaternion,
-										 200.0f, 200.0f, 40.0f, 40.0f,
-										 40.0f, 10.0f, -2.0f,
-										 Status::ST_NORMAL, 0.004f, 100);
+										 400.0f, 400.0f, 50.0f, 50.0f,
+										 30.0f, 30.0f, -4.0f,
+										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
 				unitVec.push_back(enemy);
@@ -579,9 +579,9 @@ namespace ZS {
 
 				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(0.004f),
 										 initialQuaternion,
-										 200.0f, 200.0f, 40.0f, 40.0f,
-										 40.0f, 10.0f, -2.0f,
-										 Status::ST_NORMAL, 0.004f, 100);
+										 1000.0f, 1000.0f, 50.0f, 50.0f,
+										 50.0f, 20.0f, -2.0f,
+										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
 				unitVec.push_back(enemy);
