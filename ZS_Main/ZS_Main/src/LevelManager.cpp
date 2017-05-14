@@ -287,7 +287,7 @@ namespace ZS {
 		// will not start.
 		// ------------------------------------------------------
 
-		int initObjectCount = 3 + enemyTypes.size();
+		int initObjectCount = 2 + enemyTypes.size();
 		logicSystem->queueSendMessage(graphicsSystem, Mq::INIT_LEVEL_START, initObjectCount);
 
 		{ // 1
@@ -342,34 +342,51 @@ namespace ZS {
 		}
 
 		{ // 3
-			MovableObjectDefinition* moZitherWoman = new MovableObjectDefinition();
-			moZitherWoman->meshName = "zitherwoman.mesh";
-			moZitherWoman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
-			moZitherWoman->submeshMaterials = Ogre::StringVector{"zither_body1", "zither_hair", "zither_face",
-				"zither_body2", "zither_body3","zither_body4", "zither_body5", "zither_colorW", "zither_colorB", "zither_body6"};
-			moZitherWoman->moType = MoTypeItemSkeleton;
+			//MovableObjectDefinition* moZitherWoman = new MovableObjectDefinition();
+			//moZitherWoman->meshName = "zitherwoman.mesh";
+			//moZitherWoman->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			//moZitherWoman->submeshMaterials = Ogre::StringVector{"zither_body1", "zither_hair", "zither_face",
+			//	"zither_body2", "zither_body3","zither_body4", "zither_body5", "zither_colorW", "zither_colorB", "zither_body6"};
+			//moZitherWoman->moType = MoTypeItemSkeleton;
 
-			Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
-			initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+			//Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
+			//initialQuaternion.FromAngleAxis(Ogre::Radian(-Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
-			Vec3 initPos = levelPath->getPosInPath(0.0004f);
-			// Define behaviour and data model
-			//swordsman = new Swordsman(gm->getPlayerStats(), initPos, initialQuaternion, 0.0001f);
-			//swordsman->bindPath(levelPath);
+			//Vec3 initPos = levelPath->getPosInPath(0.0004f);
+			//// Define behaviour and data model
+			////swordsman = new Swordsman(gm->getPlayerStats(), initPos, initialQuaternion, 0.0001f);
+			////swordsman->bindPath(levelPath);
 
-			Zitherwoman* zitherwoman = new Zitherwoman(initPos, initialQuaternion, 0.0001f);
-			zitherwoman->bindPath(levelPath);
+			//Zitherwoman* zitherwoman = new Zitherwoman(initPos, initialQuaternion, 0.0001f);
+			//zitherwoman->bindPath(levelPath);
 
-			// Define the scene models.
-			GameEntity* entZitherWoman = addGameEntity(Ogre::SCENE_DYNAMIC, moZitherWoman
-						  , zitherwoman
-						  , initPos + Vec3(0.0f, 5.0f, 0.0f) // Change to Level data start pos
-						  , Ogre::Quaternion::IDENTITY
-						  , 12.0f * Vec3::UNIT_SCALE);
-			entMainCharacters.push_back(entZitherWoman);
+			//// Define the scene models.
+			//GameEntity* entZitherWoman = addGameEntity(Ogre::SCENE_DYNAMIC, moZitherWoman
+			//			  , zitherwoman
+			//			  , initPos + Vec3(0.0f, 5.0f, 0.0f) // Change to Level data start pos
+			//			  , Ogre::Quaternion::IDENTITY
+			//			  , 12.0f * Vec3::UNIT_SCALE);
+			//entMainCharacters.push_back(entZitherWoman);
 
-			// Create controller
-			ccZitherwoman = new ZitherWomanController(this, entZitherWoman, getUnitID());
+			//// Create controller
+			//ccZitherwoman = new ZitherWomanController(this, entZitherWoman, getUnitID());
+		}
+
+		{
+			MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
+			moEnemyWeapon->meshName = "enemy1weapon.mesh";
+			moEnemyWeapon->resourceGroup = Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME;
+			moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
+			moEnemyWeapon->moType = MoTypeItem;
+
+			Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+
+			GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
+													   , enemyWeapon
+													   , levelPath->getPoint(0)->pos + Vec3(0.0f, 3.0f, 0.0f)
+													   , Ogre::Quaternion::IDENTITY 
+													   , Vec3(0.4f, 0.4f, 0.4f));
+			enemyEntities.push_back(entEnemyWeapon);
 		}
 
 		logicSystem->queueSendMessage(graphicsSystem, Mq::CAMERA_FOLLOW_PATH, cameraPath);
@@ -398,7 +415,7 @@ namespace ZS {
 		// Set default animation
 
 		ccSwordsman->changeControlState(CST_IDLE);
-		ccZitherwoman->changeControlState(CST_ATTACK);
+		//ccZitherwoman->changeControlState(CST_ATTACK);
 
 		for (int i = 0; i < characterControllers.size(); i++) {
 			characterControllers[i]->changeControlState(CST_IDLE);			
@@ -411,7 +428,7 @@ namespace ZS {
 		//Update Controllers
 		//TODO: Character controllers
 		ccSwordsman->changeActionState();
-		ccZitherwoman->changeActionState();
+		//ccZitherwoman->changeActionState();
 		for (size_t i = 0; i < characterControllers.size(); i++) {
 			characterControllers[i]->changeActionState();
 		}
@@ -503,7 +520,6 @@ namespace ZS {
 													 , Vec3(0.2f, 0.2f, 0.2f));
 
 				enemyEntities.push_back(entEnemy);
-
 
 				MovableObjectDefinition* moEnemyWeapon = new MovableObjectDefinition();
 				moEnemyWeapon->meshName = "enemy1weapon.mesh";
@@ -669,7 +685,7 @@ namespace ZS {
 		gm->getGameUIManager()->showGameUI(false);
 
 		ccSwordsman->changeControlState(CST_IDLE);
-		ccZitherwoman->changeControlState(CST_IDLE);
+		//ccZitherwoman->changeControlState(CST_IDLE);
 		for (CharacterController* characterController : characterControllers) {
 			characterController->changeControlState(CST_IDLE);
 		}
@@ -686,7 +702,7 @@ namespace ZS {
 		}
 
 		delete ccSwordsman;
-		delete ccZitherwoman;
+		//delete ccZitherwoman;
 		characterControllers.clear();
 
 		sceneEntities.clear();
