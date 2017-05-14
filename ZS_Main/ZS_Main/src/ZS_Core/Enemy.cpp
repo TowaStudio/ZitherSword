@@ -28,6 +28,36 @@ namespace ZS {
 		return Unit::attack(target);
 	}
 
+	void Enemy::skill() {
+		Unit* swordsman = gm->getLevelManager()->getSwordsman();
+		float distance = (this->progress - swordsman->progress) * path->totalLength;
+		if (distance <= (weapon == nullptr ? 1.0f : weapon->range * 2)) { // 2 times of range
+			HitInfo hit;
+			hit.source = this;
+			hit.target = swordsman;
+			hit.dmg = Unit::CalculateDamage(this, swordsman) * 0.75; 
+			hit.isCritical = false; // TODO: random critical
+			hit.isFatal = hit.dmg >= swordsman->hp;
+			hit.valid = false;
+
+			hit.target->damage(hit.dmg);
+			gm->getLevelManager()->addHitInfo(hit);
+		}
+	}
+
+	Vec3 Enemy::moveBack(float _distance) {
+		if (!isDead) {
+			if (path) {
+				float step = _distance / path->totalLength;
+				float nextProgress = std::min(std::max(progress + step, 0.0f), 1.0f);
+				progress = nextProgress;
+				moveTo(path->getPosInPath(nextProgress));
+			}
+		}
+		return pos;
+	}
+
+
 	void Enemy::update(float timeSinceLast) {
 		//GameMaster::GetInstance()->log("Enemy log gm in update");
 		if(isMoving) {

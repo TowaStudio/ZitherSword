@@ -17,7 +17,9 @@ namespace ZS {
 		Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot, float hp, float maxhp, float sp, float maxsp, float str, float def, float spd, Status status, float progress, int exp);
 		Enemy(const std::string& name, Vec3 pos, Ogre::Quaternion rot, Stats stats, float progress, int exp);
 
+		void skill();
 		HitInfo attack(Unit* target) override;
+		Vec3 moveBack(float _distance) override;
 
 		void update(float timeSinceLast) override;
 	};

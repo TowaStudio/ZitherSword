@@ -115,7 +115,7 @@ namespace ZS {
 				attackTimer -= timeSinceLast;
 		}			
 		
-		if(progress >= 0.1f) {
+		if(progress >= 0.95f) {
 			reachEnd = true;
 		}
 	}

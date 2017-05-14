@@ -46,6 +46,10 @@ namespace ZS {
 			cst = _cst;
 		}
 
+		virtual void changeAIState() {
+			
+		}
+
 		virtual void changeActionState() { // call in update
 			ast = cst;
 		}

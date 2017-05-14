@@ -5,7 +5,6 @@
 #include "InputManager.h"
 #include "AudioSystem.h"
 #include "GameMaster.h"
-#include "EnemyAController.h"
 #include "LevelManager.h"
 #include "SwordsmanController.h"
 #include "ZitherWomanController.h"
@@ -111,8 +110,8 @@ namespace ZS {
 		LevelManager* levelManager = GameMaster::GetInstance()->getLevelManager();
 		levelManager->showResult(cst);
 		levelManager->ccSwordsman->changeCst(cst);
-		for(auto itr = levelManager->characterControllers.begin(); itr != levelManager->characterControllers.end(); ++itr) {
-			reinterpret_cast<EnemyAController*>(*itr)->changeAIState();
+		for(int i = 0; i < levelManager->characterControllers.size(); i++) {
+			levelManager->characterControllers[i]->changeAIState();
 		}
 	}
 }

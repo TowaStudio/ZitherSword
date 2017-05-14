@@ -53,6 +53,8 @@ namespace ZS {
 		}
 	}
 
+	void SwordsmanController::changeAIState() {}
+
 	void SwordsmanController::changeActionState() { // called in update
 		if(swordsman->isDead) {
 			cst = CST_DEAD;

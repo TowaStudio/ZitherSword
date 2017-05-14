@@ -144,7 +144,7 @@ namespace ZS {
 			aist = AIST_ATTACK1;
 			break;
 		case AIST_READY2:
-			aist = AIST_ATTACK1;
+			aist = AIST_ATTACK2;
 			break;
 		case AIST_RUN:
 			RNG();
@@ -162,27 +162,37 @@ namespace ZS {
 		// change control
 		switch (aist) {
 		case AIST_IDLE:
+			GameMaster::GetInstance()->log("IDLE");
 			changeControlState(CST_IDLE);
 			break;
 		case AIST_RUN:
+			GameMaster::GetInstance()->log("RUN");
 			changeControlState(CST_RUN);
 			break;
-		case AIST_DODGE: 
+		case AIST_DODGE:
+			enemy->moveBack(10.0f);
+			GameMaster::GetInstance()->log("DODGE");
 			changeControlState(CST_DODGE);
 			break;
 		case AIST_ATTACK1:
+			GameMaster::GetInstance()->log("ATK1");
 			changeControlState(CST_ATTACK);
 			break;
 		case AIST_ATTACK2:
+			GameMaster::GetInstance()->log("ATK2");
 			changeControlState(CST_SKILL);
 			break;
 		case AIST_READY1:
+			GameMaster::GetInstance()->log("RDY1");
 			changeControlState(CST_RUN); // run to attack 1
 			break;
-		case AIST_READY2: 
+		case AIST_READY2:
+			enemy->moveBack(5.0f);
+			GameMaster::GetInstance()->log("RDY2");
 			changeControlState(CST_DODGE); // dodge to attack 2
 			break;
-		case AIST_REST: 
+		case AIST_REST:
+			GameMaster::GetInstance()->log("REST");
 			changeControlState(CST_IDLE);
 			break;
 		default:
@@ -200,12 +210,11 @@ namespace ZS {
 			}
 		} else if (distance > readyThres) {
 			// run rest dodge
-			switch (rand() % 5) {
+			switch (rand() % 4) {
 				case 0: aist = AIST_RUN; break;
 				case 1: aist = AIST_RUN; break;
 				case 2: aist = AIST_REST; break;
 				case 3: aist = AIST_DODGE; break;
-				case 4: aist = AIST_DODGE; break;
 				default: break;
 			}
 		} else if (distance > runThres) {

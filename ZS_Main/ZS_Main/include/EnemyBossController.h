@@ -38,7 +38,7 @@ namespace ZS {
 
 		void changeActionState() override; // called in update
 
-		void changeAIState();
+		void changeAIState() override;
 
 	};
 

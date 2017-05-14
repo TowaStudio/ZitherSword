@@ -333,7 +333,7 @@ namespace ZS {
 			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 			moSword->moType = MoTypeItem;
 
-			Weapon* sword = new Weapon(getItemID(), 40.0f, 0.65f, 14.0f);
+			Weapon* sword = new Weapon(getItemID(), 60.0f, 0.65f, 14.0f);
 
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
 												 , sword
@@ -656,7 +656,7 @@ namespace ZS {
 				Enemy* enemy = new Enemy("EnemyB" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 400.0f, 400.0f, 50.0f, 50.0f,
-										 30.0f, 30.0f, -4.0f,
+										 45.0f, 30.0f, -4.0f,
 										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
@@ -684,12 +684,12 @@ namespace ZS {
 				int unitID = getUnitID();
 
 				Ogre::Quaternion initialQuaternion = Ogre::Quaternion();
-				initialQuaternion.FromAngleAxis(Ogre::Radian(Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
+				initialQuaternion.FromAngleAxis(Ogre::Radian(- Ogre::Math::PI / 2.0f), Vec3::UNIT_Y);
 
 				Enemy* enemy = new Enemy("Boss" + Ogre::StringConverter::toString(unitID), levelPath->getPosInPath(progress),
 										 initialQuaternion,
 										 1000.0f, 1000.0f, 50.0f, 50.0f,
-										 50.0f, 20.0f, -5.0f,
+										 50.0f, 20.0f, -10.0f,
 										 Status::ST_NORMAL, progress, 100);
 				enemy->bindPath(levelPath);
 
@@ -731,7 +731,7 @@ namespace ZS {
 				moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 				moSword->moType = MoTypeItem;
 
-				Weapon* sword = new Weapon(getItemID(), 80.0f, 0.5f, 14.0f);
+				Weapon* sword = new Weapon(getItemID(), 20.0f, 0.5f, 15.0f);
 				enemy->useWeapon(sword);
 
 				GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
