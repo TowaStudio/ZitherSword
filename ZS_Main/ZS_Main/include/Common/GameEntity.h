@@ -11,7 +11,7 @@
 
 namespace ZS
 {
-    #define NUM_GAME_ENTITY_BUFFERS 8
+    #define NUM_GAME_ENTITY_BUFFERS 16
 
     enum MovableObjectType
     {
