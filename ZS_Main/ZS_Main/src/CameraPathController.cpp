@@ -67,4 +67,14 @@ namespace ZS {
 			camera->lookAt(currentLookingPos + Vec3(0.0f, 7.0f, 0.0f));
 		}
 	}
+
+	void CameraPathController::reset() {
+		if(path && character && character->path) {
+			progress = 0.0f;
+			cameraPos = path->getPoint(0)->pos;
+			camera->setPosition(path->getPoint(0)->pos);
+			currentLookingPos = character->path->getPoint(0)->pos;
+			camera->lookAt(character->path->getPoint(0)->pos);
+		}
+	}
 }

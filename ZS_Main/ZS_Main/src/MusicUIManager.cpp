@@ -91,7 +91,7 @@ namespace ZS {
 			uiResult->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
 			uiResult->setPosition(7000.0f * 1280.0f / 720.0f, 0.0f);
 			uiResult->setDimensions(1875.0f * 1280.0f / 720.0f, 1944.4f);
-			uiResult->setMaterialName("MusicResultRun");
+			uiResult->setMaterialName("MusicResultIdle");
 			uiBackground->addChild(uiResult);
 		}
 

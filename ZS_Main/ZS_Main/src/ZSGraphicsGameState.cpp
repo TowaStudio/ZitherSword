@@ -113,8 +113,8 @@ namespace ZS
 				uiTitle = static_cast<Ogre::v1::OverlayContainer*>(
 					overlayManager.createOverlayElement("Panel", "LogoTitle"));
 				uiTitle->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-				uiTitle->setPosition(0.0f, 7500.0f);
-				uiTitle->setDimensions(10000.0f * 1280.0f / 720.0f, 10000.0f * 200.0f / 720.0f);
+				uiTitle->setPosition(10000.0f * 400.0f / 720.0f, 10000.0f * 120.0f / 720.0f);
+				uiTitle->setDimensions(10000.0f * 479.0f / 720.0f, 10000.0f * 175.0f / 720.0f);
 				uiTitle->setMaterialName("LogoUITitle");
 				uiLogo->add2D(uiTitle);
 			}
@@ -124,11 +124,13 @@ namespace ZS
 				uiPressToStart = static_cast<Ogre::v1::OverlayContainer*>(
 					overlayManager.createOverlayElement("Panel", "LogoPressToStart"));
 				uiPressToStart->setMetricsMode(Ogre::v1::GMM_RELATIVE_ASPECT_ADJUSTED);
-				uiPressToStart->setPosition(500.0f * 1280.0f / 720.0f, 5000.0f);
-				uiPressToStart->setDimensions(2656.0f * 1280.0f / 720.0f * 0.8f, 2916.0f * 0.8f);
+				uiPressToStart->setPosition(10000.0f * 497.0f / 720.0f, 10000.0f * 400.0f / 720.0f);
+				uiPressToStart->setDimensions(10000.0f * 286.0f / 720.0f, 10000.0f * 62.0f / 720.0f);
 				uiPressToStart->setMaterialName("LogoUIPressToStart");
 				uiLogo->add2D(uiPressToStart);
 			}
+
+			uiLogo->show();
 
 			/*Ogre::v1::BillboardSet* bill = sceneManager->createBillboardSet(2);
 			bill->setRenderQueueGroup(10);
@@ -185,6 +187,9 @@ namespace ZS
     //-----------------------------------------------------------------------------------
 	void ZSGraphicsGameState::keyPressed(const SDL_KeyboardEvent &arg) {
 		switch(arg.keysym.sym) {
+			case SDLK_RETURN:
+				uiLogo->hide();
+				break;
 			case SDLK_SPACE:
 				musicUIManager->addNote(NoteName::DO);
 				break;
