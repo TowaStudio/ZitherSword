@@ -130,7 +130,7 @@ namespace ZS {
 				break;
 			case AIST_RUN: 
 				if (distance < runThres)
-					aist = AIST_REST1;
+					aist = AIST_ATTACK;
 				break;
 			case AIST_ATTACK: 
 				if (distance > runawayThres)

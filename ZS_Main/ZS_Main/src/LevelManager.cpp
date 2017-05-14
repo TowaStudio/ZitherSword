@@ -323,7 +323,7 @@ namespace ZS {
 			moSword->submeshMaterials = Ogre::StringVector{"SwordA","SwordB","SwordC","SwordD"};
 			moSword->moType = MoTypeItem;
 
-			Weapon* sword = new Weapon(getItemID(), 40.0f, 1.3f, 14.0f);
+			Weapon* sword = new Weapon(getItemID(), 40.0f, 0.65f, 14.0f);
 
 			GameEntity* entSword = addGameEntity(Ogre::SCENE_DYNAMIC, moSword
 												 , sword
@@ -511,7 +511,7 @@ namespace ZS {
 				moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
 				moEnemyWeapon->moType = MoTypeItem;
 
-				Weapon* enemyWeapon = new Weapon(getItemID(), 20.0f, 1.0f, 12.0f);
+				Weapon* enemyWeapon = new Weapon(getItemID(), 15.0f, 0.5f, 12.0f);
 				enemy->useWeapon(enemyWeapon);
 
 				GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
