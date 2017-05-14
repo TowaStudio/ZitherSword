@@ -379,7 +379,7 @@ namespace ZS {
 			moEnemyWeapon->submeshMaterials = Ogre::StringVector{"enemy1Weapon"};
 			moEnemyWeapon->moType = MoTypeItem;
 
-			Weapon* enemyWeapon = new Weapon(getItemID(), 80.0f, 0.5f, 15.0f);
+			Weapon* enemyWeapon = new Weapon(getItemID(), 0.0f, 0.5f, 0.0f); // Free weapon
 
 			GameEntity* entEnemyWeapon = addGameEntity(Ogre::SCENE_DYNAMIC, moEnemyWeapon
 													   , enemyWeapon

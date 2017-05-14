@@ -37,7 +37,9 @@ namespace ZS {
 		if(isAttacking) {
 			if(attackTimer < 0.0f) {
 				Unit* target = gm->getLevelManager()->getSwordsman();
-				attack(target);
+				if ((weapon == nullptr ? 12.0f : weapon->range) >= (progress - target->progress) * path->totalLength) {
+					attack(target);
+				}
 			}
 
 			else
