@@ -81,7 +81,8 @@ namespace ZS
 
         Ogre::String finalText(consoleContent);
         finalText.reserve( 128 );
-        finalText += "\n\nFrame time:\t";
+		//finalText += "\n\n";
+    	finalText += "Frame time:\t";
         finalText += Ogre::StringConverter::toString( timeSinceLast * 1000.0f );
         finalText += " ms\n";
         finalText += "Frame FPS:\t";

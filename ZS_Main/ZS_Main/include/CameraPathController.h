@@ -33,6 +33,7 @@ namespace ZS {
 		void bindCharacter(Unit* _unit, Path* _path);
 
 		void update(float timeSinceLast);
+		void reset();
 
 	};
 }

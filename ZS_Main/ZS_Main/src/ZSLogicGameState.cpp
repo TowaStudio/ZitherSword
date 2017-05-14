@@ -21,7 +21,6 @@ namespace ZS {
 	}
 	  
 	void ZSLogicGameState::createScene01() {
-		gm->log("Press 1 to start level.");
 		levelManager = gm->getLevelManager();
 	}
 

@@ -24,7 +24,7 @@ namespace ZS {
 		float getDistanceToClosestEnemy();
 
 	public:
-		SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman);
+		SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman, int _id);
 		~SwordsmanController();
 
 		//void setComboNum(int _comboNum);

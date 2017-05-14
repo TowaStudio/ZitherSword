@@ -1,10 +1,10 @@
 ﻿#include "SwordsmanController.h"
 #include "GameMaster.h"
-#include <winioctl.h>
 
 namespace ZS {
 
-	SwordsmanController::SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman) :
+
+	SwordsmanController::SwordsmanController(LevelManager* _levelManager, GameEntity* _entSwordsman, int _id) :
 		CharacterController(_levelManager, _entSwordsman, 0), distance(0), comboNum(0), skillEnabled(false) {
 		swordsman = dynamic_cast<Swordsman*>(_entSwordsman->behaviour);
 	}
