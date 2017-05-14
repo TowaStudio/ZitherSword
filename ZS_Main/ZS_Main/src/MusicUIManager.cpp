@@ -241,7 +241,6 @@ namespace ZS {
 				resultMaterial = "MusicResultWalk";
 				break;
 			case CST_SKILL:
-			case CST_SKILL: 
 				resultMaterial = "MusicResultUltimate";
 				break;
 		}
