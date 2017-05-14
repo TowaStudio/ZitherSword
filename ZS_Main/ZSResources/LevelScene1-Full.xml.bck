@@ -1982,11 +1982,11 @@
                 </subentities>
             </entity>
         </node>
-        <node name="Road" id="356" isTarget="false">
-            <position x="2509.74" y="-14.263" z="-739.883" />
+        <node name="Plane001" id="356" isTarget="false" isTamWrap="true">
+            <position x="469.823" y="-14.3055" z="345.405" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
-            <scale x="2.14163" y="11.1624" z="11.1624" />
-            <entity name="Road" id="357" meshFile="Road.mesh" castShadows="true">
+            <scale x="1" y="1" z="1.08065" />
+            <entity name="Plane001" id="357" meshFile="Plane001.mesh" castShadows="true">
                 <subentities>
                     <subentity index="0" materialName="road" />
                 </subentities>

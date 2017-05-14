@@ -10,7 +10,7 @@
             <scale x="1" y="1" z="1" />
             <entity name="Road" id="1" meshFile="Road.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="Material__8" />
+                    <subentity index="0" materialName="Material__2" />
                 </subentities>
             </entity>
         </node>
@@ -20,7 +20,7 @@
             <scale x="1.19598" y="1" z="2.10552" />
             <entity name="mountain002" id="3" meshFile="mountain002.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="Material__12" />
+                    <subentity index="0" materialName="Material__0" />
                 </subentities>
             </entity>
         </node>
@@ -31,6 +31,106 @@
             <entity name="mountain003" id="5" meshFile="mountain003.mesh" castShadows="true">
                 <subentities>
                     <subentity index="0" materialName="Material__1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint001" id="6" isTarget="false">
+            <position x="-61.5935" y="0" z="-161.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint001" id="7" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint002" id="8" isTarget="false">
+            <position x="-21.5935" y="0" z="-184.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint002" id="9" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint003" id="10" isTarget="false">
+            <position x="18.4065" y="0" z="-207.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint003" id="11" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint004" id="12" isTarget="false">
+            <position x="58.4065" y="0" z="-230.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint004" id="13" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint005" id="14" isTarget="false">
+            <position x="98.4065" y="0" z="-253.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint005" id="15" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint006" id="16" isTarget="false">
+            <position x="138.407" y="0" z="-276.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint006" id="17" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint007" id="18" isTarget="false">
+            <position x="178.407" y="0" z="-299.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint007" id="19" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint008" id="20" isTarget="false">
+            <position x="218.407" y="0" z="-322.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint008" id="21" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint009" id="22" isTarget="false">
+            <position x="258.407" y="0" z="-345.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint009" id="23" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="pathPoint010" id="24" isTarget="false">
+            <position x="298.407" y="0" z="-322.766" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="pathPoint010" id="25" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
                 </subentities>
             </entity>
         </node>
@@ -844,6 +944,106 @@
                 </subentities>
             </entity>
         </node>
+        <node name="cameraPoint001" id="188" isTarget="false">
+            <position x="-30.7127" y="20" z="-109.733" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint001" id="189" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint002" id="190" isTarget="false">
+            <position x="8.74507" y="20" z="-132.43" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint002" id="191" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint003" id="192" isTarget="false">
+            <position x="47.6403" y="20" z="-156.138" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint003" id="193" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint004" id="194" isTarget="false">
+            <position x="87.6595" y="20" z="-179.148" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint004" id="195" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint005" id="196" isTarget="false">
+            <position x="128.191" y="20" z="-202.443" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint005" id="197" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint006" id="198" isTarget="false">
+            <position x="167.497" y="20" z="-225.425" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint006" id="199" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint007" id="200" isTarget="false">
+            <position x="208.226" y="20" z="-249.491" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint007" id="201" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint008" id="202" isTarget="false">
+            <position x="231.701" y="20" z="-261.716" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint008" id="203" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint009" id="204" isTarget="false">
+            <position x="257.856" y="20" z="-274.511" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint009" id="205" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="cameraPoint010" id="206" isTarget="false">
+            <position x="267.836" y="20" z="-271.123" />
+            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="cameraPoint010" id="207" meshFile="pathPoint001.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="defaultLambert" />
+                </subentities>
+            </entity>
+        </node>
         <node name="cameraPoint011" id="208" isTarget="false">
             <position x="307.018" y="20" z="-246.609" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
@@ -1065,7 +1265,7 @@
             </entity>
         </node>
         <node name="cameraPoint033" id="252" isTarget="false">
-            <position x="1253.78" y="20" z="-189.357" />
+            <position x="1235.69" y="20" z="-197.443" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint033" id="253" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1075,7 +1275,7 @@
             </entity>
         </node>
         <node name="cameraPoint034" id="254" isTarget="false">
-            <position x="1258.95" y="20" z="-217.876" />
+            <position x="1258.95" y="20" z="-228.994" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint034" id="255" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1085,7 +1285,7 @@
             </entity>
         </node>
         <node name="cameraPoint035" id="256" isTarget="false">
-            <position x="1279.61" y="20" z="-247.78" />
+            <position x="1287.92" y="20" z="-258.009" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint035" id="257" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1095,7 +1295,7 @@
             </entity>
         </node>
         <node name="cameraPoint036" id="258" isTarget="false">
-            <position x="1289.21" y="20" z="-308.215" />
+            <position x="1318.01" y="20" z="-308.215" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint036" id="259" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1105,7 +1305,7 @@
             </entity>
         </node>
         <node name="cameraPoint037" id="260" isTarget="false">
-            <position x="1341.12" y="20" z="-350.274" />
+            <position x="1356" y="20" z="-342.011" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint037" id="261" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1115,7 +1315,7 @@
             </entity>
         </node>
         <node name="cameraPoint038" id="262" isTarget="false">
-            <position x="1370.3" y="20" z="-329.707" />
+            <position x="1411.21" y="20" z="-277.193" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint038" id="263" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1125,7 +1325,7 @@
             </entity>
         </node>
         <node name="cameraPoint039" id="264" isTarget="false">
-            <position x="1413.96" y="20" z="-313.673" />
+            <position x="1440.76" y="20" z="-239.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint039" id="265" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1135,7 +1335,7 @@
             </entity>
         </node>
         <node name="cameraPoint040" id="266" isTarget="false">
-            <position x="1453.2" y="20" z="-298.217" />
+            <position x="1480.76" y="20" z="-224.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint040" id="267" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1145,7 +1345,7 @@
             </entity>
         </node>
         <node name="cameraPoint041" id="268" isTarget="false">
-            <position x="1492.92" y="20" z="-282.581" />
+            <position x="1520.76" y="20" z="-209.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint041" id="269" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1155,7 +1355,7 @@
             </entity>
         </node>
         <node name="cameraPoint042" id="270" isTarget="false">
-            <position x="1521.72" y="20" z="-252.714" />
+            <position x="1560.76" y="20" z="-194.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint042" id="271" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1165,7 +1365,7 @@
             </entity>
         </node>
         <node name="cameraPoint043" id="272" isTarget="false">
-            <position x="1563.55" y="20" z="-221.916" />
+            <position x="1600.76" y="20" z="-179.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint043" id="273" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1175,7 +1375,7 @@
             </entity>
         </node>
         <node name="cameraPoint044" id="274" isTarget="false">
-            <position x="1613.75" y="20" z="-186.466" />
+            <position x="1640.76" y="20" z="-164.048" />
             <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
             <scale x="1" y="1" z="1" />
             <entity name="cameraPoint044" id="275" meshFile="pathPoint001.mesh" castShadows="true">
@@ -1660,7 +1860,7 @@
             <scale x="1.19598" y="1" z="2.10552" />
             <entity name="mountain004" id="371" meshFile="mountain002.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="Material__11" />
+                    <subentity index="0" materialName="Material__0" />
                 </subentities>
             </entity>
         </node>
@@ -1680,7 +1880,7 @@
             <scale x="1.19598" y="1" z="2.10552" />
             <entity name="mountain006" id="375" meshFile="mountain006.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="Material__13" />
+                    <subentity index="0" materialName="Material__0" />
                 </subentities>
             </entity>
         </node>
@@ -1690,7 +1890,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo125" id="377" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1700,7 +1900,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo124" id="379" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1710,7 +1910,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo123" id="381" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1720,7 +1920,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo122" id="383" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1730,7 +1930,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo121" id="385" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1740,7 +1940,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo120" id="387" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1750,7 +1950,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo119" id="389" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1760,7 +1960,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo118" id="391" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1770,7 +1970,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo117" id="393" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1780,7 +1980,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo116" id="395" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1790,7 +1990,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo115" id="397" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1800,7 +2000,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo114" id="399" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1810,7 +2010,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo113" id="401" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1820,7 +2020,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo112" id="403" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1830,7 +2030,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo111" id="405" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1840,7 +2040,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo110" id="407" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1850,7 +2050,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo109" id="409" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1860,7 +2060,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo108" id="411" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1870,7 +2070,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo107" id="413" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1880,7 +2080,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo106" id="415" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1890,7 +2090,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo105" id="417" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1900,7 +2100,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo104" id="419" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1910,7 +2110,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo103" id="421" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1920,7 +2120,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo102" id="423" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1930,7 +2130,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo101" id="425" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1940,7 +2140,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo100" id="427" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1950,7 +2150,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo099" id="429" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1960,7 +2160,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo098" id="431" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1970,7 +2170,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo097" id="433" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1980,7 +2180,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo096" id="435" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -1990,7 +2190,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo095" id="437" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2000,7 +2200,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo094" id="439" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2010,7 +2210,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo093" id="441" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2020,7 +2220,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo092" id="443" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2030,7 +2230,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo091" id="445" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2040,7 +2240,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo090" id="447" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2050,7 +2250,7 @@
             <scale x="2.31805" y="1.34624" z="2.31805" />
             <entity name="bamboo089" id="449" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2060,7 +2260,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo088" id="451" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2070,7 +2270,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo087" id="453" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2080,7 +2280,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo086" id="455" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2090,7 +2290,7 @@
             <scale x="2.31644" y="1.0007" z="2.31805" />
             <entity name="bamboo085" id="457" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2100,7 +2300,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo084" id="459" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2110,7 +2310,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo083" id="461" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2120,7 +2320,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo082" id="463" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2130,7 +2330,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo081" id="465" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2140,7 +2340,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo080" id="467" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2150,7 +2350,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo079" id="469" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2160,7 +2360,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo078" id="471" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2170,7 +2370,7 @@
             <scale x="2.31644" y="1.0007" z="2.31805" />
             <entity name="bamboo077" id="473" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2180,7 +2380,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo076" id="475" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2190,7 +2390,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo075" id="477" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2200,7 +2400,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo074" id="479" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2210,7 +2410,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo073" id="481" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2220,7 +2420,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo072" id="483" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2230,7 +2430,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo071" id="485" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2240,7 +2440,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo070" id="487" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2250,7 +2450,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo069" id="489" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2260,7 +2460,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo068" id="491" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2270,7 +2470,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo067" id="493" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2280,7 +2480,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo066" id="495" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2290,7 +2490,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo065" id="497" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2300,7 +2500,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo064" id="499" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2310,7 +2510,7 @@
             <scale x="2.08994" y="1.34081" z="2.08151" />
             <entity name="bamboo063" id="501" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2320,7 +2520,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo062" id="503" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2330,7 +2530,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo061" id="505" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2340,7 +2540,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo060" id="507" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2350,7 +2550,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo059" id="509" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2360,7 +2560,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo058" id="511" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2370,7 +2570,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo057" id="513" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2380,7 +2580,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo056" id="515" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2390,7 +2590,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo055" id="517" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2400,7 +2600,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo054" id="519" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2410,7 +2610,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo053" id="521" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2420,7 +2620,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo052" id="523" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2430,7 +2630,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo051" id="525" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2440,7 +2640,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo050" id="527" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2450,7 +2650,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo049" id="529" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2460,7 +2660,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo048" id="531" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2470,7 +2670,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo047" id="533" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2480,7 +2680,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo046" id="535" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2490,7 +2690,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo045" id="537" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2500,7 +2700,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo044" id="539" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2510,7 +2710,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo043" id="541" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2520,7 +2720,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo042" id="543" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2530,7 +2730,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo041" id="545" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2540,7 +2740,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo040" id="547" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2550,7 +2750,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo039" id="549" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2560,7 +2760,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo038" id="551" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2570,7 +2770,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo037" id="553" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2580,7 +2780,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo036" id="555" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2590,7 +2790,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo035" id="557" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2600,7 +2800,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo034" id="559" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2610,7 +2810,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo033" id="561" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2620,7 +2820,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo032" id="563" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2630,7 +2830,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo031" id="565" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2640,7 +2840,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo030" id="567" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2650,7 +2850,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo029" id="569" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2660,7 +2860,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo028" id="571" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2670,7 +2870,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo027" id="573" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2680,7 +2880,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo026" id="575" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2690,7 +2890,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo025" id="577" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2700,7 +2900,7 @@
             <scale x="2.08994" y="1.34081" z="2.08151" />
             <entity name="bamboo024" id="579" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2710,7 +2910,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo023" id="581" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2720,7 +2920,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo022" id="583" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2730,7 +2930,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo021" id="585" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2740,7 +2940,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo020" id="587" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2750,7 +2950,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo019" id="589" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2760,7 +2960,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo018" id="591" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2770,7 +2970,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo017" id="593" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2780,7 +2980,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo016" id="595" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2790,7 +2990,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo015" id="597" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2800,7 +3000,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo014" id="599" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2810,7 +3010,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo013" id="601" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2820,7 +3020,7 @@
             <scale x="2.31644" y="1.0007" z="2.31805" />
             <entity name="bamboo012" id="603" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2830,7 +3030,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo011" id="605" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2840,7 +3040,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo010" id="607" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2850,7 +3050,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo009" id="609" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2860,7 +3060,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo008" id="611" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2870,7 +3070,7 @@
             <scale x="2.31805" y="1.34624" z="2.31805" />
             <entity name="bamboo007" id="613" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2880,7 +3080,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo006" id="615" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2890,7 +3090,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo005" id="617" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2900,7 +3100,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo004" id="619" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2910,7 +3110,7 @@
             <scale x="2.32275" y="1.34351" z="2.31805" />
             <entity name="bamboo003" id="621" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2920,7 +3120,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo002" id="623" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2930,7 +3130,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo001" id="625" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2940,7 +3140,7 @@
             <scale x="2.31805" y="1" z="2.31805" />
             <entity name="bamboo126" id="627" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2950,7 +3150,7 @@
             <scale x="2.08151" y="1.34624" z="2.08151" />
             <entity name="bamboo127" id="629" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2960,7 +3160,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo128" id="631" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2970,7 +3170,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo129" id="633" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2980,7 +3180,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo130" id="635" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
@@ -2990,19 +3190,7 @@
             <scale x="2.08151" y="1" z="2.08151" />
             <entity name="bamboo131" id="637" meshFile="bamboo125.mesh" castShadows="true">
                 <subentities>
-                    <subentity index="0" materialName="bambooMtr" />
-                </subentities>
-            </entity>
-        </node>
-        <node name="NGon001" id="638" isTarget="false">
-            <position x="1733.28" y="-11.7332" z="-233.84" />
-            <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
-            <scale x="1" y="1" z="1" />
-            <entity name="NGon001" id="639" meshFile="NGon001.mesh" castShadows="true">
-                <subentities>
-                    <subentity index="0" materialName="Material__14" />
-                    <subentity index="1" materialName="Material__14" />
-                    <subentity index="2" materialName="Material__14" />
+                    <subentity index="0" materialName="_01_-_Default" />
                 </subentities>
             </entity>
         </node>
