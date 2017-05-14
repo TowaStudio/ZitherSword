@@ -10,24 +10,16 @@
 			<sequence type="skill" content="6000600020306000" />
 		</sequences>
 		<enemies>
-			<enemy type="0" loc="0.1" />
-			<enemy type="0" loc="0.15" />
 			<enemy type="0" loc="0.2" />
-			<enemy type="0" loc="0.22" />
-			<enemy type="0" loc="0.3" />
 			<enemy type="0" loc="0.32" />
-			<enemy type="0" loc="0.35" />
-			<enemy type="0" loc="0.45" />
-			<enemy type="0" loc="0.55" />
+			<enemy type="0" loc="0.44" />
+			<enemy type="0" loc="0.47" />
 			<enemy type="0" loc="0.57" />
-			<enemy type="0" loc="0.58" />
-			<enemy type="0" loc="0.7" />
-			<enemy type="0" loc="0.72" />
-			<enemy type="0" loc="0.73" />
-			<enemy type="0" loc="0.75" />
+			<enemy type="0" loc="0.59" />
+			<enemy type="1" loc="0.7" />
 			<enemy type="0" loc="0.8" />
-			<enemy type="0" loc="0.83" />
-			<enemy type="0" loc="0.9" />
+			<enemy type="0" loc="0.87" />
+			<enemy type="1" loc="0.9" />
 		</enemies>
 	</level>
 	<level id="2">
@@ -42,23 +34,21 @@
 		</sequences>
 		<enemies>
 			<enemy type="0" loc="0.1" />
-			<enemy type="0" loc="0.15" />
 			<enemy type="0" loc="0.2" />
 			<enemy type="0" loc="0.22" />
-			<enemy type="0" loc="0.3" />
-			<enemy type="0" loc="0.32" />
-			<enemy type="0" loc="0.35" />
+			<enemy type="1" loc="0.25" />
+			<enemy type="1" loc="0.35" />
 			<enemy type="0" loc="0.45" />
-			<enemy type="0" loc="0.55" />
-			<enemy type="0" loc="0.57" />
-			<enemy type="0" loc="0.58" />
-			<enemy type="0" loc="0.7" />
-			<enemy type="0" loc="0.72" />
-			<enemy type="0" loc="0.73" />
-			<enemy type="0" loc="0.75" />
-			<enemy type="0" loc="0.8" />
-			<enemy type="0" loc="0.83" />
-			<enemy type="0" loc="0.9" />
+			<enemy type="0" loc="0.46" />
+			<enemy type="0" loc="0.48" />
+			<enemy type="1" loc="0.58" />
+			<enemy type="1" loc="0.66" />
+			<enemy type="1" loc="0.76" />
+			<enemy type="1" loc="0.78" />
+			<enemy type="0" loc="0.85" />
+			<enemy type="0" loc="0.86" />
+			<enemy type="1" loc="0.88" />
+			<enemy type="2" loc="0.9" />
 		</enemies>
 	</level>
 </levels>

@@ -666,7 +666,7 @@ namespace ZS {
 													 , enemy
 													 , levelPath->getPosInPath(progress) // Change to Level data start pos
 													 , initialQuaternion
-													 , Vec3(10.0f, 10.0f, 10.0f));
+													 , Vec3(8.5f, 8.5f, 8.5f));
 
 				enemyEntities.push_back(entEnemy);
 
