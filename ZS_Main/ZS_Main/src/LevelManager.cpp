@@ -542,7 +542,7 @@ namespace ZS {
 	}
 
 	void LevelManager::addHitInfo(const HitInfo& hit) {
-		gm->log(hit.source->name + " hit " + hit.target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
+		//gm->log(hit.source->name + " hit " + hit.target->name + "\nDmg: " + Ogre::StringConverter::toString(hit.dmg));
 		// Todo: Effect
 		if(hit.target->name.compare("Swordsman") == 0) {
 			// refreash UI
