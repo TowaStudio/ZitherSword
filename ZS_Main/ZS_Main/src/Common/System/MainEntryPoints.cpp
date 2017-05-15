@@ -34,5 +34,5 @@ THE SOFTWARE.
 
 namespace ZS
 {
-    double MainEntryPoints::Frametime = 1.0 / 60.0;
+    double MainEntryPoints::Frametime = 1.0 / 50.0;
 }

@@ -812,7 +812,7 @@ namespace ZS
             gEnt->mSceneNode->setOrientation( interpQ );
 
 			if(gEnt->hasAnimation && gEnt->animationController->isEnabled) {
-				gEnt->animationController->update(0.01667f * mThreadWeight);
+				gEnt->animationController->update(0.006f);
 			}
 
             ++itor;
